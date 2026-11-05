@@ -37,8 +37,8 @@ git add data.json && git commit -m "Refresh site data" && git push
 `data/*.json`). It needs Python 3.9+ and nothing else. It collects:
 
 - **Commits**: every commit on `main` with its date, plus commits per hour for the activity chart.
-- **Test runs**: every full-suite `N passed, M failed` line ever added to `PROGRESS.md`, dated by
-  the commit that added it, merged with the runs listed in `manual.json`.
+- **Test runs**: every full-suite `N passed, M failed` line that `PROGRESS.md` still reports,
+  dated by the commit that first added it, merged with the runs listed in `manual.json`.
 - **Timeline**: the events in `manual.json`, plus an event for every `## ` section of
   `PROGRESS.md` that no manual event covers. A new milestone note shows up on its own; give it
   proper text by adding an event with a matching `"progress"` title to `manual.json`.

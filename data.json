@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-06T06:13+10:00",
+ "generated": "2026-11-06T06:54+10:00",
  "head": "f9ea641",
  "stats": {
   "commits": 100,
@@ -66,13 +66,6 @@
    "failed": 0,
    "source": "PROGRESS.md (aef84dd)",
    "note": "Full suite (`gt test`): 928 passed, 0 failed."
-  },
-  {
-   "date": "2026-11-05T22:32:53+10:00",
-   "passed": 941,
-   "failed": 1,
-   "source": "PROGRESS.md (95ce661)",
-   "note": "Full suite on this branch: 941 passed, 1 failed (`m5_acceptance` \"two boxes went on the"
   },
   {
    "date": "2026-11-05T22:48:28+10:00",
@@ -1132,6 +1125,7 @@
   }
  ],
  "unmerged_branches": [
+  "additions-b",
   "m9-build"
  ]
 }

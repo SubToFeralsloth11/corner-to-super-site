@@ -187,6 +187,10 @@ def main():
 
     rows = commits(repo)
     headings, points = progress_history(repo)
+    # Keep only runs PROGRESS.md still reports; lines an agent later rewrote were superseded.
+    current = {(int(a.replace(",", "")), int(b)) for a, b in
+               TEST_LINE.findall((repo / "docs/PROGRESS.md").read_text())}
+    points = [p for p in points if (p["passed"], p["failed"]) in current]
     known = {(p["passed"], p["failed"]) for p in points}
     points += [p for p in manual["test_points"] if (p["passed"], p["failed"]) not in known]
     points.sort(key=lambda p: datetime.fromisoformat(p["date"]))
