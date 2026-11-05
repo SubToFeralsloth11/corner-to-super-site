@@ -93,15 +93,20 @@ function testChart(d) {
   const line = pts.map((p) => `${x(p.t).toFixed(1)},${y(p.passed).toFixed(1)}`).join(" L");
   el("path", { d: `M${x(pts[0].t)},${y(0)} L${line} L${x(pts[pts.length - 1].t)},${y(0)}Z`, class: "area" }, svg);
   el("path", { d: "M" + line, class: "line" }, svg);
+  // Green runs are labelled above their dot (below if the previous green run is close by);
+  // runs with failures are labelled to the left of their ring, in red.
   let lastX = -1e9, flip = false;
   for (const p of pts) {
     const px = x(p.t), py = y(p.passed);
     const dot = el("circle", { cx: px, cy: py, r: 5.5, class: p.failed ? "dot fail" : "dot" }, svg);
     el("title", {}, dot, `${local(p.date).time}: ${num(p.passed)} passed, ${p.failed} failed (${p.source})`);
-    flip = px - lastX < 40 ? !flip : false; // stagger labels of runs close in time
+    if (p.failed) {
+      el("text", { x: px - 9, y: py + 4, "text-anchor": "end", class: "lbl fail" }, svg, `${num(p.passed)} / ${p.failed}✗`);
+      continue;
+    }
+    flip = px - lastX < 40 ? !flip : false;
     lastX = px;
-    const label = num(p.passed) + (p.failed ? ` / ${p.failed}✗` : "");
-    el("text", { x: px, y: flip ? py + 20 : py - 10, "text-anchor": "middle", class: "lbl" }, svg, label);
+    el("text", { x: px, y: flip ? py + 20 : py - 10, "text-anchor": "middle", class: "lbl" }, svg, num(p.passed));
   }
   $("#test-chart").replaceChildren(svg);
 }
