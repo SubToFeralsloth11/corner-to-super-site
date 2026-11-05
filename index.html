@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corner to Super: build log</title>
+<meta name="description" content="What has been built for Corner to Super, a first-person supermarket game in Godot 4.7: features, a dated timeline, how agents built it, numbers and status.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232FA866'/%3E%3Cpath d='M8 12h16l-2 10H10z' fill='%23F2C14E'/%3E%3C/svg%3E">
+<script src="app.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#top"><span class="logo" aria-hidden="true"></span>Corner to Super</a>
+  <nav aria-label="Sections">
+    <a href="#features">Features</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#how">How it was built</a>
+    <a href="#numbers">Numbers</a>
+    <a href="#economy">Economy</a>
+    <a href="#assets">Assets</a>
+    <a href="#credits">Credits</a>
+    <a href="#status">Status</a>
+  </nav>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">Build log · Godot 4.7 · personal project, not published</p>
+    <h1>Corner to Super</h1>
+    <p class="pitch">A first-person supermarket game: grow a <strong>12 × 8 m corner shop</strong> into a
+      <strong>28 × 24 m supermarket</strong>. Your stock arrives by <span class="gold">ice-cream van</span>,
+      which fires the boxes out of its roof speaker.</p>
+    <p>Order on the store PC, catch the boxes, stock the shelves, set prices, scan groceries, count
+      Australian change by hand, pay the rent and the loans, knock walls through and hire staff.
+      It's modelled on <em>Supermarket Simulator</em> and built on the asset pipeline of an earlier
+      game, Mimic Mart.</p>
+    <p class="hero-stats" id="hero-stats" aria-live="polite"></p>
+    <p class="note">This page is a log of how the game was built. The game's repository is private.
+      None of the pictures here are in-game screenshots; they're renders from the asset pipeline.</p>
+  </div>
+  <figure class="hero-fig">
+    <img src="img/ice-cream-van.jpg" width="480" height="330" alt="Render of the ice-cream delivery van model: mint body, pink drips, a cone on the roof and a speaker that fires boxes">
+    <figcaption>The <code>ice_cream_van</code> model, cropped from the fixtures contact sheet (an asset render, not a game screenshot).</figcaption>
+  </figure>
+</section>
+
+<section id="features">
+  <h2>What's in the game</h2>
+  <p class="lead">Everything below is built and covered by headless tests. None of it has been checked in a window yet; see <a href="#status">status</a>.</p>
+  <div class="grid features">
+    <article class="card">
+      <h3><span class="ico" aria-hidden="true">📦</span> Stocking</h3>
+      <ul>
+        <li>The <b>ShopOS</b> PC on the counter, with a Market app: cart, cost arrows (▲▼) after the overnight price drift, "On shelves N · In boxes M" for each product, and <i>Restock to full</i>.</li>
+        <li>Carry stock boxes, open them, and hold E to put items on a slot one at a time. R takes them back. Fold the empty box and put it in the bin.</li>
+        <li>Slot capacity depends on the pack shape (6 cans, 3 bags, 12 stacked noodles…). Slots glow green or red, and a red slot says why ("Needs a drinks cooler").</li>
+        <li>Live shelf price labels. Press F on a label to reprice it, and every label for that product updates.</li>
+        <li>Shelf stock is drawn with MultiMesh. Rear rows are hidden beyond 25 m.</li>
+      </ul>
+    </article>
+    <article class="card accent-gold">
+      <h3><span class="ico" aria-hidden="true">🍦</span> The delivery van</h3>
+      <ul>
+        <li>3–6 s after you order, the ice-cream van skids into the car park. It swings its roof speaker round, fires the boxes into the yellow bay along ballistic arcs, honks, and leaves with a burnout U-turn.</li>
+        <li>Bay spots are reserved as each box flies and filled from the van's side. A second layer and an overflow grid take big orders. Lost boxes come back to the bay.</li>
+        <li>The van carries 30 boxes a trip; a bigger order comes in several trips for one $5 fee. Furniture arrives as flat-packs, and the van rocks when it fires one.</li>
+        <li>It brakes, honks and waits if you stand in its lane.</li>
+        <li>Press E with empty hands to catch a box mid-air (+5 XP). From day 3, now and then a box goes wild, bounces off a parked car and sets off its alarm.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h3><span class="ico" aria-hidden="true">🛒</span> Customers &amp; checkout</h3>
+      <ul>
+        <li>14 shopper models, each with a shopping list, a basket or a trolley, and speech bubbles. They find the nearest stocked slot, reach in, and buy or refuse depending on your price.</li>
+        <li>Empty shelves and high prices are recorded as lost sales. A customer who has waited 90 s at the till drops the basket and leaves.</li>
+        <li>At the till: customers unload, you click each item to scan it, and the POS screen updates. Card customers need the exact amount typed (a wrong amount is DECLINED). Cash customers need their change counted by hand from AUD-style notes and coins.</li>
+        <li><b>Australian cash rounding:</b> cash totals round to the nearest 5c and card payments are exact. Give too little and they say "I'm still owed…"; give too much and you lose the difference. An optional Change helper highlights the right coins.</li>
+        <li>Smokes are sold over the counter from the cigarette wall behind the till.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h3><span class="ico" aria-hidden="true">🧾</span> Days, bills, loans, saves</h3>
+      <ul>
+        <li>PREP at 07:30 with the clock paused. Flip the door sign to OPEN; at 22:00 no new customers come in; hold E on the sign to end the day. 08:00–22:00 lasts 12 real minutes (8, 12, 16 or 20 in Options).</li>
+        <li>The end-of-day receipt bills rent, electricity, wages and loan instalments. Unpaid bills get a 10% late fee. After three unpaid nights in a row, the bank repossesses the store.</li>
+        <li>Bank app for loans (a $1,000 loan costs $108 a night for 10 nights) and early repayment.</li>
+        <li>3 save slots and an autosave every night. The HUD shows cash, profit and stars; hold Tab for the clipboard.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h3><span class="ico" aria-hidden="true">⭐</span> Progression</h3>
+      <ul>
+        <li>16 levels. XP comes from customers, items and perfect change. A LEVEL N banner with confetti lists what unlocked.</li>
+        <li>9 licences (Starter, Dairy, Frozen, Produce, Pantry, Household, Bottle shop, Deli, Tobacco) open up the 48 products.</li>
+        <li>Market prices drift ±4% a day. The Pricing app has bulk actions and the Stats app has a 14-day chart.</li>
+        <li>Reputation stars, and cleanliness: spills, litter and dropped baskets. Mop them up before customers start complaining.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h3><span class="ico" aria-hidden="true">🧱</span> Build mode &amp; expansions</h3>
+      <ul>
+        <li>The Furniture app orders flat-packs. In build mode (B), place on a 0.25 m grid and rotate with Q or the scroll wheel; a red ghost says why it can't go there. Empty fixtures sell for 50%.</li>
+        <li>The Expansions app shows a plot map. Expansions E1–E8 grow the store over 42 cells, and the old walls break into falling pieces with dust, a rumble and camera shake.</li>
+        <li>The stockroom shed (S1–S3) has a roller door and storage racks.</li>
+        <li>The navmesh rebakes on a worker thread after changes, and walkers re-route.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h3><span class="ico" aria-hidden="true">🧑‍💼</span> Staff</h3>
+      <ul>
+        <li>Cashiers, restockers and cleaners, each with three tiers, a hire fee and a nightly wage, managed in the Staff app.</li>
+        <li>They walk in from the footpath at PREP and go home at night.</li>
+        <li>Cashiers scan and count exact change. Restockers refill shelves from rack boxes only. Cleaners mop messes and bin boxes.</li>
+        <li>Customers prefer staffed tills.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h3><span class="ico" aria-hidden="true">🥫</span> Content</h3>
+      <ul>
+        <li>48 products, all orderable, stockable, buyable and sellable. Apples, oranges, tomatoes, potatoes and wine alternate between two meshes, and loose produce varies slightly in colour.</li>
+        <li>18 fixture types, including a cooler, a dairy multideck, freezers, a produce stand, and a deli corner with a slicer.</li>
+        <li>Ceiling aisle signs appear once three categories are on the floor. Outside: verge trees and parked cars that come and go with trade.</li>
+        <li>Ambience (traffic, birds, room tone, crowd murmur) and six music tracks with crossfades.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h3><span class="ico" aria-hidden="true">🎛️</span> Menus &amp; tutorial</h3>
+      <ul>
+        <li>The main menu sits over a slow dolly shot of a stocked store. It has Continue, New game, Load, Options, Controls, Credits and a <b>Sandbox picker</b> (start level 1–16, money $600–$1,000,000, no bills).</li>
+        <li>Options: sensitivity, FOV, Low/Medium/High graphics, six volume buses, the change helper and day length.</li>
+        <li>An 8-step day-1 tutorial, with a gold arrow to the bay. Dale walks up, hands over the keys and walks off.</li>
+        <li>Scan flash, a cash counter that rolls up, and an F3 performance overlay.</li>
+      </ul>
+    </article>
+    <article class="card accent-green">
+      <h3><span class="ico" aria-hidden="true">📰</span> Review additions</h3>
+      <ul>
+        <li><b>Catch the box</b> and <b>van misfires</b> that set off a car alarm.</li>
+        <li><b>Store phone</b> (level 6, $500): press P anywhere to open the Market and Furniture apps.</li>
+        <li><b>My Store look</b>: floor vinyl, sign, shelf trim and uniform colours, with one new option at each level from 2 to 16.</li>
+        <li>Sunday's <b>Corner Courier</b> review quotes real customer speech bubbles from the week. <b>MegaMart sale weeks</b> make customers refuse high markups twice as often.</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section id="timeline">
+  <h2>Timeline</h2>
+  <p class="lead">Times are local (AEST, +10:00). The whole build so far took about 12 hours, from the planning docs on 5 November to the round-1 fixes early on 6 November.</p>
+  <div class="legend" id="tl-legend"></div>
+  <ol class="timeline" id="tl"><li class="loading">Loading the timeline from <code>data.json</code>…</li></ol>
+  <noscript><p>The timeline, numbers and economy tables are drawn from <code>data.json</code> by a small script. Turn on JavaScript to see them.</p></noscript>
+  <details class="commits">
+    <summary>Every commit on <code>main</code> (<span id="commit-count">…</span>)</summary>
+    <ol id="commit-list"></ol>
+  </details>
+</section>
+
+<section id="how">
+  <h2>How it was built</h2>
+  <p class="lead">One person (the user) directed a main agent, which planned the work and handed milestones to coding agents. Nobody played the game by hand: bots played it headless and tests checked the results.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 860 330" role="img" aria-labelledby="dg-t dg-d">
+      <title id="dg-t">Build pipeline</title>
+      <desc id="dg-d">The user answers the grill questions and reports bugs; the main agent plans and spawns build agents, each in its own git worktree; every agent queues its headless Godot tests through gt's single lock; finished work is rebased onto main and pushed to the private GitHub repo; a reviewer critiques main and fix agents act on the findings.</desc>
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="dg-arrowhead"/></marker>
+      </defs>
+      <g class="dg-box"><rect x="10" y="20" width="150" height="64" rx="10"/><text x="85" y="47">User</text><text x="85" y="66" class="dg-sub">grill answers, bug reports</text></g>
+      <g class="dg-box dg-main"><rect x="220" y="20" width="170" height="64" rx="10"/><text x="305" y="47">Main agent</text><text x="305" y="66" class="dg-sub">plans, spawns, merges</text></g>
+      <g class="dg-box dg-agents"><rect x="450" y="10" width="400" height="140" rx="12"/><text x="650" y="34">Build agents · separate git worktrees</text>
+        <g class="dg-chip"><rect x="466" y="48" width="84" height="26" rx="13"/><text x="508" y="66">BuildM1–M9</text></g>
+        <g class="dg-chip"><rect x="558" y="48" width="84" height="26" rx="13"/><text x="600" y="66">VerifyM1</text></g>
+        <g class="dg-chip"><rect x="650" y="48" width="90" height="26" rx="13"/><text x="695" y="66">AssetsBatch</text></g>
+        <g class="dg-chip"><rect x="748" y="48" width="90" height="26" rx="13"/><text x="793" y="66">FixLeftovers</text></g>
+        <g class="dg-chip"><rect x="466" y="84" width="84" height="26" rx="13"/><text x="508" y="102">FixRound1</text></g>
+        <g class="dg-chip"><rect x="558" y="84" width="84" height="26" rx="13"/><text x="600" y="102">AdditionsA/B</text></g>
+        <g class="dg-chip"><rect x="650" y="84" width="90" height="26" rx="13"/><text x="695" y="102">FixNPCRepath</text></g>
+        <g class="dg-chip"><rect x="748" y="84" width="90" height="26" rx="13"/><text x="793" y="102">FinishM9</text></g>
+        <text x="650" y="136" class="dg-sub">up to 6 at once on an 8 GB Mac</text></g>
+      <g class="dg-box dg-gt"><rect x="450" y="190" width="190" height="72" rx="10"/><text x="545" y="218">gt queue</text><text x="545" y="238" class="dg-sub">one Godot lock · headless</text><text x="545" y="254" class="dg-sub">cached results</text></g>
+      <g class="dg-box"><rect x="690" y="190" width="160" height="72" rx="10"/><text x="770" y="218">Tests &amp; bots</text><text x="770" y="238" class="dg-sub">unit cases, StockBot,</text><text x="770" y="254" class="dg-sub">TillBot, soak bot</text></g>
+      <g class="dg-box"><rect x="220" y="190" width="170" height="72" rx="10"/><text x="305" y="218">main → GitHub</text><text x="305" y="238" class="dg-sub">rebase, land, push</text><text x="305" y="254" class="dg-sub">(private repo)</text></g>
+      <g class="dg-box dg-review"><rect x="10" y="190" width="150" height="72" rx="10"/><text x="85" y="218">Reviewer</text><text x="85" y="238" class="dg-sub">20 issues +</text><text x="85" y="254" class="dg-sub">8 additions</text></g>
+      <g class="dg-lines">
+        <path d="M160 52H218" marker-end="url(#ar)"/>
+        <path d="M390 52H448" marker-end="url(#ar)"/>
+        <path d="M545 150V188" marker-end="url(#ar)"/>
+        <path d="M640 226H688" marker-end="url(#ar)" marker-start="url(#ar)"/>
+        <path d="M450 226H392" marker-end="url(#ar)"/>
+        <path d="M220 226H162" marker-end="url(#ar)"/>
+        <path d="M85 190V110Q85 100 95 100H290Q305 100 305 88" marker-end="url(#ar)"/>
+      </g>
+      <text x="200" y="300" class="dg-sub dg-left">critique → fix agents → green suite → next round</text>
+    </svg>
+    <figcaption>The build pipeline. Every agent's tests went through one shared Godot lock, so up to six agents could work at once without running out of memory.</figcaption>
+  </figure>
+  <div class="grid two">
+    <article class="card">
+      <h3>The rules it ran by</h3>
+      <ul>
+        <li><b>Plan first.</b> Ten docs (vision, GDD, economy, the van, architecture, reuse, assets, visuals, milestones with acceptance checks) were written before any code.</li>
+        <li><b>Grilled before starting.</b> Seven questions settled how to run it: straight through M0 to M9, bots and playtest checklists instead of manual play, tune to the pacing table, a Sandbox picker, Kevin MacLeod CC-BY music, clean the disk as you go, then a critique-and-fix loop.</li>
+        <li><b>Nothing on screen.</b> All checks were headless. Anything that needs eyes (screenshots, real fps) was written down as a deferred check.</li>
+        <li><b>Atomic commits, pushed after each change.</b> Agents stage only their own files.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h3><code>gt</code>: the test runner that unblocked it</h3>
+      <p>Early on, Godot runs on an 8 GB Mac were risky, so testing was put on hold and M1 and M2 were written blind. The user then wrote <code>gt</code>, a headless Godot test runner. It queues every agent's run behind one shared lock, waits for free memory, caches results for unchanged files, and lets agents waiting on the same run share one result.</p>
+      <p>Its first run on the blind M1 code gave <b>136 passed, 2 failed</b> and about 300 errors. The suite had grown to <b>1225 passed, 0 failed</b> twelve hours after the first commit.</p>
+    </article>
+    <article class="card">
+      <h3>Bots instead of hands</h3>
+      <p>Acceptance items that need someone to play are checked by scripted players that use the real controls. <b>StockBot</b> clicks the PC's buttons, carries boxes and fills shelves. <b>TillBot</b> sits at the till, scans, types card amounts and counts change. Tours play whole days (a 3-day day tour, a progression tour and a staff day with 79 customers). M9's <b>soak bot</b> plays 30 days in about 4 minutes and logs pacing, errors and stuck NPCs.</p>
+    </article>
+    <article class="card">
+      <h3>When things went wrong</h3>
+      <ul>
+        <li><b>Mouse look dead, POS screen flickering</b> (user report, 18:08): the crosshair control was eating mouse input, and the screen was z-fighting with its glass. Both fixed by 18:21.</li>
+        <li><b>Broken main</b> (19:34): one agent's <code>git commit -a</code> swept another agent's half-done edits into main. It was fixed within minutes.</li>
+        <li><b>Review round 1</b>: one crash (selling a till with a queue), 6 major and 13 minor issues. The fixes came with regression tests; four of them (#1, #2, #3, #17) were shown failing on the old code first.</li>
+      </ul>
+    </article>
+  </div>
+  <h3>The agents</h3>
+  <div class="table-wrap">
+  <table class="agents">
+    <thead><tr><th>Agent</th><th>Job</th><th>Outcome (from its report)</th></tr></thead>
+    <tbody>
+      <tr><td>BuildM0</td><td>Fork Mimic Mart, world shell, data, test harness</td><td>71 tests passing, 60 fps on Medium, about 57 min</td></tr>
+      <tr><td>BuildM1</td><td>Stock loop and the van</td><td>Written blind during the hold; nothing run</td></tr>
+      <tr><td>VerifyM1</td><td>Make M1 pass headless</td><td>Stock-box parts, bay physics and van timing fixed; 871 passed, 0 failed</td></tr>
+      <tr><td>BuildM2</td><td>Customers and checkout</td><td>Landed; the commit that broke main came from here</td></tr>
+      <tr><td>BuildM3</td><td>Days, bills, loans, saves</td><td>3-day bot tour passes; 599 passed, 3 failed (M1's)</td></tr>
+      <tr><td>AssetsBatch</td><td>M4–M7 models, sounds, music</td><td>30 products, the fixtures, staff humans, offline-rendered sounds, 6 tracks</td></tr>
+      <tr><td>BuildM5</td><td>Build mode, furniture, expansions, stockroom</td><td>Landed at 710 passed, 4 failed (a flaky rack step)</td></tr>
+      <tr><td>BuildM4</td><td>Progression and reputation</td><td>Licences, drift, Pricing and Stats apps, cleanliness, mop</td></tr>
+      <tr><td>BuildM6</td><td>Staff</td><td>79-customer acceptance day with no change mistakes; 928 passed</td></tr>
+      <tr><td>BuildM8</td><td>Menus, tutorial, polish</td><td>Menu 75 and tutorial 15 tests pass</td></tr>
+      <tr><td>BuildM7</td><td>Content complete</td><td>All 48 products end to end; 999 passed, 0 failed</td></tr>
+      <tr><td>FixLeftovers</td><td>Dock overlap, rack targeting, progression tour</td><td>1041 passed, 0 failed</td></tr>
+      <tr><td>BuildM9</td><td>Balance, performance, soak</td><td>Soak bot works; mesh surfaces 5,749 → 3,893; pacing met 3 of 5 rows; on a branch</td></tr>
+      <tr><td>Review1</td><td>Independent critique, round 1</td><td>20 issues and 8 suggested additions</td></tr>
+      <tr><td>AdditionsA</td><td>Review additions #4, #6, #7, #8</td><td>1162 passed, 0 failed</td></tr>
+      <tr><td>FixRound1</td><td>Review fixes</td><td>15 of 16 fixed; 1205 passed, 0 failed</td></tr>
+      <tr><td>FixNPCRepath</td><td>Review #17: NPCs re-pathing</td><td>1225 passed, 0 failed</td></tr>
+      <tr class="wip"><td>FinishM9</td><td>Finish M9 tuning and soaks</td><td>In progress</td></tr>
+      <tr class="wip"><td>AdditionsB</td><td>Review additions #1, #2, #3, #5</td><td>In progress</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section id="numbers">
+  <h2>Numbers</h2>
+  <div class="stats" id="stats"></div>
+  <figure class="chart-fig">
+    <figcaption><b>Full-suite test runs over time.</b> Green dots are fully green runs; red rings show runs with failures (the failure count is in the label). Sources: PROGRESS.md and the agents' reports.</figcaption>
+    <div id="test-chart" class="chart"></div>
+  </figure>
+  <figure class="chart-fig">
+    <figcaption><b>Commits to <code>main</code> per hour.</b></figcaption>
+    <div id="commit-chart" class="chart"></div>
+  </figure>
+</section>
+
+<section id="economy">
+  <h2>Economy and pacing</h2>
+  <p class="lead">Money is in AUD and the data files store integer cents. A new game starts with <span id="start-cash">$600</span>, a 12 × 8 m shop, two gondolas, a drinks cooler, one checkout and the PC. The tables below come from the game's <code>data/*.json</code> on <code>main</code>. M9's tuning, still in progress, is cutting many of these prices.</p>
+  <div class="grid two">
+    <div class="table-wrap"><table id="pacing"><caption>Pacing targets (ECONOMY.md): what the soak bot is tuned to</caption></table></div>
+    <div class="table-wrap"><table id="licences"><caption>Licences</caption></table></div>
+    <div class="table-wrap"><table id="expansions"><caption>Store expansions (start: 3 × 2 cells)</caption></table></div>
+    <div class="table-wrap"><table id="stockroom"><caption>Stockroom shed</caption></table></div>
+  </div>
+</section>
+
+<section id="assets">
+  <h2>Asset contact sheets</h2>
+  <p class="lead">These are <b>contact sheets</b>: the pipeline renders each generated model on its own for review. They are <b>not in-game screenshots</b>; none have been taken yet.</p>
+  <div class="gallery">
+    <figure><a href="img/fixtures-contact-sheet.jpg"><img src="img/fixtures-contact-sheet.jpg" loading="lazy" width="1600" height="2000" alt="Grid of fixture models: shelves, coolers, freezers, the checkout, the PC desk, the ice-cream van, cars, signs, spills and the stockroom shed"></a>
+      <figcaption>Fixtures and props contact sheet (<code>assets/fixtures/preview.jpg</code>)</figcaption></figure>
+    <figure><a href="img/products-contact-sheet.jpg"><img src="img/products-contact-sheet.jpg" loading="lazy" width="1600" height="2400" alt="Grid of product models with their packaging"></a>
+      <figcaption>Products contact sheet (<code>assets/products/preview.jpg</code>)</figcaption></figure>
+    <figure><a href="img/humans-contact-sheet.jpg"><img src="img/humans-contact-sheet.jpg" loading="lazy" width="1600" height="1169" alt="Lineup of human models: shoppers, Dale, Echo and two staff in red uniforms and caps, with face close-ups"></a>
+      <figcaption>Humans contact sheet (<code>assets/humans/preview.jpg</code>): shoppers, Dale, and staff in uniform. Made with MPFB2/MakeHuman.</figcaption></figure>
+  </div>
+</section>
+
+<section id="credits">
+  <h2>Credits</h2>
+  <div class="grid two">
+    <article class="card">
+      <h3>Music: Kevin MacLeod (incompetech.com)</h3>
+      <p>Six in-store tracks, re-encoded to Ogg Vorbis, licensed under <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons: By Attribution 4.0</a>:</p>
+      <ul class="tracks">
+        <li>"Local Forecast - Elevator" Kevin MacLeod (incompetech.com)</li>
+        <li>"Airport Lounge" Kevin MacLeod (incompetech.com)</li>
+        <li>"Bossa Antigua" Kevin MacLeod (incompetech.com)</li>
+        <li>"Easy Lemon" Kevin MacLeod (incompetech.com)</li>
+        <li>"Wallpaper" Kevin MacLeod (incompetech.com)</li>
+        <li>"Carefree" Kevin MacLeod (incompetech.com)</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h3>Everything else</h3>
+      <ul>
+        <li><b>Poly Haven</b> (polyhaven.com), CC0: textures, props (shelf units for the storage rack, the bleach bottle and more) and the kloofendal sky.</li>
+        <li><b>MPFB2 / MakeHuman</b> for Blender: base mesh, skins, hair, clothes and eyes, CC0.</li>
+        <li><b>Quaternius</b> (quaternius.com): Universal Animation Library, CC0.</li>
+        <li>Fonts in the game: Archivo and Anton, SIL Open Font License 1.1.</li>
+        <li>Made with <b>Godot Engine</b> (MIT). Other models, packaging art, box prints and sounds were generated by the project's own Blender and sound tools.</li>
+        <li>Reference: <em>Supermarket Simulator</em> (Nokta Games, 2024).</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section id="status">
+  <h2>Status and what's next</h2>
+  <p class="lead">Fully playable headless: every system above passes its tests, and bots have played whole days. Nothing has been looked at in a window yet, because the user asked for nothing on screen during the build.</p>
+  <h3>In progress right now</h3>
+  <div class="grid two" id="in-progress"></div>
+  <h3>Deferred visual checks</h3>
+  <p>No windowed screenshots, real-frame-rate measurements or listening checks have been run since M0. Each milestone recorded what to look at once screen time is allowed:</p>
+  <div id="deferred" class="deferred"></div>
+  <h3>After that</h3>
+  <ul>
+    <li>Review loop: more critique-and-fix rounds until a round finds nothing significant (PLAN.md).</li>
+    <li>Round 1 left two items open: <b>#18</b> (the spawner scans every slot each physics frame; left for M9's perf pass) and <b>#20</b> (the first customer replaces the starting 3.0 stars).</li>
+    <li>Run the screenshot tours and the ≥ 60 fps check on the full level-16 store at 1280 × 720 and 1920 × 1080, then work through each milestone's playtest checklist.</li>
+  </ul>
+</section>
+</main>
+
+<footer>
+  <p>Data generated <span id="generated">…</span> from game commit <code id="head">…</code> by <code>update.py</code>. Corner to Super is a personal project; it has not been published or sold.</p>
+  <p><a href="https://github.com/SubToFeralsloth11/corner-to-super-site">Source for this page</a></p>
+</footer>
+</body>
+</html>
