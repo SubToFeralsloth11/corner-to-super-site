@@ -1,0 +1,1137 @@
+{
+ "generated": "2026-11-06T06:13+10:00",
+ "head": "f9ea641",
+ "stats": {
+  "commits": 100,
+  "first_commit": "2026-11-05T16:22:30+10:00",
+  "last_commit": "2026-11-06T04:14:06+10:00",
+  "products": 48,
+  "licences": 9,
+  "fixtures": 18,
+  "levels": 16,
+  "test_files": 27,
+  "gd_files": 146,
+  "gd_lines": 24799,
+  "models": 130,
+  "music_tracks": 6,
+  "sounds": 84,
+  "tests_passing": 1225
+ },
+ "test_points": [
+  {
+   "date": "2026-11-05T17:47:32+10:00",
+   "passed": 71,
+   "failed": 0,
+   "source": "PROGRESS.md (7b31b72)",
+   "note": "tests/check.sh`: clean. `tests/run_tests.sh`: 71 passed, 0 failed. The cases cover:"
+  },
+  {
+   "date": "2026-11-05T18:50:28+10:00",
+   "passed": 136,
+   "failed": 2,
+   "source": "first gt run on main 28b6b41 (blind M1 code)",
+   "note": "delivery_test six and forty boxes failing, ~300 stock-box errors"
+  },
+  {
+   "date": "2026-11-05T19:34:00+10:00",
+   "passed": 599,
+   "failed": 3,
+   "source": "BuildM3 report",
+   "note": "3 M1 delivery-timing failures, then being fixed by VerifyM1"
+  },
+  {
+   "date": "2026-11-05T20:57:00+10:00",
+   "passed": 710,
+   "failed": 4,
+   "source": "BuildM5 report",
+   "note": "rebased branch just before landing; M1 and M5 rack failures"
+  },
+  {
+   "date": "2026-11-05T21:18:00+10:00",
+   "passed": 865,
+   "failed": 6,
+   "source": "BuildM8 report",
+   "note": "last run before the final rebase; failures all in M1 and M5 tests"
+  },
+  {
+   "date": "2026-11-05T21:55:51+10:00",
+   "passed": 871,
+   "failed": 0,
+   "source": "PROGRESS.md (26cfcf5)",
+   "note": "(M0-M5 and M8 cases): 871 passed, 0 failed, no script errors."
+  },
+  {
+   "date": "2026-11-05T22:32:41+10:00",
+   "passed": 928,
+   "failed": 0,
+   "source": "PROGRESS.md (aef84dd)",
+   "note": "Full suite (`gt test`): 928 passed, 0 failed."
+  },
+  {
+   "date": "2026-11-05T22:32:53+10:00",
+   "passed": 941,
+   "failed": 1,
+   "source": "PROGRESS.md (95ce661)",
+   "note": "Full suite on this branch: 941 passed, 1 failed (`m5_acceptance` \"two boxes went on the"
+  },
+  {
+   "date": "2026-11-05T22:48:28+10:00",
+   "passed": 999,
+   "failed": 0,
+   "source": "PROGRESS.md (106ae36)",
+   "note": "Full suite on this branch after rebasing onto M6: **999 passed, 0 failed**. (An earlier run"
+  },
+  {
+   "date": "2026-11-05T23:45:00+10:00",
+   "passed": 1041,
+   "failed": 0,
+   "source": "FixLeftovers report (main f609d0b)",
+   "note": "no lambda or SCRIPT ERROR lines"
+  },
+  {
+   "date": "2026-11-06T01:51:55+10:00",
+   "passed": 1162,
+   "failed": 0,
+   "source": "PROGRESS.md (82f9a11)",
+   "note": "Full suite: **1162 passed, 0 failed**; `gt smoke` 149 scripts and scenes, no errors."
+  },
+  {
+   "date": "2026-11-06T02:11:00+10:00",
+   "passed": 1205,
+   "failed": 0,
+   "source": "FixRound1 report",
+   "note": "15 of 16 review fixes"
+  },
+  {
+   "date": "2026-11-06T04:14:06+10:00",
+   "passed": 1225,
+   "failed": 0,
+   "source": "PROGRESS.md (f9ea641)",
+   "note": "Full suite: **1225 passed, 0 failed** (after #17)."
+  }
+ ],
+ "events": [
+  {
+   "date": "2026-11-05T16:22:30+10:00",
+   "kind": "plan",
+   "title": "Planning docs written",
+   "text": "Eleven commits in eight minutes (16:22-16:30): README, agent rules, PLAN, GDD, ECONOMY, DELIVERY_VAN, ARCHITECTURE, REUSE, ASSETS, VISUALS and MILESTONES (M0-M9 with acceptance checks). No game code yet."
+  },
+  {
+   "date": "2026-11-05T16:45:13+10:00",
+   "kind": "process",
+   "title": "\"Build my full game... grill me first\"",
+   "text": "Before any code, the user was grilled with 7 questions. Answers: run M0-M9 straight through; a scripted bot plus a playtest checklist instead of manual play; tune to the ECONOMY.md pacing table; a Sandbox picker for start level and money; Kevin MacLeod CC-BY music; clean the disk as you go; then a critique-and-fix review loop. Recorded in PLAN.md (497870a, 16:51)."
+  },
+  {
+   "date": "2026-11-05T16:51:18+10:00",
+   "kind": "milestone",
+   "title": "M0: Fork and world shell",
+   "progress": "M0: Fork and world shell (2026-11-05)",
+   "text": "One agent (BuildM0), about 57 minutes. Mimic Mart's assets copied without the horror content; all 48 products, 9 licences and 18 fixtures in data/*.json; the shop shell generated from unlocked cells; car park, road and neighbours; daylight HDRI lighting; the player controller; the test harness. 71 tests passing, 60 fps on the Medium preset. Finished 17:47 (7b31b72)."
+  },
+  {
+   "date": "2026-11-05T18:08:30+10:00",
+   "kind": "incident",
+   "title": "First user bug reports",
+   "text": "\"You can't move the camera with the mouse and the cash register screen is glitchy at angles.\" Fixed within 13 minutes: the crosshair control was swallowing mouse look (c75517e, 18:18) and the POS screen was z-fighting with its glass (640a314, 18:21)."
+  },
+  {
+   "date": "2026-11-05T18:21:28+10:00",
+   "kind": "process",
+   "title": "Testing on hold",
+   "text": "The user asked to hold off testing. M1 (the stock loop and the van, 28b6b41) and M2 (customers and checkout) were written blind: no Godot run, nothing parsed or executed."
+  },
+  {
+   "date": "2026-11-05T18:46:23+10:00",
+   "kind": "process",
+   "title": "The user's `gt` lifts the hold",
+   "text": "The user's new `gt` tool runs headless Godot tests through one shared queue and lock, caches results and keeps everything off the screen and inside the 8 GB of RAM. The first run on the blind M1 code: 136 passed, 2 failed, plus ~300 stock-box errors. VerifyM1 started fixing it."
+  },
+  {
+   "date": "2026-11-05T18:50:22+10:00",
+   "kind": "process",
+   "title": "Up to 6 agents in parallel",
+   "text": "AssetsBatch and BuildM3 (18:50), BuildM5 (19:10), BuildM4 and BuildM6 (19:27), BuildM8 (19:35), alongside VerifyM1 and BuildM2. Each worked in its own git worktree and branch, rebased onto main to land, and queued for the one Godot lock through `gt`."
+  },
+  {
+   "date": "2026-11-05T19:22:00+10:00",
+   "kind": "milestone",
+   "title": "M2: Customers and checkout",
+   "progress": "M2: Customers and checkout (2026-11-05)",
+   "text": "14 shoppers with shopping lists, a baked navmesh, baskets and trolleys, speech bubbles, queues, click-to-scan, a typed card keypad and hand-counted AUD cash change with 5c rounding (d96b0d3)."
+  },
+  {
+   "date": "2026-11-05T19:34:00+10:00",
+   "kind": "incident",
+   "title": "Main broke, and was fixed within minutes",
+   "text": "An agent committed a one-file PROGRESS.md change with `git commit -a`, which swept another agent's half-done edits from the shared working tree into main (f6b2668). It was caught and fixed within minutes; the lesson: stage only your own files."
+  },
+  {
+   "date": "2026-11-05T19:34:30+10:00",
+   "kind": "milestone",
+   "title": "M3: Days, bills, loans, saves",
+   "progress": "M3: Days, bills, loans, saves (2026-11-05)",
+   "text": "Day phases from PREP to the receipt, rent, electricity, wages, loans, late fees and repossession, the Bank app, 3 save slots with autosave, the HUD and the Tab clipboard. A bot played 3 full days headless. Full suite: 599 passed, 3 failed (the M1 delivery tests still being fixed)."
+  },
+  {
+   "date": "2026-11-05T19:49:00+10:00",
+   "kind": "milestone",
+   "title": "Assets batch for M4-M7",
+   "text": "AssetsBatch: 30 new product models with packaging art and box prints, the M4-M7 fixtures, two uniformed staff humans, the remaining sounds (rendered offline with numpy) and six Kevin MacLeod music tracks. `Catalog.missing_models()` returned []."
+  },
+  {
+   "date": "2026-11-05T20:32:00+10:00",
+   "kind": "milestone",
+   "title": "M1: Stock loop and the van verified",
+   "progress": "M1: Stock loop and the van (verified 2026-11-05)",
+   "text": "VerifyM1 made the blind M1 code pass: stock-box parts found under the GLB root, boxes kept in the bay with probed spots and softened landings, and the van tuned to stop at about 4.5 s and leave at 14.05 s. 20/20 six-box and 44/44 forty-box runs landed every box. Full suite: 871 passed, 0 failed."
+  },
+  {
+   "date": "2026-11-05T20:57:00+10:00",
+   "kind": "milestone",
+   "title": "M5: Build mode, furniture, expansions, stockroom",
+   "progress": "M5: Build mode, furniture, expansions, stockroom (2026-11-05)",
+   "text": "Flat-pack furniture fired from the van, build mode with placement rules, expansions E1-E8 knocking walls down with dust and camera shake, and the stockroom shed S1-S3 with storage racks. Landed at 710 passed, 4 failed (one flaky rack step in the acceptance bot)."
+  },
+  {
+   "date": "2026-11-05T21:18:00+10:00",
+   "kind": "milestone",
+   "title": "M8: Menus, tutorial, polish",
+   "progress": "M8: Menus, tutorial, polish (2026-11-05)",
+   "text": "Main menu over a dolly shot of a stocked store, Sandbox picker, options with mixer buses, the day-1 tutorial, Dale handing over the keys, the music player and the F3 overlay. menu_test 75 passed, tutorial_test 15 passed."
+  },
+  {
+   "date": "2026-11-05T21:47:00+10:00",
+   "kind": "milestone",
+   "title": "M4: Progression and reputation",
+   "progress": "M4: Progression and reputation (2026-11-05, BuildM4)",
+   "text": "Level-up banner and confetti, licences, daily market drift, the Pricing and Stats apps, cleanliness with spills, litter and the mop, and promo stands. The progression bot reached level 3 on day 5."
+  },
+  {
+   "date": "2026-11-05T21:56:00+10:00",
+   "kind": "milestone",
+   "title": "M6: Staff",
+   "progress": "M6: Staff (2026-11-05)",
+   "text": "Cashiers, restockers and cleaners with three tiers and wages, plus the Staff app. In the acceptance day, two cashiers served 79 customers ($653.60) with no change mistakes. Full suite: 928 passed, 0 failed."
+  },
+  {
+   "date": "2026-11-05T22:30:00+10:00",
+   "kind": "milestone",
+   "title": "M7: Content complete",
+   "progress": "M7: Content complete (2026-11-05, BuildM7)",
+   "text": "All 48 products ordered, stocked, bought and sold end to end; the deli corner, the cigarette wall and Smokes at the till; aisle signs; verge trees; parked cars that follow trade. The level-16 test store held 11,164 units on 564 slots. Full suite: 999 passed, 0 failed."
+  },
+  {
+   "date": "2026-11-05T22:49:21+10:00",
+   "kind": "process",
+   "title": "M9 started: balance, perf, soak",
+   "text": "BuildM9 built a soak bot that plays N days of a new game through the real van, till and build mode, and cut mesh surfaces from 5,749 to 3,893 in the headless perf pass. Its last 30-day run had 0 errors and no stuck NPCs. Tuning met 3 of the 5 pacing rows before the agent's budget ran out; the work is on the m9-build branch."
+  },
+  {
+   "date": "2026-11-05T23:45:00+10:00",
+   "kind": "test",
+   "title": "Leftovers fixed: 1041 green",
+   "text": "FixLeftovers: the ShopOS dock was covering the bottom of every app window, the rack box couldn't be targeted, and the progression tour bot was stuck. The progression tour passes. Full suite: 1041 passed, 0 failed."
+  },
+  {
+   "date": "2026-11-06T00:05:00+10:00",
+   "kind": "review",
+   "title": "Review round 1",
+   "text": "An independent reviewer (Review1) critiqued the build: 20 issues (1 blocker crash from selling a till with a queue, 6 major, 13 minor) and 8 suggested additions. Its own full-suite run was 1041 passed, 0 failed."
+  },
+  {
+   "date": "2026-11-06T01:31:00+10:00",
+   "kind": "milestone",
+   "title": "Review additions, batch A",
+   "progress": "Round-1 review additions #4, #6, #7, #8 (2026-11-06, AdditionsA)",
+   "text": "Catch boxes out of the air, van misfires that set off a car alarm, the store phone, the My Store look app, Sunday's Corner Courier review quoting real customers, and MegaMart's rival sale week. Full suite: 1162 passed, 0 failed."
+  },
+  {
+   "date": "2026-11-06T02:11:00+10:00",
+   "kind": "review",
+   "title": "Round-1 fixes land",
+   "text": "FixRound1 fixed 15 of the review's 16 bug and UX items, writing a regression test for each (1205 passed, 0 failed). The crash fix refuses to sell a till that has a queue."
+  },
+  {
+   "date": "2026-11-06T02:11:37+10:00",
+   "kind": "process",
+   "title": "FinishM9 picks up M9",
+   "text": "A new agent continues from the m9-build branch: more pacing tuning, ECONOMY.md updates and soaks. In progress."
+  },
+  {
+   "date": "2026-11-06T04:14:00+10:00",
+   "kind": "review",
+   "title": "NPC re-pathing fixed: 1225 green",
+   "progress": "Round-1 review fixes (2026-11-06, FixRound1 and FixNPCRepath)",
+   "text": "FixNPCRepath: walkers re-route when a fixture moves or the navmesh is rebaked, and stand and wait instead of walking through walls when there is no route. The new tests failed on the old code (13/20) and pass now. Full suite: 1225 passed, 0 failed."
+  },
+  {
+   "date": "2026-11-06T04:44:54+10:00",
+   "kind": "process",
+   "title": "Review additions, batch B started",
+   "text": "Customer types, a requests board with daily goals, supplier deals and shoplifters. In progress."
+  }
+ ],
+ "commits": [
+  {
+   "sha": "fb058b7",
+   "date": "2026-11-05T16:22:30+10:00",
+   "subject": "Add README with plan file index"
+  },
+  {
+   "sha": "2ee211b",
+   "date": "2026-11-05T16:25:19+10:00",
+   "subject": "Add project agent rules"
+  },
+  {
+   "sha": "2c5fef4",
+   "date": "2026-11-05T16:25:19+10:00",
+   "subject": "Add vision, decisions and scope plan"
+  },
+  {
+   "sha": "7c0fb78",
+   "date": "2026-11-05T16:25:19+10:00",
+   "subject": "Add gameplay systems design doc"
+  },
+  {
+   "sha": "0b7b51d",
+   "date": "2026-11-05T16:25:19+10:00",
+   "subject": "Add economy numbers and formulas"
+  },
+  {
+   "sha": "ba8374f",
+   "date": "2026-11-05T16:26:32+10:00",
+   "subject": "Add ice-cream delivery van spec"
+  },
+  {
+   "sha": "148a204",
+   "date": "2026-11-05T16:27:28+10:00",
+   "subject": "Add technical architecture doc"
+  },
+  {
+   "sha": "993ee58",
+   "date": "2026-11-05T16:28:54+10:00",
+   "subject": "Add Mimic Mart reuse guide"
+  },
+  {
+   "sha": "1f57793",
+   "date": "2026-11-05T16:29:38+10:00",
+   "subject": "Add asset list with new model specs"
+  },
+  {
+   "sha": "855e8bc",
+   "date": "2026-11-05T16:30:38+10:00",
+   "subject": "Add visual, audio and performance direction"
+  },
+  {
+   "sha": "f05de36",
+   "date": "2026-11-05T16:30:52+10:00",
+   "subject": "Add milestone build order with acceptance checks"
+  },
+  {
+   "sha": "497870a",
+   "date": "2026-11-05T16:51:01+10:00",
+   "subject": "Record agreed build decisions: sandbox picker, music, run mode, review loop"
+  },
+  {
+   "sha": "ee189a5",
+   "date": "2026-11-05T17:15:07+10:00",
+   "subject": "Copy Mimic Mart assets, sounds and generators without the horror content"
+  },
+  {
+   "sha": "0d9861a",
+   "date": "2026-11-05T17:15:07+10:00",
+   "subject": "Add game data files with the full ECONOMY.md numbers"
+  },
+  {
+   "sha": "6f6c6f3",
+   "date": "2026-11-05T17:25:30+10:00",
+   "subject": "Add fresh project, Catalog validation, Game state and Money/clock helpers"
+  },
+  {
+   "sha": "abf7bd8",
+   "date": "2026-11-05T17:25:31+10:00",
+   "subject": "Generate the shop shell from unlocked cells and build the outside world"
+  },
+  {
+   "sha": "ca5a93c",
+   "date": "2026-11-05T17:25:31+10:00",
+   "subject": "Add test harness: check.sh, run_tests.sh with --only, cases, screenshot tour"
+  },
+  {
+   "sha": "364bf92",
+   "date": "2026-11-05T17:43:35+10:00",
+   "subject": "Add Godot import settings for the copied and generated assets"
+  },
+  {
+   "sha": "eaf8bb3",
+   "date": "2026-11-05T17:43:35+10:00",
+   "subject": "Place the bin from the clean half of the metal_trash_can model"
+  },
+  {
+   "sha": "0c08647",
+   "date": "2026-11-05T17:43:35+10:00",
+   "subject": "Brighten the shop: polished vinyl floor, painted walls, green feature wall"
+  },
+  {
+   "sha": "575f921",
+   "date": "2026-11-05T17:43:35+10:00",
+   "subject": "Add Low/Medium/High graphics presets and cheapen the outside"
+  },
+  {
+   "sha": "b553a9b",
+   "date": "2026-11-05T17:43:35+10:00",
+   "subject": "Aim the tour's sun shot at the sun and take the window size as an option"
+  },
+  {
+   "sha": "8234f21",
+   "date": "2026-11-05T17:47:32+10:00",
+   "subject": "Import textures with mipmaps and VRAM compression; rewrite the asset notes for this game"
+  },
+  {
+   "sha": "97d361a",
+   "date": "2026-11-05T17:47:32+10:00",
+   "subject": "Document M0 decisions: data shapes, outside layout, presets, deli corner"
+  },
+  {
+   "sha": "7b31b72",
+   "date": "2026-11-05T17:47:32+10:00",
+   "subject": "Finish M0: tick its boxes and record progress with a playtest checklist"
+  },
+  {
+   "sha": "c75517e",
+   "date": "2026-11-05T18:18:47+10:00",
+   "subject": "Stop the crosshair swallowing mouse look"
+  },
+  {
+   "sha": "640a314",
+   "date": "2026-11-05T18:21:52+10:00",
+   "subject": "Lift the POS screen off its glass to stop z-fighting"
+  },
+  {
+   "sha": "d1f79f6",
+   "date": "2026-11-05T18:22:51+10:00",
+   "subject": "Add the M1 models, box prints and sounds: ice-cream van, PC desk, door sign, stock box"
+  },
+  {
+   "sha": "52fd028",
+   "date": "2026-11-05T18:23:01+10:00",
+   "subject": "Add stock-box cartons, pack types and paid ordering"
+  },
+  {
+   "sha": "ebef8b7",
+   "date": "2026-11-05T18:26:13+10:00",
+   "subject": "Render Market icons for every product model"
+  },
+  {
+   "sha": "28b6b41",
+   "date": "2026-11-05T18:37:36+10:00",
+   "subject": "Add the stock loop: slots, stock boxes, the PC Market and the ice-cream van"
+  },
+  {
+   "sha": "7e7e7bf",
+   "date": "2026-11-05T18:58:19+10:00",
+   "subject": "Add the M2 checkout props: card reader, basket, trolley, basket stand and AUD-style money"
+  },
+  {
+   "sha": "2c2f6f4",
+   "date": "2026-11-05T18:58:53+10:00",
+   "subject": "Add the checkout sounds: cash drawer, coins, notes, card terminal keys and tones, receipt printer"
+  },
+  {
+   "sha": "d96b0d3",
+   "date": "2026-11-05T19:22:23+10:00",
+   "subject": "Add customers and the checkout: shoppers, navmesh, queueing, scanning, card keypad and cash change"
+  },
+  {
+   "sha": "018514e",
+   "date": "2026-11-05T19:22:23+10:00",
+   "subject": "Test the M2 acceptance items and add the till bot, the cashier gameplay tour and the checkout shots"
+  },
+  {
+   "sha": "b761698",
+   "date": "2026-11-05T19:23:18+10:00",
+   "subject": "Skip pictures in headless tour runs and list who is still in the store"
+  },
+  {
+   "sha": "ed943c3",
+   "date": "2026-11-05T19:25:18+10:00",
+   "subject": "Document M2: navigation, checkout layout, customer details, assets, deferred checks and playtest"
+  },
+  {
+   "sha": "a29e38f",
+   "date": "2026-11-05T18:56:25+10:00",
+   "subject": "Find stock box parts under the GLB's own root node"
+  },
+  {
+   "sha": "a1d852c",
+   "date": "2026-11-05T19:23:29+10:00",
+   "subject": "Add the day's bills, loans, overdue fees and repossession to Game"
+  },
+  {
+   "sha": "25adae7",
+   "date": "2026-11-05T19:23:38+10:00",
+   "subject": "Play days end to end: the sign, HUD, clipboard, receipt, Bank app and save slots"
+  },
+  {
+   "sha": "28bfc54",
+   "date": "2026-11-05T19:23:38+10:00",
+   "subject": "Document the M3 day cycle, bill and loan details, save format and dev flags"
+  },
+  {
+   "sha": "f4c9b4d",
+   "date": "2026-11-05T19:34:29+10:00",
+   "subject": "Count sales and lost sales into the day report; add the 3-day bot tour"
+  },
+  {
+   "sha": "49cec8a",
+   "date": "2026-11-05T19:34:29+10:00",
+   "subject": "Finish M3: tick its boxes and record progress with a playtest checklist"
+  },
+  {
+   "sha": "f6b2668",
+   "date": "2026-11-05T19:34:45+10:00",
+   "subject": "Point the M2 playtest at the M3 door sign for opening the store"
+  },
+  {
+   "sha": "55f3e10",
+   "date": "2026-11-05T19:36:27+10:00",
+   "subject": "Add spills and litter and the mop bucket that the player's mop needs"
+  },
+  {
+   "sha": "42af2f6",
+   "date": "2026-11-05T19:33:23+10:00",
+   "subject": "Add the storage rack: two Poly Haven shelf units with Box_L empties"
+  },
+  {
+   "sha": "6e5c6fc",
+   "date": "2026-11-05T19:33:31+10:00",
+   "subject": "Add the 30 Corner to Super products: packaging art, models, variants, icons and stock-box prints"
+  },
+  {
+   "sha": "79ebc23",
+   "date": "2026-11-05T19:35:23+10:00",
+   "subject": "Add the M4-M7 fixtures: wall shelf, upright freezer, dairy multideck, chest freezer, produce stand, decor, bin, flat-pack carton, stockroom shed, aisle sign, verge trees"
+  },
+  {
+   "sha": "e8a5ace",
+   "date": "2026-11-05T19:49:13+10:00",
+   "subject": "Add litter props, flat-pack carton labels and the full fixture contact sheet"
+  },
+  {
+   "sha": "d78d433",
+   "date": "2026-11-05T19:49:13+10:00",
+   "subject": "Add the M4-M7 sounds and six Kevin MacLeod store music tracks"
+  },
+  {
+   "sha": "fe87a36",
+   "date": "2026-11-05T20:27:02+10:00",
+   "subject": "Clear tonight's bills with a typed array so a Sandbox day can end"
+  },
+  {
+   "sha": "765bcc5",
+   "date": "2026-11-05T20:41:18+10:00",
+   "subject": "Add the staff_uniform_m/f humans with the store badge"
+  },
+  {
+   "sha": "579696c",
+   "date": "2026-11-05T20:57:37+10:00",
+   "subject": "Add build mode, furniture flat-packs, expansions and the stockroom shed with racks"
+  },
+  {
+   "sha": "579ae23",
+   "date": "2026-11-05T20:31:54+10:00",
+   "subject": "Add M4 progression: licences, daily market drift, Pricing and Stats apps, cleanliness, customer messes and the level-up banner"
+  },
+  {
+   "sha": "5788ddc",
+   "date": "2026-11-05T20:52:51+10:00",
+   "subject": "Slide the chest freezer's glass lids open over the half being stocked or shopped"
+  },
+  {
+   "sha": "e644fe0",
+   "date": "2026-11-05T21:23:18+10:00",
+   "subject": "Let the Furniture app count owned fixtures before the delivery service exists"
+  },
+  {
+   "sha": "0c2cc3a",
+   "date": "2026-11-05T20:26:06+10:00",
+   "subject": "Add the mixer buses, per-bus volumes, day length setting and the crossfading music player"
+  },
+  {
+   "sha": "0c56422",
+   "date": "2026-11-05T20:26:06+10:00",
+   "subject": "Track the wanted mouse capture in Cursor; flash the scanner line and roll the HUD cash up"
+  },
+  {
+   "sha": "6626f8b",
+   "date": "2026-11-05T20:26:06+10:00",
+   "subject": "Add the main menu with its store backdrop, options, controls, credits, the day-1 tutorial, Dale's walk-in and the F3 overlay"
+  },
+  {
+   "sha": "60772ba",
+   "date": "2026-11-05T21:18:51+10:00",
+   "subject": "Test the menus, options, mouse capture and the day-1 tutorial; add the M8 tour shots, ambience and docs"
+  },
+  {
+   "sha": "1bf9648",
+   "date": "2026-11-05T21:47:40+10:00",
+   "subject": "Add the M4 progression tour and document M4: drift, licences, apps, cleanliness, mop"
+  },
+  {
+   "sha": "028d243",
+   "date": "2026-11-05T19:42:13+10:00",
+   "subject": "Run delayed box and dust-puff callbacks from node tweens, not timer lambdas"
+  },
+  {
+   "sha": "768ffc3",
+   "date": "2026-11-05T19:42:13+10:00",
+   "subject": "Keep delivered boxes in the bay: probe spots, fill from the van side, soften landings"
+  },
+  {
+   "sha": "200a22d",
+   "date": "2026-11-05T19:42:14+10:00",
+   "subject": "Tune the van's speeds so a 6-box visit lands by 10 s and leaves by 15 s"
+  },
+  {
+   "sha": "650b884",
+   "date": "2026-11-05T19:42:14+10:00",
+   "subject": "Aim the stock bot at a box's middle and give skipped boxes a second pass"
+  },
+  {
+   "sha": "26cfcf5",
+   "date": "2026-11-05T20:32:01+10:00",
+   "subject": "Record the M1 verification in PROGRESS and tick its milestone boxes"
+  },
+  {
+   "sha": "b072ba6",
+   "date": "2026-11-05T21:56:42+10:00",
+   "subject": "Share navmesh walking between customers and staff"
+  },
+  {
+   "sha": "0c8d566",
+   "date": "2026-11-05T21:56:42+10:00",
+   "subject": "Add staff hiring, tiers, till assignment, wages from the first working day and the Staff app"
+  },
+  {
+   "sha": "814184e",
+   "date": "2026-11-05T21:56:43+10:00",
+   "subject": "Add staff in the store: cashiers, restockers and cleaners; customers prefer staffed tills"
+  },
+  {
+   "sha": "2a23bc6",
+   "date": "2026-11-05T21:56:43+10:00",
+   "subject": "Test staff wages, cashier change, rack-only restocking and cleaning; add the staff tour and soak"
+  },
+  {
+   "sha": "8fe0676",
+   "date": "2026-11-05T21:56:43+10:00",
+   "subject": "Document M6: staff rules, API, tour results and playtest"
+  },
+  {
+   "sha": "78d9272",
+   "date": "2026-11-05T22:32:41+10:00",
+   "subject": "Hook the staff crew to phase changes with a bound method so freed worlds disconnect"
+  },
+  {
+   "sha": "aef84dd",
+   "date": "2026-11-05T22:32:41+10:00",
+   "subject": "Record the M6 acceptance day and full-suite results"
+  },
+  {
+   "sha": "54e47b1",
+   "date": "2026-11-05T22:30:47+10:00",
+   "subject": "Add outdoor traffic and birdsong loops; play fridge door, rack slide and box flap sounds"
+  },
+  {
+   "sha": "333f733",
+   "date": "2026-11-05T22:30:47+10:00",
+   "subject": "Alternate produce and wine meshes with a produce colour spread; hide rear stock rows past 25 m"
+  },
+  {
+   "sha": "eeea6a8",
+   "date": "2026-11-05T22:30:47+10:00",
+   "subject": "Keep the background navmesh bake from calling into a freed world"
+  },
+  {
+   "sha": "9f59f62",
+   "date": "2026-11-05T22:30:47+10:00",
+   "subject": "Place the deli corner and cigarette wall with their licences, sell Smokes at the till, hang aisle signs, plant verge trees and fill the car park with trade"
+  },
+  {
+   "sha": "d2ac697",
+   "date": "2026-11-05T22:30:47+10:00",
+   "subject": "Test every product end to end, the licence furniture, Smokes and the full level-16 store; add the full-store tour"
+  },
+  {
+   "sha": "95ce661",
+   "date": "2026-11-05T22:30:47+10:00",
+   "subject": "Document M7 and tick its product box"
+  },
+  {
+   "sha": "6d4d20b",
+   "date": "2026-11-05T22:33:09+10:00",
+   "subject": "Let staff cashiers fetch Smokes from the cigarette wall"
+  },
+  {
+   "sha": "106ae36",
+   "date": "2026-11-05T22:48:28+10:00",
+   "subject": "Record the M7 full-suite result"
+  },
+  {
+   "sha": "9a8c523",
+   "date": "2026-11-05T22:48:54+10:00",
+   "subject": "Line the store's brick with the shed's own wall where store col 0 meets the stockroom"
+  },
+  {
+   "sha": "5c137e1",
+   "date": "2026-11-05T22:48:54+10:00",
+   "subject": "Keep ShopOS app windows above the dock so the Market's bottom row takes clicks; scroll long carts"
+  },
+  {
+   "sha": "93b6a1f",
+   "date": "2026-11-05T22:48:54+10:00",
+   "subject": "Type the next expansion's cells in the plot map so it draws once every expansion is bought"
+  },
+  {
+   "sha": "5ce061b",
+   "date": "2026-11-05T22:59:35+10:00",
+   "subject": "Order and stock dairy right after placing the multideck; walk the stock bot round fixtures along the navmesh"
+  },
+  {
+   "sha": "59b40f1",
+   "date": "2026-11-05T23:45:39+10:00",
+   "subject": "Take a racked box with E on the rack: racked boxes sit inside its collider, so the crosshair never found them"
+  },
+  {
+   "sha": "f609d0b",
+   "date": "2026-11-05T23:45:39+10:00",
+   "subject": "Pick up bay boxes the stock bot's way in the M5 acceptance test and rack any two of them, noting why one fails"
+  },
+  {
+   "sha": "4251453",
+   "date": "2026-11-06T00:42:51+10:00",
+   "subject": "Refuse to sell a till someone is queued at or staffing, and send a queue whose till vanished to another till instead of crashing"
+  },
+  {
+   "sha": "f99e6b8",
+   "date": "2026-11-06T00:56:41+10:00",
+   "subject": "Keep the player off a staffed till's reader and cash, and have the cashier count change from what is already in the tray"
+  },
+  {
+   "sha": "5fe4304",
+   "date": "2026-11-06T00:57:18+10:00",
+   "subject": "Refresh price labels and the price popup after the morning market drift; GDD: an unset price shows the market price, not --"
+  },
+  {
+   "sha": "e9e336b",
+   "date": "2026-11-06T01:31:04+10:00",
+   "subject": "Add the round-1 review additions: catch boxes from the van, rare misfires that set off a car alarm, the store phone, the My Store look app, Sunday's newspaper review and the rival's sale week"
+  },
+  {
+   "sha": "82f9a11",
+   "date": "2026-11-06T01:51:55+10:00",
+   "subject": "Record the round-1 review additions in PROGRESS"
+  },
+  {
+   "sha": "29f75fd",
+   "date": "2026-11-06T02:11:36+10:00",
+   "subject": "Keep the deli corner clear in build mode once E7 is built, and place licence furniture only where it fits, asking the player to clear the spot"
+  },
+  {
+   "sha": "55b69d0",
+   "date": "2026-11-06T02:11:36+10:00",
+   "subject": "Refuse build mode while holding the mop (GDD §1: empty hands only)"
+  },
+  {
+   "sha": "7a89d95",
+   "date": "2026-11-06T02:11:36+10:00",
+   "subject": "Name products in prompts and hints instead of their ids, and stop an empty box offering to fold or glowing green at a slot where E does nothing; test build mode needs empty hands"
+  },
+  {
+   "sha": "7095d1a",
+   "date": "2026-11-06T02:11:36+10:00",
+   "subject": "Run patience until the first scan, ring a counter bell and show a waiting chip for unstaffed tills, grey out Give change with an empty tray, and keep customers off a shelf carried in build mode"
+  },
+  {
+   "sha": "aec01df",
+   "date": "2026-11-06T02:11:37+10:00",
+   "subject": "Show stock on hand and Restock to full in the Market, split orders over 30 boxes into van trips, and restore a carried box into the player's hands on load"
+  },
+  {
+   "sha": "fe4e7ca",
+   "date": "2026-11-06T02:11:37+10:00",
+   "subject": "Send game-over New game through the menu's slot picker so the autosave isn't replaced unasked, and fix two tutorial instructions"
+  },
+  {
+   "sha": "2ddbc82",
+   "date": "2026-11-06T04:14:06+10:00",
+   "subject": "Re-route walking NPCs when a fixture moves or the navmesh is rebaked, and wait instead of walking through walls when there is no route"
+  },
+  {
+   "sha": "f9ea641",
+   "date": "2026-11-06T04:14:06+10:00",
+   "subject": "Record the round-1 review fixes in PROGRESS, with the windowed checks still to do"
+  }
+ ],
+ "commits_per_hour": [
+  {
+   "hour": "2026-11-05T16:00:00+10:00",
+   "commits": 12
+  },
+  {
+   "hour": "2026-11-05T17:00:00+10:00",
+   "commits": 13
+  },
+  {
+   "hour": "2026-11-05T18:00:00+10:00",
+   "commits": 9
+  },
+  {
+   "hour": "2026-11-05T19:00:00+10:00",
+   "commits": 20
+  },
+  {
+   "hour": "2026-11-05T20:00:00+10:00",
+   "commits": 9
+  },
+  {
+   "hour": "2026-11-05T21:00:00+10:00",
+   "commits": 8
+  },
+  {
+   "hour": "2026-11-05T22:00:00+10:00",
+   "commits": 14
+  },
+  {
+   "hour": "2026-11-05T23:00:00+10:00",
+   "commits": 2
+  },
+  {
+   "hour": "2026-11-06T00:00:00+10:00",
+   "commits": 3
+  },
+  {
+   "hour": "2026-11-06T01:00:00+10:00",
+   "commits": 2
+  },
+  {
+   "hour": "2026-11-06T02:00:00+10:00",
+   "commits": 6
+  },
+  {
+   "hour": "2026-11-06T03:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-06T04:00:00+10:00",
+   "commits": 2
+  }
+ ],
+ "sections": [
+  {
+   "title": "M0: Fork and world shell (2026-11-05)",
+   "deferred": []
+  },
+  {
+   "title": "M1: Stock loop and the van (verified 2026-11-05)",
+   "deferred": [
+    "`tests/screenshot_tour.sh`, then look in `/tmp/cts_shots/` at `12_pc_market`, `13_van_sliding_in`, `14_van_mid_fire` (M1 acceptance shot), `15_full_bay`, `16_full_shelf` (M1 acceptance shot), `17_cooler_stocked`, `18_box_at_slot_green`, `19_box_at_cooler_red`, `20_price_popup`. Check that the cooler's printed price strips are hidden under the live labels, and that landings look like thuds, not like boxes stopping dead.",
+    "Watch a 40-box delivery from the shop window: second layer, overflow grid, no popping."
+   ]
+  },
+  {
+   "title": "M2: Customers and checkout (2026-11-05)",
+   "deferred": [
+    "`tests/screenshot_tour.sh` then look in `/tmp/cts_shots/` at: `23_v5_checkout_change_panel` (VISUALS shot 5: cashier side, customer at the till, change panel along the bottom, pieces in the tray, cash gone into the drawer, live POS screen), `24_card_keypad` (keypad bottom right, reader screen shows the typed amount), `21_shoppers_in_aisle` (basket hanging from a hand, trolley in front of its pusher, `Push` clip), `22_speech_bubble` (green card behind the text, sized to it), `11_pos_screen_grazing` (now the live POS screen). Also check `perf.txt`.",
+    "`tests/gameplay_tour.sh /tmp/cts_play 10`: exit 0, `summary.txt` shows card and cash customers served and few or no shoppers stuck; look at `play_*.png`, `card_keypad.png`, `change_panel.png`.",
+    "`~/.agents/bin/gt test ~/Code/corner-to-super` (full suite) once M1's fixes have landed."
+   ]
+  },
+  {
+   "title": "M3: Days, bills, loans, saves (2026-11-05)",
+   "deferred": [
+    "Screenshot tour shots 30–37 (HUD + sign prompt, clipboard, HUD open, receipt before/after paying, Bank app, pause menu, game over): `tests/screenshot_tour.sh`, then review them."
+   ]
+  },
+  {
+   "title": "M5: Build mode, furniture, expansions, stockroom (2026-11-05)",
+   "deferred": [
+    "screenshot tour shots 40–48 (`tests/screenshot_tour.sh`) Furniture app, Expansions app, knock-through mid-fall and after, build ghost valid/invalid (VISUALS 7), flat-pack in the bay, stockroom racks (VISUALS 9), shed from the apron. Look for: ghost tint readable, wall pieces/haze not distracting, shed modules lining up with no gaps, roller door, rack boxes sitting on the boards."
+   ]
+  },
+  {
+   "title": "M6: Staff (2026-11-05)",
+   "deferred": [
+    "Screenshot tour additions to look at: a cashier at the till mid-scan (uniform, cap, name tag, hands at the counter), a restocker carrying an open box and reaching into a shelf, a cleaner at a spill, staff walking in from the footpath in the morning, the Staff app on the PC screen.",
+    "`tests/staff_tour.sh 1` windowed if wanted (it saves no pictures; watch the staff work)."
+   ]
+  },
+  {
+   "title": "M8: Menus, tutorial, polish (2026-11-05)",
+   "deferred": [
+    "`tests/screenshot_tour.sh`, then review against VISUALS.md all 10 VISUALS shots: 1 exterior with the van mid-fire (`14_van_mid_fire`), 2 entrance looking in (`02_entrance_looking_in`), 3 aisle with full shelves at level 8, 4 fridge wall close-up, 5 checkout from the cashier side with the change panel (`23_v5_checkout_change_panel`), 6 PC with the Market app (`12_pc_market`), 7 build mode ghost valid + invalid (`44/45_build_ghost_*`, M5), 8 full level-16 store from the back corner (M7), 9 stockroom with racks (`47_stockroom_racks`, M5), 10 day summary (`33_day_summary`). Plus the new M8 shots: `80_main_menu`, `81_main_menu_dolly_later`, `82_menu_{sandbox,new,options,controls,credits}`, `83_dale_walking_up`, `84_dale_hands_over_keys`, `85/86_tutorial_van_arrow_*`, `87_clipboard_tutorial`, `88_pause_options`, `89_f3_overlay`, and `36_pause_menu`, `37_game_over` (restyled).",
+    "Listening checks: music crossfades, bus sliders, ambience levels inside/outside."
+   ]
+  },
+  {
+   "title": "M4: Progression and reputation (2026-11-05, BuildM4)",
+   "deferred": [
+    "Screenshot the level-up banner + confetti, the Licences / Pricing / Stats apps on the PC, a spill and litter in an aisle, the mop in hand, the chest freezer lid open, the multideck stocked with dairy."
+   ]
+  },
+  {
+   "title": "M7: Content complete (2026-11-05, BuildM7)",
+   "deferred": [
+    "`tests/full_store_tour.sh` → `/tmp/cts_m7/perf.txt`: the **≥ 60 fps** acceptance at 1280 x 720 and 1920 x 1080 (Medium), draw calls (< 2,500), primitives (< 3 M), VRAM (< 1.5 GB). If the draw calls are over, the first lever is fewer stock MultiMeshes per slot (drop the rear-row split) — M9's perf pass.",
+    "Look at its shots: `m7_01_v8_full_store_back_corner` (VISUALS shot 8), `m7_02_aisle_signs` (sign text readable, not clipping troffers/coolers), `m7_03_produce_stand` (two meshes, subtle colour spread, no odd tints), `m7_04_deli_corner`, `m7_05_cigarette_wall`, `m7_06_fridge_wall`, `m7_07_wine_and_household`, `m7_08_car_park_trees` (trees on the verge, parked cars).",
+    "Listening: traffic and birds outside, muffled inside; fridge door open/close; box flap."
+   ]
+  },
+  {
+   "title": "Round-1 review additions #4, #6, #7, #8 (2026-11-06, AdditionsA)",
+   "deferred": [
+    "Screenshot-tour shots to add and review: a box caught mid-air in front of the camera; a misfired box on a car roof with the hazard lights on; the phone open in the car park; the My Store app with locked and chosen swatches; the store with a non-default floor, sign, trim and a staff member in a dyed uniform (check the shader keeps folds and leaves the trousers black); the Sunday newspaper card with quotes and the MegaMart advert; the HUD sale chip.",
+    "Listening: `car_alarm` level against the van and traffic outside."
+   ]
+  },
+  {
+   "title": "Round-1 review fixes (2026-11-06, FixRound1 and FixNPCRepath)",
+   "deferred": [
+    "HUD waiting chip: \"2 waiting · Till 1\" beside OPEN with nobody on the till, gone once served, and the mouse passes through it.",
+    "Market cards: the \"On shelves N · In boxes M\" stock lines and the Restock to full button.",
+    "Counter bell: rings once when a customer reaches an unstaffed till; level against the shop.",
+    "Till prompts: nothing happens clicking the reader or cash at a staffed till, Give greyed out with an empty tray, product names (not ids) in prompts."
+   ]
+  }
+ ],
+ "economy": {
+  "start_cash": 600.0,
+  "start_rent": 40.0,
+  "licences": [
+   {
+    "name": "Starter",
+    "level": 1,
+    "price": 0.0,
+    "needs": ""
+   },
+   {
+    "name": "Dairy",
+    "level": 2,
+    "price": 400.0,
+    "needs": ""
+   },
+   {
+    "name": "Frozen",
+    "level": 3,
+    "price": 600.0,
+    "needs": ""
+   },
+   {
+    "name": "Produce",
+    "level": 5,
+    "price": 900.0,
+    "needs": ""
+   },
+   {
+    "name": "Pantry",
+    "level": 6,
+    "price": 800.0,
+    "needs": ""
+   },
+   {
+    "name": "Household",
+    "level": 8,
+    "price": 1000.0,
+    "needs": ""
+   },
+   {
+    "name": "Bottle shop",
+    "level": 10,
+    "price": 2000.0,
+    "needs": ""
+   },
+   {
+    "name": "Deli",
+    "level": 12,
+    "price": 2500.0,
+    "needs": "E7"
+   },
+   {
+    "name": "Tobacco",
+    "level": 14,
+    "price": 1500.0,
+    "needs": ""
+   }
+  ],
+  "expansions": [
+   {
+    "id": "E1",
+    "name": "Back room knock-through",
+    "level": 2,
+    "price": 1000.0,
+    "rent_after": 55.0
+   },
+   {
+    "id": "E3",
+    "name": "Side wings",
+    "level": 4,
+    "price": 2500.0,
+    "rent_after": 80.0
+   },
+   {
+    "id": "E4",
+    "name": "Middle aisles",
+    "level": 6,
+    "price": 4000.0,
+    "rent_after": 105.0
+   },
+   {
+    "id": "E5",
+    "name": "Corner wings",
+    "level": 8,
+    "price": 6500.0,
+    "rent_after": 135.0
+   },
+   {
+    "id": "E6",
+    "name": "Back aisles",
+    "level": 10,
+    "price": 9000.0,
+    "rent_after": 165.0
+   },
+   {
+    "id": "E7",
+    "name": "Back corners",
+    "level": 12,
+    "price": 13000.0,
+    "rent_after": 190.0
+   },
+   {
+    "id": "E8",
+    "name": "Full depth",
+    "level": 15,
+    "price": 18000.0,
+    "rent_after": 230.0
+   }
+  ],
+  "stockroom": [
+   {
+    "id": "S1",
+    "name": "Stockroom shed",
+    "level": 2,
+    "price": 800.0,
+    "rent_add": 10.0
+   },
+   {
+    "id": "S2",
+    "name": "Stockroom extension",
+    "level": 7,
+    "price": 2000.0,
+    "rent_add": 20.0
+   },
+   {
+    "id": "S3",
+    "name": "Big stockroom",
+    "level": 11,
+    "price": 4000.0,
+    "rent_add": 30.0
+   }
+  ],
+  "pacing": [
+   [
+    "Day",
+    "Level",
+    "Store",
+    "Daily profit (after bills)"
+   ],
+   [
+    "1",
+    "1–2",
+    "start",
+    "$40–$120"
+   ],
+   [
+    "3",
+    "2–3",
+    "E1 + stockroom possible with a loan",
+    "$100–$200"
+   ],
+   [
+    "7",
+    "5",
+    "E3, dairy + frozen",
+    "$250–$450"
+   ],
+   [
+    "15",
+    "10",
+    "E5–E6, 2–3 tills, staff",
+    "$900–$1,600"
+   ],
+   [
+    "30",
+    "15–16",
+    "E8 full store",
+    "$2,500+"
+   ]
+  ]
+ },
+ "in_progress": [
+  {
+   "title": "M9: balance, performance, soak",
+   "who": "FinishM9 (branch m9-build)",
+   "text": "Tune data/*.json until the 30-day soak hits the ECONOMY.md pacing table (within 1 level and 25% money), update ECONOMY.md to the tuned numbers, and get the progression tour passing again.",
+   "table": {
+    "caption": "Latest 30-day soak on m9-build (BuildM9 report, before FinishM9; not merged yet)",
+    "head": [
+     "Day",
+     "Level (want)",
+     "Profit after bills (want)",
+     "Result"
+    ],
+    "rows": [
+     [
+      "1",
+      "1 (1-2)",
+      "$74 ($40-120)",
+      "ok"
+     ],
+     [
+      "3",
+      "2 (2-3)",
+      "$181 ($100-200)",
+      "ok"
+     ],
+     [
+      "7",
+      "4 (5, ±1)",
+      "$464 ($250-450, +25% allowed)",
+      "ok"
+     ],
+     [
+      "15",
+      "8 (10, ±1)",
+      "$694 ($900-1,600)",
+      "fails"
+     ],
+     [
+      "30",
+      "14 (15-16, ±1)",
+      "$1,778 ($2,500+)",
+      "fails"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Review additions, batch B",
+   "who": "AdditionsB (branch additions-b)",
+   "text": "The other four review suggestions: customer types (the review suggested a kid paying in 5c coins, a tradie in a hurry, a bargain hunter and a tourist with a $100 note), a requests board with daily goals, supplier deals, and shoplifters."
+  }
+ ],
+ "unmerged_branches": [
+  "m9-build"
+ ]
+}
