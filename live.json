@@ -1977,6 +1977,11 @@
    "t": "2026-11-06T20:57:21+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixNPC: N1 carried till queue"
+  },
+  {
+   "t": "2026-11-06T21:37:51+10:00",
+   "kind": "question",
+   "msg": "Question #6 answering: What has been added/fixed and Whats in development right now"
   }
  ],
  "tests": [
@@ -2032,13 +2037,9 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:57:21+10:00",
-  "mem_free_pct": 57,
-  "load": [
-   1.69,
-   2.2,
-   2.4
-  ],
+  "t": "2026-11-06T21:37:51+10:00",
+  "mem_free_pct": 54,
+  "load": [],
   "godot_procs": 0
  },
  "game": {
@@ -2465,11 +2466,17 @@
    }
   ],
   "dirty": [
-   " M scripts/autoload/game.gd"
+   " M scripts/autoload/game.gd",
+   " M scripts/build/build_mode.gd",
+   " M scripts/core/bills.gd",
+   " M scripts/fixtures/open_sign.gd",
+   " M scripts/npc/shopper_brain.gd",
+   " M scripts/ui/day_summary.gd",
+   " M tests/cases/customer_test.gd"
   ],
   "total_commits": 140
  },
- "updated": "2026-11-06T20:57:22+10:00",
+ "updated": "2026-11-06T21:37:52+10:00",
  "qa": [
   {
    "num": 1,
@@ -2510,6 +2517,14 @@
    "answer": "So far the loop has only been fixing problems in what's already in the game. No new features are on its list. It has worked through two areas and found 34 problems: 16 are fixed and 18 are still waiting. This comes from the `rounds` list in `corner-to-super-site/live.json`. The loop is in round R3 now, and the fixer is working on C9.\n\n## R2 – Checkout, payment, change and the till (17 found, 7 fixed)\n\n**Fixed:**\n- **C1:** pressing E at the till sat you down and stood you up on the same press (`63fb369`).\n- **C2:** cigarettes only sold at the till next to the cigarette wall; other tills logged them as out of stock (`72f2b03`).\n- **C3:** scanning the last item quickly skipped the customer's cigarette request (`0e86b99`).\n- **C4:** customers being served were still losing patience and complaining that the queue wasn't moving (`18bfd25`).\n- **C11:** customers paying exact cash gave a free +10 XP (`4401ca4`).\n- **C12:** the cash prompt still said \"take the cash\" after the cash was already in the drawer (`cb5ee4a`).\n- **C17:** two checks for whether a till is staffed did the same job, and one was missing a safety check (`8aebda2`).\n\n**Still to do:**\n- **Queues (C5–C8):** customers don't move from an unstaffed till to a staffed one. Queues run into the shelving, and overflow queues pile everyone onto one spot. Trolley spacing is wrong, and trolleys swing into the counter.\n- **C9 (being fixed now):** looking at the till screen or card reader when no one is paying should offer to sit you down.\n- **C10:** fetching cigarettes while seated takes 5 steps, and the hint tells you to press the key that stands you up.\n- **C13–C16:** the \"I'm still owed\" message stays after you fix the change. Pressing OK on \".\" or \"0\" on the keypad declines the payment and lowers satisfaction. The till clock is blank all morning, and every till shows \"REG 1\". The bag vanishes mid-air, so the customer leaves empty-handed.\n\n## R3 – Shelves, stocking, boxes and pricing (17 found, 9 fixed)\n\n**Fixed:**\n- **S1, S4:** stock in the chest freezer stacked up through the closed glass lid, and its price labels were hidden inside (`f9b156b`).\n- **S2:** a box a restocker was carrying disappeared if you saved during the prep phase (`f05587a`).\n- **Pricing app and price popup (S5, S8, S15–S17):** these fixes all went in together in `e08817b`.\n  - S5: you can now go back to following the market price.\n  - S8: the price box is focused when it opens, bad input shows an error, and you can type a comma as the decimal point.\n  - S15: the +/- buttons step to rounded prices.\n  - S16: the app lists products that aren't on a shelf yet.\n  - S17: you get a warning when a price is high enough that every customer will refuse it.\n\n**Still to do:**\n- **S3:** shelf slots hold too little. Cans are twice real size, there's 1 toilet roll per slot, and frozen pizza doesn't fit in the chest freezer at all.\n- **S6:** you can't put items back into an empty box that held a different product.\n- **S7:** pressing E while holding a box tears the box open at the PC, till or sign. Cooler doors stay open after stocking.\n- **S9:** racks keep empty boxes forever, and the rack prompt and sound appear even when you're holding the mop.\n- **S10–S14:** smaller fixes:\n  - the box-opening delay carries over to the next box;\n  - the threshold for the SPECIAL price label is hard-coded instead of read from the game data;\n  - a box weighs the same when it's empty;\n  - the slot highlight is rebuilt every frame;\n  - restockers stock coolers and freezers through closed doors.\n\nIf you meant new things to add to the game, none are planned in the loop. Ask through the question box and I'll pass it to the loop's inbox.",
    "state": "answered",
    "t": "2026-11-06T20:32:37+10:00"
+  },
+  {
+   "num": 6,
+   "title": "What has been added/fixed and Whats in development right now",
+   "question": "",
+   "answer": "",
+   "state": "answering",
+   "t": "2026-11-06T21:37:51+10:00"
   }
  ],
  "shots": {
