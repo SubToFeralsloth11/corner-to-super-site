@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T07:50+10:00",
- "head": "c98c03f",
+ "generated": "2026-11-07T07:53+10:00",
+ "head": "9061b62",
  "stats": {
-  "commits": 146,
+  "commits": 147,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T07:50:26+10:00",
+  "last_commit": "2026-11-07T07:53:40+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 27384,
+  "gd_lines": 27428,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1024,6 +1024,11 @@
    "sha": "c98c03f",
    "date": "2026-11-07T07:50:26+10:00",
    "subject": "Buy a product drawn several times as several units in one trip, with one price decision"
+  },
+  {
+   "sha": "9061b62",
+   "date": "2026-11-07T07:53:40+10:00",
+   "subject": "Skip shelves nobody can stand in front of, instead of shopping them through a fixture"
   }
  ],
  "commits_per_hour": [
@@ -1185,7 +1190,7 @@
   },
   {
    "hour": "2026-11-07T07:00:00+10:00",
-   "commits": 6
+   "commits": 7
   }
  ],
  "sections": [

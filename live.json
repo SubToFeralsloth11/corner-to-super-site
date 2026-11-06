@@ -518,10 +518,11 @@
      "file": "scripts/npc/shopper_brain.gd:94-98,235-246,265-268",
      "detail": "`_stand_point` snaps the spot 0.6 m in front of the slot to `nav.closest()`, which can be metres away when that spot is blocked. `BuildRules.refusal` has no rule keeping slot fronts clear, so two shelves can be placed face to face with a gap under 0.6 m, or a shelf front against another fixture's back. TO_SLOT then calls `_reach_in()` whenever `follow()` returns true or they stop walking, with no distance check. The customer takes stock from the end of the aisle, through a shelf. `_nearest_slot` also ranks slots by straight-line distance through fixtures, so it prefers such a blocked slot. Fix: in `_stand_point`, if the snapped point is more than about 0.3 m from the intended one, treat the slot as unreachable and try the next nearest. Check that the customer is within 0.5 m of the stand point before `_reach_in`. Add a front-clearance rule (about 0.7 m) to `BuildRules.refusal`.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:53+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "9061b62",
+     "note": "customer_test regression fails before (bought through shelf), passes after; full suite 1012/0",
+     "closed": "2026-11-07T07:53:42+10:00"
     },
     {
      "id": "N5",
@@ -2067,6 +2068,16 @@
    "t": "2026-11-07T07:50:28+10:00",
    "kind": "fix",
    "msg": "R4/N3 fixed c98c03f customer_test regression: 3 lost/1 complaint and 3 taken at once; fails before"
+  },
+  {
+   "t": "2026-11-07T07:53:42+10:00",
+   "kind": "fix",
+   "msg": "R4/N4 fixed 9061b62 customer_test regression fails before (bought through shelf), passes after; full suite 1012/0"
+  },
+  {
+   "t": "2026-11-07T07:53:42+10:00",
+   "kind": "test",
+   "msg": "Tests: 1012 passed, 0 failed after R4 P1s + R5 P1s"
   }
  ],
  "tests": [
@@ -2087,6 +2098,12 @@
    "passed": 986,
    "failed": 0,
    "note": "after R2 fixes"
+  },
+  {
+   "t": "2026-11-07T07:53:42+10:00",
+   "passed": 1012,
+   "failed": 0,
+   "note": "after R4 P1s + R5 P1s"
   }
  ],
  "agents": {
@@ -2127,17 +2144,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T07:50:28+10:00",
-  "mem_free_pct": 36,
+  "t": "2026-11-07T07:53:42+10:00",
+  "mem_free_pct": 49,
   "load": [
-   2.69,
-   4.22,
-   6.57
+   3.95,
+   4.0,
+   5.99
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "9061b62",
+    "date": "2026-11-07T07:53:40+10:00",
+    "subject": "Skip shelves nobody can stand in front of, instead of shopping them through a fixture",
+    "body": "A slot whose front is blocked (the navmesh ends over 0.6 m from the reach spot) isn't chosen,\nand a customer who can't get in front of a slot drops it for the visit. Review round 2, N4.",
+    "stat": "2 files changed, 46 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "c98c03f",
     "date": "2026-11-07T07:50:26+10:00",
@@ -2550,19 +2574,12 @@
     "subject": "Refuse to sell a till someone is queued at or staffing, and send a queue whose till vanished to another till instead of crashing",
     "body": "",
     "stat": "3 files changed, 41 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "f609d0b",
-    "date": "2026-11-05T23:45:39+10:00",
-    "subject": "Pick up bay boxes the stock bot's way in the M5 acceptance test and rack any two of them, noting why one fails",
-    "body": "",
-    "stat": "1 file changed, 14 insertions(+), 14 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 146
+  "total_commits": 147
  },
- "updated": "2026-11-07T07:50:29+10:00",
+ "updated": "2026-11-07T07:53:43+10:00",
  "qa": [
   {
    "num": 1,
