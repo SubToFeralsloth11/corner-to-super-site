@@ -1,11 +1,11 @@
 {
  "status": {
-  "state": "reviewing",
-  "round": "R6",
-  "area": "Build mode, expansions, fixtures",
-  "activity": "Lead critiquing build mode by reading code while the soak runs",
+  "state": "fixing",
+  "round": "R4/R5 leftovers",
+  "area": "Customers + economy P2s",
+  "activity": "Lead fixing remaining R4/R5 P2s (subagents rate-limited)",
   "cycle": "1",
-  "since": "2026-11-07T07:54:44+10:00"
+  "since": "2026-11-07T08:03:10+10:00"
  },
  "rounds": [
   {
@@ -2238,6 +2238,16 @@
    "t": "2026-11-07T08:02:41+10:00",
    "kind": "test",
    "msg": "Tests: 1023 passed, 0 failed after customer batch"
+  },
+  {
+   "t": "2026-11-07T08:03:10+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - Lead fixing remaining R4/R5 P2s (subagents rate-limited)"
+  },
+  {
+   "t": "2026-11-07T08:03:13+10:00",
+   "kind": "question",
+   "msg": "Question #6 answered: What has been added/fixed and Whats in development right now"
   }
  ],
  "tests": [
@@ -2756,7 +2766,7 @@
   "dirty": [],
   "total_commits": 150
  },
- "updated": "2026-11-07T08:02:42+10:00",
+ "updated": "2026-11-07T08:03:13+10:00",
  "qa": [
   {
    "num": 1,
@@ -2802,9 +2812,9 @@
    "num": 6,
    "title": "What has been added/fixed and Whats in development right now",
    "question": "",
-   "answer": "The answering agent failed:\n```\nWorking...\n429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your account's rate limit. Please try again later.\"},\"request_id\":\"req_011CgmdicyJYgRLh4VEwUWGw\"} retry-after-ms=32548000\n\n```",
+   "answer": "Answering from the live log (the answering agent hit an API limit earlier, sorry about the error above):\n\n**Now:** fixing: Lead fixing remaining R4/R5 P2s (subagents rate-limited) (round R4/R5 leftovers)\n\n**Fixed so far:** 58. Latest:\n- R5/E7 [P2] Fair prices top out around 3.85 stars, and stars fall as you level up (66de3c5)\n- R4/N9 [P2] The arrival cap counts customers walking along the footpath and through the car park (66de3c5)\n- R4/N8 [P2] Customers keep staring back at the shelf for 2.5 s after a bark at the shelf (66de3c5)\n- R4/N15 [P3] A messy customer can complain about their own spill (66de3c5)\n- R4/N12 [P2] With no usable till, customers walk out carrying unpaid items (66de3c5)\n- R4/N11 [P2] Barks ignore how the visit went, and there is no sound with them (66de3c5)\n- R4/N10 [P2] Fair, well-run service cannot earn more than about 3.85 stars (66de3c5)\n- R6/B3 [P3] Footprint plate BoxMesh rebuilt every physics frame in build mode (017be96)\n- R6/B2 [P1] Shelves can be boxed in so no customer can reach any face (stock silently unsellable) (017be96)\n- R6/B1 [P2] One stray Del sells a fixture at half price, no confirmation (017be96)\n- R4/N4 [P1] Customers buy items they physically cannot reach (017be96)\n- R5/E3 [P1] Customer numbers don't grow with store size, so expansions E4–E8 and tills 5–6 only add cost (20de20c)\n- R4/N3 [P1] Each list entry buys one unit, and repeated entries for the same product stack penalties and contradict each other (c98c03f)\n- R4/N21 [P3] Unreachable leftover code after `return` in `cig_wall_till` (e913982)\n- R4/N2 [P1] The front customer at an unstaffed till never moves to a till that is being served (e913982)\n\n**Still open:** 28. Highest first:\n- R4/N7 [P2] Customers know an item is out of stock without looking, and complain wherever they happen to be\n- R5/E6 [P2] Every loan's daily instalment is at least the whole day's profit when it unlocks\n- R4/N5 [P2] No crowd avoidance: customers pass through each other and walk through the player, who cannot get past them\n- R5/E8 [P2] Progression runs out around day 27, and two of the 16 levels unlock only a colour\n- R5/E10 [P2] Shoppers turned away by the cap are never shown\n- R3/S3 [P2] Slot capacities are tiny: cans are 2x real size, toilet paper 1 per slot, pizza 0 in chest freezer (1fcf7bf)\n- R5/E9 [P2] The day-length option changes income while bills stay the same\n- R5/E13 [P2] The newspaper says a product \"kept running out\" when it may have been refused for price\n- R5/E4 [P2] The pacing table is not met, but M9 was recorded as passed\n- R5/E11 [P2] The receipt leaves out most of the day's spending, so its net doesn't match the change in cash\n- R5/E5 [P2] The soak AI prices at +10%, so money pacing was never checked for real players\n- R4/N6 [P2] Trolleys go through shelves at every pick and every corner\n- R4/N18 [P3] Basket and bag follow the hands one frame late from physics\n- R4/N14 [P3] Baskets appear from nowhere, vanish at the till, and walk off the plot\n- R4/N24 [P3] Customer behaviour tuning is hard-coded instead of in customers.json\n\n**Last test run:** 1023 passed, 0 failed (after customer batch)\n\nFull detail: https://subtoferalsloth11.github.io/corner-to-super-site/live.html",
    "state": "answered",
-   "t": "2026-11-06T21:57:37+10:00"
+   "t": "2026-11-07T08:03:13+10:00"
   }
  ],
  "shots": {

@@ -72,6 +72,33 @@ def live(*args):
                    capture_output=True, text=True, timeout=180)
 
 
+def status_digest():
+    """What the loop is doing, the latest fixes and what is still open, from live.json."""
+    try:
+        d = json.loads((HERE / "live.json").read_text())
+    except (OSError, json.JSONDecodeError):
+        return "(live.json unreadable)"
+    s = d.get("status", {})
+    lines = [f"**Now:** {s.get('state', '?')}: {s.get('activity', '')} (round {s.get('round', '?')})", ""]
+    fixed, open_ = [], []
+    for r in d.get("rounds", []):
+        for f in r.get("findings", []):
+            row = f"{r['id']}/{f['id']} [{f['sev']}] {f['title']}"
+            (fixed if f.get("status") == "fixed" else open_ if f.get("status") in ("open", "wip") else []).append(
+                (f.get("closed") or f.get("found") or "", row + (f" ({f['commit']})" if f.get("commit") else "")))
+    fixed.sort(reverse=True)
+    lines.append(f"**Fixed so far:** {len(fixed)}. Latest:")
+    lines += [f"- {row}" for _, row in fixed[:15]]
+    lines.append("")
+    lines.append(f"**Still open:** {len(open_)}. Highest first:")
+    lines += [f"- {row}" for _, row in sorted(open_, key=lambda x: x[1].split('[')[1])[:15]]
+    t = d.get("tests", [])
+    if t:
+        lines += ["", f"**Last test run:** {t[-1]['passed']} passed, {t[-1]['failed']} failed ({t[-1].get('note', '')})"]
+    lines += ["", "Full detail: https://subtoferalsloth11.github.io/corner-to-super-site/live.html"]
+    return "\n".join(lines)
+
+
 def answer(q):
     num, title, body = q["number"], q["title"], (q["body"] or "").strip()
     log(f"question #{num}: {title}")
@@ -88,9 +115,15 @@ def answer(q):
              "--approval-mode", "yolo", "--tools", "read,grep,glob,find,bash",
              "--cwd", str(GAME), "--add-dir", str(HERE), prompt],
             capture_output=True, text=True, timeout=ANSWER_TIMEOUT_S)
-        text = r.stdout.strip() or ("The answering agent failed:\n```\n" + r.stderr[-1500:] + "\n```")
+        text = r.stdout.strip()
+        failed = r.returncode != 0 or not text or "rate_limit_error" in text or text.startswith("Working...")
     except subprocess.TimeoutExpired:
-        text = "The answering agent ran out of time. Ask again, or ask something narrower."
+        text, failed = "", True
+    if failed:
+        # No agent available (rate limit, timeout): answer from the live log instead of leaving
+        # the question with an error.
+        text = ("The answering agent isn't available right now (API limit), so here is the "
+                "current state straight from the live log:\n\n" + status_digest())
 
     gh("issue", "comment", str(num), "-R", REPO, "--body-file", "-", inp=text)
     gh("issue", "close", str(num), "-R", REPO)
