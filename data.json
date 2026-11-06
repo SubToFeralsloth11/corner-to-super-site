@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T08:40+10:00",
- "head": "cbbc78e",
+ "generated": "2026-11-07T08:55+10:00",
+ "head": "0da31b5",
  "stats": {
-  "commits": 171,
+  "commits": 176,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T08:40:22+10:00",
+  "last_commit": "2026-11-07T08:55:14+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 28245,
+  "gd_lines": 28272,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1156,6 +1156,31 @@
    "sha": "cbbc78e",
    "date": "2026-11-07T08:40:22+10:00",
    "subject": "Record review round 2 in PROGRESS"
+  },
+  {
+   "sha": "1b985cd",
+   "date": "2026-11-07T08:55:14+10:00",
+   "subject": "Lower the in-store cap's base so week 1 sits on the pacing table again"
+  },
+  {
+   "sha": "26924f8",
+   "date": "2026-11-07T08:55:14+10:00",
+   "subject": "Let a ShopOS app reopen while its close animation is still running"
+  },
+  {
+   "sha": "416a981",
+   "date": "2026-11-07T08:55:14+10:00",
+   "subject": "Sit closer to the PC so the Market's text is readable, and keep the price popup's figure clear of its edge"
+  },
+  {
+   "sha": "0d5921d",
+   "date": "2026-11-07T08:55:14+10:00",
+   "subject": "Have customers say product names the way people do (no pack weights)"
+  },
+  {
+   "sha": "0da31b5",
+   "date": "2026-11-07T08:55:14+10:00",
+   "subject": "Hide Continue on the main menu when there is no save to continue"
   }
  ],
  "commits_per_hour": [
@@ -1321,7 +1346,7 @@
   },
   {
    "hour": "2026-11-07T08:00:00+10:00",
-   "commits": 22
+   "commits": 27
   }
  ],
  "sections": [

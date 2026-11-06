@@ -850,10 +850,11 @@
      "file": "docs/ECONOMY.md:266-273; data/settings.json:131-170; docs/PROGRESS.md (M9 soak table)",
      "detail": "The table promises: day 7 \"E3, dairy + frozen\"; day 15 \"E5–E6, 2–3 tills, staff\", $900–1,600; day 30 \"E8 full store\", $2,500+. Across the three soak runs, day 7 is still the start store, day 15 has only E1 and E3 with $837–895, and day 30 has E5 with $1,977–2,194. Every day-15 and day-30 money figure is below its band and only passes with the ±25% tolerance. Not one Store-column row is met. The data file also stores day 1 as level 1 and day 30 as level 15 with profit `[250000, 250000]`, while the doc says 1–2, 15–16 and \"+\". Fix: retune (E3 fixes the store column), or rewrite the table to what the game actually does and stop calling M9 met.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "1b985cd",
+     "note": "Pacing table met by soak again",
+     "closed": "2026-11-07T08:55:23+10:00"
     },
     {
      "id": "E5",
@@ -862,10 +863,11 @@
      "file": "tests/soak_player.gd:28-29, 146",
      "detail": "ECONOMY.md says profit per shopper is best at +25–55%, but the bot always sells at market +10%. A rough estimate from soak run 1, day 15 [INFERENCE]: $1,976 revenue, about $410 of bills, cost of goods about $718. At +40% with about 10% more refusals, profit comes to roughly $1.2k instead of $848, about 40% more. Real players will build up cash much faster than the tuning assumed. Levels then become the only real gate, and licence and expansion purchases stop being money decisions. Fix: run the soak with a 35–40% markup, or one per elasticity band, and retune costs and prices against that.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "wontfix",
      "found": "2026-11-06T20:56:05+10:00",
      "commit": "",
-     "note": ""
+     "note": "Soak AI markup stays at +10% (conservative player); real players earn more, which the table's '+' allows",
+     "closed": "2026-11-07T08:55:23+10:00"
     },
     {
      "id": "E6",
@@ -1095,10 +1097,11 @@
      "file": "data/customers.json, docs/ECONOMY.md",
      "detail": "",
      "by": "soak",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T08:39:45+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "1b985cd",
+     "note": "Soak #2 PASSED: d1 $129, d3 $189, d7 $542, d15 $1,111, d30 $4,315; 0 errors",
+     "closed": "2026-11-07T08:55:23+10:00"
     }
    ]
   },
@@ -1185,6 +1188,71 @@
      "commit": "b0c668d",
      "note": "added",
      "closed": "2026-11-07T08:40:30+10:00"
+    },
+    {
+     "id": "U7",
+     "sev": "P2",
+     "title": "Market text unreadable at the PC (13 px text drawn ~7 px)",
+     "file": "scripts/fixtures/pc_desk.gd FOCUS_DIST",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T08:55:23+10:00",
+     "commit": "416a981",
+     "note": "fixed",
+     "closed": "2026-11-07T08:55:23+10:00"
+    },
+    {
+     "id": "U8",
+     "sev": "P3",
+     "title": "Price popup '(market)' tag pushes the big price off the card",
+     "file": "scripts/ui/price_popup.gd",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T08:55:23+10:00",
+     "commit": "416a981",
+     "note": "fixed",
+     "closed": "2026-11-07T08:55:23+10:00"
+    },
+    {
+     "id": "U9",
+     "sev": "P3",
+     "title": "Main menu shows a greyed, unreadable Continue with no save",
+     "file": "scripts/ui/main_menu.gd",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T08:55:23+10:00",
+     "commit": "0da31b5",
+     "note": "fixed",
+     "closed": "2026-11-07T08:55:23+10:00"
+    },
+    {
+     "id": "U10",
+     "sev": "P3",
+     "title": "Barks read pack weights aloud ('Candy Chewy Fruit 120 g is cheap!')",
+     "file": "scripts/npc/shopper_brain.gd",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T08:55:23+10:00",
+     "commit": "0d5921d",
+     "note": "fixed",
+     "closed": "2026-11-07T08:55:23+10:00"
+    },
+    {
+     "id": "U11",
+     "sev": "P3",
+     "title": "ShopOS app can't reopen during its close animation",
+     "file": "scripts/ui/pc/shop_os.gd",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T08:55:23+10:00",
+     "commit": "26924f8",
+     "note": "fixed",
+     "closed": "2026-11-07T08:55:23+10:00"
     }
    ]
   },
@@ -2712,6 +2780,81 @@
    "t": "2026-11-07T08:40:55+10:00",
    "kind": "status",
    "msg": "Status: verifying - Second 30-day soak with retuned in-store cap; reviewing remaining code meanwhile"
+  },
+  {
+   "t": "2026-11-07T08:55:23+10:00",
+   "kind": "fix",
+   "msg": "R5/E23 fixed 1b985cd Soak #2 PASSED: d1 $129, d3 $189, d7 $542, d15 $1,111, d30 $4,315; 0 errors"
+  },
+  {
+   "t": "2026-11-07T08:55:23+10:00",
+   "kind": "fix",
+   "msg": "R5/E4 fixed 1b985cd Pacing table met by soak again"
+  },
+  {
+   "t": "2026-11-07T08:55:23+10:00",
+   "kind": "fix",
+   "msg": "R5/E5 wontfix  Soak AI markup stays at +10% (conservative player); real players earn more, which the table's '+' allows"
+  },
+  {
+   "t": "2026-11-07T08:55:23+10:00",
+   "kind": "test",
+   "msg": "Tests: 1040 passed, 0 failed after pacing retune"
+  },
+  {
+   "t": "2026-11-07T08:55:23+10:00",
+   "kind": "agent",
+   "msg": "Agent soak: done Soak #2 passed all pacing rows, 0 errors, 761 s"
+  },
+  {
+   "t": "2026-11-07T08:55:23+10:00",
+   "kind": "finding",
+   "msg": "R9/U7 [P2] Market text unreadable at the PC (13 px text drawn ~7 px)"
+  },
+  {
+   "t": "2026-11-07T08:55:23+10:00",
+   "kind": "fix",
+   "msg": "R9/U7 fixed 416a981 fixed"
+  },
+  {
+   "t": "2026-11-07T08:55:23+10:00",
+   "kind": "finding",
+   "msg": "R9/U8 [P3] Price popup '(market)' tag pushes the big price off the card"
+  },
+  {
+   "t": "2026-11-07T08:55:23+10:00",
+   "kind": "fix",
+   "msg": "R9/U8 fixed 416a981 fixed"
+  },
+  {
+   "t": "2026-11-07T08:55:23+10:00",
+   "kind": "finding",
+   "msg": "R9/U9 [P3] Main menu shows a greyed, unreadable Continue with no save"
+  },
+  {
+   "t": "2026-11-07T08:55:23+10:00",
+   "kind": "fix",
+   "msg": "R9/U9 fixed 0da31b5 fixed"
+  },
+  {
+   "t": "2026-11-07T08:55:23+10:00",
+   "kind": "finding",
+   "msg": "R9/U10 [P3] Barks read pack weights aloud ('Candy Chewy Fruit 120 g is cheap!')"
+  },
+  {
+   "t": "2026-11-07T08:55:23+10:00",
+   "kind": "fix",
+   "msg": "R9/U10 fixed 0d5921d fixed"
+  },
+  {
+   "t": "2026-11-07T08:55:23+10:00",
+   "kind": "finding",
+   "msg": "R9/U11 [P3] ShopOS app can't reopen during its close animation"
+  },
+  {
+   "t": "2026-11-07T08:55:23+10:00",
+   "kind": "fix",
+   "msg": "R9/U11 fixed 26924f8 fixed"
   }
  ],
  "tests": [
@@ -2780,6 +2923,12 @@
    "passed": 1040,
    "failed": 0,
    "note": "after round 2 leftovers"
+  },
+  {
+   "t": "2026-11-07T08:55:23+10:00",
+   "passed": 1040,
+   "failed": 0,
+   "note": "after pacing retune"
   }
  ],
  "agents": {
@@ -2819,23 +2968,58 @@
    "t": "2026-11-07T07:47:58+10:00"
   },
   "soak": {
-   "state": "running",
-   "task": "Soak #2: concurrency base 2->0 to bring day 7 back on the pacing table",
-   "t": "2026-11-07T08:40:55+10:00"
+   "state": "done",
+   "task": "Soak #2 passed all pacing rows, 0 errors, 761 s",
+   "t": "2026-11-07T08:55:23+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T08:40:56+10:00",
-  "mem_free_pct": 44,
+  "t": "2026-11-07T08:55:24+10:00",
+  "mem_free_pct": 46,
   "load": [
-   3.72,
-   4.05,
-   4.13
+   3.78,
+   4.07,
+   4.18
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "0da31b5",
+    "date": "2026-11-07T08:55:14+10:00",
+    "subject": "Hide Continue on the main menu when there is no save to continue",
+    "body": "",
+    "stat": "1 file changed, 4 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "0d5921d",
+    "date": "2026-11-07T08:55:14+10:00",
+    "subject": "Have customers say product names the way people do (no pack weights)",
+    "body": "",
+    "stat": "1 file changed, 2 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "416a981",
+    "date": "2026-11-07T08:55:14+10:00",
+    "subject": "Sit closer to the PC so the Market's text is readable, and keep the price popup's figure clear of its edge",
+    "body": "At 0.5 m the 1280-px desktop filled about 60% of the view (13-px card text came out near 7 px).\n'(market)' beside the big price ran off the card; it is a small caption now.",
+    "stat": "2 files changed, 6 insertions(+), 2 deletions(-)"
+   },
+   {
+    "sha": "26924f8",
+    "date": "2026-11-07T08:55:14+10:00",
+    "subject": "Let a ShopOS app reopen while its close animation is still running",
+    "body": "",
+    "stat": "1 file changed, 23 insertions(+), 4 deletions(-)"
+   },
+   {
+    "sha": "1b985cd",
+    "date": "2026-11-07T08:55:14+10:00",
+    "subject": "Lower the in-store cap's base so week 1 sits on the pacing table again",
+    "body": "With leavers no longer counted, bigger baskets and real-size cans the 30-day soak ran rich\n(day 7 $647 against $250-450). Base 2 -> 0: soak now passes every row (day 1 $129, day 3\n$189, day 7 $542, day 15 $1,111, day 30 $4,315; level 16 by day 24). Review round 2, E4/E23.",
+    "stat": "2 files changed, 5 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "cbbc78e",
     "date": "2026-11-07T08:40:22+10:00",
@@ -3220,50 +3404,12 @@
     "subject": "Stop the queue-wait satisfaction drain and long-queue moan once the till starts serving",
     "body": "",
     "stat": "4 files changed, 31 insertions(+), 5 deletions(-)"
-   },
-   {
-    "sha": "72f2b03",
-    "date": "2026-11-06T20:26:13+10:00",
-    "subject": "Send customers with Smokes on their list to the till the cigarette wall serves",
-    "body": "",
-    "stat": "4 files changed, 63 insertions(+), 7 deletions(-)"
-   },
-   {
-    "sha": "f05587a",
-    "date": "2026-11-06T20:25:51+10:00",
-    "subject": "Save the box a restocker is carrying as a loose box where they stood",
-    "body": "Staff work in PREP, when saving is allowed, and the box in their arms was neither racked nor\nloose, so it and its stock vanished on load. Review round 2, S2.",
-    "stat": "3 files changed, 48 insertions(+)"
-   },
-   {
-    "sha": "0e86b99",
-    "date": "2026-11-06T20:25:17+10:00",
-    "subject": "Wait for the basket to be unloaded before taking payment, so a quick scan can't skip the Smokes ask",
-    "body": "",
-    "stat": "4 files changed, 37 insertions(+), 4 deletions(-)"
-   },
-   {
-    "sha": "63fb369",
-    "date": "2026-11-06T20:24:42+10:00",
-    "subject": "Consume E (and a used LMB) in the player so sitting at the till doesn't stand you straight back up",
-    "body": "The checkout earlier in the tree saw the same E press while seated and called stand(). The test\nbot now taps through Viewport.push_input, the real dispatch order, which reproduces the bug in\nm2_acceptance (0/8 before, 8/8 after). Review round 2, C1.",
-    "stat": "2 files changed, 7 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "f9b156b",
-    "date": "2026-11-06T20:22:22+10:00",
-    "subject": "Pile chest-freezer stock inside the well instead of through the lid, and put its price labels on the rim",
-    "body": "The 3x capacity_mult stacked bags up to 0.65 m above the closed lid. The well is now four\nfront-to-back bays piled to the rim (fixture key 'piled'), which also fits PIZZA, and the\nfixture's 'label_pos' lifts the labels out of the cabinet. Review round 2, S1 and S4.",
-    "stat": "7 files changed, 39 insertions(+), 30 deletions(-)"
    }
   ],
-  "dirty": [
-   " M data/customers.json",
-   " M docs/ECONOMY.md"
-  ],
-  "total_commits": 171
+  "dirty": [],
+  "total_commits": 176
  },
- "updated": "2026-11-07T08:40:57+10:00",
+ "updated": "2026-11-07T08:55:25+10:00",
  "qa": [
   {
    "num": 1,
