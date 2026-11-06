@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C2",
   "area": "Second pass",
-  "activity": "FixRegress agent on X findings; lead on remaining Y findings",
+  "activity": "FixRegress: X1 exact-cash keypad",
   "cycle": "2",
-  "since": "2026-11-07T09:46:58+10:00"
+  "since": "2026-11-07T09:47:21+10:00"
  },
  "rounds": [
   {
@@ -3712,6 +3712,11 @@
    "t": "2026-11-07T09:46:58+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixRegress agent on X findings; lead on remaining Y findings"
+  },
+  {
+   "t": "2026-11-07T09:47:21+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixRegress: X1 exact-cash keypad"
   }
  ],
  "tests": [
@@ -3853,11 +3858,11 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:46:58+10:00",
-  "mem_free_pct": 35,
+  "t": "2026-11-07T09:47:21+10:00",
+  "mem_free_pct": 36,
   "load": [
-   3.99,
-   3.3,
+   3.86,
+   3.32,
    3.6
   ],
   "godot_procs": 0
@@ -4285,10 +4290,13 @@
     "stat": "1 file changed, 17 insertions(+), 3 deletions(-)"
    }
   ],
-  "dirty": [],
+  "dirty": [
+   " M scripts/main.gd",
+   " M scripts/ui/pause_menu.gd"
+  ],
   "total_commits": 188
  },
- "updated": "2026-11-07T09:46:59+10:00",
+ "updated": "2026-11-07T09:47:23+10:00",
  "qa": [
   {
    "num": 1,
