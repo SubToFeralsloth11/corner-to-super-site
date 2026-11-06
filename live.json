@@ -1992,6 +1992,11 @@
    "t": "2026-11-06T21:57:26+10:00",
    "kind": "question",
    "msg": "Question #6 answering: What has been added/fixed and Whats in development right now"
+  },
+  {
+   "t": "2026-11-06T21:57:37+10:00",
+   "kind": "question",
+   "msg": "Question #6 answered: What has been added/fixed and Whats in development right now"
   }
  ],
  "tests": [
@@ -2047,8 +2052,8 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T21:57:26+10:00",
-  "mem_free_pct": 55,
+  "t": "2026-11-06T21:57:37+10:00",
+  "mem_free_pct": 51,
   "load": [],
   "godot_procs": 0
  },
@@ -2486,7 +2491,7 @@
   ],
   "total_commits": 140
  },
- "updated": "2026-11-06T21:57:27+10:00",
+ "updated": "2026-11-06T21:57:38+10:00",
  "qa": [
   {
    "num": 1,
@@ -2532,9 +2537,9 @@
    "num": 6,
    "title": "What has been added/fixed and Whats in development right now",
    "question": "",
-   "answer": "",
-   "state": "answering",
-   "t": "2026-11-06T21:57:26+10:00"
+   "answer": "The answering agent failed:\n```\nWorking...\n429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your account's rate limit. Please try again later.\"},\"request_id\":\"req_011CgmdicyJYgRLh4VEwUWGw\"} retry-after-ms=32548000\n\n```",
+   "state": "answered",
+   "t": "2026-11-06T21:57:37+10:00"
   }
  ],
  "shots": {
