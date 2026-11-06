@@ -218,10 +218,11 @@
      "file": "checkout.gd:474-481",
      "detail": "",
      "by": "CritCheckout",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:22:44+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "8aebda2",
+     "note": "is_attended_by_staff removed (it ignored freed cashiers); prompt/interact use has_cashier(); check.sh clean",
+     "closed": "2026-11-06T20:27:50+10:00"
     }
    ]
   },
@@ -836,6 +837,11 @@
    "t": "2026-11-06T20:27:42+10:00",
    "kind": "status",
    "msg": "Status: fixing - Lead: R3 S6/S7/S9-S14 (boxes, racks, player); fixer on R2"
+  },
+  {
+   "t": "2026-11-06T20:27:50+10:00",
+   "kind": "fix",
+   "msg": "R2/C17 fixed 8aebda2 is_attended_by_staff removed (it ignored freed cashiers); prompt/interact use has_cashier(); check.sh clean"
   }
  ],
  "tests": [
@@ -870,17 +876,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:27:42+10:00",
-  "mem_free_pct": 54,
+  "t": "2026-11-06T20:27:50+10:00",
+  "mem_free_pct": 53,
   "load": [
-   2.69,
-   2.5,
-   2.72
+   2.47,
+   2.45,
+   2.7
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "8aebda2",
+    "date": "2026-11-06T20:27:48+10:00",
+    "subject": "Drop Checkout.is_attended_by_staff for has_cashier",
+    "body": "",
+    "stat": "1 file changed, 3 insertions(+), 8 deletions(-)"
+   },
    {
     "sha": "e08817b",
     "date": "2026-11-06T20:27:36+10:00",
@@ -1293,21 +1306,12 @@
     "subject": "Add the M4 progression tour and document M4: drift, licences, apps, cleanliness, mop",
     "body": "",
     "stat": "10 files changed, 338 insertions(+), 9 deletions(-)"
-   },
-   {
-    "sha": "60772ba",
-    "date": "2026-11-05T21:18:51+10:00",
-    "subject": "Test the menus, options, mouse capture and the day-1 tutorial; add the M8 tour shots, ambience and docs",
-    "body": "",
-    "stat": "28 files changed, 779 insertions(+), 29 deletions(-)"
    }
   ],
-  "dirty": [
-   " M scripts/fixtures/checkout.gd"
-  ],
-  "total_commits": 119
+  "dirty": [],
+  "total_commits": 120
  },
- "updated": "2026-11-06T20:27:43+10:00",
+ "updated": "2026-11-06T20:27:50+10:00",
  "qa": [
   {
    "num": 1,
