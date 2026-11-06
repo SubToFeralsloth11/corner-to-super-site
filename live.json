@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C2",
   "area": "Second pass",
-  "activity": "FixRegress: X11 franchise payback",
+  "activity": "FixRegress: X4 overflow holding spot",
   "cycle": "2",
-  "since": "2026-11-07T09:57:11+10:00"
+  "since": "2026-11-07T09:58:00+10:00"
  },
  "rounds": [
   {
@@ -3858,6 +3858,11 @@
    "t": "2026-11-07T09:57:57+10:00",
    "kind": "fix",
    "msg": "C2/X11 fixed 78b9606 price $10,000 -> $6,000, Sunday pay $100 -> $1,000 per star: 12 days payback at 3.5 stars, 10 at 4.35; card text states it; ECONOMY.md table + rationale. test_late_upgrades_do_something asserts payback <= 2 weeks, 5/0"
+  },
+  {
+   "t": "2026-11-07T09:58:00+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixRegress: X4 overflow holding spot"
   }
  ],
  "tests": [
@@ -3999,12 +4004,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:57:57+10:00",
+  "t": "2026-11-07T09:58:00+10:00",
   "mem_free_pct": 56,
   "load": [
-   3.02,
-   3.12,
-   3.42
+   2.86,
+   3.09,
+   3.41
   ],
   "godot_procs": 0
  },
@@ -4434,7 +4439,7 @@
   "dirty": [],
   "total_commits": 204
  },
- "updated": "2026-11-07T09:57:58+10:00",
+ "updated": "2026-11-07T09:58:00+10:00",
  "qa": [
   {
    "num": 1,
