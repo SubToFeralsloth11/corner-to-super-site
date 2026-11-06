@@ -1,18 +1,18 @@
 {
  "status": {
-  "state": "fixing",
-  "round": "R2 (fixer) / R4 next",
-  "area": "Shelves, stocking, boxes, pricing",
-  "activity": "Fixer: R2 checkout fixes done (986/0)",
+  "state": "reviewing",
+  "round": "R4+R5",
+  "area": "NPCs; economy",
+  "activity": "Critics on R4/R5; lead running windowed gameplay tour to eyeball R2 fixes (bag in hand, trolley, overflow queue)",
   "cycle": "1",
-  "since": "2026-11-06T20:44:35+10:00"
+  "since": "2026-11-06T20:45:22+10:00"
  },
  "rounds": [
   {
    "id": "R2",
    "area": "Checkout, payment, change, till",
    "started": "2026-11-06T20:11:25+10:00",
-   "finished": null,
+   "finished": "2026-11-06T20:45:22+10:00",
    "findings": [
     {
      "id": "C1",
@@ -465,6 +465,20 @@
      "closed": "2026-11-06T20:27:42+10:00"
     }
    ]
+  },
+  {
+   "id": "R4",
+   "area": "Customers / NPC AI, queues, pathing",
+   "started": "2026-11-06T20:45:22+10:00",
+   "finished": null,
+   "findings": []
+  },
+  {
+   "id": "R5",
+   "area": "Economy, bills, loans, day flow, progression",
+   "started": "2026-11-06T20:45:22+10:00",
+   "finished": null,
+   "findings": []
   }
  ],
  "log": [
@@ -1032,6 +1046,41 @@
    "t": "2026-11-06T20:44:35+10:00",
    "kind": "status",
    "msg": "Status: fixing - Fixer: R2 checkout fixes done (986/0)"
+  },
+  {
+   "t": "2026-11-06T20:45:22+10:00",
+   "kind": "agent",
+   "msg": "Agent FixCheckout: done R2 C2-C17 fixed, 986 passed 0 failed"
+  },
+  {
+   "t": "2026-11-06T20:45:22+10:00",
+   "kind": "round",
+   "msg": "Round R2 closed"
+  },
+  {
+   "t": "2026-11-06T20:45:22+10:00",
+   "kind": "round",
+   "msg": "Round R4 started: Customers / NPC AI, queues, pathing"
+  },
+  {
+   "t": "2026-11-06T20:45:22+10:00",
+   "kind": "round",
+   "msg": "Round R5 started: Economy, bills, loans, day flow, progression"
+  },
+  {
+   "t": "2026-11-06T20:45:22+10:00",
+   "kind": "agent",
+   "msg": "Agent CritNPC: running Reviewer: NPCs (read-only)"
+  },
+  {
+   "t": "2026-11-06T20:45:22+10:00",
+   "kind": "agent",
+   "msg": "Agent CritEconomy: running Reviewer: economy (read-only)"
+  },
+  {
+   "t": "2026-11-06T20:45:22+10:00",
+   "kind": "status",
+   "msg": "Status: reviewing - Critics on R4/R5; lead running windowed gameplay tour to eyeball R2 fixes (bag in hand, trolley, overflow queue)"
   }
  ],
  "tests": [
@@ -1069,17 +1118,32 @@
    "state": "done",
    "task": "947 passed, 0 failed",
    "t": "2026-11-06T20:19:59+10:00"
+  },
+  "FixCheckout": {
+   "state": "done",
+   "task": "R2 C2-C17 fixed, 986 passed 0 failed",
+   "t": "2026-11-06T20:45:22+10:00"
+  },
+  "CritNPC": {
+   "state": "running",
+   "task": "Reviewer: NPCs (read-only)",
+   "t": "2026-11-06T20:45:22+10:00"
+  },
+  "CritEconomy": {
+   "state": "running",
+   "task": "Reviewer: economy (read-only)",
+   "t": "2026-11-06T20:45:22+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-06T20:44:35+10:00",
-  "mem_free_pct": 45,
+  "t": "2026-11-06T20:45:22+10:00",
+  "mem_free_pct": 51,
   "load": [
-   2.69,
-   2.67,
-   2.75
+   2.58,
+   2.63,
+   2.73
   ],
-  "godot_procs": 34
+  "godot_procs": 0
  },
  "game": {
   "commits": [
@@ -1507,7 +1571,7 @@
   "dirty": [],
   "total_commits": 137
  },
- "updated": "2026-11-06T20:44:35+10:00",
+ "updated": "2026-11-06T20:45:23+10:00",
  "qa": [
   {
    "num": 1,
