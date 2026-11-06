@@ -1739,10 +1739,11 @@
      "file": "scripts/npc/shopper_brain.gd:139-140",
      "detail": "While _oos_walk is true, TO_SLOT calls _nearest_slot(_wanted) every tick. That loops all fixtures × slots (564 in a full store), calling _slot_has and in_use on each. Out-of-stock walks are frequent mid-game and last several seconds per customer. This brings back the per-frame full-slot scan that round-1 #18 removed from the spawner, while V3 (35-44 fps windowed) is still open. [UNVERIFIED cost; expect ms per frame with several walkers]. Fix: re-check on a 0.5 s timer, or listen for the product's slot count changing.",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:57+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "9e96aa2",
+     "note": "OOS walk re-scans slots every OOS_RECHECK 0.5 s instead of every physics tick; customer_test 54/0",
+     "closed": "2026-11-07T09:57:04+10:00"
     },
     {
      "id": "X8",
@@ -3829,6 +3830,11 @@
    "t": "2026-11-07T09:57:01+10:00",
    "kind": "fix",
    "msg": "C2/X18 fixed 4fadc8d comment 4*tills+level/2, fallbacks base 0 per_till 4 (match customers.json)"
+  },
+  {
+   "t": "2026-11-07T09:57:04+10:00",
+   "kind": "fix",
+   "msg": "C2/X7 fixed 9e96aa2 OOS walk re-scans slots every OOS_RECHECK 0.5 s instead of every physics tick; customer_test 54/0"
   }
  ],
  "tests": [
@@ -3970,7 +3976,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:57:01+10:00",
+  "t": "2026-11-07T09:57:04+10:00",
   "mem_free_pct": 56,
   "load": [
    2.76,
@@ -4405,7 +4411,7 @@
   "dirty": [],
   "total_commits": 203
  },
- "updated": "2026-11-07T09:57:02+10:00",
+ "updated": "2026-11-07T09:57:04+10:00",
  "qa": [
   {
    "num": 1,
