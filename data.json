@@ -1,10 +1,10 @@
 {
  "generated": "2026-11-07T09:51+10:00",
- "head": "3dd9256",
+ "head": "e65fe0e",
  "stats": {
-  "commits": 196,
+  "commits": 197,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T09:51:11+10:00",
+  "last_commit": "2026-11-07T09:51:18+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
@@ -1281,6 +1281,11 @@
    "sha": "3dd9256",
    "date": "2026-11-07T09:51:11+10:00",
    "subject": "Hold the front customer only when their own queue switch would move them, to a till someone works (X3, X20)"
+  },
+  {
+   "sha": "e65fe0e",
+   "date": "2026-11-07T09:51:18+10:00",
+   "subject": "Don't tell players a cashier raises the in-store cap (only tills do) (X13)"
   }
  ],
  "commits_per_hour": [
@@ -1450,7 +1455,7 @@
   },
   {
    "hour": "2026-11-07T09:00:00+10:00",
-   "commits": 19
+   "commits": 20
   }
  ],
  "sections": [

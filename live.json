@@ -1894,10 +1894,11 @@
      "file": "scripts/fixtures/checkout.gd:323-332",
      "detail": "is_attended() counts the player just standing in the 2.5 × 5.2 m box behind a counter. Walking behind till A on the way to till B makes A \"attended with an empty queue\". B's front customer is then held by _served_elsewhere and moves to A at the next 2.5 s check. When the player sits at B, A is unattended and the same rule sends them back. Fix: use only seated or cashier (is_staffed()) for _served_elsewhere and _maybe_switch_queue, and keep the standing-behind check for picking a queue.",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:58+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "3dd9256",
+     "note": "hold and queue switch target only is_staffed() tills (seated/cashier); standing behind a counter still counts for picking a queue (shortest_queue ranks staffed above merely attended). checkout_test 74/0",
+     "closed": "2026-11-07T09:51:19+10:00"
     }
    ]
   }
@@ -3782,6 +3783,11 @@
    "t": "2026-11-07T09:51:16+10:00",
    "kind": "fix",
    "msg": "C2/X3 fixed 3dd9256 _served_elsewhere now asks shortest_queue(counter_asks) like _maybe_switch_queue, so a Smokes buyer (always routed to the wall till) is never held. test_smokes_buyer_is_not_held_for_another_served_till fails on 1724812 (phase 0), passes after; m7_content 83/0"
+  },
+  {
+   "t": "2026-11-07T09:51:19+10:00",
+   "kind": "fix",
+   "msg": "C2/X20 fixed 3dd9256 hold and queue switch target only is_staffed() tills (seated/cashier); standing behind a counter still counts for picking a queue (shortest_queue ranks staffed above merely attended). checkout_test 74/0"
   }
  ],
  "tests": [
@@ -3923,17 +3929,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:51:16+10:00",
+  "t": "2026-11-07T09:51:19+10:00",
   "mem_free_pct": 56,
   "load": [
-   4.11,
-   4.13,
-   3.89
+   3.94,
+   4.09,
+   3.88
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "e65fe0e",
+    "date": "2026-11-07T09:51:18+10:00",
+    "subject": "Don't tell players a cashier raises the in-store cap (only tills do) (X13)",
+    "body": "",
+    "stat": "1 file changed, 1 insertion(+), 1 deletion(-)"
+   },
    {
     "sha": "3dd9256",
     "date": "2026-11-07T09:51:11+10:00",
@@ -4346,21 +4359,14 @@
     "subject": "Close an exact-cash sale as the cash is taken, and move the till hint below the HUD clock",
     "body": "Exact cash opened the change panel with $0.00 due and waited for a Give click; the seated\nhint line was drawn over the clock card (seen in the windowed gameplay tour). Review round 2,\nU1 and U2.",
     "stat": "2 files changed, 26 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "4e7a26b",
-    "date": "2026-11-06T20:44:33+10:00",
-    "subject": "Record review round 2 checkout fixes in PROGRESS",
-    "body": "",
-    "stat": "1 file changed, 35 insertions(+)"
    }
   ],
   "dirty": [
    " M scripts/build/build_mode.gd"
   ],
-  "total_commits": 196
+  "total_commits": 197
  },
- "updated": "2026-11-07T09:51:17+10:00",
+ "updated": "2026-11-07T09:51:19+10:00",
  "qa": [
   {
    "num": 1,
