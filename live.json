@@ -60,10 +60,11 @@
      "file": "shopper_brain.gd:304-310",
      "detail": "Trolley customers get drained during their own scan.",
      "by": "CritCheckout",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:22:44+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "18bfd25",
+     "note": "drain/moan gated on not served; GDD+ECONOMY say so; new checkout_test test_queue_drain_stops_once_they_are_served (46/0)",
+     "closed": "2026-11-06T20:26:58+10:00"
     },
     {
      "id": "C5",
@@ -779,6 +780,11 @@
    "t": "2026-11-06T20:26:48+10:00",
    "kind": "status",
    "msg": "Status: fixing - Fixer: C4 no queue drain while served"
+  },
+  {
+   "t": "2026-11-06T20:26:58+10:00",
+   "kind": "fix",
+   "msg": "R2/C4 fixed 18bfd25 drain/moan gated on not served; GDD+ECONOMY say so; new checkout_test test_queue_drain_stops_once_they_are_served (46/0)"
   }
  ],
  "tests": [
@@ -813,17 +819,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:26:48+10:00",
+  "t": "2026-11-06T20:26:58+10:00",
   "mem_free_pct": 47,
   "load": [
-   1.8,
-   2.3,
-   2.66
+   2.71,
+   2.47,
+   2.72
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "18bfd25",
+    "date": "2026-11-06T20:26:57+10:00",
+    "subject": "Stop the queue-wait satisfaction drain and long-queue moan once the till starts serving",
+    "body": "",
+    "stat": "4 files changed, 31 insertions(+), 5 deletions(-)"
+   },
    {
     "sha": "72f2b03",
     "date": "2026-11-06T20:26:13+10:00",
@@ -1236,26 +1249,15 @@
     "subject": "Track the wanted mouse capture in Cursor; flash the scanner line and roll the HUD cash up",
     "body": "",
     "stat": "6 files changed, 90 insertions(+), 9 deletions(-)"
-   },
-   {
-    "sha": "0c2cc3a",
-    "date": "2026-11-05T20:26:06+10:00",
-    "subject": "Add the mixer buses, per-bus volumes, day length setting and the crossfading music player",
-    "body": "",
-    "stat": "8 files changed, 246 insertions(+), 24 deletions(-)"
    }
   ],
   "dirty": [
-   " M docs/ECONOMY.md",
-   " M docs/GDD.md",
    " M scripts/autoload/game.gd",
-   " M scripts/npc/shopper_brain.gd",
-   " M scripts/ui/price_popup.gd",
-   " M tests/cases/checkout_test.gd"
+   " M scripts/ui/price_popup.gd"
   ],
-  "total_commits": 116
+  "total_commits": 117
  },
- "updated": "2026-11-06T20:26:49+10:00",
+ "updated": "2026-11-06T20:26:59+10:00",
  "qa": [
   {
    "num": 1,

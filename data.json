@@ -1,17 +1,17 @@
 {
  "generated": "2026-11-06T20:26+10:00",
- "head": "72f2b03",
+ "head": "18bfd25",
  "stats": {
-  "commits": 116,
+  "commits": 117,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-06T20:26:13+10:00",
+  "last_commit": "2026-11-06T20:26:57+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 26567,
+  "gd_lines": 26568,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -860,6 +860,11 @@
    "sha": "72f2b03",
    "date": "2026-11-06T20:26:13+10:00",
    "subject": "Send customers with Smokes on their list to the till the cigarette wall serves"
+  },
+  {
+   "sha": "18bfd25",
+   "date": "2026-11-06T20:26:57+10:00",
+   "subject": "Stop the queue-wait satisfaction drain and long-queue moan once the till starts serving"
   }
  ],
  "commits_per_hour": [
@@ -977,7 +982,7 @@
   },
   {
    "hour": "2026-11-06T20:00:00+10:00",
-   "commits": 5
+   "commits": 6
   }
  ],
  "sections": [
