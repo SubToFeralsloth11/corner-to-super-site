@@ -418,6 +418,11 @@
    "t": "2026-11-06T20:20:32+10:00",
    "kind": "question",
    "msg": "Question #2 answering: Testing"
+  },
+  {
+   "t": "2026-11-06T20:20:52+10:00",
+   "kind": "question",
+   "msg": "Question #2 answered: Testing"
   }
  ],
  "tests": [
@@ -452,8 +457,8 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:20:32+10:00",
-  "mem_free_pct": 46,
+  "t": "2026-11-06T20:20:52+10:00",
+  "mem_free_pct": 53,
   "load": [],
   "godot_procs": 0
  },
@@ -883,7 +888,7 @@
   "dirty": [],
   "total_commits": 111
  },
- "updated": "2026-11-06T20:20:33+10:00",
+ "updated": "2026-11-06T20:20:53+10:00",
  "qa": [
   {
    "num": 1,
@@ -897,9 +902,9 @@
    "num": 2,
    "title": "Testing",
    "question": "",
-   "answer": "",
-   "state": "answering",
-   "t": "2026-11-06T20:20:32+10:00"
+   "answer": "The question only said \"Testing\", so here is where testing stands right now.\n\n- **All tests pass.** The most recent run had **947 passed and 0 failed** at 20:19:59. That was the starting check before cycle 1's fixes, run with `tests/run_tests.sh` in about 30 s. The last full run before the loop, recorded in PROGRESS.md under M9, was 930 passed and 0 failed.\n- **One hiccup on the way.** The loop first ran the suite with `gt test .`, and it was killed after 600 s. The log says the cause was a missing `--fixed-fps`. The loop then re-ran it with `tests/run_tests.sh`, which finished cleanly.\n- **What's happening now.** The loop is fixing round R3's findings (shelves, stocking, boxes, pricing), most urgent (P1) first. It hasn't logged a test run since those fixes started. Expect a new entry under `tests` once a batch of fixes lands.\n\nAll of this is from `status`, `tests` and `activity` in `corner-to-super-site/live.json`.\n\nIf you meant something else, like pausing or running a particular test, say so and I'll pass it to the loop's inbox.",
+   "state": "answered",
+   "t": "2026-11-06T20:20:52+10:00"
   }
  ]
 }
