@@ -492,10 +492,11 @@
      "file": "scripts/npc/shopper_brain.gd:315-327 (with scripts/fixtures/checkout.gd:304-306)",
      "detail": "`Checkout._physics_process` calls `begin(queue[0])` as soon as the front customer is `ready_at_till()`, whether or not anyone is serving; it only rings the bell. `begin()` sets them to AT_TILL. The AT_TILL branch of `_queue_tick` never calls `_maybe_switch_queue()`, which only runs in QUEUE. A common case: you serve at till 1, a cashier works till 2, and you leave to restock. The C5 fix moves everyone behind the front customer to till 2. The front customer stands at till 1 with their basket on the counter for the full 90 s of `patience_s`, then drops the basket and leaves. That is lost sales, a mess and about −15 satisfaction, while the cashier at till 2 has nobody to serve. Fix: in the IDLE branch, only `begin()` when `is_attended()` or no attended till with room exists. Otherwise leave them in QUEUE so the 2.5 s switch check can move them.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:53+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e913982",
+     "note": "checkout_test regression fails before, passes after",
+     "closed": "2026-11-07T07:50:28+10:00"
     },
     {
      "id": "N3",
@@ -504,10 +505,11 @@
      "file": "scripts/npc/customer_rules.gd:50-58; scripts/npc/shopper_brain.gd:135-143,161-186",
      "detail": "This confirms the lead. `pick_list` draws with replacement, so the same product can appear on a list several times. Each entry is a separate trip, price roll and `remove_one`. An unstocked product listed twice costs −12 twice (−24) and two lost sales; the second bark is dropped because they are still talking. At +40% the customer can say \"I'm not paying $X for that\" and grab the same item 0.3 s later (refuse chance 16% per roll). Nobody buys a six-pack's worth, as Supermarket Simulator customers do. Fix: turn the list into `{id: qty}` and merge duplicates. Draw the quantity from a new `customers.json` `quantity` table, optionally per product. Make one price decision and one OOS or refuse penalty per product. Take `min(qty, stock)` units across slots and show all of them in the basket.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:53+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "c98c03f",
+     "note": "customer_test regression: 3 lost/1 complaint and 3 taken at once; fails before",
+     "closed": "2026-11-07T07:50:28+10:00"
     },
     {
      "id": "N4",
@@ -720,10 +722,11 @@
      "file": "scripts/world/world.gd:475-484",
      "detail": "After `return null` there are ten lines of an old `shortest_queue` body that never run. GDScript reports them as unreachable code, and they look as if they still matter. Fix: delete lines 475-484.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:54+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e913982",
+     "note": "dead code removed",
+     "closed": "2026-11-07T07:50:28+10:00"
     },
     {
      "id": "N22",
@@ -2049,6 +2052,21 @@
    "t": "2026-11-07T07:47:58+10:00",
    "kind": "plan",
    "msg": "Subagents rate-limited for ~10 h: lead now critiques and fixes alone, one area at a time"
+  },
+  {
+   "t": "2026-11-07T07:50:28+10:00",
+   "kind": "fix",
+   "msg": "R4/N2 fixed e913982 checkout_test regression fails before, passes after"
+  },
+  {
+   "t": "2026-11-07T07:50:28+10:00",
+   "kind": "fix",
+   "msg": "R4/N21 fixed e913982 dead code removed"
+  },
+  {
+   "t": "2026-11-07T07:50:28+10:00",
+   "kind": "fix",
+   "msg": "R4/N3 fixed c98c03f customer_test regression: 3 lost/1 complaint and 3 taken at once; fails before"
   }
  ],
  "tests": [
@@ -2109,17 +2127,31 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T07:47:58+10:00",
+  "t": "2026-11-07T07:50:28+10:00",
   "mem_free_pct": 36,
   "load": [
-   3.73,
-   5.14,
-   7.29
+   2.69,
+   4.22,
+   6.57
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "c98c03f",
+    "date": "2026-11-07T07:50:26+10:00",
+    "subject": "Buy a product drawn several times as several units in one trip, with one price decision",
+    "body": "Repeat picks were separate trips, separate refusal rolls (refuse then grab the same item) and\nstacked out-of-stock penalties. Unit counts are unchanged, so the economy tuning holds.\nReview round 2, N3.",
+    "stat": "3 files changed, 76 insertions(+), 18 deletions(-)"
+   },
+   {
+    "sha": "e913982",
+    "date": "2026-11-07T07:48:37+10:00",
+    "subject": "Don't start serving at an unserved till while another till is served, and drop dead queue code",
+    "body": "The front customer unloaded onto the empty counter and waited out their patience there instead\nof moving to the served till. Also removes unreachable lines after cig_wall_till's return.\nReview round 2, N2 and N21.",
+    "stat": "3 files changed, 35 insertions(+), 11 deletions(-)"
+   },
    {
     "sha": "9c37344",
     "date": "2026-11-07T07:47:56+10:00",
@@ -2525,26 +2557,12 @@
     "subject": "Pick up bay boxes the stock bot's way in the M5 acceptance test and rack any two of them, noting why one fails",
     "body": "",
     "stat": "1 file changed, 14 insertions(+), 14 deletions(-)"
-   },
-   {
-    "sha": "59b40f1",
-    "date": "2026-11-05T23:45:39+10:00",
-    "subject": "Take a racked box with E on the rack: racked boxes sit inside its collider, so the crosshair never found them",
-    "body": "",
-    "stat": "2 files changed, 57 insertions(+), 3 deletions(-)"
-   },
-   {
-    "sha": "5ce061b",
-    "date": "2026-11-05T22:59:35+10:00",
-    "subject": "Order and stock dairy right after placing the multideck; walk the stock bot round fixtures along the navmesh",
-    "body": "",
-    "stat": "3 files changed, 47 insertions(+), 6 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 144
+  "total_commits": 146
  },
- "updated": "2026-11-07T07:48:00+10:00",
+ "updated": "2026-11-07T07:50:29+10:00",
  "qa": [
   {
    "num": 1,

@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T07:48+10:00",
- "head": "9c37344",
+ "generated": "2026-11-07T07:50+10:00",
+ "head": "c98c03f",
  "stats": {
-  "commits": 144,
+  "commits": 146,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T07:47:56+10:00",
+  "last_commit": "2026-11-07T07:50:26+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 27304,
+  "gd_lines": 27384,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1014,6 +1014,16 @@
    "sha": "9c37344",
    "date": "2026-11-07T07:47:56+10:00",
    "subject": "Document closing early, the short-night warnings, and the streak reset at the Bank"
+  },
+  {
+   "sha": "e913982",
+   "date": "2026-11-07T07:48:37+10:00",
+   "subject": "Don't start serving at an unserved till while another till is served, and drop dead queue code"
+  },
+  {
+   "sha": "c98c03f",
+   "date": "2026-11-07T07:50:26+10:00",
+   "subject": "Buy a product drawn several times as several units in one trip, with one price decision"
   }
  ],
  "commits_per_hour": [
@@ -1175,7 +1185,7 @@
   },
   {
    "hour": "2026-11-07T07:00:00+10:00",
-   "commits": 4
+   "commits": 6
   }
  ],
  "sections": [
