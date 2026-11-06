@@ -1520,10 +1520,11 @@
      "file": "scripts/ui/pause_menu.gd:67-71",
      "detail": "Each Load slot button emits `load_requested(n)` at once, and `Main.load_slot` rebuilds the world. Quit emits `quit_requested`, which goes to `show_main_menu`. Saving is blocked during OPEN, so either misclick mid-day loses everything since the morning. The current slot's own Load button is enabled too, so \"reload\" silently rolls back the day. The main menu's New game page already warns before replacing a slot. Fix: a confirm step (\"Lose today's progress since 07:30?\") on both, at least when `Save.can_save()` is false or the day has moved since the last save.",
      "by": "CritPlayer",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:40:30+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "697e847",
+     "note": "menu_test 81/81",
+     "closed": "2026-11-07T09:46:11+10:00"
     },
     {
      "id": "Y6",
@@ -3356,6 +3357,11 @@
    "t": "2026-11-07T09:44:37+10:00",
    "kind": "fix",
    "msg": "C2/Y8 fixed 22aae8b stock tests 87/87"
+  },
+  {
+   "t": "2026-11-07T09:46:11+10:00",
+   "kind": "fix",
+   "msg": "C2/Y5 fixed 697e847 menu_test 81/81"
   }
  ],
  "tests": [
@@ -3497,17 +3503,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:44:37+10:00",
-  "mem_free_pct": 35,
+  "t": "2026-11-07T09:46:11+10:00",
+  "mem_free_pct": 34,
   "load": [
-   2.53,
-   3.06,
-   3.6
+   2.64,
+   3.0,
+   3.52
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "697e847",
+    "date": "2026-11-07T09:46:10+10:00",
+    "subject": "Ask before pause-menu Load or Quit throws away a day that can't be saved yet",
+    "body": "Mid-day either button discarded everything since the morning on one click. Review round 2, Y5.",
+    "stat": "1 file changed, 20 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "22aae8b",
     "date": "2026-11-07T09:44:35+10:00",
@@ -3920,19 +3933,12 @@
     "subject": "Show the clock on the POS from the start and number each register",
     "body": "",
     "stat": "1 file changed, 17 insertions(+), 3 deletions(-)"
-   },
-   {
-    "sha": "cfffc0d",
-    "date": "2026-11-06T20:37:23+10:00",
-    "subject": "Treat OK on an empty or zero card amount as a misclick, not a decline",
-    "body": "",
-    "stat": "2 files changed, 23 insertions(+), 2 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 187
+  "total_commits": 188
  },
- "updated": "2026-11-07T09:44:38+10:00",
+ "updated": "2026-11-07T09:46:12+10:00",
  "qa": [
   {
    "num": 1,

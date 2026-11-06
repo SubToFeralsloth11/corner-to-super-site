@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T09:44+10:00",
- "head": "22aae8b",
+ "generated": "2026-11-07T09:46+10:00",
+ "head": "697e847",
  "stats": {
-  "commits": 187,
+  "commits": 188,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T09:44:35+10:00",
+  "last_commit": "2026-11-07T09:46:10+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 28522,
+  "gd_lines": 28540,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1236,6 +1236,11 @@
    "sha": "22aae8b",
    "date": "2026-11-07T09:44:35+10:00",
    "subject": "Shut the previous cooler when stocking the next, open the case when taking stock back, and shut it when you sit down"
+  },
+  {
+   "sha": "697e847",
+   "date": "2026-11-07T09:46:10+10:00",
+   "subject": "Ask before pause-menu Load or Quit throws away a day that can't be saved yet"
   }
  ],
  "commits_per_hour": [
@@ -1405,7 +1410,7 @@
   },
   {
    "hour": "2026-11-07T09:00:00+10:00",
-   "commits": 10
+   "commits": 11
   }
  ],
  "sections": [
