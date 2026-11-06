@@ -1,11 +1,11 @@
 {
  "status": {
-  "state": "reviewing",
-  "round": "R10",
-  "area": "Player, audio, visuals, perf",
-  "activity": "Soak running (engine busy ~1 h); lead reading player controller and audio code",
+  "state": "verifying",
+  "round": "R5 (pacing)",
+  "area": "Economy pacing",
+  "activity": "Second 30-day soak with retuned in-store cap; reviewing remaining code meanwhile",
   "cycle": "1",
-  "since": "2026-11-07T08:24:56+10:00"
+  "since": "2026-11-07T08:40:55+10:00"
  },
  "rounds": [
   {
@@ -2702,6 +2702,16 @@
    "t": "2026-11-07T08:40:30+10:00",
    "kind": "test",
    "msg": "Tests: 1040 passed, 0 failed after round 2 leftovers"
+  },
+  {
+   "t": "2026-11-07T08:40:55+10:00",
+   "kind": "agent",
+   "msg": "Agent soak: running Soak #2: concurrency base 2->0 to bring day 7 back on the pacing table"
+  },
+  {
+   "t": "2026-11-07T08:40:55+10:00",
+   "kind": "status",
+   "msg": "Status: verifying - Second 30-day soak with retuned in-store cap; reviewing remaining code meanwhile"
   }
  ],
  "tests": [
@@ -2809,20 +2819,20 @@
    "t": "2026-11-07T07:47:58+10:00"
   },
   "soak": {
-   "state": "done",
-   "task": "30 days, 0 errors; pacing: day 7 profit $647 over band ($250-450); day 30 $4,014; level 16 by day 24. Day 11: 62 left the queue (N2 fix starved an unserved till) - fixing",
-   "t": "2026-11-07T08:39:44+10:00"
+   "state": "running",
+   "task": "Soak #2: concurrency base 2->0 to bring day 7 back on the pacing table",
+   "t": "2026-11-07T08:40:55+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T08:40:30+10:00",
-  "mem_free_pct": 43,
+  "t": "2026-11-07T08:40:56+10:00",
+  "mem_free_pct": 44,
   "load": [
-   4.58,
-   4.23,
-   4.2
+   3.72,
+   4.05,
+   4.13
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
@@ -3247,10 +3257,13 @@
     "stat": "7 files changed, 39 insertions(+), 30 deletions(-)"
    }
   ],
-  "dirty": [],
+  "dirty": [
+   " M data/customers.json",
+   " M docs/ECONOMY.md"
+  ],
   "total_commits": 171
  },
- "updated": "2026-11-07T08:40:31+10:00",
+ "updated": "2026-11-07T08:40:57+10:00",
  "qa": [
   {
    "num": 1,
