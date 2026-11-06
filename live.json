@@ -73,10 +73,11 @@
      "file": "shopper_brain.gd:284-304",
      "detail": "",
      "by": "CritCheckout",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:22:44+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "b16ea41",
+     "note": "every 2.5 s a customer queued at an unattended till switches to an attended one where queue_length <= their index (keeps queue_time); GDD updated; new checkout_test test_customers_move_to_a_till_someone_opens (2/0)",
+     "closed": "2026-11-06T20:42:17+10:00"
     },
     {
      "id": "C6",
@@ -1000,6 +1001,11 @@
    "t": "2026-11-06T20:42:01+10:00",
    "kind": "fix",
    "msg": "R2/C8 fixed 029856b queue spacing adds TROLLEY_SPACING ahead of each trolley pusher (Checkout._queue_depth); trolley pushers keep facing along the lane at the till; new checkout_test test_trolley_room_is_in_front_of_the_pusher (3/0); visual pending windowed tour"
+  },
+  {
+   "t": "2026-11-06T20:42:17+10:00",
+   "kind": "fix",
+   "msg": "R2/C5 fixed b16ea41 every 2.5 s a customer queued at an unattended till switches to an attended one where queue_length <= their index (keeps queue_time); GDD updated; new checkout_test test_customers_move_to_a_till_someone_opens (2/0)"
   }
  ],
  "tests": [
@@ -1034,17 +1040,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:42:01+10:00",
+  "t": "2026-11-06T20:42:17+10:00",
   "mem_free_pct": 45,
   "load": [
-   2.42,
-   2.84,
-   2.83
+   2.26,
+   2.78,
+   2.81
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "b16ea41",
+    "date": "2026-11-06T20:42:15+10:00",
+    "subject": "Move customers from an unserved queue to a till someone opens",
+    "body": "",
+    "stat": "3 files changed, 46 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "029856b",
     "date": "2026-11-06T20:41:59+10:00",
@@ -1457,22 +1470,12 @@
     "subject": "Keep the background navmesh bake from calling into a freed world",
     "body": "",
     "stat": "1 file changed, 6 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "333f733",
-    "date": "2026-11-05T22:30:47+10:00",
-    "subject": "Alternate produce and wine meshes with a produce colour spread; hide rear stock rows past 25 m",
-    "body": "",
-    "stat": "2 files changed, 127 insertions(+), 31 deletions(-)"
    }
   ],
-  "dirty": [
-   " M scripts/npc/shopper_brain.gd",
-   " M tests/cases/checkout_test.gd"
-  ],
-  "total_commits": 134
+  "dirty": [],
+  "total_commits": 135
  },
- "updated": "2026-11-06T20:42:01+10:00",
+ "updated": "2026-11-06T20:42:17+10:00",
  "qa": [
   {
    "num": 1,
