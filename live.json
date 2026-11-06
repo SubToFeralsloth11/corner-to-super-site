@@ -1874,10 +1874,11 @@
      "file": "scripts/npc/customer_rules.gd:34-38",
      "detail": "1b985cd set customers.json concurrency.base to 0. The comment still says \"2 + 4 * tills + level / 2\", and the fallbacks are base 4 and per_till 2 (the pre-M9 formula). N22's \"stale docs and fallback values\" problem is back. Fix: comment `4 * tills + level / 2`; fallbacks base 0, per_till 4.",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:58+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "4fadc8d",
+     "note": "comment 4*tills+level/2, fallbacks base 0 per_till 4 (match customers.json)",
+     "closed": "2026-11-07T09:57:01+10:00"
     },
     {
      "id": "X19",
@@ -3823,6 +3824,11 @@
    "t": "2026-11-07T09:56:59+10:00",
    "kind": "fix",
    "msg": "C2/X19 fixed 46fa054 wrapper deleted, caller uses _any_overlap; build_test 129/0"
+  },
+  {
+   "t": "2026-11-07T09:57:01+10:00",
+   "kind": "fix",
+   "msg": "C2/X18 fixed 4fadc8d comment 4*tills+level/2, fallbacks base 0 per_till 4 (match customers.json)"
   }
  ],
  "tests": [
@@ -3964,12 +3970,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:56:59+10:00",
+  "t": "2026-11-07T09:57:01+10:00",
   "mem_free_pct": 56,
   "load": [
-   2.82,
-   3.12,
-   3.45
+   2.76,
+   3.1,
+   3.44
   ],
   "godot_procs": 0
  },
@@ -4399,7 +4405,7 @@
   "dirty": [],
   "total_commits": 203
  },
- "updated": "2026-11-07T09:56:59+10:00",
+ "updated": "2026-11-07T09:57:02+10:00",
  "qa": [
   {
    "num": 1,
