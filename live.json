@@ -1726,10 +1726,11 @@
      "file": "scripts/build/build_rules.gd:24",
      "detail": "B2 now requires one face with ACCESS_DEPTH=0.6 m of free floor. The navmesh is baked with agent_radius 0.3 (world/nav.gd:91), which erodes 0.3 m from both the face and the opposite obstacle. A gap of 0.6 m to about 0.7 m therefore has no walkable cells. ShopperBrain._reachable (closest nav point within 0.6 of a stand point 0.6 out) then fails for mid-aisle slots, and customers skip them or bark \"not carried\". The strip check also never tests whether the strip connects to the rest of the floor. Fix: set ACCESS_DEPTH to at least REACH_STAND + agent_radius (0.9 m). Optionally confirm with a nav query once the rebake finishes.",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:57+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "46fa054",
+     "note": "ACCESS_DEPTH = REACH_STAND + 0.3 = 0.9 m. Measured on the navmesh: 0.6-0.8 m aisles leave 4-8 of 12 gondola slots reachable. test_an_accepted_shelf_is_reachable_on_the_navmesh fails on old rule (x 4.75 accepted, 4/12), passes after; build_test 129/0",
+     "closed": "2026-11-07T09:56:56+10:00"
     },
     {
      "id": "X7",
@@ -3811,6 +3812,11 @@
    "t": "2026-11-07T09:56:54+10:00",
    "kind": "fix",
    "msg": "C2/X5 fixed de254e4 pick() ignores the cashier (queue/customer still block); cashier steps off while carried and returns via CashierJob._resolve; hover shows Move only when it can. test_a_staffed_till_can_be_moved_and_the_cashier_follows passes; staff_test 57/0"
+  },
+  {
+   "t": "2026-11-07T09:56:56+10:00",
+   "kind": "fix",
+   "msg": "C2/X6 fixed 46fa054 ACCESS_DEPTH = REACH_STAND + 0.3 = 0.9 m. Measured on the navmesh: 0.6-0.8 m aisles leave 4-8 of 12 gondola slots reachable. test_an_accepted_shelf_is_reachable_on_the_navmesh fails on old rule (x 4.75 accepted, 4/12), passes after; build_test 129/0"
   }
  ],
  "tests": [
@@ -3952,12 +3958,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:56:54+10:00",
-  "mem_free_pct": 55,
+  "t": "2026-11-07T09:56:56+10:00",
+  "mem_free_pct": 56,
   "load": [
-   2.98,
-   3.15,
-   3.46
+   2.82,
+   3.12,
+   3.45
   ],
   "godot_procs": 0
  },
@@ -4387,7 +4393,7 @@
   "dirty": [],
   "total_commits": 203
  },
- "updated": "2026-11-07T09:56:54+10:00",
+ "updated": "2026-11-07T09:56:57+10:00",
  "qa": [
   {
    "num": 1,
