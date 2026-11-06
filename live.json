@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "R3",
   "area": "Shelves, stocking, boxes, pricing",
-  "activity": "Fixer: C11 perfect change needs change",
+  "activity": "Lead: R3 S6/S7/S9-S14 (boxes, racks, player); fixer on R2",
   "cycle": "1",
-  "since": "2026-11-06T20:27:18+10:00"
+  "since": "2026-11-06T20:27:42+10:00"
  },
  "rounds": [
   {
@@ -289,10 +289,11 @@
      "file": "price_popup.gd:67, app_pricing.gd:10,123, game.gd:688",
      "detail": "GDD says unset prices follow market; these buttons write a fixed price instead.",
      "by": "CritShelves",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e08817b",
+     "note": "progression_test 69/69; follow-market + boxed stock covered by test",
+     "closed": "2026-11-06T20:27:42+10:00"
     },
     {
      "id": "S6",
@@ -325,10 +326,11 @@
      "file": "price_popup.gd:79-89,114-118",
      "detail": "",
      "by": "CritShelves",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e08817b",
+     "note": "progression_test 69/69; follow-market + boxed stock covered by test",
+     "closed": "2026-11-06T20:27:42+10:00"
     },
     {
      "id": "S9",
@@ -409,10 +411,11 @@
      "file": "price_popup.gd:110, price_label.gd:85-94",
      "detail": "",
      "by": "CritShelves",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e08817b",
+     "note": "Steps snap to 5c; unit info on label deferred (data has no unit field)",
+     "closed": "2026-11-06T20:27:42+10:00"
     },
     {
      "id": "S16",
@@ -421,10 +424,11 @@
      "file": "app_pricing.gd:54-62",
      "detail": "",
      "by": "CritShelves",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e08817b",
+     "note": "progression_test 69/69; follow-market + boxed stock covered by test",
+     "closed": "2026-11-06T20:27:42+10:00"
     },
     {
      "id": "S17",
@@ -433,10 +437,11 @@
      "file": "price_popup.gd _refresh",
      "detail": "",
      "by": "CritShelves",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e08817b",
+     "note": "progression_test 69/69; follow-market + boxed stock covered by test",
+     "closed": "2026-11-06T20:27:42+10:00"
     }
    ]
   }
@@ -801,6 +806,36 @@
    "t": "2026-11-06T20:27:29+10:00",
    "kind": "fix",
    "msg": "R2/C11 fixed 4401ca4 perfect_change requires received > charged; progression_test checks exact cash earns 8 XP not 18 (69/0)"
+  },
+  {
+   "t": "2026-11-06T20:27:42+10:00",
+   "kind": "fix",
+   "msg": "R3/S5 fixed e08817b progression_test 69/69; follow-market + boxed stock covered by test"
+  },
+  {
+   "t": "2026-11-06T20:27:42+10:00",
+   "kind": "fix",
+   "msg": "R3/S8 fixed e08817b progression_test 69/69; follow-market + boxed stock covered by test"
+  },
+  {
+   "t": "2026-11-06T20:27:42+10:00",
+   "kind": "fix",
+   "msg": "R3/S16 fixed e08817b progression_test 69/69; follow-market + boxed stock covered by test"
+  },
+  {
+   "t": "2026-11-06T20:27:42+10:00",
+   "kind": "fix",
+   "msg": "R3/S17 fixed e08817b progression_test 69/69; follow-market + boxed stock covered by test"
+  },
+  {
+   "t": "2026-11-06T20:27:42+10:00",
+   "kind": "fix",
+   "msg": "R3/S15 fixed e08817b Steps snap to 5c; unit info on label deferred (data has no unit field)"
+  },
+  {
+   "t": "2026-11-06T20:27:42+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - Lead: R3 S6/S7/S9-S14 (boxes, racks, player); fixer on R2"
   }
  ],
  "tests": [
@@ -835,17 +870,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:27:29+10:00",
-  "mem_free_pct": 53,
+  "t": "2026-11-06T20:27:42+10:00",
+  "mem_free_pct": 54,
   "load": [
-   2.89,
-   2.52,
-   2.73
+   2.69,
+   2.5,
+   2.72
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "e08817b",
+    "date": "2026-11-06T20:27:36+10:00",
+    "subject": "Let prices follow the market again, price boxed stock, and make the price popup forgiving",
+    "body": "'Market price' and 'All to market' pinned today's market price for good; they now drop your own\nprice (Game.clear_price), shown as '(market)' / '*'. The Pricing app lists stock in boxes and on\nracks too. The popup focuses its field, takes '4,20', says when input is rejected, steps land on\nwhole 5c, and warns in red above the refuse-all ratio. Review round 2, S5 S8 S15 S16 S17.\n(The progression_test hunk for this went in with 4401ca4.)",
+    "stat": "3 files changed, 81 insertions(+), 27 deletions(-)"
+   },
    {
     "sha": "4401ca4",
     "date": "2026-11-06T20:27:27+10:00",
@@ -1258,23 +1300,14 @@
     "subject": "Test the menus, options, mouse capture and the day-1 tutorial; add the M8 tour shots, ambience and docs",
     "body": "",
     "stat": "28 files changed, 779 insertions(+), 29 deletions(-)"
-   },
-   {
-    "sha": "6626f8b",
-    "date": "2026-11-05T20:26:06+10:00",
-    "subject": "Add the main menu with its store backdrop, options, controls, credits, the day-1 tutorial, Dale's walk-in and the F3 overlay",
-    "body": "",
-    "stat": "19 files changed, 1498 insertions(+), 58 deletions(-)"
    }
   ],
   "dirty": [
-   " M scripts/autoload/game.gd",
-   " M scripts/ui/pc/app_pricing.gd",
-   " M scripts/ui/price_popup.gd"
+   " M scripts/fixtures/checkout.gd"
   ],
-  "total_commits": 118
+  "total_commits": 119
  },
- "updated": "2026-11-06T20:27:29+10:00",
+ "updated": "2026-11-06T20:27:43+10:00",
  "qa": [
   {
    "num": 1,

@@ -1,17 +1,17 @@
 {
  "generated": "2026-11-06T20:27+10:00",
- "head": "4401ca4",
+ "head": "e08817b",
  "stats": {
-  "commits": 118,
+  "commits": 119,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-06T20:27:27+10:00",
+  "last_commit": "2026-11-06T20:27:36+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 26587,
+  "gd_lines": 26582,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -870,6 +870,11 @@
    "sha": "4401ca4",
    "date": "2026-11-06T20:27:27+10:00",
    "subject": "Award the perfect-change bonus only when there was change to count"
+  },
+  {
+   "sha": "e08817b",
+   "date": "2026-11-06T20:27:36+10:00",
+   "subject": "Let prices follow the market again, price boxed stock, and make the price popup forgiving"
   }
  ],
  "commits_per_hour": [
@@ -987,7 +992,7 @@
   },
   {
    "hour": "2026-11-06T20:00:00+10:00",
-   "commits": 7
+   "commits": 8
   }
  ],
  "sections": [
