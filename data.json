@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-06T21:57+10:00",
- "head": "54d5286",
+ "generated": "2026-11-07T07:48+10:00",
+ "head": "9c37344",
  "stats": {
-  "commits": 140,
+  "commits": 144,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-06T20:52:54+10:00",
+  "last_commit": "2026-11-07T07:47:56+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 27233,
+  "gd_lines": 27304,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -994,6 +994,26 @@
    "sha": "54d5286",
    "date": "2026-11-06T20:52:54+10:00",
    "subject": "Drop the till hint a little further, clear of the clock card at 720p"
+  },
+  {
+   "sha": "41f4c70",
+   "date": "2026-11-07T07:45:14+10:00",
+   "subject": "Keep a till with a queue from being picked up, and send a carried till's queue elsewhere"
+  },
+  {
+   "sha": "5329992",
+   "date": "2026-11-07T07:47:39+10:00",
+   "subject": "Let exact cash wait on the counter until the player takes it"
+  },
+  {
+   "sha": "69bad78",
+   "date": "2026-11-07T07:47:39+10:00",
+   "subject": "Stop bills punishing negative cash, give a short night a way out, and let the store close early"
+  },
+  {
+   "sha": "9c37344",
+   "date": "2026-11-07T07:47:56+10:00",
+   "subject": "Document closing early, the short-night warnings, and the streak reset at the Bank"
   }
  ],
  "commits_per_hour": [
@@ -1112,6 +1132,50 @@
   {
    "hour": "2026-11-06T20:00:00+10:00",
    "commits": 29
+  },
+  {
+   "hour": "2026-11-06T21:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-06T22:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-06T23:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-07T00:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-07T01:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-07T02:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-07T03:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-07T04:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-07T05:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-07T06:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-07T07:00:00+10:00",
+   "commits": 4
   }
  ],
  "sections": [

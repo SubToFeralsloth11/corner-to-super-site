@@ -479,10 +479,11 @@
      "file": "scripts/npc/shopper_brain.gd:419-420 (with scripts/build/build_mode.gd:165-178)",
      "detail": "`BuildMode.pick()` has no customer check. `sell_refusal` refuses with \"Someone is at this till\" (build_mode.gd:241-244), but nothing stops you moving a checkout while people are queued or being served. Build mode can also be opened while the store is OPEN (`enter()` only checks your hands and tool). Once the till is carried, `_checkout_ok()` only checks that it is valid, in the tree and not queued for deletion. It never calls `world.in_use(checkout)`, unlike `_slot_has` at :232. So `_queue_tick` keeps running and `_queue_walk` calls `queue_spot_for()` every tick from the ghost's live `global_transform`. Queued customers walk after the floating till. `Checkout._physics_process` can also `begin()` the front customer and unload items onto the moving counter. Fix: in `pick()`, refuse a `Checkout` with `customer`, a non-empty `queue` or a cashier, the same way `sell_refusal` does. Also add `and shopper.world.in_use(checkout)` to `_checkout_ok()`, so a carried till sends its queue to `_join_queue()`.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:53+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "41f4c70",
+     "note": "customer_test regression (till with queue can't be picked up; carried till's queue moves)",
+     "closed": "2026-11-07T07:47:58+10:00"
     },
     {
      "id": "N2",
@@ -787,10 +788,11 @@
      "file": "scripts/autoload/game.gd:348-354 (also 562-565)",
      "detail": "`complete_sale` adds `sale.net()` to `money` without a floor. `net()` is `charged - over_changed`, and the change tray has no limit (`checkout.gd:681-684` appends any note). So handing over a $100 note by mistake when cash is low, which is common on day 1 after spending the $600 on stock, leaves `money` below zero. In `pay_bills`, `part := mini(money, cents)` is then negative. `b[\"paid\"] = part` stores that negative number, and `unpaid = cents - part` becomes `cents + |money|`. Each of tonight's bills goes overdue at its full amount plus the whole cash deficit, plus 10% on top. With four bills, the deficit is counted four times. The receipt sees `paid < 0`, so it shows no PAID or UNPAID tag. Fix: `var part := clampi(money, 0, int(b[\"cents\"]))` in both loops, and the same in `pay_overdue`.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "69bad78",
+     "note": "loan_test: 8 new checks fail before, pass after",
+     "closed": "2026-11-07T07:47:58+10:00"
     },
     {
      "id": "E2",
@@ -799,10 +801,11 @@
      "file": "scripts/autoload/game.gd:356-363, 435-436; scripts/ui/pc/app_bank.gd:120-123; scripts/ui/day_summary.gd:156; scripts/fixtures/open_sign.gd:78-79",
      "detail": "Only a night that ends with nothing overdue resets `overdue_streak`; paying the debt off at the Bank in the morning does not. The receipt tells the player \"Pay them at the Bank on the PC\", so they clear everything. The Bank then hides the streak, because `_fill_overdue` returns \"Nothing overdue.\" before it draws the warning. If they end that night even 1¢ short, repossession is certain. Holding E on the sign gives no warning. On the receipt the only button is \"Pay all\", and `loan_refusal` returns \"The bank is closed\" in SUMMARY, so they can't borrow to cover it. The run is lost with no chance to react; only the clipboard's red total hints at it. Fix: show the streak in the Bank and the HUD whenever it is above 0. When streak + 1 would reach `repossession_days` and cash is below `bills_due()`, block or confirm End day at the sign. Allow loans in SUMMARY before Pay all. Change the receipt text to \"Clear them and cover tonight's bills, or the bank takes the store on night N\".",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "69bad78",
+     "note": "loan_test: 8 new checks fail before, pass after",
+     "closed": "2026-11-07T07:47:58+10:00"
     },
     {
      "id": "E3",
@@ -919,10 +922,11 @@
      "file": "scripts/fixtures/open_sign.gd:58-62, 74-79",
      "detail": "Once the sign is OPEN it only says \"OPEN until 22:00\", and the clock has no fast-forward. On days 1–3 the four starter kinds sell out by mid-afternoon. The player then waits about 6 real minutes for 1–2 shoppers, which is dead time. Supermarket Simulator lets you flip the sign closed early [UNVERIFIED]. Fix: allow E on the sign during OPEN to go to CLOSING, with a confirm. Optionally allow a hold-to-fast-forward while nobody is in the store.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "69bad78",
+     "note": "loan_test: 8 new checks fail before, pass after",
+     "closed": "2026-11-07T07:47:58+10:00"
     },
     {
      "id": "E13",
@@ -943,10 +947,11 @@
      "file": "scripts/core/bills.gd:81-84",
      "detail": "The daily instalment is $1,643 against an exact $1,642.857, so at k=13 `remaining` is 164,100. `payoff` after hours is `2,000,000·1/14 + roundi(21,428.6)` = 164,286. \"Repay now\" charges $1.86 more than the final instalment it replaces. Fix: `return mini(principal_left(loan) + roundi(...), int(loan[\"remaining\"]))`.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "69bad78",
+     "note": "loan_test: 8 new checks fail before, pass after",
+     "closed": "2026-11-07T07:47:58+10:00"
     },
     {
      "id": "E15",
@@ -967,10 +972,11 @@
      "file": "scripts/ui/day_summary.gd:126-127, 139-140",
      "detail": "`_pay.visible = not r.settled` applies in Sandbox too, so the receipt says \"Sandbox: no bills tonight\" and still shows a Pay all button that must be pressed before Next day. Normal nights are also always Pay all then Next day, with no keyboard shortcut. Fix: auto-settle when `bills_total + overdue_before_total == 0` or in Sandbox; when cash covers everything, merge into one \"Pay and continue\" button; bind Enter/Space.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "69bad78",
+     "note": "loan_test: 8 new checks fail before, pass after",
+     "closed": "2026-11-07T07:47:58+10:00"
     },
     {
      "id": "E17",
@@ -979,10 +985,11 @@
      "file": "scripts/ui/day_summary.gd:124-125, 159-165",
      "detail": "After settling, the `overdue_before` lines are drawn with `paid = -2`, which means no tag and always the warning colour. A fully paid overdue line still shows in red with no PAID tag. Fix: record per-line `paid` on `overdue_before` in `pay_bills` and draw it like tonight's bills.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "69bad78",
+     "note": "loan_test: 8 new checks fail before, pass after",
+     "closed": "2026-11-07T07:47:58+10:00"
     },
     {
      "id": "E18",
@@ -1997,6 +2004,51 @@
    "t": "2026-11-06T21:57:37+10:00",
    "kind": "question",
    "msg": "Question #6 answered: What has been added/fixed and Whats in development right now"
+  },
+  {
+   "t": "2026-11-07T07:47:58+10:00",
+   "kind": "fix",
+   "msg": "R4/N1 fixed 41f4c70 customer_test regression (till with queue can't be picked up; carried till's queue moves)"
+  },
+  {
+   "t": "2026-11-07T07:47:58+10:00",
+   "kind": "fix",
+   "msg": "R5/E1 fixed 69bad78 loan_test: 8 new checks fail before, pass after"
+  },
+  {
+   "t": "2026-11-07T07:47:58+10:00",
+   "kind": "fix",
+   "msg": "R5/E2 fixed 69bad78 loan_test: 8 new checks fail before, pass after"
+  },
+  {
+   "t": "2026-11-07T07:47:58+10:00",
+   "kind": "fix",
+   "msg": "R5/E12 fixed 69bad78 loan_test: 8 new checks fail before, pass after"
+  },
+  {
+   "t": "2026-11-07T07:47:58+10:00",
+   "kind": "fix",
+   "msg": "R5/E14 fixed 69bad78 loan_test: 8 new checks fail before, pass after"
+  },
+  {
+   "t": "2026-11-07T07:47:58+10:00",
+   "kind": "fix",
+   "msg": "R5/E16 fixed 69bad78 loan_test: 8 new checks fail before, pass after"
+  },
+  {
+   "t": "2026-11-07T07:47:58+10:00",
+   "kind": "fix",
+   "msg": "R5/E17 fixed 69bad78 loan_test: 8 new checks fail before, pass after"
+  },
+  {
+   "t": "2026-11-07T07:47:58+10:00",
+   "kind": "agent",
+   "msg": "Agent FixNPC: failed API rate limit (429, retry in ~10 h); lead continues alone"
+  },
+  {
+   "t": "2026-11-07T07:47:58+10:00",
+   "kind": "plan",
+   "msg": "Subagents rate-limited for ~10 h: lead now critiques and fixes alone, one area at a time"
   }
  ],
  "tests": [
@@ -2049,16 +2101,53 @@
    "state": "done",
    "task": "21 findings (3 P1)",
    "t": "2026-11-06T20:56:05+10:00"
+  },
+  "FixNPC": {
+   "state": "failed",
+   "task": "API rate limit (429, retry in ~10 h); lead continues alone",
+   "t": "2026-11-07T07:47:58+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-06T21:57:37+10:00",
-  "mem_free_pct": 51,
-  "load": [],
+  "t": "2026-11-07T07:47:58+10:00",
+  "mem_free_pct": 36,
+  "load": [
+   3.73,
+   5.14,
+   7.29
+  ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "9c37344",
+    "date": "2026-11-07T07:47:56+10:00",
+    "subject": "Document closing early, the short-night warnings, and the streak reset at the Bank",
+    "body": "",
+    "stat": "2 files changed, 11 insertions(+), 6 deletions(-)"
+   },
+   {
+    "sha": "69bad78",
+    "date": "2026-11-07T07:47:39+10:00",
+    "subject": "Stop bills punishing negative cash, give a short night a way out, and let the store close early",
+    "body": "- Bills paid with cash below zero no longer add the deficit to every bill (E1).\n- Clearing every overdue bill at the Bank resets the short-night count; the receipt says how\n  short you are, warns when paying short repossesses, and offers loans before Pay all; the\n  sign's End day prompt warns too (E2).\n- Hold E on the OPEN sign to close early (E12).\n- A loan's payoff never exceeds what is left (E14).\n- A night with nothing to pay settles itself; Enter/Space presses the receipt's button; old\n  overdue lines show PAID/UNPAID after paying (E16, E17).\nReview round 2. loan_test: 8 new checks fail before, pass after.",
+    "stat": "5 files changed, 164 insertions(+), 17 deletions(-)"
+   },
+   {
+    "sha": "5329992",
+    "date": "2026-11-07T07:47:39+10:00",
+    "subject": "Let exact cash wait on the counter until the player takes it",
+    "body": "Closing the sale the moment payment began (when seated) skipped the cash entirely and broke the\nbot and a staff test whenever the random customer paid exact. Taking the cash now closes it,\nand the cash prompt says it is exact. Follow-up to f0e3703 (U2).",
+    "stat": "2 files changed, 15 insertions(+), 8 deletions(-)"
+   },
+   {
+    "sha": "41f4c70",
+    "date": "2026-11-07T07:45:14+10:00",
+    "subject": "Keep a till with a queue from being picked up, and send a carried till's queue elsewhere",
+    "body": "Customers followed a till carried in build mode round the store and could be served at the\nfloating counter. Review round 2, N1.",
+    "stat": "3 files changed, 45 insertions(+), 7 deletions(-)"
+   },
    {
     "sha": "54d5286",
     "date": "2026-11-06T20:52:54+10:00",
@@ -2450,48 +2539,12 @@
     "subject": "Order and stock dairy right after placing the multideck; walk the stock bot round fixtures along the navmesh",
     "body": "",
     "stat": "3 files changed, 47 insertions(+), 6 deletions(-)"
-   },
-   {
-    "sha": "93b6a1f",
-    "date": "2026-11-05T22:48:54+10:00",
-    "subject": "Type the next expansion's cells in the plot map so it draws once every expansion is bought",
-    "body": "",
-    "stat": "1 file changed, 3 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "5c137e1",
-    "date": "2026-11-05T22:48:54+10:00",
-    "subject": "Keep ShopOS app windows above the dock so the Market's bottom row takes clicks; scroll long carts",
-    "body": "",
-    "stat": "3 files changed, 80 insertions(+), 15 deletions(-)"
-   },
-   {
-    "sha": "9a8c523",
-    "date": "2026-11-05T22:48:54+10:00",
-    "subject": "Line the store's brick with the shed's own wall where store col 0 meets the stockroom",
-    "body": "",
-    "stat": "3 files changed, 95 insertions(+), 7 deletions(-)"
-   },
-   {
-    "sha": "106ae36",
-    "date": "2026-11-05T22:48:28+10:00",
-    "subject": "Record the M7 full-suite result",
-    "body": "",
-    "stat": "1 file changed, 3 insertions(+), 2 deletions(-)"
    }
   ],
-  "dirty": [
-   " M scripts/autoload/game.gd",
-   " M scripts/build/build_mode.gd",
-   " M scripts/core/bills.gd",
-   " M scripts/fixtures/open_sign.gd",
-   " M scripts/npc/shopper_brain.gd",
-   " M scripts/ui/day_summary.gd",
-   " M tests/cases/customer_test.gd"
-  ],
-  "total_commits": 140
+  "dirty": [],
+  "total_commits": 144
  },
- "updated": "2026-11-06T21:57:38+10:00",
+ "updated": "2026-11-07T07:48:00+10:00",
  "qa": [
   {
    "num": 1,
