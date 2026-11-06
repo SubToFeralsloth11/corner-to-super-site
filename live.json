@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "R2 (fixer) / R4 next",
   "area": "Shelves, stocking, boxes, pricing",
-  "activity": "R3 closed (16/17 fixed, S3 partly). Spawning R4 customers/NPC critic once fixer finishes",
+  "activity": "Fixer: C6 cap queue lane",
   "cycle": "1",
-  "since": "2026-11-06T20:35:38+10:00"
+  "since": "2026-11-06T20:38:51+10:00"
  },
  "rounds": [
   {
@@ -973,6 +973,11 @@
    "t": "2026-11-06T20:38:32+10:00",
    "kind": "fix",
    "msg": "R2/C10 fixed d956452 Checkout.fetch_from_seat + seated 'Take a pack of X (R)' button; toast no longer says E (which stands you up); new m7_content test_seated_cashier_fetches_smokes_without_standing (smokes 19/0)"
+  },
+  {
+   "t": "2026-11-06T20:38:51+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - Fixer: C6 cap queue lane"
   }
  ],
  "tests": [
@@ -1007,14 +1012,14 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:38:32+10:00",
-  "mem_free_pct": 44,
+  "t": "2026-11-06T20:38:51+10:00",
+  "mem_free_pct": 45,
   "load": [
-   3.32,
-   3.08,
-   2.89
+   3.47,
+   3.12,
+   2.91
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
@@ -1440,12 +1445,14 @@
    }
   ],
   "dirty": [
+   " M data/fixtures.json",
    " M scripts/fixtures/checkout.gd",
+   " M tests/cases/checkout_test.gd",
    " M tests/screenshot_tour.gd"
   ],
   "total_commits": 131
  },
- "updated": "2026-11-06T20:38:32+10:00",
+ "updated": "2026-11-06T20:38:52+10:00",
  "qa": [
   {
    "num": 1,
