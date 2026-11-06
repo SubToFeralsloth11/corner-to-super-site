@@ -1022,6 +1022,11 @@
    "t": "2026-11-06T20:43:39+10:00",
    "kind": "status",
    "msg": "Status: fixing - Fixer: full test suite after R2 checkout fixes"
+  },
+  {
+   "t": "2026-11-06T20:44:17+10:00",
+   "kind": "test",
+   "msg": "Tests: 986 passed, 0 failed after R2 fixes"
   }
  ],
  "tests": [
@@ -1036,6 +1041,12 @@
    "passed": 947,
    "failed": 0,
    "note": "baseline before cycle 1 fixes (tests/run_tests.sh, 30 s)"
+  },
+  {
+   "t": "2026-11-06T20:44:17+10:00",
+   "passed": 986,
+   "failed": 0,
+   "note": "after R2 fixes"
   }
  ],
  "agents": {
@@ -1056,12 +1067,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:43:39+10:00",
+  "t": "2026-11-06T20:44:17+10:00",
   "mem_free_pct": 45,
   "load": [
-   2.13,
-   2.56,
-   2.72
+   2.99,
+   2.73,
+   2.77
   ],
   "godot_procs": 0
  },
@@ -1491,7 +1502,7 @@
   "dirty": [],
   "total_commits": 136
  },
- "updated": "2026-11-06T20:43:39+10:00",
+ "updated": "2026-11-06T20:44:18+10:00",
  "qa": [
   {
    "num": 1,
