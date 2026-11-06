@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "R2 (fixer) / R4 next",
   "area": "Shelves, stocking, boxes, pricing",
-  "activity": "Fixer: C7 queue capacity",
+  "activity": "Fixer: full test suite after R2 checkout fixes",
   "cycle": "1",
-  "since": "2026-11-06T20:42:59+10:00"
+  "since": "2026-11-06T20:43:39+10:00"
  },
  "rounds": [
   {
@@ -1017,6 +1017,11 @@
    "t": "2026-11-06T20:43:33+10:00",
    "kind": "fix",
    "msg": "R2/C7 fixed 7f6ffc0 Checkout.has_room()/in_lane(); shortest_queue prefers tills with room; customers past a full lane wait where they stand instead of stacking on the last spot; new checkout_test test_a_full_lane_sends_newcomers_elsewhere_and_overflow_waits_in_place (4/0), queue tests 15/0"
+  },
+  {
+   "t": "2026-11-06T20:43:39+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - Fixer: full test suite after R2 checkout fixes"
   }
  ],
  "tests": [
@@ -1051,12 +1056,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:43:33+10:00",
+  "t": "2026-11-06T20:43:39+10:00",
   "mem_free_pct": 45,
   "load": [
-   1.97,
-   2.54,
-   2.71
+   2.13,
+   2.56,
+   2.72
   ],
   "godot_procs": 0
  },
@@ -1486,7 +1491,7 @@
   "dirty": [],
   "total_commits": 136
  },
- "updated": "2026-11-06T20:43:33+10:00",
+ "updated": "2026-11-06T20:43:39+10:00",
  "qa": [
   {
    "num": 1,
