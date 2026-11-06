@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T08:03+10:00",
- "head": "66de3c5",
+ "generated": "2026-11-07T08:04+10:00",
+ "head": "7914cd7",
  "stats": {
-  "commits": 150,
+  "commits": 152,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T08:02:36+10:00",
+  "last_commit": "2026-11-07T08:04:27+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 27671,
+  "gd_lines": 27699,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1044,6 +1044,16 @@
    "sha": "66de3c5",
    "date": "2026-11-07T08:02:36+10:00",
    "subject": "Reward visits that go right, free the cap from people walking home, and fix four customer slips"
+  },
+  {
+   "sha": "58eaa5e",
+   "date": "2026-11-07T08:03:56+10:00",
+   "subject": "Name the product that actually ran out in the Sunday review"
+  },
+  {
+   "sha": "7914cd7",
+   "date": "2026-11-07T08:04:27+10:00",
+   "subject": "Show on the receipt how many customers a full store turned away"
   }
  ],
  "commits_per_hour": [
@@ -1209,7 +1219,7 @@
   },
   {
    "hour": "2026-11-07T08:00:00+10:00",
-   "commits": 1
+   "commits": 3
   }
  ],
  "sections": [

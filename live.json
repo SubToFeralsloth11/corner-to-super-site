@@ -910,10 +910,11 @@
      "file": "scripts/npc/customer_spawner.gd:28-31, 37-41",
      "detail": "`pending` arrivals that never got in are silently zeroed at 22:00. They are not recorded as lost sales, not on the receipt, and not in Stats or the newspaper. The player has no way to see that a second till or a bigger cap is what's holding income back. Supermarket Simulator's feedback is about what customers do; here the biggest income limit can't be seen at all. Fix: count `turned_away` in DayReport, show it on the receipt and in Stats (\"23 shoppers gave up at the door, add a till\"), and add a \"left without entering\" bucket to the weekly review.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "7914cd7",
+     "note": "customer_test checks turned_away count at closing",
+     "closed": "2026-11-07T08:04:29+10:00"
     },
     {
      "id": "E11",
@@ -947,10 +948,11 @@
      "file": "scripts/core/weekly_review.gd:45-49, 89-90; scripts/autoload/game.gd:143-146",
      "detail": "`missed` comes from `lost_products`. `_count_lost_sale` adds to that for every reason: out of stock, too expensive and left the queue. `body()` then prints \"%s kept running out\" using the top of that mixed count. A product that was overpriced and never ran out gets named as the stock problem, which is the wrong advice. Fix: keep `lost_products` per reason, or a separate `oos_products`, and name the out-of-stock leader there.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "58eaa5e",
+     "note": "additions_test: overpriced CHIPZ no longer blamed for running out",
+     "closed": "2026-11-07T08:04:29+10:00"
     },
     {
      "id": "E14",
@@ -2248,6 +2250,16 @@
    "t": "2026-11-07T08:03:13+10:00",
    "kind": "question",
    "msg": "Question #6 answered: What has been added/fixed and Whats in development right now"
+  },
+  {
+   "t": "2026-11-07T08:04:29+10:00",
+   "kind": "fix",
+   "msg": "R5/E13 fixed 58eaa5e additions_test: overpriced CHIPZ no longer blamed for running out"
+  },
+  {
+   "t": "2026-11-07T08:04:29+10:00",
+   "kind": "fix",
+   "msg": "R5/E10 fixed 7914cd7 customer_test checks turned_away count at closing"
   }
  ],
  "tests": [
@@ -2331,17 +2343,31 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T08:03:15+10:00",
+  "t": "2026-11-07T08:04:29+10:00",
   "mem_free_pct": 47,
   "load": [
-   2.47,
-   2.81,
-   4.36
+   3.7,
+   3.07,
+   4.32
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "7914cd7",
+    "date": "2026-11-07T08:04:27+10:00",
+    "subject": "Show on the receipt how many customers a full store turned away",
+    "body": "Arrivals held back by the in-store cap were dropped silently at closing, so the player never\nlearned that another till or cashier would have earned more. Review round 2, E10.",
+    "stat": "5 files changed, 20 insertions(+), 2 deletions(-)"
+   },
+   {
+    "sha": "58eaa5e",
+    "date": "2026-11-07T08:03:56+10:00",
+    "subject": "Name the product that actually ran out in the Sunday review",
+    "body": "'Kept running out' used the top of all lost sales, so an overpriced product that never ran out\nwas blamed. Out-of-stock misses are now counted (and saved) on their own. Review round 2, E13.",
+    "stat": "4 files changed, 15 insertions(+), 5 deletions(-)"
+   },
    {
     "sha": "66de3c5",
     "date": "2026-11-07T08:02:36+10:00",
@@ -2747,26 +2773,12 @@
     "subject": "Keep the deli corner clear in build mode once E7 is built, and place licence furniture only where it fits, asking the player to clear the spot",
     "body": "",
     "stat": "3 files changed, 97 insertions(+), 17 deletions(-)"
-   },
-   {
-    "sha": "82f9a11",
-    "date": "2026-11-06T01:51:55+10:00",
-    "subject": "Record the round-1 review additions in PROGRESS",
-    "body": "",
-    "stat": "1 file changed, 57 insertions(+)"
-   },
-   {
-    "sha": "e9e336b",
-    "date": "2026-11-06T01:31:04+10:00",
-    "subject": "Add the round-1 review additions: catch boxes from the van, rare misfires that set off a car alarm, the store phone, the My Store look app, Sunday's newspaper review and the rival's sale week",
-    "body": "",
-    "stat": "42 files changed, 2080 insertions(+), 64 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 150
+  "total_commits": 152
  },
- "updated": "2026-11-07T08:03:15+10:00",
+ "updated": "2026-11-07T08:04:29+10:00",
  "qa": [
   {
    "num": 1,
