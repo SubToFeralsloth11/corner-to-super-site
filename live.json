@@ -531,10 +531,11 @@
      "file": "scripts/npc/shopper.gd:31-32; scripts/npc/walker.gd:1-4; scripts/player/player.gd:99",
      "detail": "This confirms the lead. `collision_mask = Mk.LAYER_WORLD` for shoppers, and staff and Dale do the same. The ARCHITECTURE doc says this is deliberate (\"people pass through each other\"). Everyone walks to the exact same `DOOR_IN` point, the exact same stand point for a slot, and one of two spawn points. The spawner's `while pending` loop (customer_spawner.gd:41-43) can spawn several customers in one frame at the same `EXITS` point, so they walk the same path inside each other. The player's mask includes `LAYER_NPCS`, so it is one-sided. Customers walk into your capsule, and the physics probably pushes you out when you next move [INFERENCE: Jolt depenetration]. Meanwhile someone picking an item, or an overflow queuer told to \"wait where they are\" for up to 90 s, blocks your way down a 1 m aisle completely. Fix: add `LAYER_NPCS | LAYER_PLAYER` to the walker mask. Use navmesh avoidance (`NavigationServer3D` agents with `velocity_computed`) or a cheap separation steer. Spread out stand points and `DOOR_IN` per customer, and space out spawns.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:53+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "5eefcd6",
+     "note": "nav_test: head-on walkers keep >0.35 m and still arrive; windowed tour ran clean",
+     "closed": "2026-11-07T08:20:03+10:00"
     },
     {
      "id": "N6",
@@ -1160,6 +1161,61 @@
      "commit": "017be96",
      "note": "build_test regressions fail before, pass after; full suite 1019/0",
      "closed": "2026-11-07T07:59:44+10:00"
+    }
+   ]
+  },
+  {
+   "id": "R7",
+   "area": "Staff (cashier, restocker, cleaner)",
+   "started": "2026-11-07T08:20:03+10:00",
+   "finished": null,
+   "findings": [
+    {
+     "id": "T1",
+     "sev": "P3",
+     "title": "Restocker stands idle with no explanation when there are no racked boxes",
+     "file": "scripts/npc/restocker_job.gd",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T08:20:03+10:00",
+     "commit": "fdd9e9f",
+     "note": "status explains",
+     "closed": "2026-11-07T08:20:03+10:00"
+    }
+   ]
+  },
+  {
+   "id": "R8",
+   "area": "Delivery van, Market PC, orders",
+   "started": "2026-11-07T08:20:03+10:00",
+   "finished": null,
+   "findings": [
+    {
+     "id": "M1",
+     "sev": "P2",
+     "title": "Market Order button greys out with no reason when the cart is over your cash",
+     "file": "scripts/ui/pc/app_market.gd:218",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T08:20:03+10:00",
+     "commit": "cfa35ef",
+     "note": "shortfall note",
+     "closed": "2026-11-07T08:20:03+10:00"
+    },
+    {
+     "id": "M2",
+     "sev": "P3",
+     "title": "Market adds one box per click only",
+     "file": "scripts/ui/pc/app_market.gd:163",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T08:20:03+10:00",
+     "commit": "cfa35ef",
+     "note": "Shift = 5 boxes",
+     "closed": "2026-11-07T08:20:03+10:00"
     }
    ]
   }
@@ -2374,6 +2430,51 @@
    "t": "2026-11-07T08:12:13+10:00",
    "kind": "test",
    "msg": "Tests: 1034 passed, 0 failed after customer behaviour batch"
+  },
+  {
+   "t": "2026-11-07T08:20:03+10:00",
+   "kind": "fix",
+   "msg": "R4/N5 fixed 5eefcd6 nav_test: head-on walkers keep >0.35 m and still arrive; windowed tour ran clean"
+  },
+  {
+   "t": "2026-11-07T08:20:03+10:00",
+   "kind": "round",
+   "msg": "Round R7 started: Staff (cashier, restocker, cleaner)"
+  },
+  {
+   "t": "2026-11-07T08:20:03+10:00",
+   "kind": "finding",
+   "msg": "R7/T1 [P3] Restocker stands idle with no explanation when there are no racked boxes"
+  },
+  {
+   "t": "2026-11-07T08:20:03+10:00",
+   "kind": "fix",
+   "msg": "R7/T1 fixed fdd9e9f status explains"
+  },
+  {
+   "t": "2026-11-07T08:20:03+10:00",
+   "kind": "round",
+   "msg": "Round R8 started: Delivery van, Market PC, orders"
+  },
+  {
+   "t": "2026-11-07T08:20:03+10:00",
+   "kind": "finding",
+   "msg": "R8/M1 [P2] Market Order button greys out with no reason when the cart is over your cash"
+  },
+  {
+   "t": "2026-11-07T08:20:03+10:00",
+   "kind": "finding",
+   "msg": "R8/M2 [P3] Market adds one box per click only"
+  },
+  {
+   "t": "2026-11-07T08:20:03+10:00",
+   "kind": "fix",
+   "msg": "R8/M1 fixed cfa35ef shortfall note"
+  },
+  {
+   "t": "2026-11-07T08:20:03+10:00",
+   "kind": "fix",
+   "msg": "R8/M2 fixed cfa35ef Shift = 5 boxes"
   }
  ],
  "tests": [
@@ -2475,17 +2576,38 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T08:12:13+10:00",
-  "mem_free_pct": 42,
+  "t": "2026-11-07T08:20:03+10:00",
+  "mem_free_pct": 28,
   "load": [
-   2.8,
-   2.66,
-   3.53
+   2.22,
+   2.41,
+   3.02
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "cfa35ef",
+    "date": "2026-11-07T08:19:56+10:00",
+    "subject": "Say why Order is greyed out, and let Shift add or remove five boxes in the Market",
+    "body": "",
+    "stat": "1 file changed, 14 insertions(+), 3 deletions(-)"
+   },
+   {
+    "sha": "fdd9e9f",
+    "date": "2026-11-07T08:19:56+10:00",
+    "subject": "Say why a restocker stands idle: no boxes on the stockroom racks",
+    "body": "",
+    "stat": "1 file changed, 3 insertions(+)"
+   },
+   {
+    "sha": "5eefcd6",
+    "date": "2026-11-07T08:19:56+10:00",
+    "subject": "Make walkers keep personal space and pass head-on to the right",
+    "body": "Customers and staff walked straight through each other and through the player. A light\nseparation steer (0.7 m, plus keep-right for anyone just ahead) keeps them apart without\nchanging their paths. Review round 2, N5.",
+    "stat": "2 files changed, 71 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "e9d5269",
     "date": "2026-11-07T08:12:11+10:00",
@@ -2884,33 +3006,22 @@
     "subject": "Cut the full store's draw calls: one shadowless MultiMesh per slot, batched troffers, price labels drawn only up close",
     "body": "Stock no longer casts sun shadows (it sits inside its fixture under the roof) and each slot\ndraws all its rows in one MultiMesh, leaving distant stock to the import LODs; the ceiling\ntroffers are one MultiMesh per part; price label text stops drawing past 10 m and the card\npast 20 m. The full-store tour now records CPU per frame by the wall clock and a headless\ndraw estimate (frustum + visibility ranges, shadow casters).",
     "stat": "7 files changed, 128 insertions(+), 31 deletions(-)"
-   },
-   {
-    "sha": "f9ea641",
-    "date": "2026-11-06T04:14:06+10:00",
-    "subject": "Record the round-1 review fixes in PROGRESS, with the windowed checks still to do",
-    "body": "",
-    "stat": "1 file changed, 42 insertions(+)"
-   },
-   {
-    "sha": "2ddbc82",
-    "date": "2026-11-06T04:14:06+10:00",
-    "subject": "Re-route walking NPCs when a fixture moves or the navmesh is rebaked, and wait instead of walking through walls when there is no route",
-    "body": "Review #17. Shoppers also work out their stand point or queue spot again. Nav.path is empty\nwith no navmesh or from more than 0.6 m off it; the walker asks again every 0.5 s and after 3 s\nhops to the nearest navmesh point (PLAN.md). The nav region and map now sync on the physics\nframe, and rebaked fires once the map uses the new mesh (it fired a sync early before).",
-    "stat": "7 files changed, 287 insertions(+), 21 deletions(-)"
-   },
-   {
-    "sha": "fe4e7ca",
-    "date": "2026-11-06T02:11:37+10:00",
-    "subject": "Send game-over New game through the menu's slot picker so the autosave isn't replaced unasked, and fix two tutorial instructions",
-    "body": "",
-    "stat": "2 files changed, 7 insertions(+), 3 deletions(-)"
    }
   ],
-  "dirty": [],
-  "total_commits": 157
+  "dirty": [
+   " M data/products.json",
+   " M docs/ARCHITECTURE.md",
+   " M docs/ECONOMY.md",
+   " M scripts/autoload/catalog.gd",
+   " M scripts/entities/held_item.gd",
+   " M scripts/entities/stock_box.gd",
+   " M scripts/fixtures/slot.gd",
+   " M scripts/npc/shopper_carry.gd",
+   " M tests/cases/stock_test.gd"
+  ],
+  "total_commits": 160
  },
- "updated": "2026-11-07T08:12:13+10:00",
+ "updated": "2026-11-07T08:20:04+10:00",
  "qa": [
   {
    "num": 1,
