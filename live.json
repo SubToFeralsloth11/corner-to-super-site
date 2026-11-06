@@ -858,6 +858,11 @@
    "t": "2026-11-06T20:29:01+10:00",
    "kind": "status",
    "msg": "Status: fixing - Fixer: C9 till targets sit you down"
+  },
+  {
+   "t": "2026-11-06T20:32:01+10:00",
+   "kind": "question",
+   "msg": "Question #5 answering: What have the current suggestions/things going to be added to the game been so far"
   }
  ],
  "tests": [
@@ -892,14 +897,10 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:29:01+10:00",
-  "mem_free_pct": 52,
-  "load": [
-   2.37,
-   2.46,
-   2.69
-  ],
-  "godot_procs": 0
+  "t": "2026-11-06T20:32:01+10:00",
+  "mem_free_pct": 47,
+  "load": [],
+  "godot_procs": 4
  },
  "game": {
   "commits": [
@@ -1325,16 +1326,24 @@
    }
   ],
   "dirty": [
+   " M scripts/core/stock_math.gd",
    " M scripts/entities/player.gd",
    " M scripts/entities/stock_box.gd",
    " M scripts/fixtures/checkout.gd",
+   " M scripts/fixtures/pos.gd",
+   " M scripts/fixtures/price_label.gd",
+   " M scripts/fixtures/slot.gd",
    " M scripts/fixtures/storage_rack.gd",
    " M scripts/fixtures/till_target.gd",
-   " M tests/cases/checkout_test.gd"
+   " M scripts/npc/restocker_job.gd",
+   " M scripts/ui/card_keypad.gd",
+   " M scripts/ui/change_panel.gd",
+   " M tests/cases/checkout_test.gd",
+   " M tests/cases/stock_test.gd"
   ],
   "total_commits": 121
  },
- "updated": "2026-11-06T20:29:02+10:00",
+ "updated": "2026-11-06T20:32:03+10:00",
  "qa": [
   {
    "num": 1,
@@ -1367,6 +1376,14 @@
    "answer": "The loop has run two critique rounds so far and logged **34 findings**. 8 are fixed and 26 are open. It is currently in round R3, fixing C11.\n\n### R2: Checkout, payment, change, till (17 findings, 5 fixed)\n**Fixed**\n- **C1 (P1):** pressing E at the till sat you down and stood you back up on the same keypress. Fixed in `63fb369`.\n- **C2 (P1):** cigarettes (\"Smokes\") only sold at the till next to the cigarette wall. Other tills booked them as out of stock. Fixed in `72f2b03`.\n- **C3 (P1):** if you scanned the last item within 0.35 s, the game skipped asking about Smokes and the customer's request disappeared. Fixed in `0e86b99`.\n- **C4 (P2):** the queue-wait penalty and the \"queue isn't moving\" complaint kept running while the customer was being served. Fixed in `18bfd25`.\n- **C11 (P3):** the +10 XP for perfect change was free when the customer paid the exact amount. Marked fixed in `4401ca4`; the loop is still working on it.\n\n**Open**\n- **Queues:**\n  - C5: customers never leave an unattended queue for a till with a cashier.\n  - C6: the queue runs past its lane into the shelving.\n  - C7: the overflow queue piles everyone onto one spot.\n  - C8: trolley spacing is backwards, and the trolley swings into the counter.\n- **Till usability:**\n  - C9: aiming at the POS, card reader or cash outside a payment does nothing and doesn't offer to sit.\n  - C10: fetching Smokes while seated takes 5 steps, and the hint tells you to press the key that stands you up.\n  - C14: pressing OK on the keypad after \".\" or \"0\" declines the payment and costs satisfaction.\n- **Cosmetic and messages:**\n  - C12: the cash prompt is out of date.\n  - C13: the \"I'm still owed\" message stays after you fix the count.\n  - C15: the POS clock is blank all morning, and every till says REG 1.\n  - C16: the bag vanishes mid-air.\n- **Code:**\n  - C17: duplicate cashier check.\n\n### R3: Shelves, stocking, boxes, pricing (17 findings, 3 fixed)\n**Fixed**\n- **S1 (P1):** chest-freezer stock stacked up through the glass lid. Fixed in `f9b156b`.\n- **S4 (P2):** chest-freezer price labels were hidden inside the cabinet. Also fixed in `f9b156b`.\n- **S2 (P1):** saving during PREP made the box a restocker was carrying vanish. Fixed in `f05587a`.\n\n**Open, notable ones**\n- **S3:** shelf slots hold too little. Cans are twice their real size, toilet paper fits 1 per slot, and pizza fits 0 in the chest freezer.\n- **S5:** \"Market price\" and \"All to market\" fix the price for good, with no way to go back to following the market.\n- **S6:** you can't put items back into an empty box of a different product.\n- **S7:** pressing E with a box in hand tears it open at the PC, till or sign. Cooler doors also stay open after stocking.\n- **S8:** the price popup field isn't focused, bad input fails silently, and comma decimals aren't accepted.\n- **S9:** racks keep empty boxes for good, and the rack prompt is wrong when you hold the mop.\n- **S14:** restockers stock coolers and freezers through closed doors.\n- **S16:** the pricing app only lists products that are already on a shelf.\n- **S17:** the price popup doesn't warn you when a price is high enough that every customer will refuse it.\n\n**Smaller open ones**\n- S10: the box-opening delay carries over between boxes.\n- S11: the SPECIAL label threshold is set in code instead of read from `customers.json`.\n- S12: a box keeps the same weight as it empties.\n- S13: the slot highlight mesh is rebuilt every frame.\n- S15: the price +/- steps leave odd cents, and the label shows no unit info.\n\nP1 is the most severe. Everything here comes from the `rounds` list in `corner-to-super-site/live.json`, which has no R1 entry.",
    "state": "answered",
    "t": "2026-11-06T20:27:53+10:00"
+  },
+  {
+   "num": 5,
+   "title": "What have the current suggestions/things going to be added to the game been so far",
+   "question": "",
+   "answer": "",
+   "state": "answering",
+   "t": "2026-11-06T20:32:01+10:00"
   }
  ]
 }
