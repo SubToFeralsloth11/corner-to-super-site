@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "R2 (fixer) / R4 next",
   "area": "Shelves, stocking, boxes, pricing",
-  "activity": "Fixer: C6 cap queue lane",
+  "activity": "Fixer: C7 queue capacity",
   "cycle": "1",
-  "since": "2026-11-06T20:38:51+10:00"
+  "since": "2026-11-06T20:42:59+10:00"
  },
  "rounds": [
   {
@@ -1006,6 +1006,11 @@
    "t": "2026-11-06T20:42:17+10:00",
    "kind": "fix",
    "msg": "R2/C5 fixed b16ea41 every 2.5 s a customer queued at an unattended till switches to an attended one where queue_length <= their index (keeps queue_time); GDD updated; new checkout_test test_customers_move_to_a_till_someone_opens (2/0)"
+  },
+  {
+   "t": "2026-11-06T20:42:59+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - Fixer: C7 queue capacity"
   }
  ],
  "tests": [
@@ -1040,12 +1045,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:42:17+10:00",
+  "t": "2026-11-06T20:42:59+10:00",
   "mem_free_pct": 45,
   "load": [
-   2.26,
-   2.78,
-   2.81
+   1.76,
+   2.59,
+   2.74
   ],
   "godot_procs": 0
  },
@@ -1472,10 +1477,15 @@
     "stat": "1 file changed, 6 insertions(+), 1 deletion(-)"
    }
   ],
-  "dirty": [],
+  "dirty": [
+   " M scripts/fixtures/checkout.gd",
+   " M scripts/npc/shopper_brain.gd",
+   " M scripts/world/world.gd",
+   " M tests/cases/checkout_test.gd"
+  ],
   "total_commits": 135
  },
- "updated": "2026-11-06T20:42:17+10:00",
+ "updated": "2026-11-06T20:43:00+10:00",
  "qa": [
   {
    "num": 1,
