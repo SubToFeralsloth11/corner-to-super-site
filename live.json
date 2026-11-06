@@ -1469,10 +1469,11 @@
      "file": "scripts/entities/player.gd:651-684 (with fixtures/open_sign.gd:96-97)",
      "detail": "In PREP the sign's hold time is 0, so the E press opens the store at once through `_try_instant_interact` (`Game.open_store`). On the same held press, `_update_hold_interact` reads the hold time again. The phase is now OPEN, so it reads 0.6 s, and `_hold_lock` is still false, so the hold keeps counting. After 0.6 s it calls `interact`, which runs `Game.close_early()`. That means a press of about 0.7 s flips the sign twice and throws away the whole trading day, with no confirm and no undo. The tutorial teaches \"hold E on the sign to end the day\", so players will hold E here. Fix: set `_hold_lock = true` after any instant interact (and after `try_catch`), so a hold needs a fresh press. Also consider a confirm before closing early if it is before about 12:00.",
      "by": "CritPlayer",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:40:30+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "d4b2342",
+     "note": "day_test: 1.5 s press stays OPEN; failed before (CLOSING)",
+     "closed": "2026-11-07T09:41:09+10:00"
     },
     {
      "id": "Y2",
@@ -3315,6 +3316,11 @@
    "t": "2026-11-07T09:40:31+10:00",
    "kind": "agent",
    "msg": "Agent CritPlayer: done 15 findings (2 P1)"
+  },
+  {
+   "t": "2026-11-07T09:41:09+10:00",
+   "kind": "fix",
+   "msg": "C2/Y1 fixed d4b2342 day_test: 1.5 s press stays OPEN; failed before (CLOSING)"
   }
  ],
  "tests": [
@@ -3456,17 +3462,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:40:31+10:00",
+  "t": "2026-11-07T09:41:09+10:00",
   "mem_free_pct": 37,
   "load": [
-   2.89,
-   3.74,
-   3.96
+   2.33,
+   3.49,
+   3.86
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "d4b2342",
+    "date": "2026-11-07T09:41:08+10:00",
+    "subject": "Stop one held E from opening the store and then closing it early",
+    "body": "An instant interact (or a catch) left the hold timer free, so holding E on the CLOSED sign\nopened the store and 0.6 s later closed it for the day. The press is now spent. Review round 2,\nY1.",
+    "stat": "2 files changed, 27 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "e1fd948",
     "date": "2026-11-07T09:34:25+10:00",
@@ -3879,19 +3892,12 @@
     "subject": "Let products without a printed front stand turned on a shelf when that holds more",
     "body": "Toilet paper fit one roll pack per gondola slot; with 'turnable' it fits two. Bananas,\ncarrots and roast chickens gain 33-50%. Printed packs still face the customer. Can and bag\nsizes themselves are left for an asset pass. Review round 2, S3 (part).",
     "stat": "5 files changed, 37 insertions(+), 10 deletions(-)"
-   },
-   {
-    "sha": "a37e5ec",
-    "date": "2026-11-06T20:35:31+10:00",
-    "subject": "Read the SPECIAL label threshold from customers.json bargain_ratio",
-    "body": "The label hard-coded 85% while customers decide bargains from data. Review round 2, S11.",
-    "stat": "1 file changed, 3 insertions(+), 3 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 182
+  "total_commits": 183
  },
- "updated": "2026-11-07T09:40:32+10:00",
+ "updated": "2026-11-07T09:41:10+10:00",
  "qa": [
   {
    "num": 1,
