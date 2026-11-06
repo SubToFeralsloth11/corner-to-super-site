@@ -1557,10 +1557,11 @@
      "file": "scripts/entities/player.gd:566-569,581-597,531,602-611",
      "detail": "`_door_fx` holds only one fixture. If you stock cooler A and then start on cooler B within 1 s, `_door_fx` becomes B and A is never closed. Customers only close doors they opened themselves. `take_back_one` never calls `open_door`, so items come out through shut glass; S14 fixed the same problem for restockers. Also, `_update_box` returns on `locked` before `_close_idle_door`, so sitting at the PC or till straight after stocking leaves the door open. Fix: before switching to a new fixture, close the old `_door_fx`. Call `slot.fixture.open_door(...)` and set `_door_fx` in `take_back_one`. Run `_close_idle_door` before the `locked` return.",
      "by": "CritPlayer",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:40:30+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "22aae8b",
+     "note": "stock tests 87/87",
+     "closed": "2026-11-07T09:44:37+10:00"
     },
     {
      "id": "Y9",
@@ -3350,6 +3351,11 @@
    "t": "2026-11-07T09:43:35+10:00",
    "kind": "fix",
    "msg": "C2/Y9 fixed 92519bd rows added"
+  },
+  {
+   "t": "2026-11-07T09:44:37+10:00",
+   "kind": "fix",
+   "msg": "C2/Y8 fixed 22aae8b stock tests 87/87"
   }
  ],
  "tests": [
@@ -3491,17 +3497,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:43:35+10:00",
+  "t": "2026-11-07T09:44:37+10:00",
   "mem_free_pct": 35,
   "load": [
-   2.43,
-   3.18,
-   3.68
+   2.53,
+   3.06,
+   3.6
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "22aae8b",
+    "date": "2026-11-07T09:44:35+10:00",
+    "subject": "Shut the previous cooler when stocking the next, open the case when taking stock back, and shut it when you sit down",
+    "body": "Review round 2, Y8.",
+    "stat": "1 file changed, 14 insertions(+), 4 deletions(-)"
+   },
    {
     "sha": "92519bd",
     "date": "2026-11-07T09:43:34+10:00",
@@ -3914,19 +3927,12 @@
     "subject": "Treat OK on an empty or zero card amount as a misclick, not a decline",
     "body": "",
     "stat": "2 files changed, 23 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "ba4975c",
-    "date": "2026-11-06T20:37:15+10:00",
-    "subject": "Clear the change panel's 'still owed' line once the tray is right",
-    "body": "",
-    "stat": "2 files changed, 36 insertions(+), 3 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 186
+  "total_commits": 187
  },
- "updated": "2026-11-07T09:43:36+10:00",
+ "updated": "2026-11-07T09:44:38+10:00",
  "qa": [
   {
    "num": 1,
