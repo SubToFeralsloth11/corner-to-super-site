@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-06T20:27+10:00",
- "head": "8aebda2",
+ "generated": "2026-11-06T20:28+10:00",
+ "head": "cb5ee4a",
  "stats": {
-  "commits": 120,
+  "commits": 121,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-06T20:27:48+10:00",
+  "last_commit": "2026-11-06T20:28:15+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 26582,
+  "gd_lines": 26587,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -880,6 +880,11 @@
    "sha": "8aebda2",
    "date": "2026-11-06T20:27:48+10:00",
    "subject": "Drop Checkout.is_attended_by_staff for has_cashier"
+  },
+  {
+   "sha": "cb5ee4a",
+   "date": "2026-11-06T20:28:15+10:00",
+   "subject": "Say the cash is in the drawer once it has been taken"
   }
  ],
  "commits_per_hour": [
@@ -997,7 +1002,7 @@
   },
   {
    "hour": "2026-11-06T20:00:00+10:00",
-   "commits": 9
+   "commits": 10
   }
  ],
  "sections": [

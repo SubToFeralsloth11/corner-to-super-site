@@ -158,10 +158,11 @@
      "file": "checkout.gd:557",
      "detail": "",
      "by": "CritCheckout",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:22:44+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "cb5ee4a",
+     "note": "cash target prompt reads 'Cash $X is in the drawer / [LMB] Count the change' while drawer.is_open(); check.sh clean",
+     "closed": "2026-11-06T20:28:17+10:00"
     },
     {
      "id": "C13",
@@ -847,6 +848,11 @@
    "t": "2026-11-06T20:27:53+10:00",
    "kind": "question",
    "msg": "Question #4 answered: What have the criticises or improvement suggested for the game so far?"
+  },
+  {
+   "t": "2026-11-06T20:28:17+10:00",
+   "kind": "fix",
+   "msg": "R2/C12 fixed cb5ee4a cash target prompt reads 'Cash $X is in the drawer / [LMB] Count the change' while drawer.is_open(); check.sh clean"
   }
  ],
  "tests": [
@@ -881,13 +887,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:27:53+10:00",
+  "t": "2026-11-06T20:28:17+10:00",
   "mem_free_pct": 53,
-  "load": [],
+  "load": [
+   2.72,
+   2.53,
+   2.72
+  ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "cb5ee4a",
+    "date": "2026-11-06T20:28:15+10:00",
+    "subject": "Say the cash is in the drawer once it has been taken",
+    "body": "",
+    "stat": "1 file changed, 6 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "8aebda2",
     "date": "2026-11-06T20:27:48+10:00",
@@ -1300,19 +1317,12 @@
     "subject": "Run delayed box and dust-puff callbacks from node tweens, not timer lambdas",
     "body": "",
     "stat": "2 files changed, 5 insertions(+), 7 deletions(-)"
-   },
-   {
-    "sha": "1bf9648",
-    "date": "2026-11-05T21:47:40+10:00",
-    "subject": "Add the M4 progression tour and document M4: drift, licences, apps, cleanliness, mop",
-    "body": "",
-    "stat": "10 files changed, 338 insertions(+), 9 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 120
+  "total_commits": 121
  },
- "updated": "2026-11-06T20:27:53+10:00",
+ "updated": "2026-11-06T20:28:18+10:00",
  "qa": [
   {
    "num": 1,
