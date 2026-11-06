@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T08:39+10:00",
- "head": "56ef26f",
+ "generated": "2026-11-07T08:40+10:00",
+ "head": "cbbc78e",
  "stats": {
-  "commits": 164,
+  "commits": 171,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T08:24:36+10:00",
+  "last_commit": "2026-11-07T08:40:22+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 28224,
+  "gd_lines": 28245,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -292,6 +292,13 @@
    "title": "Review round 2: checkout (2026-11-06, FixCheckout)",
    "text": "New section in PROGRESS.md (4e7a26b).",
    "progress": "Review round 2: checkout (2026-11-06, FixCheckout)"
+  },
+  {
+   "date": "2026-11-07T08:40:22+10:00",
+   "kind": "milestone",
+   "title": "Review round 2: everything else (2026-11-06/07, lead)",
+   "text": "New section in PROGRESS.md (cbbc78e).",
+   "progress": "Review round 2: everything else (2026-11-06/07, lead)"
   }
  ],
  "commits": [
@@ -1114,6 +1121,41 @@
    "sha": "56ef26f",
    "date": "2026-11-07T08:24:36+10:00",
    "subject": "Tell new players how to actually serve: sit with E, click to scan, click the cash"
+  },
+  {
+   "sha": "24860bb",
+   "date": "2026-11-07T08:40:22+10:00",
+   "subject": "Only hold a customer back at an unserved till when the served till is free to take them"
+  },
+  {
+   "sha": "712c877",
+   "date": "2026-11-07T08:40:22+10:00",
+   "subject": "Park the trolley beside a shopper at the shelf, and take baskets from the stand"
+  },
+  {
+   "sha": "b2de54c",
+   "date": "2026-11-07T08:40:22+10:00",
+   "subject": "Give Dale a straight-line fallback and stuck recovery on his walk"
+  },
+  {
+   "sha": "f67737d",
+   "date": "2026-11-07T08:40:22+10:00",
+   "subject": "Book cost of goods at what the stock cost, not today's drifted cost"
+  },
+  {
+   "sha": "cddb516",
+   "date": "2026-11-07T08:40:22+10:00",
+   "subject": "Move the Sunday review's sentences into events.json as the class doc promised"
+  },
+  {
+   "sha": "b0c668d",
+   "date": "2026-11-07T08:40:22+10:00",
+   "subject": "Add invert Y, head bob and fullscreen to Options"
+  },
+  {
+   "sha": "cbbc78e",
+   "date": "2026-11-07T08:40:22+10:00",
+   "subject": "Record review round 2 in PROGRESS"
   }
  ],
  "commits_per_hour": [
@@ -1279,7 +1321,7 @@
   },
   {
    "hour": "2026-11-07T08:00:00+10:00",
-   "commits": 15
+   "commits": 22
   }
  ],
  "sections": [

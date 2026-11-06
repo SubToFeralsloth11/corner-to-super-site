@@ -544,10 +544,11 @@
      "file": "scripts/npc/shopper.gd:14; scripts/npc/shopper_brain.gd:14,149-152,266",
      "detail": "The trolley sits at `TROLLEY_OFFSET` (0, 0, −0.78), in front of the body. The checkout code says it sticks out about 0.9 m. The stand point is only `REACH_STAND` = 0.6 m from the slot front, and `_reach_in` turns the body to face the shelf. The trolley's origin ends up about 0.18 m inside the fixture, with most of its length inside. Paths are planned for a 0.3 m agent radius, so the trolley also cuts through shelf ends at every turn. R2's C8 fixed this only at the till. Fix: trolley users stop beside the shelf. Leave the trolley at the stand point lined up with the aisle (`top_level`), and face the shelf from beside it. Or add the trolley length to the stand distance and to a larger nav radius for trolley customers.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:53+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "712c877",
+     "note": "trolley parked beside at the shelf; suite 1039/0",
+     "closed": "2026-11-07T08:40:29+10:00"
     },
     {
      "id": "N7",
@@ -647,10 +648,11 @@
      "file": "scripts/npc/shopper_brain.gd:88-91,430-432; scripts/npc/shopper.gd:101-111",
      "detail": "`take_carrier()` makes a basket appear in the hand at `DOOR_IN`, 1.75 m from `BASKET_STAND_POS`, with no reach animation; GDD §6 says baskets come from the stand. At payment the basket is `queue_free()`d in front of the cashier. Customers who bought nothing (`_next_item` → `leave()`) carry the store's empty basket off the plot. Fix: path to the stand and play `Interact` there. At the till, put the basket into a stack on the counter end. On an empty-handed leave, drop it back on the stand.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:53+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "712c877",
+     "note": "basket from the stand, unused basket returned",
+     "closed": "2026-11-07T08:40:29+10:00"
     },
     {
      "id": "N15",
@@ -788,10 +790,11 @@
      "file": "scripts/npc/dale.gd:1,154-171",
      "detail": "`Dale extends CharacterBody3D` and repeats `_go` / `_follow` / `_idle` with none of Walker's no-path retry, stuck detection or re-planning when the layout changes. If `nav.path` returns empty, for example when he is more than 0.6 m off the navmesh, `_follow` returns true at once. In LEAVE that means he disappears in front of the player. Fix: make Dale extend `Walker` (`go_to`, `follow`, `face`) and keep only his scripted stages.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:54+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "b2de54c",
+     "note": "straight-line fallback + stuck hop",
+     "closed": "2026-11-07T08:40:29+10:00"
     }
    ]
   },
@@ -988,10 +991,11 @@
      "file": "scripts/fixtures/checkout.gd:731 (`sale.cost += Game.cost_of(...)`)",
      "detail": "Cost of goods sold uses the drifted cost on the day of sale. Costs drift up to ±15%, so stock bought cheap and sold on an expensive day shows less profit than was really made, and the reverse. A player who times orders for cheap days never sees the gain on the receipt or in Stats. Fix: carry the purchase cost per box or slot (average cost) and book that on sale.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "f67737d",
+     "note": "day_test: cost basis average",
+     "closed": "2026-11-07T08:40:29+10:00"
     },
     {
      "id": "E16",
@@ -1052,10 +1056,11 @@
      "file": "scripts/core/weekly_review.gd:6, 80-99",
      "detail": "The class doc says \"Numbers and words in data/events.json review\", yet every body sentence (\"%d customers came through…\", \"kept running out\", \"gave up waiting at the till\", the zero-customer line) is a GDScript literal. Fix: move them to `events.json review.body` templates.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "cddb516",
+     "note": "review text in events.json",
+     "closed": "2026-11-07T08:40:29+10:00"
     },
     {
      "id": "E21",
@@ -1077,10 +1082,11 @@
      "file": "scripts/fixtures/checkout.gd _served_elsewhere",
      "detail": "",
      "by": "soak",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T08:39:45+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "24860bb",
+     "note": "checkout_test regression: unserved till starts when the served one is busy",
+     "closed": "2026-11-07T08:40:29+10:00"
     },
     {
      "id": "E23",
@@ -1166,6 +1172,19 @@
      "commit": "56ef26f",
      "note": "steps rewritten",
      "closed": "2026-11-07T08:24:43+10:00"
+    },
+    {
+     "id": "U6",
+     "sev": "P2",
+     "title": "No invert Y, head-bob or fullscreen options",
+     "file": "scripts/ui/options.gd",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T08:40:30+10:00",
+     "commit": "b0c668d",
+     "note": "added",
+     "closed": "2026-11-07T08:40:30+10:00"
     }
    ]
   },
@@ -2638,6 +2657,51 @@
    "t": "2026-11-07T08:39:45+10:00",
    "kind": "finding",
    "msg": "R5/E23 [P2] Soak: the economy now runs ~40% richer than the pacing table (day 7 $647 vs $250-450; day 30 $4,014)"
+  },
+  {
+   "t": "2026-11-07T08:40:29+10:00",
+   "kind": "fix",
+   "msg": "R5/E22 fixed 24860bb checkout_test regression: unserved till starts when the served one is busy"
+  },
+  {
+   "t": "2026-11-07T08:40:29+10:00",
+   "kind": "fix",
+   "msg": "R4/N6 fixed 712c877 trolley parked beside at the shelf; suite 1039/0"
+  },
+  {
+   "t": "2026-11-07T08:40:29+10:00",
+   "kind": "fix",
+   "msg": "R4/N14 fixed 712c877 basket from the stand, unused basket returned"
+  },
+  {
+   "t": "2026-11-07T08:40:29+10:00",
+   "kind": "fix",
+   "msg": "R4/N25 fixed b2de54c straight-line fallback + stuck hop"
+  },
+  {
+   "t": "2026-11-07T08:40:29+10:00",
+   "kind": "fix",
+   "msg": "R5/E15 fixed f67737d day_test: cost basis average"
+  },
+  {
+   "t": "2026-11-07T08:40:29+10:00",
+   "kind": "fix",
+   "msg": "R5/E20 fixed cddb516 review text in events.json"
+  },
+  {
+   "t": "2026-11-07T08:40:30+10:00",
+   "kind": "finding",
+   "msg": "R9/U6 [P2] No invert Y, head-bob or fullscreen options"
+  },
+  {
+   "t": "2026-11-07T08:40:30+10:00",
+   "kind": "fix",
+   "msg": "R9/U6 fixed b0c668d added"
+  },
+  {
+   "t": "2026-11-07T08:40:30+10:00",
+   "kind": "test",
+   "msg": "Tests: 1040 passed, 0 failed after round 2 leftovers"
   }
  ],
  "tests": [
@@ -2700,6 +2764,12 @@
    "passed": 1036,
    "failed": 0,
    "note": "after real-size cans"
+  },
+  {
+   "t": "2026-11-07T08:40:30+10:00",
+   "passed": 1040,
+   "failed": 0,
+   "note": "after round 2 leftovers"
   }
  ],
  "agents": {
@@ -2745,17 +2815,66 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T08:39:45+10:00",
-  "mem_free_pct": 35,
+  "t": "2026-11-07T08:40:30+10:00",
+  "mem_free_pct": 43,
   "load": [
-   3.93,
-   4.11,
-   4.16
+   4.58,
+   4.23,
+   4.2
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "cbbc78e",
+    "date": "2026-11-07T08:40:22+10:00",
+    "subject": "Record review round 2 in PROGRESS",
+    "body": "",
+    "stat": "1 file changed, 30 insertions(+)"
+   },
+   {
+    "sha": "b0c668d",
+    "date": "2026-11-07T08:40:22+10:00",
+    "subject": "Add invert Y, head bob and fullscreen to Options",
+    "body": "Review round 2, U6.",
+    "stat": "4 files changed, 64 insertions(+), 4 deletions(-)"
+   },
+   {
+    "sha": "cddb516",
+    "date": "2026-11-07T08:40:22+10:00",
+    "subject": "Move the Sunday review's sentences into events.json as the class doc promised",
+    "body": "Review round 2, E20.",
+    "stat": "2 files changed, 20 insertions(+), 8 deletions(-)"
+   },
+   {
+    "sha": "f67737d",
+    "date": "2026-11-07T08:40:22+10:00",
+    "subject": "Book cost of goods at what the stock cost, not today's drifted cost",
+    "body": "Buying on a cheap day never showed as profit. Game.stock_basis keeps a running average per\nproduct (saved). Review round 2, E15.",
+    "stat": "2 files changed, 52 insertions(+)"
+   },
+   {
+    "sha": "b2de54c",
+    "date": "2026-11-07T08:40:22+10:00",
+    "subject": "Give Dale a straight-line fallback and stuck recovery on his walk",
+    "body": "With no navmesh route he 'arrived' at once and vanished in front of the player. Review round 2,\nN25.",
+    "stat": "1 file changed, 17 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "712c877",
+    "date": "2026-11-07T08:40:22+10:00",
+    "subject": "Park the trolley beside a shopper at the shelf, and take baskets from the stand",
+    "body": "Trolleys poked into the fixture being shopped; baskets appeared in hand at the door and empty\nones walked off the plot. Basket shoppers step to the stand and lift one; an unused basket goes\nback. Review round 2, N6 and N14.",
+    "stat": "2 files changed, 37 insertions(+), 3 deletions(-)"
+   },
+   {
+    "sha": "24860bb",
+    "date": "2026-11-07T08:40:22+10:00",
+    "subject": "Only hold a customer back at an unserved till when the served till is free to take them",
+    "body": "The 30-day soak lost 62 customers on day 11: with a queue at the served till nobody switched, and\nthe unserved till never started on its front customer. Review round 2, E22 (N2 follow-up).",
+    "stat": "2 files changed, 28 insertions(+), 5 deletions(-)"
+   },
    {
     "sha": "56ef26f",
     "date": "2026-11-07T08:24:36+10:00",
@@ -3126,75 +3245,12 @@
     "subject": "Pile chest-freezer stock inside the well instead of through the lid, and put its price labels on the rim",
     "body": "The 3x capacity_mult stacked bags up to 0.65 m above the closed lid. The well is now four\nfront-to-back bays piled to the rim (fixture key 'piled'), which also fits PIZZA, and the\nfixture's 'label_pos' lifts the labels out of the cabinet. Review round 2, S1 and S4.",
     "stat": "7 files changed, 39 insertions(+), 30 deletions(-)"
-   },
-   {
-    "sha": "666830b",
-    "date": "2026-11-06T15:22:29+10:00",
-    "subject": "Pause the game when the window loses focus",
-    "body": "",
-    "stat": "2 files changed, 32 insertions(+)"
-   },
-   {
-    "sha": "d0d1e91",
-    "date": "2026-11-06T15:22:29+10:00",
-    "subject": "Keep HUD cards in their corners instead of overlapping across the top",
-    "body": "",
-    "stat": "7 files changed, 35 insertions(+), 10 deletions(-)"
-   },
-   {
-    "sha": "1d536c6",
-    "date": "2026-11-06T07:14:22+10:00",
-    "subject": "Record M9: soak table, tuning and perf in PROGRESS, tick the soak and tuning boxes, README How to play",
-    "body": "PROGRESS also marks review #18 and #20 fixed. The perf-on-High box and the 1-hour manual session\nwait for a windowed run.",
-    "stat": "4 files changed, 216 insertions(+), 11 deletions(-)"
-   },
-   {
-    "sha": "eaac1f5",
-    "date": "2026-11-06T06:55:14+10:00",
-    "subject": "Read the list cap and the start rent from data in the customer and save tests",
-    "body": "",
-    "stat": "2 files changed, 7 insertions(+), 3 deletions(-)"
-   },
-   {
-    "sha": "8f05db5",
-    "date": "2026-11-06T06:35:34+10:00",
-    "subject": "Tune the economy so three 30-day soaks in a row hit every pacing row",
-    "body": "XP 500 + 225(L-1); arrivals 2.5 + level; shoppers at once 2 + 4 per till + level/2 (cap 20);\nlists 1 + randi() % (2 + level), cap 16; start rent $20; costs 10% lower across the board.\nThe soak AI buys a till first, then licences, shelving, the shed and one restocker, then\nexpansions; it borrows only for a till's spot or a licence. The 2nd and 3rd tills stand in the\nE3 wings and a chest freezer fits in the start store. ECONOMY.md and GDD follow the data;\norder_test reads costs from products.json.",
-    "stat": "10 files changed, 197 insertions(+), 178 deletions(-)"
-   },
-   {
-    "sha": "4775e30",
-    "date": "2026-11-06T04:19:18+10:00",
-    "subject": "Read the start rent, fixture and expansion prices and the level-2 XP from data in the bills, build, day and progression tests",
-    "body": "The M9 tuning changed them; progression_test's levels dictionary is typed (a Variant-inferred var is a parse error).",
-    "stat": "4 files changed, 39 insertions(+), 20 deletions(-)"
-   },
-   {
-    "sha": "dfe5dee",
-    "date": "2026-11-06T02:11:00+10:00",
-    "subject": "Add the M9 soak simulator and a first economy tuning pass (pacing not yet met)",
-    "body": "tests/soak.sh runs an AI player (tests/soak_player.gd) for N days at Engine.time_scale: it\nprices at market +10%, serves with perfect change, orders and stocks through the van, buys\nlicences, tills, expansions, furniture, racks and staff and takes/repays loans by simple rules;\nit fails on engine/script errors, stuck NPCs, a store that won't empty and repossession, logs\nlevel/money/profit/spend/perf per day and per hour, and checks the ECONOMY.md pacing table.\nTuning so far: cheaper expansions, licences and fixtures, tiered cost cuts for later licences,\narrival base 2.8, list spread 2 + level, concurrency 4 + 3 per till, faster walkers, XP steps\n625 + 250(L-1). Day 15 level and day 30 profit are still short; ECONOMY.md not yet updated.",
-    "stat": "10 files changed, 1453 insertions(+), 90 deletions(-)"
    }
   ],
-  "dirty": [
-   " M data/events.json",
-   " M docs/GDD.md",
-   " M docs/PROGRESS.md",
-   " M scripts/autoload/game.gd",
-   " M scripts/autoload/settings.gd",
-   " M scripts/core/weekly_review.gd",
-   " M scripts/entities/player.gd",
-   " M scripts/fixtures/checkout.gd",
-   " M scripts/npc/dale.gd",
-   " M scripts/npc/shopper.gd",
-   " M scripts/npc/shopper_brain.gd",
-   " M scripts/ui/options.gd",
-   " M tests/cases/day_test.gd"
-  ],
-  "total_commits": 164
+  "dirty": [],
+  "total_commits": 171
  },
- "updated": "2026-11-07T08:39:48+10:00",
+ "updated": "2026-11-07T08:40:31+10:00",
  "qa": [
   {
    "num": 1,
