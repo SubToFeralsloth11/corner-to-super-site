@@ -2322,6 +2322,11 @@
    "t": "2026-11-07T08:10:25+10:00",
    "kind": "question",
    "msg": "Question #7 answering: Are you using subagents to help you or just yourself"
+  },
+  {
+   "t": "2026-11-07T08:10:47+10:00",
+   "kind": "question",
+   "msg": "Question #7 answered: Are you using subagents to help you or just yourself"
   }
  ],
  "tests": [
@@ -2417,10 +2422,10 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T08:10:25+10:00",
-  "mem_free_pct": 48,
+  "t": "2026-11-07T08:10:47+10:00",
+  "mem_free_pct": 47,
   "load": [],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
@@ -2846,13 +2851,15 @@
    }
   ],
   "dirty": [
+   " M scripts/npc/customer_spawner.gd",
    " M scripts/npc/human_rig.gd",
+   " M scripts/npc/shopper.gd",
    " M scripts/npc/shopper_brain.gd",
    " M scripts/npc/walker.gd"
   ],
   "total_commits": 156
  },
- "updated": "2026-11-07T08:10:26+10:00",
+ "updated": "2026-11-07T08:10:49+10:00",
  "qa": [
   {
    "num": 1,
@@ -2906,9 +2913,9 @@
    "num": 7,
    "title": "Are you using subagents to help you or just yourself",
    "question": "",
-   "answer": "",
-   "state": "answering",
-   "t": "2026-11-07T08:10:25+10:00"
+   "answer": "**Both, but right now the lead agent is working alone.**\n\n- **Earlier:** the loop used subagents. Two critic agents reviewed the checkout code (R2) and the shelf code (R3) at the same time. A critic named `CritShelves` produced the R3 findings. Later a fixer agent, `FixNPC`, worked on the R4 customer findings while the lead fixed the R5 economy findings.\n- **Now:** the log says *\"Subagents rate-limited for ~10 h: lead now critiques and fixes alone, one area at a time.\"* The current status is *\"Lead fixing remaining R4/R5 P2s (subagents rate-limited).\"*\n- **Separately:** your questions are answered by a different watcher agent (`com.agents.cts-ask-watch`), which is me. I can only read files, so I don't take any work off the loop.\n\nIt never runs more than 2 subagents at once, because of the 8 GB RAM limit in `AGENTS.md`.\n\nAll of this comes from the `status` and `log` sections of `corner-to-super-site/live.json`.",
+   "state": "answered",
+   "t": "2026-11-07T08:10:47+10:00"
   }
  ],
  "shots": {
