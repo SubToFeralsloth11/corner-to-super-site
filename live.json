@@ -861,10 +861,11 @@
      "file": "data/loans.json:6-30",
      "detail": "Small loan at L1: $108 a day against a day-1 profit of $40–120. Business loan at L5 (about day 7): $560 a day against $250–450. Expansion loan at L10 (about day 15): $1,643 a day against $848–895 in the soak. Terms are 10–14 days, and the first instalment is charged the same night. Taking any of them leads straight to overdue bills and, under E2, repossession, unless what you buy pays back the full instalment from the first day. PROGRESS M9 confirms the soak AI had to be stopped from borrowing except for tills and licences. In practice the choice is \"never borrow\". Fix: longer terms, e.g. 30/40/60 days with the same interest, or instalments set to about 40% of the expected daily profit at the unlock level.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "aad6ecc",
+     "note": "Small $54/20d, Business $186.67/30d, Expansion $575/40d; suite 1028/0",
+     "closed": "2026-11-07T08:07:08+10:00"
     },
     {
      "id": "E7",
@@ -965,8 +966,8 @@
      "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
      "commit": "69bad78",
-     "note": "loan_test: 8 new checks fail before, pass after",
-     "closed": "2026-11-07T07:47:58+10:00"
+     "note": "loan_test payoff cap (now on the business loan)",
+     "closed": "2026-11-07T08:07:08+10:00"
     },
     {
      "id": "E15",
@@ -2266,6 +2267,21 @@
    "t": "2026-11-07T08:05:36+10:00",
    "kind": "fix",
    "msg": "R5/E11 fixed 9bc60ec day_test: open + sales + other = cash now"
+  },
+  {
+   "t": "2026-11-07T08:07:08+10:00",
+   "kind": "fix",
+   "msg": "R5/E6 fixed aad6ecc Small $54/20d, Business $186.67/30d, Expansion $575/40d; suite 1028/0"
+  },
+  {
+   "t": "2026-11-07T08:07:08+10:00",
+   "kind": "fix",
+   "msg": "R5/E14 fixed 69bad78 loan_test payoff cap (now on the business loan)"
+  },
+  {
+   "t": "2026-11-07T08:07:08+10:00",
+   "kind": "test",
+   "msg": "Tests: 1028 passed, 0 failed after E6/E10/E11/E13"
   }
  ],
  "tests": [
@@ -2304,6 +2320,12 @@
    "passed": 1023,
    "failed": 0,
    "note": "after customer batch"
+  },
+  {
+   "t": "2026-11-07T08:07:08+10:00",
+   "passed": 1028,
+   "failed": 0,
+   "note": "after E6/E10/E11/E13"
   }
  ],
  "agents": {
@@ -2349,17 +2371,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T08:05:36+10:00",
+  "t": "2026-11-07T08:07:08+10:00",
   "mem_free_pct": 47,
   "load": [
-   3.15,
-   3.05,
-   4.22
+   2.37,
+   2.79,
+   4.0
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "aad6ecc",
+    "date": "2026-11-07T08:07:06+10:00",
+    "subject": "Stretch loan terms to 20/30/40 days so borrowing is a real choice",
+    "body": "At 10-14 days every instalment was at least the day's whole profit when the loan unlocked, so a\nloan led straight to overdue bills and repossession. Same interest, smaller instalments. Loan\nand bills tests now read the numbers from loans.json. Review round 2, E6.",
+    "stat": "5 files changed, 51 insertions(+), 28 deletions(-)"
+   },
    {
     "sha": "9bc60ec",
     "date": "2026-11-07T08:05:34+10:00",
@@ -2772,19 +2801,12 @@
     "subject": "Name products in prompts and hints instead of their ids, and stop an empty box offering to fold or glowing green at a slot where E does nothing; test build mode needs empty hands",
     "body": "",
     "stat": "9 files changed, 72 insertions(+), 16 deletions(-)"
-   },
-   {
-    "sha": "55b69d0",
-    "date": "2026-11-06T02:11:36+10:00",
-    "subject": "Refuse build mode while holding the mop (GDD §1: empty hands only)",
-    "body": "",
-    "stat": "1 file changed, 3 insertions(+)"
    }
   ],
   "dirty": [],
-  "total_commits": 153
+  "total_commits": 154
  },
- "updated": "2026-11-07T08:05:36+10:00",
+ "updated": "2026-11-07T08:07:09+10:00",
  "qa": [
   {
    "num": 1,

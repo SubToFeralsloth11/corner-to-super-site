@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T08:05+10:00",
- "head": "9bc60ec",
+ "generated": "2026-11-07T08:07+10:00",
+ "head": "aad6ecc",
  "stats": {
-  "commits": 153,
+  "commits": 154,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T08:05:34+10:00",
+  "last_commit": "2026-11-07T08:07:06+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 27761,
+  "gd_lines": 27782,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1059,6 +1059,11 @@
    "sha": "9bc60ec",
    "date": "2026-11-07T08:05:34+10:00",
    "subject": "Itemise the day's other money on the receipt so it adds up to the cash"
+  },
+  {
+   "sha": "aad6ecc",
+   "date": "2026-11-07T08:07:06+10:00",
+   "subject": "Stretch loan terms to 20/30/40 days so borrowing is a real choice"
   }
  ],
  "commits_per_hour": [
@@ -1224,7 +1229,7 @@
   },
   {
    "hour": "2026-11-07T08:00:00+10:00",
-   "commits": 4
+   "commits": 5
   }
  ],
  "sections": [
