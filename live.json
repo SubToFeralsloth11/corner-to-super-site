@@ -775,10 +775,11 @@
      "file": "scripts/npc/shopper_brain.gd:12-16,84,180,186; scripts/npc/shopper.gd:95; scripts/npc/walker.gd:12-20; scripts/npc/bark.gd:7",
      "detail": "`SHRUG_TIME` 0.8, `REACH_STAND` 0.6, `SWITCH_CHECK` 2.5, look-around every 0.5 s, 50% chance of a \"great prices\" bark, the 0.3 s pause after a pick, the 4 m look-at-player radius, walker stuck and retry timings, and bark `LIFE` 2.5 are all constants. Patience, speed and mess chance already live in customers.json, so this is a second convention. The capsule shape (0.28 by 1.7) is also copied in shopper.gd, staff.gd and dale.gd. Fix: move these into a `customers.json` `behaviour` block, and put the capsule in one shared Walker helper.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "wontfix",
      "found": "2026-11-06T20:55:54+10:00",
      "commit": "",
-     "note": ""
+     "note": "AGENTS.md puts prices, costs and gates in data; animation/reach timings are code constants by design. Revisit if tuning is needed",
+     "closed": "2026-11-07T08:27:08+10:00"
     },
     {
      "id": "N25",
@@ -1063,10 +1064,11 @@
      "file": "scripts/autoload/game.gd:1046-1060; scripts/core/weekly_review.gd:40",
      "detail": "`WeeklyReview.write` works out `stars`, which is only shown in the newspaper and changes nothing: not reputation, arrivals, the rival or anything else. Combined with E7's ceiling, the weekly beat is pure reading with no stakes. Fix: give it an effect, e.g. ±10% arrivals for the next week by rating, or a one-day visitor boost for 4+ stars.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "wontfix",
      "found": "2026-11-06T20:56:05+10:00",
      "commit": "",
-     "note": ""
+     "note": "The paper's rating is a weekly summary of reputation, which already drives arrivals; giving it a second effect would double-count",
+     "closed": "2026-11-07T08:27:08+10:00"
     }
    ]
   },
@@ -2587,6 +2589,16 @@
    "t": "2026-11-07T08:24:56+10:00",
    "kind": "status",
    "msg": "Status: reviewing - Soak running (engine busy ~1 h); lead reading player controller and audio code"
+  },
+  {
+   "t": "2026-11-07T08:27:08+10:00",
+   "kind": "fix",
+   "msg": "R5/E21 wontfix  The paper's rating is a weekly summary of reputation, which already drives arrivals; giving it a second effect would double-count"
+  },
+  {
+   "t": "2026-11-07T08:27:08+10:00",
+   "kind": "fix",
+   "msg": "R4/N24 wontfix  AGENTS.md puts prices, costs and gates in data; animation/reach timings are code constants by design. Revisit if tuning is needed"
   }
  ],
  "tests": [
@@ -2694,14 +2706,14 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T08:24:56+10:00",
-  "mem_free_pct": 47,
+  "t": "2026-11-07T08:27:09+10:00",
+  "mem_free_pct": 33,
   "load": [
-   1.9,
-   2.33,
-   2.82
+   12.25,
+   5.78,
+   4.08
   ],
-  "godot_procs": 3
+  "godot_procs": 4
  },
  "game": {
   "commits": [
@@ -3126,10 +3138,18 @@
     "stat": "10 files changed, 1453 insertions(+), 90 deletions(-)"
    }
   ],
-  "dirty": [],
+  "dirty": [
+   " M data/events.json",
+   " M scripts/autoload/game.gd",
+   " M scripts/core/weekly_review.gd",
+   " M scripts/fixtures/checkout.gd",
+   " M scripts/npc/shopper.gd",
+   " M scripts/npc/shopper_brain.gd",
+   " M tests/cases/day_test.gd"
+  ],
   "total_commits": 164
  },
- "updated": "2026-11-07T08:24:56+10:00",
+ "updated": "2026-11-07T08:27:13+10:00",
  "qa": [
   {
    "num": 1,
