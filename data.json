@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T09:51+10:00",
- "head": "75c335b",
+ "generated": "2026-11-07T09:56+10:00",
+ "head": "a0aedee",
  "stats": {
-  "commits": 198,
+  "commits": 203,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T09:51:46+10:00",
+  "last_commit": "2026-11-07T09:56:44+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 28686,
+  "gd_lines": 28808,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1291,6 +1291,31 @@
    "sha": "75c335b",
    "date": "2026-11-07T09:51:46+10:00",
    "subject": "Remove Player.box_caught, a signal only a test listened to (Y15)"
+  },
+  {
+   "sha": "de254e4",
+   "date": "2026-11-07T09:56:37+10:00",
+   "subject": "Let a till with its cashier on be moved in build mode; the cashier steps off and walks back (X5)"
+  },
+  {
+   "sha": "46fa054",
+   "date": "2026-11-07T09:56:37+10:00",
+   "subject": "Keep 0.9 m in front of a shelf face so customers can reach every slot, and drop the overlap wrapper (X6, X19)"
+  },
+  {
+   "sha": "4fadc8d",
+   "date": "2026-11-07T09:56:37+10:00",
+   "subject": "Fix the stale concurrency comment and fallbacks in CustomerRules (X18)"
+  },
+  {
+   "sha": "9e96aa2",
+   "date": "2026-11-07T09:56:44+10:00",
+   "subject": "Re-check for restocked stock every 0.5 s on an out-of-stock walk, not every frame (X7)"
+  },
+  {
+   "sha": "a0aedee",
+   "date": "2026-11-07T09:56:44+10:00",
+   "subject": "One complaint and one price decision per wall product, and no found-everything bonus after a wall letdown (X8, X12)"
   }
  ],
  "commits_per_hour": [
@@ -1460,7 +1485,7 @@
   },
   {
    "hour": "2026-11-07T09:00:00+10:00",
-   "commits": 21
+   "commits": 26
   }
  ],
  "sections": [

@@ -1713,10 +1713,11 @@
      "file": "scripts/build/build_mode.gd:178-180",
      "detail": "41f4c70 made pick() refuse till_busy(fx), and till_busy includes has_cashier(). Cashiers are on shift in PREP (StaffCrew.shift_on), stand at their post and set checkout.cashier (cashier_job.gd:93). So any staffed till is locked in place exactly when players rearrange. The hover prompt still reads \"[LMB] Move · …\" and LMB fails with \"Someone is at this till\". The only way out is after hours, or reassigning or firing the cashier. Fix: ignore the cashier for pick() and have the cashier re-walk to _post() when the till lands (the queue/customer checks can stay). At minimum, say \"Move it after hours or reassign the cashier\".",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:57+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "de254e4",
+     "note": "pick() ignores the cashier (queue/customer still block); cashier steps off while carried and returns via CashierJob._resolve; hover shows Move only when it can. test_a_staffed_till_can_be_moved_and_the_cashier_follows passes; staff_test 57/0",
+     "closed": "2026-11-07T09:56:54+10:00"
     },
     {
      "id": "X6",
@@ -3805,6 +3806,11 @@
    "t": "2026-11-07T09:51:47+10:00",
    "kind": "fix",
    "msg": "C2/Y15 fixed 75c335b additions_test passes"
+  },
+  {
+   "t": "2026-11-07T09:56:54+10:00",
+   "kind": "fix",
+   "msg": "C2/X5 fixed de254e4 pick() ignores the cashier (queue/customer still block); cashier steps off while carried and returns via CashierJob._resolve; hover shows Move only when it can. test_a_staffed_till_can_be_moved_and_the_cashier_follows passes; staff_test 57/0"
   }
  ],
  "tests": [
@@ -3946,17 +3952,52 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:51:47+10:00",
-  "mem_free_pct": 57,
+  "t": "2026-11-07T09:56:54+10:00",
+  "mem_free_pct": 55,
   "load": [
-   2.94,
-   3.84,
-   3.8
+   2.98,
+   3.15,
+   3.46
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "a0aedee",
+    "date": "2026-11-07T09:56:44+10:00",
+    "subject": "One complaint and one price decision per wall product, and no found-everything bonus after a wall letdown (X8, X12)",
+    "body": "",
+    "stat": "3 files changed, 95 insertions(+), 12 deletions(-)"
+   },
+   {
+    "sha": "9e96aa2",
+    "date": "2026-11-07T09:56:44+10:00",
+    "subject": "Re-check for restocked stock every 0.5 s on an out-of-stock walk, not every frame (X7)",
+    "body": "",
+    "stat": "1 file changed, 10 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "4fadc8d",
+    "date": "2026-11-07T09:56:37+10:00",
+    "subject": "Fix the stale concurrency comment and fallbacks in CustomerRules (X18)",
+    "body": "",
+    "stat": "1 file changed, 2 insertions(+), 2 deletions(-)"
+   },
+   {
+    "sha": "46fa054",
+    "date": "2026-11-07T09:56:37+10:00",
+    "subject": "Keep 0.9 m in front of a shelf face so customers can reach every slot, and drop the overlap wrapper (X6, X19)",
+    "body": "",
+    "stat": "3 files changed, 44 insertions(+), 13 deletions(-)"
+   },
+   {
+    "sha": "de254e4",
+    "date": "2026-11-07T09:56:37+10:00",
+    "subject": "Let a till with its cashier on be moved in build mode; the cashier steps off and walks back (X5)",
+    "body": "",
+    "stat": "2 files changed, 32 insertions(+), 6 deletions(-)"
+   },
    {
     "sha": "75c335b",
     "date": "2026-11-07T09:51:46+10:00",
@@ -4341,50 +4382,12 @@
     "subject": "Document closing early, the short-night warnings, and the streak reset at the Bank",
     "body": "",
     "stat": "2 files changed, 11 insertions(+), 6 deletions(-)"
-   },
-   {
-    "sha": "69bad78",
-    "date": "2026-11-07T07:47:39+10:00",
-    "subject": "Stop bills punishing negative cash, give a short night a way out, and let the store close early",
-    "body": "- Bills paid with cash below zero no longer add the deficit to every bill (E1).\n- Clearing every overdue bill at the Bank resets the short-night count; the receipt says how\n  short you are, warns when paying short repossesses, and offers loans before Pay all; the\n  sign's End day prompt warns too (E2).\n- Hold E on the OPEN sign to close early (E12).\n- A loan's payoff never exceeds what is left (E14).\n- A night with nothing to pay settles itself; Enter/Space presses the receipt's button; old\n  overdue lines show PAID/UNPAID after paying (E16, E17).\nReview round 2. loan_test: 8 new checks fail before, pass after.",
-    "stat": "5 files changed, 164 insertions(+), 17 deletions(-)"
-   },
-   {
-    "sha": "5329992",
-    "date": "2026-11-07T07:47:39+10:00",
-    "subject": "Let exact cash wait on the counter until the player takes it",
-    "body": "Closing the sale the moment payment began (when seated) skipped the cash entirely and broke the\nbot and a staff test whenever the random customer paid exact. Taking the cash now closes it,\nand the cash prompt says it is exact. Follow-up to f0e3703 (U2).",
-    "stat": "2 files changed, 15 insertions(+), 8 deletions(-)"
-   },
-   {
-    "sha": "41f4c70",
-    "date": "2026-11-07T07:45:14+10:00",
-    "subject": "Keep a till with a queue from being picked up, and send a carried till's queue elsewhere",
-    "body": "Customers followed a till carried in build mode round the store and could be served at the\nfloating counter. Review round 2, N1.",
-    "stat": "3 files changed, 45 insertions(+), 7 deletions(-)"
-   },
-   {
-    "sha": "54d5286",
-    "date": "2026-11-06T20:52:54+10:00",
-    "subject": "Drop the till hint a little further, clear of the clock card at 720p",
-    "body": "At 1280x720 the UI scale put it on the card's bottom edge (gameplay tour play_02).",
-    "stat": "1 file changed, 1 insertion(+), 1 deletion(-)"
-   },
-   {
-    "sha": "67774d3",
-    "date": "2026-11-06T20:50:48+10:00",
-    "subject": "Make the POS screen readable from the till seat: bigger, fewer lines and short status text",
-    "body": "Item lines were 19 px on a screen ~200 px wide in the seated view (about 6 px on screen). Six\n32 px lines, a 60 px total and a status line clipped clear of it. Review round 2, U3.",
-    "stat": "2 files changed, 20 insertions(+), 15 deletions(-)"
    }
   ],
-  "dirty": [
-   " M scripts/build/build_mode.gd",
-   " M tests/cases/staff_test.gd"
-  ],
-  "total_commits": 198
+  "dirty": [],
+  "total_commits": 203
  },
- "updated": "2026-11-07T09:51:48+10:00",
+ "updated": "2026-11-07T09:56:54+10:00",
  "qa": [
   {
    "num": 1,
