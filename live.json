@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "R3",
   "area": "Shelves, stocking, boxes, pricing",
-  "activity": "Fixer: C2 smokes route to wall till",
+  "activity": "Fixer: C4 no queue drain while served",
   "cycle": "1",
-  "since": "2026-11-06T20:25:50+10:00"
+  "since": "2026-11-06T20:26:48+10:00"
  },
  "rounds": [
   {
@@ -774,6 +774,11 @@
    "t": "2026-11-06T20:26:15+10:00",
    "kind": "fix",
    "msg": "R2/C2 fixed 72f2b03 World.shortest_queue(counter_asks) returns the wall's till; new m7_content test_smokes_buyers_queue_at_the_wall_till passes (smokes 16/0, queue 11/0)"
+  },
+  {
+   "t": "2026-11-06T20:26:48+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - Fixer: C4 no queue drain while served"
   }
  ],
  "tests": [
@@ -808,12 +813,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:26:15+10:00",
+  "t": "2026-11-06T20:26:48+10:00",
   "mem_free_pct": 47,
   "load": [
-   2.22,
-   2.41,
-   2.72
+   1.8,
+   2.3,
+   2.66
   ],
   "godot_procs": 0
  },
@@ -1240,10 +1245,17 @@
     "stat": "8 files changed, 246 insertions(+), 24 deletions(-)"
    }
   ],
-  "dirty": [],
+  "dirty": [
+   " M docs/ECONOMY.md",
+   " M docs/GDD.md",
+   " M scripts/autoload/game.gd",
+   " M scripts/npc/shopper_brain.gd",
+   " M scripts/ui/price_popup.gd",
+   " M tests/cases/checkout_test.gd"
+  ],
   "total_commits": 116
  },
- "updated": "2026-11-06T20:26:16+10:00",
+ "updated": "2026-11-06T20:26:49+10:00",
  "qa": [
   {
    "num": 1,
