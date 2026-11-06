@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T07:59+10:00",
- "head": "017be96",
+ "generated": "2026-11-07T08:02+10:00",
+ "head": "66de3c5",
  "stats": {
-  "commits": 149,
+  "commits": 150,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T07:59:38+10:00",
+  "last_commit": "2026-11-07T08:02:36+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 27581,
+  "gd_lines": 27671,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1039,6 +1039,11 @@
    "sha": "017be96",
    "date": "2026-11-07T07:59:38+10:00",
    "subject": "Keep one reachable side on every shelf, and ask for a second Del before selling"
+  },
+  {
+   "sha": "66de3c5",
+   "date": "2026-11-07T08:02:36+10:00",
+   "subject": "Reward visits that go right, free the cap from people walking home, and fix four customer slips"
   }
  ],
  "commits_per_hour": [
@@ -1201,6 +1206,10 @@
   {
    "hour": "2026-11-07T07:00:00+10:00",
    "commits": 9
+  },
+  {
+   "hour": "2026-11-07T08:00:00+10:00",
+   "commits": 1
   }
  ],
  "sections": [

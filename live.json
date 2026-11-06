@@ -567,10 +567,11 @@
      "file": "scripts/npc/shopper_brain.gd:78-79,173,181; scripts/npc/shopper.gd:88-97",
      "detail": "`tick` only resets `look_weight` while `not bark.is_talking()`. At the shelf the weight is 1 with `look_target` on the slot front. A forced refusal bark or a `great_prices` bark then moves the state to BROWSE. The weight stays at 1 for the 2.5 s bark, and the target is not updated unless you are within 4 m. The customer walks to the next item with their head turned up to 70° back at the old shelf. When you are nearby, they stare at where you stood when they started talking. Fix: drop `look_weight` to 0 when leaving PICK unless they are talking to you. While talking within 4 m, update `look_target` to the player camera every tick.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:53+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "66de3c5",
+     "note": "customer_test regressions; full suite 1023/0",
+     "closed": "2026-11-07T08:02:41+10:00"
     },
     {
      "id": "N9",
@@ -579,10 +580,11 @@
      "file": "scripts/npc/customer_spawner.gd:46-54; scripts/npc/shopper.gd:13",
      "detail": "`live_count()` counts everyone in the `shoppers` group. Customers start and end at `EXITS` (−22.5, 29.5) and (16.5, 29.5), about 38 m and 35 m in a straight line from `DOOR_IN`. At 1.2–1.6 m/s that is roughly 22–32 s each way, about 45–60 s of every visit spent outside, all counted against `2 + 4·tills + level/2`. With 6 slots on day 1, a large share are on the pavement while the store sits empty. The spawner, `Game` CLOSING and the open sign also wait for that walk. Fix: leave customers in LEAVE who are past the door out of the cap, keeping the hard 20 for performance. Or start and end them at the parked-car bays (`ParkedCars`), much closer to the door.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:53+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "66de3c5",
+     "note": "customer_test regressions; full suite 1023/0",
+     "closed": "2026-11-07T08:02:41+10:00"
     },
     {
      "id": "N10",
@@ -591,10 +593,11 @@
      "file": "data/customers.json:72-87; scripts/npc/shopper_brain.gd:424-428",
      "detail": "Satisfaction starts at 70, which is already 3.5 stars, and the only positive events are bargain (+3, only at ≤85% of market), promo (+2 once) and fast service (+5). A fully stocked, fairly priced visit with quick service ends at 70 + 5 + 2 = 77, or 3.85 stars. Any single out-of-stock (−12) drops it below 3.5. `fast_service_s` = 20 s counts from joining the queue, including the walk to the lane and 0.35 s per item to unload (`UNLOAD_STEP`), so trolley customers rarely get it. The M9 soak sits at 3.04 stars on day 30. Good play is not rewarded unless you sell below market. Fix: add positive events in `customers.json`, such as found every item (+8), a fair price at or under market (+1 per item), and a clean store (+3). Or lower `start` and rebalance.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:53+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "66de3c5",
+     "note": "customer_test regressions; full suite 1023/0",
+     "closed": "2026-11-07T08:02:41+10:00"
     },
     {
      "id": "N11",
@@ -603,10 +606,11 @@
      "file": "scripts/npc/shopper_brain.gd:403,428; data/barks.json",
      "detail": "`finish_checkout` always uses a cheerful green `thank_you` (\"Thanks, have a good one!\"), even after being short-changed twice and waiting 80 s. `_give_up` reuses `long_queue` (\"Come on, open another till.\") as the line for storming out, and the newspaper records it as such. There are no lines for greeting, giving up, finding everything, or trying a new product. Barks are text only, with no voice or grunt sound. Fix: add `thank_you_grumpy` and `give_up` keys to barks.json. In `finish_checkout`, pick the key and tone from `satisfaction`, for example below 50 grumpy with the complaint card. Play a short vocal or `Sfx` with complaint barks.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:53+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "66de3c5",
+     "note": "customer_test regressions; full suite 1023/0",
+     "closed": "2026-11-07T08:02:41+10:00"
     },
     {
      "id": "N12",
@@ -615,10 +619,11 @@
      "file": "scripts/npc/shopper_brain.gd:287-294",
      "detail": "When `shortest_queue()` returns null, the customer books lost sales and calls `leave()` without `abandon_carrier()` or `basket.clear()`. They carry the full basket or trolley off the plot, and that stock simply disappears. This happens whenever every till is not in use, for example when you carry your only till in build mode (allowed, see N1) and someone finishes their list. Fix: in the null branch, do what `_give_up` does (`abandon_carrier()` then `basket.clear()`). Or better, wait in BROWSE and look for a till again while patience runs.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:53+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "66de3c5",
+     "note": "customer_test regressions; full suite 1023/0",
+     "closed": "2026-11-07T08:02:41+10:00"
     },
     {
      "id": "N13",
@@ -651,10 +656,11 @@
      "file": "scripts/npc/shopper_brain.gd:183,190-196,200-213",
      "detail": "`_maybe_make_mess()` drops a spill at the customer's feet, and `spawn_mess` returns the `Spill`, but it is not added to `_seen_mess`. Their next `look_around`, at most 0.5 s later, finds it within 3 m when cleanliness is below 60. They take −5 and say \"Ew. What is that?\" about their own mess. Fix: `_seen_mess[shopper.world.hygiene.spawn_mess(...).get_instance_id()] = true`.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:54+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "66de3c5",
+     "note": "customer_test regressions; full suite 1023/0",
+     "closed": "2026-11-07T08:02:41+10:00"
     },
     {
      "id": "N16",
@@ -867,10 +873,11 @@
      "file": "data/customers.json:71-84, 106-109; scripts/npc/shopper_brain.gd:179, 220, 427",
      "detail": "Satisfaction starts at 70 (3.5★). The only gains are +3 per item sold at ≤0.85× market (a loss-leader), +2 once near a promo stand, and +5 for fast service. A perfect visit at market price or above therefore peaks at 77, about 3.85★. 4.5★ needs about five loss-leader items per customer, so the newspaper's \"worth crossing town\" headline can't be reached without selling below market. Lists grow with level (`1 + randi()%(2+L)`), and each item adds another −12 out-of-stock chance, so stars sink as you progress: the soak shows 3.6 at L5 against 2.2–3.0 at L8–16. Stars only scale arrivals by `0.4 + 0.12·stars`, and once E3's cap binds they don't matter at all. Fix: add positive events (item found, clean store, short queue, a well-stocked basket), or score satisfaction relative to the list size.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "66de3c5",
+     "note": "Same as N10: found_everything +8, clean_store +4",
+     "closed": "2026-11-07T08:02:41+10:00"
     },
     {
      "id": "E8",
@@ -2191,6 +2198,46 @@
    "t": "2026-11-07T07:59:44+10:00",
    "kind": "test",
    "msg": "Tests: 1019 passed, 0 failed after R6 build fixes"
+  },
+  {
+   "t": "2026-11-07T08:02:41+10:00",
+   "kind": "fix",
+   "msg": "R4/N8 fixed 66de3c5 customer_test regressions; full suite 1023/0"
+  },
+  {
+   "t": "2026-11-07T08:02:41+10:00",
+   "kind": "fix",
+   "msg": "R4/N9 fixed 66de3c5 customer_test regressions; full suite 1023/0"
+  },
+  {
+   "t": "2026-11-07T08:02:41+10:00",
+   "kind": "fix",
+   "msg": "R4/N10 fixed 66de3c5 customer_test regressions; full suite 1023/0"
+  },
+  {
+   "t": "2026-11-07T08:02:41+10:00",
+   "kind": "fix",
+   "msg": "R4/N11 fixed 66de3c5 customer_test regressions; full suite 1023/0"
+  },
+  {
+   "t": "2026-11-07T08:02:41+10:00",
+   "kind": "fix",
+   "msg": "R4/N12 fixed 66de3c5 customer_test regressions; full suite 1023/0"
+  },
+  {
+   "t": "2026-11-07T08:02:41+10:00",
+   "kind": "fix",
+   "msg": "R4/N15 fixed 66de3c5 customer_test regressions; full suite 1023/0"
+  },
+  {
+   "t": "2026-11-07T08:02:41+10:00",
+   "kind": "fix",
+   "msg": "R5/E7 fixed 66de3c5 Same as N10: found_everything +8, clean_store +4"
+  },
+  {
+   "t": "2026-11-07T08:02:41+10:00",
+   "kind": "test",
+   "msg": "Tests: 1023 passed, 0 failed after customer batch"
   }
  ],
  "tests": [
@@ -2223,6 +2270,12 @@
    "passed": 1019,
    "failed": 0,
    "note": "after R6 build fixes"
+  },
+  {
+   "t": "2026-11-07T08:02:41+10:00",
+   "passed": 1023,
+   "failed": 0,
+   "note": "after customer batch"
   }
  ],
  "agents": {
@@ -2268,17 +2321,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T07:59:45+10:00",
-  "mem_free_pct": 49,
+  "t": "2026-11-07T08:02:41+10:00",
+  "mem_free_pct": 47,
   "load": [
-   3.19,
-   3.28,
-   4.93
+   2.65,
+   2.88,
+   4.44
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "66de3c5",
+    "date": "2026-11-07T08:02:36+10:00",
+    "subject": "Reward visits that go right, free the cap from people walking home, and fix four customer slips",
+    "body": "- +8 when everything on the list was found at a fair price, +4 in a 90%-clean store: good play\n  now ends visits around 4.35 stars instead of topping out near 3.85 (N10, E7).\n- Customers already out of the door on the way home no longer hold places under the in-store\n  cap; a separate hard limit keeps the plot under 26 people (N9).\n- With no till, the basket is left behind instead of walked off unpaid (N12).\n- A customer isn't put off by their own spill (N15); the head no longer stays turned back at the\n  shelf after a bark (N8); grumpy customers say a grumpy goodbye and storming out has its own\n  lines, both in the Sunday review's complaints (N11).\nReview round 2.",
+    "stat": "7 files changed, 124 insertions(+), 9 deletions(-)"
+   },
    {
     "sha": "017be96",
     "date": "2026-11-07T07:59:38+10:00",
@@ -2691,19 +2751,12 @@
     "subject": "Add the round-1 review additions: catch boxes from the van, rare misfires that set off a car alarm, the store phone, the My Store look app, Sunday's newspaper review and the rival's sale week",
     "body": "",
     "stat": "42 files changed, 2080 insertions(+), 64 deletions(-)"
-   },
-   {
-    "sha": "5fe4304",
-    "date": "2026-11-06T00:57:18+10:00",
-    "subject": "Refresh price labels and the price popup after the morning market drift; GDD: an unset price shows the market price, not --",
-    "body": "",
-    "stat": "5 files changed, 35 insertions(+), 4 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 149
+  "total_commits": 150
  },
- "updated": "2026-11-07T07:59:45+10:00",
+ "updated": "2026-11-07T08:02:42+10:00",
  "qa": [
   {
    "num": 1,
