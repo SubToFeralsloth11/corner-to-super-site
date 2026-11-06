@@ -1,11 +1,11 @@
 {
  "status": {
-  "state": "reviewing",
+  "state": "fixing",
   "round": "C2",
   "area": "Second pass",
-  "activity": "Cycle 2: lead re-reviewing every area (critic agents return when the API limit lifts)",
+  "activity": "FixRegress agent on X findings; lead on remaining Y findings",
   "cycle": "2",
-  "since": "2026-11-07T09:23:57+10:00"
+  "since": "2026-11-07T09:46:58+10:00"
  },
  "rounds": [
   {
@@ -1646,6 +1646,246 @@
      "by": "CritPlayer",
      "status": "open",
      "found": "2026-11-07T09:40:31+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X1",
+     "sev": "P1",
+     "title": "Taking exact cash from the floor leaves an empty card keypad open on an idle till",
+     "file": "scripts/fixtures/checkout.gd:649-667",
+     "detail": "5329992 added the exact-cash path. If you're standing and click or E the cash, the call goes TillTarget.on_primary → use_target → open_payment(player). Because seated==null, that calls sit(player) (653), and sit() calls open_payment(player) again (888). This inner call runs drawer.open()+give_change(), which leads to _complete→_end and sets method=&\"\". When control returns to the outer open_payment, `method == &\"cash\"` is now false, so it falls into the else branch: change_panel.close(); keypad.open() (667). The player sits down after a cash sale and sees a CARD keypad for no payment. Digits they type drive reader_typed on an idle reader. The keypad keeps whatever was typed into the next card sale, because open() only clears when it's not visible. Sitting with E while exact cash is waiting also completes the sale straight away, which contradicts \"waits until the player takes it\". Fix: return from open_payment as soon as `phase != Phase.PAYING` after sit(); or have sit() pass auto=true and let only the explicit cash click complete the sale.",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:57+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X2",
+     "sev": "P1",
+     "title": "Customers now pick an empty unserved till over a full served one, then give up there",
+     "file": "scripts/world/world.gd:462-469",
+     "detail": "The new ranking puts `room` ahead of `attended`. A served lane is full at 6 people (LANE_MAX 4.65 m, 0.8 m each) or 2-3 trolleys. Once that happens, every new customer joins an unattended second till. That till's front customer starts (_served_elsewhere is false because the served till has a queue), rings the bell and unloads, then waits their whole 90 s patience. AT_TILL never runs _maybe_switch_queue, so they drop the basket and leave (mess, lost sales, \"give_up\" quote). The rest of that queue only switches when the served till's queue_length ≤ their index. Before today, everyone joined the attended till. This hits the normal mid-game setup: a second till bought for the +4 cap while the player alone works till 1. Fix: rank attended above room. Prefer attended tills with room; if none has room, join the shortest attended queue and wait as overflow. Use unattended tills only when nobody is serving anywhere.",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:57+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X3",
+     "sev": "P2",
+     "title": "A Smokes customer at the unattended cigarette-wall till is held with no bell until patience runs out",
+     "file": "scripts/fixtures/checkout.gd:323-332",
+     "detail": "_served_elsewhere() stops begin() whenever another in-use till is attended with an empty queue. The hold assumes _maybe_switch_queue will move the customer. A customer with counter_asks calls shortest_queue(true), which always returns the wall till, so `best == checkout` and they never switch (shopper_brain.gd:518-519). Example: the player or a cashier works till 2 with nobody queued while the wall stands behind till 1. The Smokes customer stands at till 1's serve point and nothing happens: no unload, no counter bell. Patience drains and they give up, unless someone happens to join till 2. Fix: skip the hold when queue[0].brain.counter_asks is non-empty, or when the customer can't use the served till (`w.cig_wall_till() == self`).",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:57+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X4",
+     "sev": "P2",
+     "title": "Overflow customers freeze wherever they finished shopping, out of sight of the till",
+     "file": "scripts/npc/shopper_brain.gd:530-534",
+     "detail": "When `not checkout.in_lane(shopper)`, they stop() on the spot and stare at the till. That spot is usually in front of the last shelf they used, somewhere across the store, so they block other shoppers' stand points. The player can't see the real queue length, and patience burns down without any visible line. LANE_MAX (4.65 m) makes this common: 6 walkers or 2-3 trolleys fill a lane. has_room() also ignores the joiner's own trolley (_queue_depth uses null for k == size), so a trolley pusher is told there is room and then waits in place anyway. Fix: send overflow to a holding spot just past the lane end, or let the line bend along a free aisle. Count the joiner's trolley in has_room.",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:57+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X5",
+     "sev": "P2",
+     "title": "A till with a cashier can't be moved during PREP, and build mode still shows \"[LMB] Move\"",
+     "file": "scripts/build/build_mode.gd:178-180",
+     "detail": "41f4c70 made pick() refuse till_busy(fx), and till_busy includes has_cashier(). Cashiers are on shift in PREP (StaffCrew.shift_on), stand at their post and set checkout.cashier (cashier_job.gd:93). So any staffed till is locked in place exactly when players rearrange. The hover prompt still reads \"[LMB] Move · …\" and LMB fails with \"Someone is at this till\". The only way out is after hours, or reassigning or firing the cashier. Fix: ignore the cashier for pick() and have the cashier re-walk to _post() when the till lands (the queue/customer checks can stay). At minimum, say \"Move it after hours or reassign the cashier\".",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:57+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X6",
+     "sev": "P2",
+     "title": "The 0.6 m shelf-access strip is narrower than the navmesh can use, so \"reachable\" layouts still starve shelves",
+     "file": "scripts/build/build_rules.gd:24",
+     "detail": "B2 now requires one face with ACCESS_DEPTH=0.6 m of free floor. The navmesh is baked with agent_radius 0.3 (world/nav.gd:91), which erodes 0.3 m from both the face and the opposite obstacle. A gap of 0.6 m to about 0.7 m therefore has no walkable cells. ShopperBrain._reachable (closest nav point within 0.6 of a stand point 0.6 out) then fails for mid-aisle slots, and customers skip them or bark \"not carried\". The strip check also never tests whether the strip connects to the rest of the floor. Fix: set ACCESS_DEPTH to at least REACH_STAND + agent_radius (0.9 m). Optionally confirm with a nav query once the rebake finishes.",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:57+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X7",
+     "sev": "P2",
+     "title": "Every customer walking to an empty shelf scans every slot in the store each physics frame",
+     "file": "scripts/npc/shopper_brain.gd:139-140",
+     "detail": "While _oos_walk is true, TO_SLOT calls _nearest_slot(_wanted) every tick. That loops all fixtures × slots (564 in a full store), calling _slot_has and in_use on each. Out-of-stock walks are frequent mid-game and last several seconds per customer. This brings back the per-frame full-slot scan that round-1 #18 removed from the spawner, while V3 (35-44 fps windowed) is still open. [UNVERIFIED cost; expect ms per frame with several walkers]. Fix: re-check on a 0.5 s timer, or listen for the product's slot count changing.",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:57+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X8",
+     "sev": "P2",
+     "title": "Repeat Smokes picks still mean one complaint and one price decision per pack",
+     "file": "scripts/npc/shopper_brain.gd:185-186",
+     "detail": "c98c03f (N3) merges repeat picks into a quantity, but the counter_wall path expands them back into one counter_asks entry per unit. When the wall is empty, _ask_for_counter_items (checkout.gd:499-505) charges -12 and plays an out_of_stock bark for each pack. 3 Smokes is -36 and three bubbles. When the wall has stock, fetch_smokes (checkout.gd:578) rolls CustomerRules.decide separately for each pack, so one customer can buy a pack and then refuse the next at the same price, -8 each time. Fix: pass {id, qty} to the till. Do one has_pack check and one complaint for the shortfall, and one decide() per product with the verdict cached for the remaining packs.",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:57+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X9",
+     "sev": "P3",
+     "title": "Overdue paid at the Bank during the day disappears from the receipt's money lines",
+     "file": "scripts/autoload/game.gd:637",
+     "detail": "_tally_other drops reason &\"overdue\", which covers both tonight's overdue lines and pay_overdue (494-499) at the Bank in PREP or OPEN. A daytime Bank payment lowers cash, but it isn't in \"Other money today\" and isn't among tonight's overdue_before (snapshot taken after the payment). So \"Cash at open + revenue + other − bills paid\" no longer equals Cash, which E11 says it should. Fix: give pay_overdue its own reason (&\"overdue_bank\") and add \"Overdue paid at the Bank\" to MONEY_NAMES.",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:57+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X10",
+     "sev": "P3",
+     "title": "Cost basis counts free first-order boxes at full price and never removes binned stock",
+     "file": "scripts/autoload/game.gd:584",
+     "detail": "place_order books every ordered unit at cost_of(id), including the q[\"free_boxes\"] that cost nothing, so day-1 COGS and profit show money never spent. _use_basis (611) only runs on sales. Units that leave any other way, such as a box binned with stock in it, stay in the held count and skew the average on later orders. Start stock is never booked at all. Fix: book free units at 0 (or cut the average by the free share). Decrement the basis wherever stock is destroyed (bin_held with count > 0, misfire losses).",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:57+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X11",
+     "sev": "P2",
+     "title": "The level-16 Head office franchise never pays for itself in a normal run",
+     "file": "data/upgrades.json:19-24",
+     "detail": "It costs $10,000 and pays $100 per star each Sunday (game.gd:1150). At 4.35 stars that is about $435 a week, so it takes about 23 weeks (over 160 days) to break even. Level 16 arrives around day 27 at about $2,000 a day (PROGRESS M9 playtest notes), so the \"real unlock\" is a money sink nobody should buy. Fix: pay per day (e.g. $50/star each night) or cut the price to about $2,500. Show payback days on the card.",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:57+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X12",
+     "sev": "P3",
+     "title": "The \"found everything\" +8 is still paid when the Smokes they asked for were sold out or refused",
+     "file": "scripts/npc/shopper_brain.gd:607-608",
+     "detail": "Only _find_slot_or_lose and _take set _let_down. _ask_for_counter_items (wall empty, checkout.gd:499-505), fetch_smokes (out of stock or too dear, 573-582) and _lose_counter_asks never set it. A customer who complained \"no Smokes\" therefore still gets +8 at checkout. Fix: set customer.brain._let_down = true (via a brain method) on each of those paths.",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:58+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X13",
+     "sev": "P3",
+     "title": "The receipt says a cashier lets in more customers, and counts close-early arrivals as \"store full\"",
+     "file": "scripts/ui/day_summary.gd:134",
+     "detail": "max_concurrent(tills, level) has no staff term, so \"Another till or a cashier lets more people in at once\" is wrong about cashiers. Also, CustomerSpawner books all `pending` as turned away whenever phase != OPEN (customer_spawner.gd:30), including after a voluntary close_early. Those people show as \"Turned away, store full\" with advice to buy a till. Fix: drop \"or a cashier\". Only count pending at the 22:00 close, or tag close-early leavers separately.",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:58+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X14",
+     "sev": "P3",
+     "title": "Load and save create overfilled boxes stacked on one spot",
+     "file": "scripts/world/world.gd:339",
+     "detail": "V1's overflow spawns one box with all `spare` units. Old 3×-multiplier chest-freezer slots can leave dozens, far beyond units_per_box, and put_one then refuses because the box is \"full\". The box spawns 0.8 m in front of the slot, which can be inside the next fixture in a tight aisle, and before later fixtures are added and without _hold_still. Dropped-basket saving (save.gd:79-82) also puts every product's box at the same point (basket position + 0.3), and they burst apart on load. Fix: split into ceil(n / units_per_box) boxes, offset each box's spawn point, and add them to the restored list that _hold_still freezes.",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:58+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X15",
+     "sev": "P3",
+     "title": "ECONOMY says the first instalment is charged on the night the loan is taken, but a loan taken on the receipt starts the next night",
+     "file": "docs/ECONOMY.md:174",
+     "detail": "loan_refusal now allows loans in SUMMARY before Pay all (game.gd:461). end_day has already built today.bills and run _advance_loans, so a loan taken on the receipt is first charged the following night. Fix: update the doc (\"taken after End day: first charged the next night\"), or add its instalment to today.bills when taken in SUMMARY.",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:58+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X16",
+     "sev": "P3",
+     "title": "The \"Take a pack\" button covers the HUD clock, and the till hint covers the rival-sale chip",
+     "file": "scripts/fixtures/checkout.gd:152",
+     "detail": "smokes_button sits on layer 5 at centre-top, offset 48. The HUD clock card (layer 4) is also centre-top from y 20, with its badges below, so the button is drawn over the clock and waiting chip. U1 moved the hint to 100 to clear that card for this reason. The hint at offset 100 now overlaps the HUD RivalSale card at offset 104 (hud.gd:249) during sale weeks. Fix: put the button under the hint (around 140) or bottom-centre, and push the hint below the sale chip when it's visible.",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:58+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X17",
+     "sev": "P3",
+     "title": "Stocking a second cooler leaves the first cooler's door open",
+     "file": "scripts/entities/player.gd:608",
+     "detail": "place_one overwrites _door_fx with the new fixture and never closes the previous one. Holding E across a row of coolers or freezers (the normal way to stock them) leaves every door but the last standing open until a customer happens to open and close it. In PREP nobody does. Fix: if `_door_fx != slot.fixture and is_instance_valid(_door_fx)`, close the old door before switching.",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:58+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X18",
+     "sev": "P3",
+     "title": "Stale concurrency comment and fallbacks in customer_rules",
+     "file": "scripts/npc/customer_rules.gd:34-38",
+     "detail": "1b985cd set customers.json concurrency.base to 0. The comment still says \"2 + 4 * tills + level / 2\", and the fallbacks are base 4 and per_till 2 (the pre-M9 formula). N22's \"stale docs and fallback values\" problem is back. Fix: comment `4 * tills + level / 2`; fallbacks base 0, per_till 4.",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:58+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X19",
+     "sev": "P3",
+     "title": "_any_overlap_poly is a one-line duplicate of _any_overlap",
+     "file": "scripts/build/build_rules.gd:92-94",
+     "detail": "It only forwards to _any_overlap(polys, b) and has one caller (refusal, the neighbour access check). Fix: call _any_overlap directly and delete the wrapper.",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:58+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "X20",
+     "sev": "P3",
+     "title": "Customers bounce between tills when the player walks past a counter",
+     "file": "scripts/fixtures/checkout.gd:323-332",
+     "detail": "is_attended() counts the player just standing in the 2.5 × 5.2 m box behind a counter. Walking behind till A on the way to till B makes A \"attended with an empty queue\". B's front customer is then held by _served_elsewhere and moves to A at the next 2.5 s check. When the player sits at B, A is unattended and the same rule sends them back. Fix: use only seated or cashier (is_staffed()) for _served_elsewhere and _maybe_switch_queue, and keep the standing-behind check for picking a queue.",
+     "by": "CritRegress",
+     "status": "open",
+     "found": "2026-11-07T09:46:58+10:00",
      "commit": "",
      "note": ""
     }
@@ -3362,6 +3602,116 @@
    "t": "2026-11-07T09:46:11+10:00",
    "kind": "fix",
    "msg": "C2/Y5 fixed 697e847 menu_test 81/81"
+  },
+  {
+   "t": "2026-11-07T09:46:57+10:00",
+   "kind": "finding",
+   "msg": "C2/X1 [P1] Taking exact cash from the floor leaves an empty card keypad open on an idle till"
+  },
+  {
+   "t": "2026-11-07T09:46:57+10:00",
+   "kind": "finding",
+   "msg": "C2/X2 [P1] Customers now pick an empty unserved till over a full served one, then give up there"
+  },
+  {
+   "t": "2026-11-07T09:46:57+10:00",
+   "kind": "finding",
+   "msg": "C2/X3 [P2] A Smokes customer at the unattended cigarette-wall till is held with no bell until patience runs out"
+  },
+  {
+   "t": "2026-11-07T09:46:57+10:00",
+   "kind": "finding",
+   "msg": "C2/X4 [P2] Overflow customers freeze wherever they finished shopping, out of sight of the till"
+  },
+  {
+   "t": "2026-11-07T09:46:57+10:00",
+   "kind": "finding",
+   "msg": "C2/X5 [P2] A till with a cashier can't be moved during PREP, and build mode still shows \"[LMB] Move\""
+  },
+  {
+   "t": "2026-11-07T09:46:57+10:00",
+   "kind": "finding",
+   "msg": "C2/X6 [P2] The 0.6 m shelf-access strip is narrower than the navmesh can use, so \"reachable\" layouts still starve shelves"
+  },
+  {
+   "t": "2026-11-07T09:46:57+10:00",
+   "kind": "finding",
+   "msg": "C2/X7 [P2] Every customer walking to an empty shelf scans every slot in the store each physics frame"
+  },
+  {
+   "t": "2026-11-07T09:46:57+10:00",
+   "kind": "finding",
+   "msg": "C2/X8 [P2] Repeat Smokes picks still mean one complaint and one price decision per pack"
+  },
+  {
+   "t": "2026-11-07T09:46:57+10:00",
+   "kind": "finding",
+   "msg": "C2/X9 [P3] Overdue paid at the Bank during the day disappears from the receipt's money lines"
+  },
+  {
+   "t": "2026-11-07T09:46:57+10:00",
+   "kind": "finding",
+   "msg": "C2/X10 [P3] Cost basis counts free first-order boxes at full price and never removes binned stock"
+  },
+  {
+   "t": "2026-11-07T09:46:57+10:00",
+   "kind": "finding",
+   "msg": "C2/X11 [P2] The level-16 Head office franchise never pays for itself in a normal run"
+  },
+  {
+   "t": "2026-11-07T09:46:58+10:00",
+   "kind": "finding",
+   "msg": "C2/X12 [P3] The \"found everything\" +8 is still paid when the Smokes they asked for were sold out or refused"
+  },
+  {
+   "t": "2026-11-07T09:46:58+10:00",
+   "kind": "finding",
+   "msg": "C2/X13 [P3] The receipt says a cashier lets in more customers, and counts close-early arrivals as \"store full\""
+  },
+  {
+   "t": "2026-11-07T09:46:58+10:00",
+   "kind": "finding",
+   "msg": "C2/X14 [P3] Load and save create overfilled boxes stacked on one spot"
+  },
+  {
+   "t": "2026-11-07T09:46:58+10:00",
+   "kind": "finding",
+   "msg": "C2/X15 [P3] ECONOMY says the first instalment is charged on the night the loan is taken, but a loan taken on the receipt starts the next night"
+  },
+  {
+   "t": "2026-11-07T09:46:58+10:00",
+   "kind": "finding",
+   "msg": "C2/X16 [P3] The \"Take a pack\" button covers the HUD clock, and the till hint covers the rival-sale chip"
+  },
+  {
+   "t": "2026-11-07T09:46:58+10:00",
+   "kind": "finding",
+   "msg": "C2/X17 [P3] Stocking a second cooler leaves the first cooler's door open"
+  },
+  {
+   "t": "2026-11-07T09:46:58+10:00",
+   "kind": "finding",
+   "msg": "C2/X18 [P3] Stale concurrency comment and fallbacks in customer_rules"
+  },
+  {
+   "t": "2026-11-07T09:46:58+10:00",
+   "kind": "finding",
+   "msg": "C2/X19 [P3] _any_overlap_poly is a one-line duplicate of _any_overlap"
+  },
+  {
+   "t": "2026-11-07T09:46:58+10:00",
+   "kind": "finding",
+   "msg": "C2/X20 [P3] Customers bounce between tills when the player walks past a counter"
+  },
+  {
+   "t": "2026-11-07T09:46:58+10:00",
+   "kind": "agent",
+   "msg": "Agent CritRegress: done 20 regression findings"
+  },
+  {
+   "t": "2026-11-07T09:46:58+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixRegress agent on X findings; lead on remaining Y findings"
   }
  ],
  "tests": [
@@ -3492,9 +3842,9 @@
    "t": "2026-11-07T08:55:23+10:00"
   },
   "CritRegress": {
-   "state": "running",
-   "task": "Reviewer: regressions in today's ~70 commits",
-   "t": "2026-11-07T09:27:56+10:00"
+   "state": "done",
+   "task": "20 regression findings",
+   "t": "2026-11-07T09:46:58+10:00"
   },
   "CritPlayer": {
    "state": "done",
@@ -3503,12 +3853,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:46:11+10:00",
-  "mem_free_pct": 34,
+  "t": "2026-11-07T09:46:58+10:00",
+  "mem_free_pct": 35,
   "load": [
-   2.64,
-   3.0,
-   3.52
+   3.99,
+   3.3,
+   3.6
   ],
   "godot_procs": 0
  },
@@ -3938,7 +4288,7 @@
   "dirty": [],
   "total_commits": 188
  },
- "updated": "2026-11-07T09:46:12+10:00",
+ "updated": "2026-11-07T09:46:59+10:00",
  "qa": [
   {
    "num": 1,
