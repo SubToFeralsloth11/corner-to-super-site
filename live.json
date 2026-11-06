@@ -276,11 +276,11 @@
      "file": "stock_math.gd:12-15, data/products.json",
      "detail": "Only one orientation tried; can meshes double size. Stocking is tedious, shelves empty instantly.",
      "by": "CritShelves",
-     "status": "wip",
+     "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "1fcf7bf",
-     "note": "Turnable products (TP 1->2 per slot). Oversized can/bag meshes need an asset+economy pass: deferred to a later round",
-     "closed": "2026-11-06T20:35:38+10:00"
+     "commit": "8a8888c",
+     "note": "Real cans (model_scale), turnable produce/TP; suite 1036/0; screenshot tour 16/17 checked",
+     "closed": "2026-11-07T08:21:24+10:00"
     },
     {
      "id": "S4",
@@ -2475,6 +2475,21 @@
    "t": "2026-11-07T08:20:03+10:00",
    "kind": "fix",
    "msg": "R8/M2 fixed cfa35ef Shift = 5 boxes"
+  },
+  {
+   "t": "2026-11-07T08:21:24+10:00",
+   "kind": "fix",
+   "msg": "R3/S3 fixed 8a8888c Real cans (model_scale), turnable produce/TP; suite 1036/0; screenshot tour 16/17 checked"
+  },
+  {
+   "t": "2026-11-07T08:21:25+10:00",
+   "kind": "shots",
+   "msg": "Screenshots refreshed: 56 images After R3-R6 fixes: real-size cans, chest freezer, POS"
+  },
+  {
+   "t": "2026-11-07T08:21:25+10:00",
+   "kind": "test",
+   "msg": "Tests: 1036 passed, 0 failed after real-size cans"
   }
  ],
  "tests": [
@@ -2531,6 +2546,12 @@
    "passed": 1034,
    "failed": 0,
    "note": "after customer behaviour batch"
+  },
+  {
+   "t": "2026-11-07T08:21:25+10:00",
+   "passed": 1036,
+   "failed": 0,
+   "note": "after real-size cans"
   }
  ],
  "agents": {
@@ -2576,17 +2597,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T08:20:03+10:00",
-  "mem_free_pct": 28,
+  "t": "2026-11-07T08:21:25+10:00",
+  "mem_free_pct": 46,
   "load": [
-   2.22,
-   2.41,
+   2.95,
+   2.58,
    3.02
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "8a8888c",
+    "date": "2026-11-07T08:21:22+10:00",
+    "subject": "Draw cans at real size, one layer deep: 30 to a cooler shelf instead of 6",
+    "body": "The can models were built twice real size, so a 24-can box needed four cooler shelves and\ncans emptied in minutes. products.json model_scale scales them wherever they are drawn (keeping\nthe import LODs); COLA, FIZZ, BEER and SOUP sizes now match real cans. Checked in the screenshot\ntour. Review round 2, S3.",
+    "stat": "9 files changed, 40 insertions(+), 25 deletions(-)"
+   },
    {
     "sha": "cfa35ef",
     "date": "2026-11-07T08:19:56+10:00",
@@ -2999,29 +3027,12 @@
     "subject": "Work out the arrival rate once a second instead of every physics frame",
     "body": "It scans every slot for the products in stock, 564 slots in a full store (review #18).",
     "stat": "1 file changed, 11 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "6dd808f",
-    "date": "2026-11-06T01:05:28+10:00",
-    "subject": "Cut the full store's draw calls: one shadowless MultiMesh per slot, batched troffers, price labels drawn only up close",
-    "body": "Stock no longer casts sun shadows (it sits inside its fixture under the roof) and each slot\ndraws all its rows in one MultiMesh, leaving distant stock to the import LODs; the ceiling\ntroffers are one MultiMesh per part; price label text stops drawing past 10 m and the card\npast 20 m. The full-store tour now records CPU per frame by the wall clock and a headless\ndraw estimate (frustum + visibility ranges, shadow casters).",
-    "stat": "7 files changed, 128 insertions(+), 31 deletions(-)"
    }
   ],
-  "dirty": [
-   " M data/products.json",
-   " M docs/ARCHITECTURE.md",
-   " M docs/ECONOMY.md",
-   " M scripts/autoload/catalog.gd",
-   " M scripts/entities/held_item.gd",
-   " M scripts/entities/stock_box.gd",
-   " M scripts/fixtures/slot.gd",
-   " M scripts/npc/shopper_carry.gd",
-   " M tests/cases/stock_test.gd"
-  ],
-  "total_commits": 160
+  "dirty": [],
+  "total_commits": 161
  },
- "updated": "2026-11-07T08:20:04+10:00",
+ "updated": "2026-11-07T08:21:26+10:00",
  "qa": [
   {
    "num": 1,
@@ -3081,8 +3092,8 @@
   }
  ],
  "shots": {
-  "t": "2026-11-06T20:41:17+10:00",
-  "note": "After R3 fixes (chest freezer shot 49 added)",
+  "t": "2026-11-07T08:21:25+10:00",
+  "note": "After R3-R6 fixes: real-size cans, chest freezer, POS",
   "files": [
    "01_exterior_from_road.jpg",
    "02_entrance_looking_in.jpg",
