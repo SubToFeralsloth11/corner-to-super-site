@@ -2094,6 +2094,11 @@
    "t": "2026-11-07T07:54:44+10:00",
    "kind": "status",
    "msg": "Status: reviewing - Lead critiquing build mode by reading code while the soak runs"
+  },
+  {
+   "t": "2026-11-07T07:56:42+10:00",
+   "kind": "agent",
+   "msg": "Agent soak: stopped Soak paused: it held the engine lock for an hour; will rerun at the end of the cycle"
   }
  ],
  "tests": [
@@ -2159,20 +2164,20 @@
    "t": "2026-11-07T07:47:58+10:00"
   },
   "soak": {
-   "state": "running",
-   "task": "30-day headless soak (pacing + stability) after round 2 fixes",
-   "t": "2026-11-07T07:54:44+10:00"
+   "state": "stopped",
+   "task": "Soak paused: it held the engine lock for an hour; will rerun at the end of the cycle",
+   "t": "2026-11-07T07:56:42+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T07:54:44+10:00",
-  "mem_free_pct": 50,
+  "t": "2026-11-07T07:56:42+10:00",
+  "mem_free_pct": 49,
   "load": [
-   2.99,
-   3.73,
-   5.74
+   3.33,
+   3.72,
+   5.49
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
@@ -2597,10 +2602,12 @@
     "stat": "3 files changed, 67 insertions(+), 11 deletions(-)"
    }
   ],
-  "dirty": [],
+  "dirty": [
+   " M scripts/build/build_rules.gd"
+  ],
   "total_commits": 148
  },
- "updated": "2026-11-07T07:54:45+10:00",
+ "updated": "2026-11-07T07:56:43+10:00",
  "qa": [
   {
    "num": 1,
