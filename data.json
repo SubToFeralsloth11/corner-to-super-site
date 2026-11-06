@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-06T20:24+10:00",
- "head": "63fb369",
+ "generated": "2026-11-06T20:25+10:00",
+ "head": "0e86b99",
  "stats": {
-  "commits": 113,
+  "commits": 114,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-06T20:24:42+10:00",
+  "last_commit": "2026-11-06T20:25:17+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 26394,
+  "gd_lines": 26408,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -845,6 +845,11 @@
    "sha": "63fb369",
    "date": "2026-11-06T20:24:42+10:00",
    "subject": "Consume E (and a used LMB) in the player so sitting at the till doesn't stand you straight back up"
+  },
+  {
+   "sha": "0e86b99",
+   "date": "2026-11-06T20:25:17+10:00",
+   "subject": "Wait for the basket to be unloaded before taking payment, so a quick scan can't skip the Smokes ask"
   }
  ],
  "commits_per_hour": [
@@ -962,7 +967,7 @@
   },
   {
    "hour": "2026-11-06T20:00:00+10:00",
-   "commits": 2
+   "commits": 3
   }
  ],
  "sections": [

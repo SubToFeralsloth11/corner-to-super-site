@@ -46,10 +46,11 @@
      "file": "checkout.gd:406-407,313-319",
      "detail": "_maybe_pay moves UNLOADING to PAYING before counter asks become 'asked'.",
      "by": "CritCheckout",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:22:44+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "0e86b99",
+     "note": "_maybe_pay returns while UNLOADING; new m7_content test_quick_scan_still_asks_for_smokes + checkout/staff tests pass (13/44/49)",
+     "closed": "2026-11-06T20:25:19+10:00"
     },
     {
      "id": "C4",
@@ -751,6 +752,11 @@
    "t": "2026-11-06T20:24:51+10:00",
    "kind": "fix",
    "msg": "R2/C1 fixed 63fb369 Player consumes E; bot taps via push_input; m2_acceptance 0/8 before, 8/8 after"
+  },
+  {
+   "t": "2026-11-06T20:25:19+10:00",
+   "kind": "fix",
+   "msg": "R2/C3 fixed 0e86b99 _maybe_pay returns while UNLOADING; new m7_content test_quick_scan_still_asks_for_smokes + checkout/staff tests pass (13/44/49)"
   }
  ],
  "tests": [
@@ -785,17 +791,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:24:51+10:00",
-  "mem_free_pct": 43,
+  "t": "2026-11-06T20:25:19+10:00",
+  "mem_free_pct": 45,
   "load": [
-   2.53,
-   2.42,
+   2.7,
+   2.46,
    2.75
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "0e86b99",
+    "date": "2026-11-06T20:25:17+10:00",
+    "subject": "Wait for the basket to be unloaded before taking payment, so a quick scan can't skip the Smokes ask",
+    "body": "",
+    "stat": "4 files changed, 37 insertions(+), 4 deletions(-)"
+   },
    {
     "sha": "63fb369",
     "date": "2026-11-06T20:24:42+10:00",
@@ -1208,23 +1221,14 @@
     "subject": "Slide the chest freezer's glass lids open over the half being stocked or shopped",
     "body": "",
     "stat": "4 files changed, 79 insertions(+), 8 deletions(-)"
-   },
-   {
-    "sha": "579ae23",
-    "date": "2026-11-05T20:31:54+10:00",
-    "subject": "Add M4 progression: licences, daily market drift, Pricing and Stats apps, cleanliness, customer messes and the level-up banner",
-    "body": "",
-    "stat": "24 files changed, 1131 insertions(+), 8 deletions(-)"
    }
   ],
   "dirty": [
-   " M scripts/fixtures/checkout.gd",
-   " M tests/cases/m7_content_test.gd",
-   " M tests/cases/staff_test.gd"
+   " M scripts/npc/staff_crew.gd"
   ],
-  "total_commits": 113
+  "total_commits": 114
  },
- "updated": "2026-11-06T20:24:51+10:00",
+ "updated": "2026-11-06T20:25:20+10:00",
  "qa": [
   {
    "num": 1,
