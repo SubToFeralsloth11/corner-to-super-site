@@ -1649,10 +1649,11 @@
      "file": "scripts/entities/player.gd:44,386",
      "detail": "The only connection is in tests/cases/additions_test.gd:56. The catch's effects (XP, chime, toast, tutorial notify) already happen inline in `try_catch` and `BoxCannon.caught`. AGENTS.md says not to test wiring, and this signal exists only for that test. Fix: remove the signal and have the test check `held_box` and the XP gain instead.",
      "by": "CritPlayer",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:40:31+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "75c335b",
+     "note": "additions_test passes",
+     "closed": "2026-11-07T09:51:47+10:00"
     },
     {
      "id": "X1",
@@ -3799,6 +3800,11 @@
    "t": "2026-11-07T09:51:24+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixRegress: X5 move staffed till"
+  },
+  {
+   "t": "2026-11-07T09:51:47+10:00",
+   "kind": "fix",
+   "msg": "C2/Y15 fixed 75c335b additions_test passes"
   }
  ],
  "tests": [
@@ -3940,17 +3946,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:51:24+10:00",
-  "mem_free_pct": 56,
+  "t": "2026-11-07T09:51:47+10:00",
+  "mem_free_pct": 57,
   "load": [
-   3.7,
-   4.04,
-   3.87
+   2.94,
+   3.84,
+   3.8
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "75c335b",
+    "date": "2026-11-07T09:51:46+10:00",
+    "subject": "Remove Player.box_caught, a signal only a test listened to (Y15)",
+    "body": "",
+    "stat": "2 files changed, 6 deletions(-)"
+   },
    {
     "sha": "e65fe0e",
     "date": "2026-11-07T09:51:18+10:00",
@@ -4363,21 +4376,15 @@
     "subject": "Make the POS screen readable from the till seat: bigger, fewer lines and short status text",
     "body": "Item lines were 19 px on a screen ~200 px wide in the seated view (about 6 px on screen). Six\n32 px lines, a 60 px total and a status line clipped clear of it. Review round 2, U3.",
     "stat": "2 files changed, 20 insertions(+), 15 deletions(-)"
-   },
-   {
-    "sha": "f0e3703",
-    "date": "2026-11-06T20:49:51+10:00",
-    "subject": "Close an exact-cash sale as the cash is taken, and move the till hint below the HUD clock",
-    "body": "Exact cash opened the change panel with $0.00 due and waited for a Give click; the seated\nhint line was drawn over the clock card (seen in the windowed gameplay tour). Review round 2,\nU1 and U2.",
-    "stat": "2 files changed, 26 insertions(+), 1 deletion(-)"
    }
   ],
   "dirty": [
-   " M scripts/build/build_mode.gd"
+   " M scripts/build/build_mode.gd",
+   " M tests/cases/staff_test.gd"
   ],
-  "total_commits": 197
+  "total_commits": 198
  },
- "updated": "2026-11-07T09:51:25+10:00",
+ "updated": "2026-11-07T09:51:48+10:00",
  "qa": [
   {
    "num": 1,

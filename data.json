@@ -1,17 +1,17 @@
 {
  "generated": "2026-11-07T09:51+10:00",
- "head": "e65fe0e",
+ "head": "75c335b",
  "stats": {
-  "commits": 197,
+  "commits": 198,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T09:51:18+10:00",
+  "last_commit": "2026-11-07T09:51:46+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 28670,
+  "gd_lines": 28686,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1286,6 +1286,11 @@
    "sha": "e65fe0e",
    "date": "2026-11-07T09:51:18+10:00",
    "subject": "Don't tell players a cashier raises the in-store cap (only tills do) (X13)"
+  },
+  {
+   "sha": "75c335b",
+   "date": "2026-11-07T09:51:46+10:00",
+   "subject": "Remove Player.box_caught, a signal only a test listened to (Y15)"
   }
  ],
  "commits_per_hour": [
@@ -1455,7 +1460,7 @@
   },
   {
    "hour": "2026-11-07T09:00:00+10:00",
-   "commits": 20
+   "commits": 21
   }
  ],
  "sections": [
