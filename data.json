@@ -1,10 +1,10 @@
 {
  "generated": "2026-11-06T20:43+10:00",
- "head": "b16ea41",
+ "head": "7f6ffc0",
  "stats": {
-  "commits": 135,
+  "commits": 136,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-06T20:42:15+10:00",
+  "last_commit": "2026-11-06T20:43:31+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
@@ -955,6 +955,11 @@
    "sha": "b16ea41",
    "date": "2026-11-06T20:42:15+10:00",
    "subject": "Move customers from an unserved queue to a till someone opens"
+  },
+  {
+   "sha": "7f6ffc0",
+   "date": "2026-11-06T20:43:31+10:00",
+   "subject": "Give each till's queue a capacity and let overflow wait in place"
   }
  ],
  "commits_per_hour": [
@@ -1072,7 +1077,7 @@
   },
   {
    "hour": "2026-11-06T20:00:00+10:00",
-   "commits": 24
+   "commits": 25
   }
  ],
  "sections": [

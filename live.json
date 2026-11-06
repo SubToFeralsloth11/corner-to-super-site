@@ -99,10 +99,11 @@
      "file": "checkout.gd:222, world.gd:442-452",
      "detail": "",
      "by": "CritCheckout",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:22:44+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "7f6ffc0",
+     "note": "Checkout.has_room()/in_lane(); shortest_queue prefers tills with room; customers past a full lane wait where they stand instead of stacking on the last spot; new checkout_test test_a_full_lane_sends_newcomers_elsewhere_and_overflow_waits_in_place (4/0), queue tests 15/0",
+     "closed": "2026-11-06T20:43:33+10:00"
     },
     {
      "id": "C8",
@@ -1011,6 +1012,11 @@
    "t": "2026-11-06T20:42:59+10:00",
    "kind": "status",
    "msg": "Status: fixing - Fixer: C7 queue capacity"
+  },
+  {
+   "t": "2026-11-06T20:43:33+10:00",
+   "kind": "fix",
+   "msg": "R2/C7 fixed 7f6ffc0 Checkout.has_room()/in_lane(); shortest_queue prefers tills with room; customers past a full lane wait where they stand instead of stacking on the last spot; new checkout_test test_a_full_lane_sends_newcomers_elsewhere_and_overflow_waits_in_place (4/0), queue tests 15/0"
   }
  ],
  "tests": [
@@ -1045,17 +1051,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:42:59+10:00",
+  "t": "2026-11-06T20:43:33+10:00",
   "mem_free_pct": 45,
   "load": [
-   1.76,
-   2.59,
-   2.74
+   1.97,
+   2.54,
+   2.71
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "7f6ffc0",
+    "date": "2026-11-06T20:43:31+10:00",
+    "subject": "Give each till's queue a capacity and let overflow wait in place",
+    "body": "",
+    "stat": "6 files changed, 69 insertions(+), 13 deletions(-)"
+   },
    {
     "sha": "b16ea41",
     "date": "2026-11-06T20:42:15+10:00",
@@ -1468,24 +1481,12 @@
     "subject": "Place the deli corner and cigarette wall with their licences, sell Smokes at the till, hang aisle signs, plant verge trees and fill the car park with trade",
     "body": "",
     "stat": "15 files changed, 625 insertions(+), 38 deletions(-)"
-   },
-   {
-    "sha": "eeea6a8",
-    "date": "2026-11-05T22:30:47+10:00",
-    "subject": "Keep the background navmesh bake from calling into a freed world",
-    "body": "",
-    "stat": "1 file changed, 6 insertions(+), 1 deletion(-)"
    }
   ],
-  "dirty": [
-   " M scripts/fixtures/checkout.gd",
-   " M scripts/npc/shopper_brain.gd",
-   " M scripts/world/world.gd",
-   " M tests/cases/checkout_test.gd"
-  ],
-  "total_commits": 135
+  "dirty": [],
+  "total_commits": 136
  },
- "updated": "2026-11-06T20:43:00+10:00",
+ "updated": "2026-11-06T20:43:33+10:00",
  "qa": [
   {
    "num": 1,
