@@ -413,6 +413,11 @@
    "t": "2026-11-06T20:20:21+10:00",
    "kind": "status",
    "msg": "Status: fixing - Fixing R3 findings, P1s first"
+  },
+  {
+   "t": "2026-11-06T20:20:32+10:00",
+   "kind": "question",
+   "msg": "Question #2 answering: Testing"
   }
  ],
  "tests": [
@@ -447,13 +452,9 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:20:21+10:00",
+  "t": "2026-11-06T20:20:32+10:00",
   "mem_free_pct": 46,
-  "load": [
-   2.34,
-   2.7,
-   2.98
-  ],
+  "load": [],
   "godot_procs": 0
  },
  "game": {
@@ -882,7 +883,7 @@
   "dirty": [],
   "total_commits": 111
  },
- "updated": "2026-11-06T20:20:22+10:00",
+ "updated": "2026-11-06T20:20:33+10:00",
  "qa": [
   {
    "num": 1,
@@ -891,6 +892,14 @@
    "answer": "The loop is on **rounds R2 and R3 together**, in cycle 1. It is in the **reviewing** stage and has been since 2026-11-06 20:11 (+10:00).\n\n- **What it's looking at:** R2 is checkout and R3 is shelves and pricing.\n- **What it's doing:** two critic agents are going through the checkout and shelf code while the baseline test suite runs.\n\nThis comes from `status` in `corner-to-super-site/live.json`. The `rounds` list there has 2 entries.",
    "state": "answered",
    "t": "2026-11-06T20:14:21+10:00"
+  },
+  {
+   "num": 2,
+   "title": "Testing",
+   "question": "",
+   "answer": "",
+   "state": "answering",
+   "t": "2026-11-06T20:20:32+10:00"
   }
  ]
 }
