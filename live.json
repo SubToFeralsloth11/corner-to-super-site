@@ -1674,10 +1674,11 @@
      "file": "scripts/world/world.gd:462-469",
      "detail": "The new ranking puts `room` ahead of `attended`. A served lane is full at 6 people (LANE_MAX 4.65 m, 0.8 m each) or 2-3 trolleys. Once that happens, every new customer joins an unattended second till. That till's front customer starts (_served_elsewhere is false because the served till has a queue), rings the bell and unloads, then waits their whole 90 s patience. AT_TILL never runs _maybe_switch_queue, so they drop the basket and leave (mess, lost sales, \"give_up\" quote). The rest of that queue only switches when the served till's queue_length ≤ their index. Before today, everyone joined the attended till. This hits the normal mid-game setup: a second till bought for the +4 cap while the player alone works till 1. Fix: rank attended above room. Prefer attended tills with room; if none has room, join the shortest attended queue and wait as overflow. Use unattended tills only when nobody is serving anywhere.",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:57+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "84de3a0",
+     "note": "shortest_queue ranks attended > room > staffed > shorter queue (world.gd swept into 84de3a0; its regression test swept into bf35689). test_a_full_served_lane_beats_an_unserved_till fails on 1724812, passes after; old full-lane test now asserts room wins only when nobody serves. checkout_test 74/0",
+     "closed": "2026-11-07T09:51:06+10:00"
     },
     {
      "id": "X3",
@@ -3770,6 +3771,11 @@
    "t": "2026-11-07T09:50:58+10:00",
    "kind": "fix",
    "msg": "C2/Y10 fixed bf35689 menu_test 81/81 incl. settings round trip"
+  },
+  {
+   "t": "2026-11-07T09:51:06+10:00",
+   "kind": "fix",
+   "msg": "C2/X2 fixed 84de3a0 shortest_queue ranks attended > room > staffed > shorter queue (world.gd swept into 84de3a0; its regression test swept into bf35689). test_a_full_served_lane_beats_an_unserved_till fails on 1724812, passes after; old full-lane test now asserts room wins only when nobody serves. checkout_test 74/0"
   }
  ],
  "tests": [
@@ -3911,12 +3917,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:50:58+10:00",
+  "t": "2026-11-07T09:51:06+10:00",
   "mem_free_pct": 56,
   "load": [
-   5.02,
-   4.3,
-   3.95
+   4.32,
+   4.17,
+   3.9
   ],
   "godot_procs": 0
  },
@@ -4351,7 +4357,7 @@
   ],
   "total_commits": 195
  },
- "updated": "2026-11-07T09:50:58+10:00",
+ "updated": "2026-11-07T09:51:06+10:00",
  "qa": [
   {
    "num": 1,
