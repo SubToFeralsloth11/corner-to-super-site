@@ -1,11 +1,11 @@
 {
  "status": {
-  "state": "reviewing",
+  "state": "fixing",
   "round": "R4+R5",
   "area": "NPCs; economy",
-  "activity": "Critics on R4/R5; lead running windowed gameplay tour to eyeball R2 fixes (bag in hand, trolley, overflow queue)",
+  "activity": "FixNPC agent on R4 (+E3/E7/E10 customer-side); lead fixing R5 economy",
   "cycle": "1",
-  "since": "2026-11-06T20:45:22+10:00"
+  "since": "2026-11-06T20:56:05+10:00"
  },
  "rounds": [
   {
@@ -779,7 +779,260 @@
    "area": "Economy, bills, loans, day flow, progression",
    "started": "2026-11-06T20:45:22+10:00",
    "finished": null,
-   "findings": []
+   "findings": [
+    {
+     "id": "E1",
+     "sev": "P1",
+     "title": "Paying bills with negative cash makes every bill bigger",
+     "file": "scripts/autoload/game.gd:348-354 (also 562-565)",
+     "detail": "`complete_sale` adds `sale.net()` to `money` without a floor. `net()` is `charged - over_changed`, and the change tray has no limit (`checkout.gd:681-684` appends any note). So handing over a $100 note by mistake when cash is low, which is common on day 1 after spending the $600 on stock, leaves `money` below zero. In `pay_bills`, `part := mini(money, cents)` is then negative. `b[\"paid\"] = part` stores that negative number, and `unpaid = cents - part` becomes `cents + |money|`. Each of tonight's bills goes overdue at its full amount plus the whole cash deficit, plus 10% on top. With four bills, the deficit is counted four times. The receipt sees `paid < 0`, so it shows no PAID or UNPAID tag. Fix: `var part := clampi(money, 0, int(b[\"cents\"]))` in both loops, and the same in `pay_overdue`.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E2",
+     "sev": "P1",
+     "title": "The third short night ends the game with no warning, no way out, and wrong advice on screen",
+     "file": "scripts/autoload/game.gd:356-363, 435-436; scripts/ui/pc/app_bank.gd:120-123; scripts/ui/day_summary.gd:156; scripts/fixtures/open_sign.gd:78-79",
+     "detail": "Only a night that ends with nothing overdue resets `overdue_streak`; paying the debt off at the Bank in the morning does not. The receipt tells the player \"Pay them at the Bank on the PC\", so they clear everything. The Bank then hides the streak, because `_fill_overdue` returns \"Nothing overdue.\" before it draws the warning. If they end that night even 1¢ short, repossession is certain. Holding E on the sign gives no warning. On the receipt the only button is \"Pay all\", and `loan_refusal` returns \"The bank is closed\" in SUMMARY, so they can't borrow to cover it. The run is lost with no chance to react; only the clipboard's red total hints at it. Fix: show the streak in the Bank and the HUD whenever it is above 0. When streak + 1 would reach `repossession_days` and cash is below `bills_due()`, block or confirm End day at the sign. Allow loans in SUMMARY before Pay all. Change the receipt text to \"Clear them and cover tonight's bills, or the bank takes the store on night N\".",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E3",
+     "sev": "P1",
+     "title": "Customer numbers don't grow with store size, so expansions E4–E8 and tills 5–6 only add cost",
+     "file": "data/customers.json:52-57; scripts/npc/customer_rules.gd:34-37; docs/ECONOMY.md:192",
+     "detail": "The in-store cap is `min(20, 2 + 4·tills + L/2)`. Floor area plays no part, and the cap is already 20 with 4 tills from L4, or 3 tills from L12. Arrivals above the cap wait in `pending` and are thrown away at 22:00 (`customer_spawner.gd:28-31`). Buying E4–E8 adds $25–40 a day in rent plus $1.50 a cell in electricity for no extra customers; E8 alone is $7,500. Tills 5–6, sold up to `max: 6`, can't raise the cap. The M9 soak in PROGRESS.md shows customers flat at about 101–117 a day from day 14 to day 30. The AI held $3k–6k cash on days 21–24 and still didn't expand, and it never bought E6–E8. The end of the build-out is a trap. Fix: make the cap depend on unlocked floor area or cells, e.g. `base + per_till·tills + per_cell·cells`, with a higher hard cap. Also correct the stale comment and defaults at customer_rules.gd:34-37, which still say `4 + 2·tills`.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E4",
+     "sev": "P2",
+     "title": "The pacing table is not met, but M9 was recorded as passed",
+     "file": "docs/ECONOMY.md:266-273; data/settings.json:131-170; docs/PROGRESS.md (M9 soak table)",
+     "detail": "The table promises: day 7 \"E3, dairy + frozen\"; day 15 \"E5–E6, 2–3 tills, staff\", $900–1,600; day 30 \"E8 full store\", $2,500+. Across the three soak runs, day 7 is still the start store, day 15 has only E1 and E3 with $837–895, and day 30 has E5 with $1,977–2,194. Every day-15 and day-30 money figure is below its band and only passes with the ±25% tolerance. Not one Store-column row is met. The data file also stores day 1 as level 1 and day 30 as level 15 with profit `[250000, 250000]`, while the doc says 1–2, 15–16 and \"+\". Fix: retune (E3 fixes the store column), or rewrite the table to what the game actually does and stop calling M9 met.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E5",
+     "sev": "P2",
+     "title": "The soak AI prices at +10%, so money pacing was never checked for real players",
+     "file": "tests/soak_player.gd:28-29, 146",
+     "detail": "ECONOMY.md says profit per shopper is best at +25–55%, but the bot always sells at market +10%. A rough estimate from soak run 1, day 15 [INFERENCE]: $1,976 revenue, about $410 of bills, cost of goods about $718. At +40% with about 10% more refusals, profit comes to roughly $1.2k instead of $848, about 40% more. Real players will build up cash much faster than the tuning assumed. Levels then become the only real gate, and licence and expansion purchases stop being money decisions. Fix: run the soak with a 35–40% markup, or one per elasticity band, and retune costs and prices against that.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E6",
+     "sev": "P2",
+     "title": "Every loan's daily instalment is at least the whole day's profit when it unlocks",
+     "file": "data/loans.json:6-30",
+     "detail": "Small loan at L1: $108 a day against a day-1 profit of $40–120. Business loan at L5 (about day 7): $560 a day against $250–450. Expansion loan at L10 (about day 15): $1,643 a day against $848–895 in the soak. Terms are 10–14 days, and the first instalment is charged the same night. Taking any of them leads straight to overdue bills and, under E2, repossession, unless what you buy pays back the full instalment from the first day. PROGRESS M9 confirms the soak AI had to be stopped from borrowing except for tills and licences. In practice the choice is \"never borrow\". Fix: longer terms, e.g. 30/40/60 days with the same interest, or instalments set to about 40% of the expected daily profit at the unlock level.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E7",
+     "sev": "P2",
+     "title": "Fair prices top out around 3.85 stars, and stars fall as you level up",
+     "file": "data/customers.json:71-84, 106-109; scripts/npc/shopper_brain.gd:179, 220, 427",
+     "detail": "Satisfaction starts at 70 (3.5★). The only gains are +3 per item sold at ≤0.85× market (a loss-leader), +2 once near a promo stand, and +5 for fast service. A perfect visit at market price or above therefore peaks at 77, about 3.85★. 4.5★ needs about five loss-leader items per customer, so the newspaper's \"worth crossing town\" headline can't be reached without selling below market. Lists grow with level (`1 + randi()%(2+L)`), and each item adds another −12 out-of-stock chance, so stars sink as you progress: the soak shows 3.6 at L5 against 2.2–3.0 at L8–16. Stars only scale arrivals by `0.4 + 0.12·stars`, and once E3's cap binds they don't matter at all. Fix: add positive events (item found, clean store, short queue, a well-stocked basket), or score satisfaction relative to the list size.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E8",
+     "sev": "P2",
+     "title": "Progression runs out around day 27, and two of the 16 levels unlock only a colour",
+     "file": "data/levels.json:2; docs/ECONOMY.md:239-242",
+     "detail": "Max level is 16, which the soak reaches on day 27. Nothing exists after it: no prestige, no new licences, no reason to keep earning, and E3 makes the late expansions worthless anyway. L13 unlocks only a sky blue uniform and L16, the final level, only a hot pink trim. L7 is just S2 and L11 just S3. Fix: move a real unlock to L13 and L16 (a till tier, staff tier 3, an extra loan, a product line), and add post-cap goals such as weekly targets or a second store.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E9",
+     "sev": "P2",
+     "title": "The day-length option changes income while bills stay the same",
+     "file": "scripts/npc/customer_spawner.gd:36-41; data/settings.json `day.length_options` [8,12,16,20]",
+     "detail": "Arrivals are counted per in-game hour (`delta * clock.rate()`), but walking, shopping and checkout take real seconds, and the cap counts shoppers alive in real time. Once the cap binds, customers per day are roughly cap × real day length ÷ visit time. An 8-minute day serves about a third fewer customers than a 12-minute one [INFERENCE: 20 × 480 s / ~150 s ≈ 64 against ≈ 96]. A 20-minute day serves more, yet rent, wages and loans are charged per day. Picking \"short days\" in Options quietly cuts income and pushes the player toward overdue bills. Fix: scale the cap or arrival rate by `12 / day_length_min`, or tune and soak at each option.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E10",
+     "sev": "P2",
+     "title": "Shoppers turned away by the cap are never shown",
+     "file": "scripts/npc/customer_spawner.gd:28-31, 37-41",
+     "detail": "`pending` arrivals that never got in are silently zeroed at 22:00. They are not recorded as lost sales, not on the receipt, and not in Stats or the newspaper. The player has no way to see that a second till or a bigger cap is what's holding income back. Supermarket Simulator's feedback is about what customers do; here the biggest income limit can't be seen at all. Fix: count `turned_away` in DayReport, show it on the receipt and in Stats (\"23 shoppers gave up at the door, add a till\"), and add a \"left without entering\" bucket to the weekly review.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E11",
+     "sev": "P2",
+     "title": "The receipt leaves out most of the day's spending, so its net doesn't match the change in cash",
+     "file": "scripts/ui/day_summary.gd:118-138; scripts/core/day_report.gd:61-63",
+     "detail": "\"Net after bills\" is sales minus cost of goods minus bills. Stock orders, the $5 delivery fees, furniture, licences, expansions, hire fees, staff upgrades, loan payouts and repayments, and fixture refunds don't appear anywhere. A typical day-2 receipt shows \"+$150\" while cash fell $400 after a restock and a licence, and there is no opening-cash line to reconcile against. Supermarket Simulator's end-of-day report itemises expenses [UNVERIFIED]. Fix: total `money_changed` deltas by reason in `today` (`spent[reason]`, `opening_cash`), and print \"Spent today\" lines plus \"Cash at open → Cash now\".",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E12",
+     "sev": "P2",
+     "title": "The store can't close early or skip time during OPEN",
+     "file": "scripts/fixtures/open_sign.gd:58-62, 74-79",
+     "detail": "Once the sign is OPEN it only says \"OPEN until 22:00\", and the clock has no fast-forward. On days 1–3 the four starter kinds sell out by mid-afternoon. The player then waits about 6 real minutes for 1–2 shoppers, which is dead time. Supermarket Simulator lets you flip the sign closed early [UNVERIFIED]. Fix: allow E on the sign during OPEN to go to CLOSING, with a confirm. Optionally allow a hold-to-fast-forward while nobody is in the store.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E13",
+     "sev": "P2",
+     "title": "The newspaper says a product \"kept running out\" when it may have been refused for price",
+     "file": "scripts/core/weekly_review.gd:45-49, 89-90; scripts/autoload/game.gd:143-146",
+     "detail": "`missed` comes from `lost_products`. `_count_lost_sale` adds to that for every reason: out of stock, too expensive and left the queue. `body()` then prints \"%s kept running out\" using the top of that mixed count. A product that was overpriced and never ran out gets named as the stock problem, which is the wrong advice. Fix: keep `lost_products` per reason, or a separate `oos_products`, and name the out-of-stock leader there.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E14",
+     "sev": "P3",
+     "title": "Early payoff of the Expansion loan on its last day costs more than letting it run",
+     "file": "scripts/core/bills.gd:81-84",
+     "detail": "The daily instalment is $1,643 against an exact $1,642.857, so at k=13 `remaining` is 164,100. `payoff` after hours is `2,000,000·1/14 + roundi(21,428.6)` = 164,286. \"Repay now\" charges $1.86 more than the final instalment it replaces. Fix: `return mini(principal_left(loan) + roundi(...), int(loan[\"remaining\"]))`.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E15",
+     "sev": "P3",
+     "title": "Receipt profit uses today's cost, not what was paid for the stock",
+     "file": "scripts/fixtures/checkout.gd:731 (`sale.cost += Game.cost_of(...)`)",
+     "detail": "Cost of goods sold uses the drifted cost on the day of sale. Costs drift up to ±15%, so stock bought cheap and sold on an expensive day shows less profit than was really made, and the reverse. A player who times orders for cheap days never sees the gain on the receipt or in Stats. Fix: carry the purchase cost per box or slot (average cost) and book that on sale.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E16",
+     "sev": "P3",
+     "title": "Sandbox nights still need \"Pay all\" with nothing to pay, and every night is two clicks",
+     "file": "scripts/ui/day_summary.gd:126-127, 139-140",
+     "detail": "`_pay.visible = not r.settled` applies in Sandbox too, so the receipt says \"Sandbox: no bills tonight\" and still shows a Pay all button that must be pressed before Next day. Normal nights are also always Pay all then Next day, with no keyboard shortcut. Fix: auto-settle when `bills_total + overdue_before_total == 0` or in Sandbox; when cash covers everything, merge into one \"Pay and continue\" button; bind Enter/Space.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E17",
+     "sev": "P3",
+     "title": "After paying, the receipt doesn't say which old overdue bills were paid",
+     "file": "scripts/ui/day_summary.gd:124-125, 159-165",
+     "detail": "After settling, the `overdue_before` lines are drawn with `paid = -2`, which means no tag and always the warning colour. A fully paid overdue line still shows in red with no PAID tag. Fix: record per-line `paid` on `overdue_before` in `pay_bills` and draw it like tonight's bills.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E18",
+     "sev": "P3",
+     "title": "The Expansions card shows the rent rise but not the electricity rise",
+     "file": "scripts/ui/pc/app_expansions.gd:82",
+     "detail": "Only \"Rent X/day now, Y/day after\" is shown. Each new cell also adds $1.50 a day of electricity (E8: +$10.50), so the real extra daily cost is understated. That matters given E3. Fix: show `rent + Bills.electricity(lit cells)` before and after as \"Daily running cost\".",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E19",
+     "sev": "P3",
+     "title": "Hard-coded values ignore or duplicate the data files",
+     "file": "scripts/autoload/game.gd:171-172, 197, 1259-1260, 1270; scripts/ui/main_menu.gd:17-18; data/customers.json:109",
+     "detail": "`new_game` hard-codes `level = 1`, `xp = 0` and `cleanliness = 100.0`, so settings.json `start.level`, `start.xp` and `start.cleanliness` are ignored. customers.json `reputation.start` is never read; settings.json `start.reputation` is used. The max level 16 is hard-coded in `sandbox_overrides`, `_flag_overrides` and the main menu slider instead of `levels.json max_level`. The Sandbox money limits are written twice: `SANDBOX_MONEY_*` in game.gd and `SANDBOX_*_DOLLARS` in main_menu.gd. Fix: read them all from data, delete the dead keys, and use `Game.max_level()`.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E20",
+     "sev": "P3",
+     "title": "WeeklyReview says its words come from data, but the body text is in code",
+     "file": "scripts/core/weekly_review.gd:6, 80-99",
+     "detail": "The class doc says \"Numbers and words in data/events.json review\", yet every body sentence (\"%d customers came through…\", \"kept running out\", \"gave up waiting at the till\", the zero-customer line) is a GDScript literal. Fix: move them to `events.json review.body` templates.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E21",
+     "sev": "P3",
+     "title": "The critic's rating has no effect on the game",
+     "file": "scripts/autoload/game.gd:1046-1060; scripts/core/weekly_review.gd:40",
+     "detail": "`WeeklyReview.write` works out `stars`, which is only shown in the newspaper and changes nothing: not reputation, arrivals, the rival or anything else. Combined with E7's ceiling, the weekly beat is pure reading with no stakes. Fix: give it an effect, e.g. ±10% arrivals for the next week by rating, or a one-day visitor boost for 4+ stars.",
+     "by": "CritEconomy",
+     "status": "open",
+     "found": "2026-11-06T20:56:05+10:00",
+     "commit": "",
+     "note": ""
+    }
+   ]
   },
   {
    "id": "R9",
@@ -1604,6 +1857,121 @@
    "t": "2026-11-06T20:55:54+10:00",
    "kind": "round",
    "msg": "R4 critique in: 25 findings"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E1 [P1] Paying bills with negative cash makes every bill bigger"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E2 [P1] The third short night ends the game with no warning, no way out, and wrong advice on screen"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E3 [P1] Customer numbers don't grow with store size, so expansions E4–E8 and tills 5–6 only add cost"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E4 [P2] The pacing table is not met, but M9 was recorded as passed"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E5 [P2] The soak AI prices at +10%, so money pacing was never checked for real players"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E6 [P2] Every loan's daily instalment is at least the whole day's profit when it unlocks"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E7 [P2] Fair prices top out around 3.85 stars, and stars fall as you level up"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E8 [P2] Progression runs out around day 27, and two of the 16 levels unlock only a colour"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E9 [P2] The day-length option changes income while bills stay the same"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E10 [P2] Shoppers turned away by the cap are never shown"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E11 [P2] The receipt leaves out most of the day's spending, so its net doesn't match the change in cash"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E12 [P2] The store can't close early or skip time during OPEN"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E13 [P2] The newspaper says a product \"kept running out\" when it may have been refused for price"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E14 [P3] Early payoff of the Expansion loan on its last day costs more than letting it run"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E15 [P3] Receipt profit uses today's cost, not what was paid for the stock"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E16 [P3] Sandbox nights still need \"Pay all\" with nothing to pay, and every night is two clicks"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E17 [P3] After paying, the receipt doesn't say which old overdue bills were paid"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E18 [P3] The Expansions card shows the rent rise but not the electricity rise"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E19 [P3] Hard-coded values ignore or duplicate the data files"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E20 [P3] WeeklyReview says its words come from data, but the body text is in code"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "finding",
+   "msg": "R5/E21 [P3] The critic's rating has no effect on the game"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "agent",
+   "msg": "Agent CritEconomy: done 21 findings (3 P1)"
+  },
+  {
+   "t": "2026-11-06T20:56:05+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixNPC agent on R4 (+E3/E7/E10 customer-side); lead fixing R5 economy"
   }
  ],
  "tests": [
@@ -1653,17 +2021,17 @@
    "t": "2026-11-06T20:55:54+10:00"
   },
   "CritEconomy": {
-   "state": "running",
-   "task": "Reviewer: economy (read-only)",
-   "t": "2026-11-06T20:45:22+10:00"
+   "state": "done",
+   "task": "21 findings (3 P1)",
+   "t": "2026-11-06T20:56:05+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-06T20:55:54+10:00",
+  "t": "2026-11-06T20:56:05+10:00",
   "mem_free_pct": 57,
   "load": [
-   2.52,
-   2.44,
+   2.47,
+   2.43,
    2.49
   ],
   "godot_procs": 0
@@ -2094,7 +2462,7 @@
   "dirty": [],
   "total_commits": 140
  },
- "updated": "2026-11-06T20:55:55+10:00",
+ "updated": "2026-11-06T20:56:06+10:00",
  "qa": [
   {
    "num": 1,
