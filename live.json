@@ -1402,6 +1402,18 @@
      "commit": "ff5b859",
      "note": "3/3 runs pass",
      "closed": "2026-11-07T09:03:17+10:00"
+    },
+    {
+     "id": "V3",
+     "sev": "P2",
+     "title": "Full store windowed: 35-44 fps at 720p (target 60). Headless CPU is fine (138 fps; brains 1.2 ms + walking 0.6 ms a frame), so it is render-bound: ~900 draw calls, 1.1 M triangles, ~1,000 shadow casters",
+     "file": "tests/full_store_tour.sh",
+     "detail": "Measured while the user's own Godot editor/game was running on the same GPU, so the number is pessimistic. Re-measure on an idle machine before optimising shadows/LOD.",
+     "by": "lead",
+     "status": "open",
+     "found": "2026-11-07T09:21:21+10:00",
+     "commit": "",
+     "note": ""
     }
    ]
   }
@@ -2916,6 +2928,16 @@
    "t": "2026-11-07T09:03:19+10:00",
    "kind": "round",
    "msg": "Cycle 1 (rounds R2-R10) complete: ~95 findings closed. Next: full-store performance check (M9's deferred windowed check), then cycle 2 critique."
+  },
+  {
+   "t": "2026-11-07T09:21:21+10:00",
+   "kind": "finding",
+   "msg": "R10/V3 [P2] Full store windowed: 35-44 fps at 720p (target 60). Headless CPU is fine (138 fps; brains 1.2 ms + walking 0.6 ms a frame), so it is render-bound: ~900 draw calls, 1.1 M triangles, ~1,000 shadow casters"
+  },
+  {
+   "t": "2026-11-07T09:21:22+10:00",
+   "kind": "finding",
+   "msg": "Windowed runs crashed (SIGBUS in memmove) with a warm shader cache: my old-commit worktree run, and the user's editor running the same project, share user://shader_cache. Clearing it fixes the next run. Not a game bug."
   }
  ],
  "tests": [
@@ -3041,12 +3063,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:03:20+10:00",
-  "mem_free_pct": 45,
+  "t": "2026-11-07T09:21:22+10:00",
+  "mem_free_pct": 47,
   "load": [
-   3.0,
-   3.06,
-   3.61
+   4.54,
+   6.38,
+   5.27
   ],
   "godot_procs": 0
  },
@@ -3476,7 +3498,7 @@
   "dirty": [],
   "total_commits": 179
  },
- "updated": "2026-11-07T09:03:21+10:00",
+ "updated": "2026-11-07T09:21:23+10:00",
  "qa": [
   {
    "num": 1,
