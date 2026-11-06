@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "R3",
   "area": "Shelves, stocking, boxes, pricing",
-  "activity": "Fixer: C3 smokes ask skipped on quick scan",
+  "activity": "Fixer: C2 smokes route to wall till",
   "cycle": "1",
-  "since": "2026-11-06T20:24:19+10:00"
+  "since": "2026-11-06T20:25:50+10:00"
  },
  "rounds": [
   {
@@ -757,6 +757,11 @@
    "t": "2026-11-06T20:25:19+10:00",
    "kind": "fix",
    "msg": "R2/C3 fixed 0e86b99 _maybe_pay returns while UNLOADING; new m7_content test_quick_scan_still_asks_for_smokes + checkout/staff tests pass (13/44/49)"
+  },
+  {
+   "t": "2026-11-06T20:25:50+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - Fixer: C2 smokes route to wall till"
   }
  ],
  "tests": [
@@ -791,12 +796,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:25:19+10:00",
-  "mem_free_pct": 45,
+  "t": "2026-11-06T20:25:50+10:00",
+  "mem_free_pct": 46,
   "load": [
-   2.7,
-   2.46,
-   2.75
+   3.06,
+   2.57,
+   2.78
   ],
   "godot_procs": 0
  },
@@ -1224,11 +1229,16 @@
    }
   ],
   "dirty": [
-   " M scripts/npc/staff_crew.gd"
+   " M scripts/autoload/save.gd",
+   " M scripts/npc/shopper_brain.gd",
+   " M scripts/npc/staff_crew.gd",
+   " M scripts/world/world.gd",
+   " M tests/cases/m7_content_test.gd",
+   " M tests/cases/save_test.gd"
   ],
   "total_commits": 114
  },
- "updated": "2026-11-06T20:25:20+10:00",
+ "updated": "2026-11-06T20:25:50+10:00",
  "qa": [
   {
    "num": 1,
