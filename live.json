@@ -471,7 +471,308 @@
    "area": "Customers / NPC AI, queues, pathing",
    "started": "2026-11-06T20:45:22+10:00",
    "finished": null,
-   "findings": []
+   "findings": [
+    {
+     "id": "N1",
+     "sev": "P1",
+     "title": "Customers keep queueing at a till the player picked up in build mode, and follow it around the store",
+     "file": "scripts/npc/shopper_brain.gd:419-420 (with scripts/build/build_mode.gd:165-178)",
+     "detail": "`BuildMode.pick()` has no customer check. `sell_refusal` refuses with \"Someone is at this till\" (build_mode.gd:241-244), but nothing stops you moving a checkout while people are queued or being served. Build mode can also be opened while the store is OPEN (`enter()` only checks your hands and tool). Once the till is carried, `_checkout_ok()` only checks that it is valid, in the tree and not queued for deletion. It never calls `world.in_use(checkout)`, unlike `_slot_has` at :232. So `_queue_tick` keeps running and `_queue_walk` calls `queue_spot_for()` every tick from the ghost's live `global_transform`. Queued customers walk after the floating till. `Checkout._physics_process` can also `begin()` the front customer and unload items onto the moving counter. Fix: in `pick()`, refuse a `Checkout` with `customer`, a non-empty `queue` or a cashier, the same way `sell_refusal` does. Also add `and shopper.world.in_use(checkout)` to `_checkout_ok()`, so a carried till sends its queue to `_join_queue()`.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:53+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N2",
+     "sev": "P1",
+     "title": "The front customer at an unstaffed till never moves to a till that is being served",
+     "file": "scripts/npc/shopper_brain.gd:315-327 (with scripts/fixtures/checkout.gd:304-306)",
+     "detail": "`Checkout._physics_process` calls `begin(queue[0])` as soon as the front customer is `ready_at_till()`, whether or not anyone is serving; it only rings the bell. `begin()` sets them to AT_TILL. The AT_TILL branch of `_queue_tick` never calls `_maybe_switch_queue()`, which only runs in QUEUE. A common case: you serve at till 1, a cashier works till 2, and you leave to restock. The C5 fix moves everyone behind the front customer to till 2. The front customer stands at till 1 with their basket on the counter for the full 90 s of `patience_s`, then drops the basket and leaves. That is lost sales, a mess and about −15 satisfaction, while the cashier at till 2 has nobody to serve. Fix: in the IDLE branch, only `begin()` when `is_attended()` or no attended till with room exists. Otherwise leave them in QUEUE so the 2.5 s switch check can move them.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:53+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N3",
+     "sev": "P1",
+     "title": "Each list entry buys one unit, and repeated entries for the same product stack penalties and contradict each other",
+     "file": "scripts/npc/customer_rules.gd:50-58; scripts/npc/shopper_brain.gd:135-143,161-186",
+     "detail": "This confirms the lead. `pick_list` draws with replacement, so the same product can appear on a list several times. Each entry is a separate trip, price roll and `remove_one`. An unstocked product listed twice costs −12 twice (−24) and two lost sales; the second bark is dropped because they are still talking. At +40% the customer can say \"I'm not paying $X for that\" and grab the same item 0.3 s later (refuse chance 16% per roll). Nobody buys a six-pack's worth, as Supermarket Simulator customers do. Fix: turn the list into `{id: qty}` and merge duplicates. Draw the quantity from a new `customers.json` `quantity` table, optionally per product. Make one price decision and one OOS or refuse penalty per product. Take `min(qty, stock)` units across slots and show all of them in the basket.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:53+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N4",
+     "sev": "P1",
+     "title": "Customers buy items they physically cannot reach",
+     "file": "scripts/npc/shopper_brain.gd:94-98,235-246,265-268",
+     "detail": "`_stand_point` snaps the spot 0.6 m in front of the slot to `nav.closest()`, which can be metres away when that spot is blocked. `BuildRules.refusal` has no rule keeping slot fronts clear, so two shelves can be placed face to face with a gap under 0.6 m, or a shelf front against another fixture's back. TO_SLOT then calls `_reach_in()` whenever `follow()` returns true or they stop walking, with no distance check. The customer takes stock from the end of the aisle, through a shelf. `_nearest_slot` also ranks slots by straight-line distance through fixtures, so it prefers such a blocked slot. Fix: in `_stand_point`, if the snapped point is more than about 0.3 m from the intended one, treat the slot as unreachable and try the next nearest. Check that the customer is within 0.5 m of the stand point before `_reach_in`. Add a front-clearance rule (about 0.7 m) to `BuildRules.refusal`.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:53+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N5",
+     "sev": "P2",
+     "title": "No crowd avoidance: customers pass through each other and walk through the player, who cannot get past them",
+     "file": "scripts/npc/shopper.gd:31-32; scripts/npc/walker.gd:1-4; scripts/player/player.gd:99",
+     "detail": "This confirms the lead. `collision_mask = Mk.LAYER_WORLD` for shoppers, and staff and Dale do the same. The ARCHITECTURE doc says this is deliberate (\"people pass through each other\"). Everyone walks to the exact same `DOOR_IN` point, the exact same stand point for a slot, and one of two spawn points. The spawner's `while pending` loop (customer_spawner.gd:41-43) can spawn several customers in one frame at the same `EXITS` point, so they walk the same path inside each other. The player's mask includes `LAYER_NPCS`, so it is one-sided. Customers walk into your capsule, and the physics probably pushes you out when you next move [INFERENCE: Jolt depenetration]. Meanwhile someone picking an item, or an overflow queuer told to \"wait where they are\" for up to 90 s, blocks your way down a 1 m aisle completely. Fix: add `LAYER_NPCS | LAYER_PLAYER` to the walker mask. Use navmesh avoidance (`NavigationServer3D` agents with `velocity_computed`) or a cheap separation steer. Spread out stand points and `DOOR_IN` per customer, and space out spawns.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:53+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N6",
+     "sev": "P2",
+     "title": "Trolleys go through shelves at every pick and every corner",
+     "file": "scripts/npc/shopper.gd:14; scripts/npc/shopper_brain.gd:14,149-152,266",
+     "detail": "The trolley sits at `TROLLEY_OFFSET` (0, 0, −0.78), in front of the body. The checkout code says it sticks out about 0.9 m. The stand point is only `REACH_STAND` = 0.6 m from the slot front, and `_reach_in` turns the body to face the shelf. The trolley's origin ends up about 0.18 m inside the fixture, with most of its length inside. Paths are planned for a 0.3 m agent radius, so the trolley also cuts through shelf ends at every turn. R2's C8 fixed this only at the till. Fix: trolley users stop beside the shelf. Leave the trolley at the stand point lined up with the aisle (`top_level`), and face the shelf from beside it. Or add the trolley length to the stand distance and to a larger nav radius for trolley customers.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:53+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N7",
+     "sev": "P2",
+     "title": "Customers know an item is out of stock without looking, and complain wherever they happen to be",
+     "file": "scripts/npc/shopper_brain.gd:135-143",
+     "detail": "`_find_slot_or_lose` checks every slot in the store instantly. With none in stock, the \"No {product}? Seriously?\" bark and the −12 happen where the customer is standing, often by the door or at the previous shelf. They never walk to the empty shelf, which still has its label (`remove_one(true)` keeps `product_id`). You cannot tell which shelf is the problem. Supermarket Simulator customers go to the spot and react there. Fix: if a labelled slot with count 0 exists for the product, walk to it, play a short look-around, then complain. Fall back to complaining in place only when no slot is labelled for it.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:53+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N8",
+     "sev": "P2",
+     "title": "Customers keep staring back at the shelf for 2.5 s after a bark at the shelf",
+     "file": "scripts/npc/shopper_brain.gd:78-79,173,181; scripts/npc/shopper.gd:88-97",
+     "detail": "`tick` only resets `look_weight` while `not bark.is_talking()`. At the shelf the weight is 1 with `look_target` on the slot front. A forced refusal bark or a `great_prices` bark then moves the state to BROWSE. The weight stays at 1 for the 2.5 s bark, and the target is not updated unless you are within 4 m. The customer walks to the next item with their head turned up to 70° back at the old shelf. When you are nearby, they stare at where you stood when they started talking. Fix: drop `look_weight` to 0 when leaving PICK unless they are talking to you. While talking within 4 m, update `look_target` to the player camera every tick.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:53+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N9",
+     "sev": "P2",
+     "title": "The arrival cap counts customers walking along the footpath and through the car park",
+     "file": "scripts/npc/customer_spawner.gd:46-54; scripts/npc/shopper.gd:13",
+     "detail": "`live_count()` counts everyone in the `shoppers` group. Customers start and end at `EXITS` (−22.5, 29.5) and (16.5, 29.5), about 38 m and 35 m in a straight line from `DOOR_IN`. At 1.2–1.6 m/s that is roughly 22–32 s each way, about 45–60 s of every visit spent outside, all counted against `2 + 4·tills + level/2`. With 6 slots on day 1, a large share are on the pavement while the store sits empty. The spawner, `Game` CLOSING and the open sign also wait for that walk. Fix: leave customers in LEAVE who are past the door out of the cap, keeping the hard 20 for performance. Or start and end them at the parked-car bays (`ParkedCars`), much closer to the door.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:53+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N10",
+     "sev": "P2",
+     "title": "Fair, well-run service cannot earn more than about 3.85 stars",
+     "file": "data/customers.json:72-87; scripts/npc/shopper_brain.gd:424-428",
+     "detail": "Satisfaction starts at 70, which is already 3.5 stars, and the only positive events are bargain (+3, only at ≤85% of market), promo (+2 once) and fast service (+5). A fully stocked, fairly priced visit with quick service ends at 70 + 5 + 2 = 77, or 3.85 stars. Any single out-of-stock (−12) drops it below 3.5. `fast_service_s` = 20 s counts from joining the queue, including the walk to the lane and 0.35 s per item to unload (`UNLOAD_STEP`), so trolley customers rarely get it. The M9 soak sits at 3.04 stars on day 30. Good play is not rewarded unless you sell below market. Fix: add positive events in `customers.json`, such as found every item (+8), a fair price at or under market (+1 per item), and a clean store (+3). Or lower `start` and rebalance.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:53+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N11",
+     "sev": "P2",
+     "title": "Barks ignore how the visit went, and there is no sound with them",
+     "file": "scripts/npc/shopper_brain.gd:403,428; data/barks.json",
+     "detail": "`finish_checkout` always uses a cheerful green `thank_you` (\"Thanks, have a good one!\"), even after being short-changed twice and waiting 80 s. `_give_up` reuses `long_queue` (\"Come on, open another till.\") as the line for storming out, and the newspaper records it as such. There are no lines for greeting, giving up, finding everything, or trying a new product. Barks are text only, with no voice or grunt sound. Fix: add `thank_you_grumpy` and `give_up` keys to barks.json. In `finish_checkout`, pick the key and tone from `satisfaction`, for example below 50 grumpy with the complaint card. Play a short vocal or `Sfx` with complaint barks.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:53+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N12",
+     "sev": "P2",
+     "title": "With no usable till, customers walk out carrying unpaid items",
+     "file": "scripts/npc/shopper_brain.gd:287-294",
+     "detail": "When `shortest_queue()` returns null, the customer books lost sales and calls `leave()` without `abandon_carrier()` or `basket.clear()`. They carry the full basket or trolley off the plot, and that stock simply disappears. This happens whenever every till is not in use, for example when you carry your only till in build mode (allowed, see N1) and someone finishes their list. Fix: in the null branch, do what `_give_up` does (`abandon_carrier()` then `basket.clear()`). Or better, wait in BROWSE and look for a till again while patience runs.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:53+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N13",
+     "sev": "P3",
+     "title": "Customers shop in random order and criss-cross the store",
+     "file": "scripts/npc/shopper_brain.gd:116-133",
+     "detail": "`_next_item` takes `list[list_i]` in the order the random draw produced. A 10-item trolley customer bounces between the far ends of the store. That adds walking time, clutters the aisles and does not look like real shopping. Fix: pick the next item as the nearest by distance to its nearest stocked slot (greedy nearest-next). Keep out-of-stock and wall items at the end.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:53+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N14",
+     "sev": "P3",
+     "title": "Baskets appear from nowhere, vanish at the till, and walk off the plot",
+     "file": "scripts/npc/shopper_brain.gd:88-91,430-432; scripts/npc/shopper.gd:101-111",
+     "detail": "`take_carrier()` makes a basket appear in the hand at `DOOR_IN`, 1.75 m from `BASKET_STAND_POS`, with no reach animation; GDD §6 says baskets come from the stand. At payment the basket is `queue_free()`d in front of the cashier. Customers who bought nothing (`_next_item` → `leave()`) carry the store's empty basket off the plot. Fix: path to the stand and play `Interact` there. At the till, put the basket into a stack on the counter end. On an empty-handed leave, drop it back on the stand.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:53+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N15",
+     "sev": "P3",
+     "title": "A messy customer can complain about their own spill",
+     "file": "scripts/npc/shopper_brain.gd:183,190-196,200-213",
+     "detail": "`_maybe_make_mess()` drops a spill at the customer's feet, and `spawn_mess` returns the `Spill`, but it is not added to `_seen_mess`. Their next `look_around`, at most 0.5 s later, finds it within 3 m when cleanliness is below 60. They take −5 and say \"Ew. What is that?\" about their own mess. Fix: `_seen_mess[shopper.world.hygiene.spawn_mess(...).get_instance_id()] = true`.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:54+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N16",
+     "sev": "P3",
+     "title": "One customer closes a fridge door on another who is still reaching in",
+     "file": "scripts/npc/shopper_brain.gd:153-158,182,224-227",
+     "detail": "Only the customer who found the door closed takes ownership (`_opened_door`). If B reaches into the same cooler while A has it open, A's `_take()` → `_close_door()` shuts it in B's face, and B then takes an item through the closed door. Fix: count users on the fixture (`open_door` and `close_door` increment and decrement) and close only when the count reaches 0.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:54+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N17",
+     "sev": "P3",
+     "title": "Walk animation runs into walls, then customers teleport",
+     "file": "scripts/npc/walker.gd:144-160",
+     "detail": "`rig.set_walk(speed, …)` uses the requested speed, not the actual movement after `move_and_slide()`. A blocked walker walks on the spot at full pace for `STUCK_TIME` (3 s), then is moved straight to the next path corner, through whatever is in the way, possibly in view of the player. Fix: drive the animation from `get_real_velocity()` length. Before teleporting, try a re-plan or a sideways nudge, and only teleport when the player cannot see the spot.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:54+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N18",
+     "sev": "P3",
+     "title": "Basket and bag follow the hands one frame late from physics",
+     "file": "scripts/npc/shopper.gd:66-73",
+     "detail": "The carrier and bag transforms are set in `_physics_process` (60 Hz, no physics interpolation in project.godot) from `bone_position()`. The bone pose comes from the AnimationPlayer, which updates on idle frames, so it is the previous frame's pose. It also does a string `find_bone` every frame. On displays faster than 60 Hz the basket probably trails or jitters against the hand [UNVERIFIED: needs a windowed run]. Fix: put `BoneAttachment3D` nodes on RightHand and LeftHand in `HumanRig.setup` and parent the carrier and bag to them with fixed offsets.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:54+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N19",
+     "sev": "P3",
+     "title": "Everyone plays the same idle, so queues look like statues",
+     "file": "scripts/npc/human_rig.gd:134-146",
+     "detail": "`set_walk(0)` always plays the one `Idle` clip from time 0, and nothing more happens while standing. GDD §6 asks for \"a random idle sway\", and nothing randomises it. A six-person queue all breathes in the same loop, with no fidget, phone check or glance at the clock. Fix: seek to a random phase per rig on setup. Choose among the UAL idle clips. Every 6–12 s of queueing, play a short one-shot (look at watch, shift weight), and more often as patience drops.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:54+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N20",
+     "sev": "P3",
+     "title": "Customers appear and disappear at the same two footpath points, and nearly all leave east",
+     "file": "scripts/npc/customer_spawner.gd:67; scripts/npc/shopper_brain.gd:437-446",
+     "detail": "They spawn exactly on an `EXITS` point and disappear on reaching one, in the open where you may see it from the car park. `leave()` picks the exit by straight-line distance. From the store (x≈0) the east end is 34.8 m and the west 38.3 m, so almost everyone exits east whichever way they came. Fix: spawn and despawn beyond the plot edge, out of view, or at parked cars. Have a customer leave the way they came, stored at spawn.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:54+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N21",
+     "sev": "P3",
+     "title": "Unreachable leftover code after `return` in `cig_wall_till`",
+     "file": "scripts/world/world.gd:475-484",
+     "detail": "After `return null` there are ten lines of an old `shortest_queue` body that never run. GDScript reports them as unreachable code, and they look as if they still matter. Fix: delete lines 475-484.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:54+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N22",
+     "sev": "P3",
+     "title": "Stale docs and fallback values that contradict the data",
+     "file": "scripts/npc/shopper.gd:3,35; scripts/npc/customer_rules.gd:34-35,40-41; docs/GDD.md:126-127",
+     "detail": "- shopper.gd says shoppers walk at 0.9–1.3 m/s and falls back to `[0.9, 1.3]`; data and ECONOMY say 1.2–1.6.<br>- `max_concurrent`'s comment says `4 + 2*tills`; the data says `2 + 4*tills`.<br>- `list_length`'s comment says `(2 + level/2)`, at most 12; the data says `(2 + level)`, cap 16.<br>- GDD §6 says \"1–2 items at level 1, … cap of 12\"; level 1 actually gives 1–3.<br><br>Fix: update the comments and the GDD, and make the fallbacks match `customers.json` (or drop them, since Catalog validates the data).",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:54+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N23",
+     "sev": "P3",
+     "title": "Unused keys in customers.json",
+     "file": "data/customers.json:91-95,103-107",
+     "detail": "`payment.card_share` is never read (`pays_cash` uses only `cash_share`). `reputation.start` is never read: `Game.new_game` and load use `settings.json` `start.reputation`. Two values for the starting stars can drift apart without anyone noticing. Fix: delete `card_share` and `reputation.start`, or make the code read the one source.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:54+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N24",
+     "sev": "P3",
+     "title": "Customer behaviour tuning is hard-coded instead of in customers.json",
+     "file": "scripts/npc/shopper_brain.gd:12-16,84,180,186; scripts/npc/shopper.gd:95; scripts/npc/walker.gd:12-20; scripts/npc/bark.gd:7",
+     "detail": "`SHRUG_TIME` 0.8, `REACH_STAND` 0.6, `SWITCH_CHECK` 2.5, look-around every 0.5 s, 50% chance of a \"great prices\" bark, the 0.3 s pause after a pick, the 4 m look-at-player radius, walker stuck and retry timings, and bark `LIFE` 2.5 are all constants. Patience, speed and mess chance already live in customers.json, so this is a second convention. The capsule shape (0.28 by 1.7) is also copied in shopper.gd, staff.gd and dale.gd. Fix: move these into a `customers.json` `behaviour` block, and put the capsule in one shared Walker helper.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:54+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "N25",
+     "sev": "P3",
+     "title": "Dale has his own copy of path following without the Walker safeguards",
+     "file": "scripts/npc/dale.gd:1,154-171",
+     "detail": "`Dale extends CharacterBody3D` and repeats `_go` / `_follow` / `_idle` with none of Walker's no-path retry, stuck detection or re-planning when the layout changes. If `nav.path` returns empty, for example when he is more than 0.6 m off the navmesh, `_follow` returns true at once. In LEAVE that means he disappears in front of the player. Fix: make Dale extend `Walker` (`go_to`, `follow`, `face`) and keep only his scripted stages.",
+     "by": "CritNPC",
+     "status": "open",
+     "found": "2026-11-06T20:55:54+10:00",
+     "commit": "",
+     "note": ""
+    }
+   ]
   },
   {
    "id": "R5",
@@ -1168,6 +1469,141 @@
    "t": "2026-11-06T20:50:50+10:00",
    "kind": "fix",
    "msg": "R9/U3 fixed 67774d3 check.sh clean, checkout_test 65/65; windowed look pending next tour"
+  },
+  {
+   "t": "2026-11-06T20:55:53+10:00",
+   "kind": "finding",
+   "msg": "R4/N1 [P1] Customers keep queueing at a till the player picked up in build mode, and follow it around the store"
+  },
+  {
+   "t": "2026-11-06T20:55:53+10:00",
+   "kind": "finding",
+   "msg": "R4/N2 [P1] The front customer at an unstaffed till never moves to a till that is being served"
+  },
+  {
+   "t": "2026-11-06T20:55:53+10:00",
+   "kind": "finding",
+   "msg": "R4/N3 [P1] Each list entry buys one unit, and repeated entries for the same product stack penalties and contradict each other"
+  },
+  {
+   "t": "2026-11-06T20:55:53+10:00",
+   "kind": "finding",
+   "msg": "R4/N4 [P1] Customers buy items they physically cannot reach"
+  },
+  {
+   "t": "2026-11-06T20:55:53+10:00",
+   "kind": "finding",
+   "msg": "R4/N5 [P2] No crowd avoidance: customers pass through each other and walk through the player, who cannot get past them"
+  },
+  {
+   "t": "2026-11-06T20:55:53+10:00",
+   "kind": "finding",
+   "msg": "R4/N6 [P2] Trolleys go through shelves at every pick and every corner"
+  },
+  {
+   "t": "2026-11-06T20:55:53+10:00",
+   "kind": "finding",
+   "msg": "R4/N7 [P2] Customers know an item is out of stock without looking, and complain wherever they happen to be"
+  },
+  {
+   "t": "2026-11-06T20:55:53+10:00",
+   "kind": "finding",
+   "msg": "R4/N8 [P2] Customers keep staring back at the shelf for 2.5 s after a bark at the shelf"
+  },
+  {
+   "t": "2026-11-06T20:55:53+10:00",
+   "kind": "finding",
+   "msg": "R4/N9 [P2] The arrival cap counts customers walking along the footpath and through the car park"
+  },
+  {
+   "t": "2026-11-06T20:55:53+10:00",
+   "kind": "finding",
+   "msg": "R4/N10 [P2] Fair, well-run service cannot earn more than about 3.85 stars"
+  },
+  {
+   "t": "2026-11-06T20:55:53+10:00",
+   "kind": "finding",
+   "msg": "R4/N11 [P2] Barks ignore how the visit went, and there is no sound with them"
+  },
+  {
+   "t": "2026-11-06T20:55:53+10:00",
+   "kind": "finding",
+   "msg": "R4/N12 [P2] With no usable till, customers walk out carrying unpaid items"
+  },
+  {
+   "t": "2026-11-06T20:55:53+10:00",
+   "kind": "finding",
+   "msg": "R4/N13 [P3] Customers shop in random order and criss-cross the store"
+  },
+  {
+   "t": "2026-11-06T20:55:53+10:00",
+   "kind": "finding",
+   "msg": "R4/N14 [P3] Baskets appear from nowhere, vanish at the till, and walk off the plot"
+  },
+  {
+   "t": "2026-11-06T20:55:54+10:00",
+   "kind": "finding",
+   "msg": "R4/N15 [P3] A messy customer can complain about their own spill"
+  },
+  {
+   "t": "2026-11-06T20:55:54+10:00",
+   "kind": "finding",
+   "msg": "R4/N16 [P3] One customer closes a fridge door on another who is still reaching in"
+  },
+  {
+   "t": "2026-11-06T20:55:54+10:00",
+   "kind": "finding",
+   "msg": "R4/N17 [P3] Walk animation runs into walls, then customers teleport"
+  },
+  {
+   "t": "2026-11-06T20:55:54+10:00",
+   "kind": "finding",
+   "msg": "R4/N18 [P3] Basket and bag follow the hands one frame late from physics"
+  },
+  {
+   "t": "2026-11-06T20:55:54+10:00",
+   "kind": "finding",
+   "msg": "R4/N19 [P3] Everyone plays the same idle, so queues look like statues"
+  },
+  {
+   "t": "2026-11-06T20:55:54+10:00",
+   "kind": "finding",
+   "msg": "R4/N20 [P3] Customers appear and disappear at the same two footpath points, and nearly all leave east"
+  },
+  {
+   "t": "2026-11-06T20:55:54+10:00",
+   "kind": "finding",
+   "msg": "R4/N21 [P3] Unreachable leftover code after `return` in `cig_wall_till`"
+  },
+  {
+   "t": "2026-11-06T20:55:54+10:00",
+   "kind": "finding",
+   "msg": "R4/N22 [P3] Stale docs and fallback values that contradict the data"
+  },
+  {
+   "t": "2026-11-06T20:55:54+10:00",
+   "kind": "finding",
+   "msg": "R4/N23 [P3] Unused keys in customers.json"
+  },
+  {
+   "t": "2026-11-06T20:55:54+10:00",
+   "kind": "finding",
+   "msg": "R4/N24 [P3] Customer behaviour tuning is hard-coded instead of in customers.json"
+  },
+  {
+   "t": "2026-11-06T20:55:54+10:00",
+   "kind": "finding",
+   "msg": "R4/N25 [P3] Dale has his own copy of path following without the Walker safeguards"
+  },
+  {
+   "t": "2026-11-06T20:55:54+10:00",
+   "kind": "agent",
+   "msg": "Agent CritNPC: done 25 findings (4 P1)"
+  },
+  {
+   "t": "2026-11-06T20:55:54+10:00",
+   "kind": "round",
+   "msg": "R4 critique in: 25 findings"
   }
  ],
  "tests": [
@@ -1212,9 +1648,9 @@
    "t": "2026-11-06T20:45:22+10:00"
   },
   "CritNPC": {
-   "state": "running",
-   "task": "Reviewer: NPCs (read-only)",
-   "t": "2026-11-06T20:45:22+10:00"
+   "state": "done",
+   "task": "25 findings (4 P1)",
+   "t": "2026-11-06T20:55:54+10:00"
   },
   "CritEconomy": {
    "state": "running",
@@ -1223,17 +1659,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:50:50+10:00",
+  "t": "2026-11-06T20:55:54+10:00",
   "mem_free_pct": 57,
   "load": [
-   1.92,
-   2.26,
-   2.52
+   2.52,
+   2.44,
+   2.49
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "54d5286",
+    "date": "2026-11-06T20:52:54+10:00",
+    "subject": "Drop the till hint a little further, clear of the clock card at 720p",
+    "body": "At 1280x720 the UI scale put it on the card's bottom edge (gameplay tour play_02).",
+    "stat": "1 file changed, 1 insertion(+), 1 deletion(-)"
+   },
    {
     "sha": "67774d3",
     "date": "2026-11-06T20:50:48+10:00",
@@ -1646,19 +2089,12 @@
     "subject": "Record the M7 full-suite result",
     "body": "",
     "stat": "1 file changed, 3 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "6d4d20b",
-    "date": "2026-11-05T22:33:09+10:00",
-    "subject": "Let staff cashiers fetch Smokes from the cigarette wall",
-    "body": "",
-    "stat": "3 files changed, 13 insertions(+), 4 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 139
+  "total_commits": 140
  },
- "updated": "2026-11-06T20:50:50+10:00",
+ "updated": "2026-11-06T20:55:55+10:00",
  "qa": [
   {
    "num": 1,
