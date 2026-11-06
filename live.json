@@ -1316,11 +1316,11 @@
      "file": "scripts/npc/restocker_job.gd",
      "detail": "",
      "by": "lead",
-     "status": "wip",
+     "status": "fixed",
      "found": "2026-11-07T08:20:03+10:00",
-     "commit": "",
-     "note": "Reopened by Y2: status never shown in game",
-     "closed": "2026-11-07T09:40:31+10:00"
+     "commit": "3983702",
+     "note": "now actually visible",
+     "closed": "2026-11-07T09:42:21+10:00"
     }
    ]
   },
@@ -1482,10 +1482,11 @@
      "file": "scripts/npc/restocker_job.gd:330-343, scripts/npc/staff.gd:149-155, scripts/ui/pc/app_staff.gd:112-136",
      "detail": "Commit fdd9e9f only added \"Idle: no boxes on the stockroom racks\" to `RestockerJob.status()`. `Staff.status()` is only called from tests/soak.gd:217 and tests/staff_tour.gd:285. Nothing in the game shows it: the Staff app member card has no status line, and staff have no `get_prompt`, so aiming at them shows nothing. A $200 restocker still stands idle with no explanation, which is exactly what T1 reported. Fix: add `status()` to `_member_card`, refreshed by a timer while the app is open or by a crew signal. Also give `Staff` a `get_prompt` that returns its role, id and `status()`. Reopen T1.",
      "by": "CritPlayer",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:40:30+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "3983702",
+     "note": "staff_test: idle reason shown in app",
+     "closed": "2026-11-07T09:42:21+10:00"
     },
     {
      "id": "Y3",
@@ -1506,10 +1507,11 @@
      "file": "scripts/ui/pc/app_staff.gd:132-136,157",
      "detail": "`UiKit.button(row, \"Fire\", fire.bind(id))` calls `Game.fire_staff` straight away: no refund, and a rehire costs the $150–200 hire fee again, starts tomorrow and resets the tier (upgrades of $400 and $800 are lost). It sits in the same row as the green Upgrade button, so a misclick is easy. B1 got a second-Del confirm for selling; this is the same kind of loss. Fix: a two-step button (\"Fire?\" → \"Confirm fire\") that times out back after about 3 s.",
      "by": "CritPlayer",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:40:30+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "3983702",
+     "note": "two-press fire tested",
+     "closed": "2026-11-07T09:42:21+10:00"
     },
     {
      "id": "Y5",
@@ -3321,6 +3323,21 @@
    "t": "2026-11-07T09:41:09+10:00",
    "kind": "fix",
    "msg": "C2/Y1 fixed d4b2342 day_test: 1.5 s press stays OPEN; failed before (CLOSING)"
+  },
+  {
+   "t": "2026-11-07T09:42:21+10:00",
+   "kind": "fix",
+   "msg": "C2/Y2 fixed 3983702 staff_test: idle reason shown in app"
+  },
+  {
+   "t": "2026-11-07T09:42:21+10:00",
+   "kind": "fix",
+   "msg": "R7/T1 fixed 3983702 now actually visible"
+  },
+  {
+   "t": "2026-11-07T09:42:21+10:00",
+   "kind": "fix",
+   "msg": "C2/Y4 fixed 3983702 two-press fire tested"
   }
  ],
  "tests": [
@@ -3462,17 +3479,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:41:09+10:00",
-  "mem_free_pct": 37,
+  "t": "2026-11-07T09:42:21+10:00",
+  "mem_free_pct": 35,
   "load": [
-   2.33,
-   3.49,
-   3.86
+   2.4,
+   3.31,
+   3.76
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "3983702",
+    "date": "2026-11-07T09:42:19+10:00",
+    "subject": "Show what each worker is doing in the Staff app and when aimed at, and ask before firing",
+    "body": "Staff.status() was only read by tests, so the restocker's idle reason never reached the player.\nCards now carry a live 'Now: ...' line, aiming at a worker shows their status, and Fire takes\ntwo presses within 3 s. Review round 2, Y2 and Y4.",
+    "stat": "3 files changed, 59 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "d4b2342",
     "date": "2026-11-07T09:41:08+10:00",
@@ -3885,19 +3909,12 @@
     "subject": "Let E on the till's reader, cash or POS sit you down when there is nothing to pay",
     "body": "",
     "stat": "3 files changed, 66 insertions(+), 25 deletions(-)"
-   },
-   {
-    "sha": "1fcf7bf",
-    "date": "2026-11-06T20:35:31+10:00",
-    "subject": "Let products without a printed front stand turned on a shelf when that holds more",
-    "body": "Toilet paper fit one roll pack per gondola slot; with 'turnable' it fits two. Bananas,\ncarrots and roast chickens gain 33-50%. Printed packs still face the customer. Can and bag\nsizes themselves are left for an asset pass. Review round 2, S3 (part).",
-    "stat": "5 files changed, 37 insertions(+), 10 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 183
+  "total_commits": 184
  },
- "updated": "2026-11-07T09:41:10+10:00",
+ "updated": "2026-11-07T09:42:22+10:00",
  "qa": [
   {
    "num": 1,

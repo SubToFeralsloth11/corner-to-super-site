@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T09:41+10:00",
- "head": "d4b2342",
+ "generated": "2026-11-07T09:42+10:00",
+ "head": "3983702",
  "stats": {
-  "commits": 183,
+  "commits": 184,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T09:41:08+10:00",
+  "last_commit": "2026-11-07T09:42:19+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 28437,
+  "gd_lines": 28494,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1216,6 +1216,11 @@
    "sha": "d4b2342",
    "date": "2026-11-07T09:41:08+10:00",
    "subject": "Stop one held E from opening the store and then closing it early"
+  },
+  {
+   "sha": "3983702",
+   "date": "2026-11-07T09:42:19+10:00",
+   "subject": "Show what each worker is doing in the Staff app and when aimed at, and ask before firing"
   }
  ],
  "commits_per_hour": [
@@ -1385,7 +1390,7 @@
   },
   {
    "hour": "2026-11-07T09:00:00+10:00",
-   "commits": 6
+   "commits": 7
   }
  ],
  "sections": [
