@@ -887,10 +887,11 @@
      "file": "data/levels.json:2; docs/ECONOMY.md:239-242",
      "detail": "Max level is 16, which the soak reaches on day 27. Nothing exists after it: no prestige, no new licences, no reason to keep earning, and E3 makes the late expansions worthless anyway. L13 unlocks only a sky blue uniform and L16, the final level, only a hot pink trim. L7 is just S2 and L11 just S3. Fix: move a real unlock to L13 and L16 (a till tier, staff tier 3, an extra loan, a product line), and add post-cap goals such as weekly targets or a second store.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "a9ed98a",
+     "note": "progression_test checks both effects",
+     "closed": "2026-11-07T08:08:30+10:00"
     },
     {
      "id": "E9",
@@ -2282,6 +2283,11 @@
    "t": "2026-11-07T08:07:08+10:00",
    "kind": "test",
    "msg": "Tests: 1028 passed, 0 failed after E6/E10/E11/E13"
+  },
+  {
+   "t": "2026-11-07T08:08:30+10:00",
+   "kind": "fix",
+   "msg": "R5/E8 fixed a9ed98a progression_test checks both effects"
   }
  ],
  "tests": [
@@ -2371,17 +2377,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T08:07:08+10:00",
-  "mem_free_pct": 47,
+  "t": "2026-11-07T08:08:30+10:00",
+  "mem_free_pct": 48,
   "load": [
-   2.37,
-   2.79,
-   4.0
+   1.72,
+   2.48,
+   3.77
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "a9ed98a",
+    "date": "2026-11-07T08:08:28+10:00",
+    "subject": "Give levels 13 and 16 real unlocks: loyalty cards and a head office franchise",
+    "body": "Both only unlocked a colour, and nothing paid off after the level cap. Loyalty cards (L13,\n$3,000) add 3 satisfaction per paying customer; the franchise (L16, $10,000) pays $100 a star\nevery Sunday night, shown on the receipt and in the paper. Upgrade effects live in\nupgrades.json. Review round 2, E8.",
+    "stat": "7 files changed, 61 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "aad6ecc",
     "date": "2026-11-07T08:07:06+10:00",
@@ -2794,19 +2807,12 @@
     "subject": "Run patience until the first scan, ring a counter bell and show a waiting chip for unstaffed tills, grey out Give change with an empty tray, and keep customers off a shelf carried in build mode",
     "body": "",
     "stat": "12 files changed, 258 insertions(+), 25 deletions(-)"
-   },
-   {
-    "sha": "7a89d95",
-    "date": "2026-11-06T02:11:36+10:00",
-    "subject": "Name products in prompts and hints instead of their ids, and stop an empty box offering to fold or glowing green at a slot where E does nothing; test build mode needs empty hands",
-    "body": "",
-    "stat": "9 files changed, 72 insertions(+), 16 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 154
+  "total_commits": 155
  },
- "updated": "2026-11-07T08:07:09+10:00",
+ "updated": "2026-11-07T08:08:30+10:00",
  "qa": [
   {
    "num": 1,
