@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C2",
   "area": "Second pass",
-  "activity": "FixRegress: X5 move staffed till",
+  "activity": "FixRegress: X11 franchise payback",
   "cycle": "2",
-  "since": "2026-11-07T09:51:24+10:00"
+  "since": "2026-11-07T09:57:11+10:00"
  },
  "rounds": [
   {
@@ -3847,6 +3847,11 @@
    "t": "2026-11-07T09:57:08+10:00",
    "kind": "fix",
    "msg": "C2/X12 fixed a0aedee wall misses and lost counter asks set _let_down via ShopperBrain.let_down(); asserted in the same test"
+  },
+  {
+   "t": "2026-11-07T09:57:11+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixRegress: X11 franchise payback"
   }
  ],
  "tests": [
@@ -3988,12 +3993,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:57:08+10:00",
-  "mem_free_pct": 55,
+  "t": "2026-11-07T09:57:11+10:00",
+  "mem_free_pct": 56,
   "load": [
-   2.78,
-   3.09,
-   3.43
+   2.95,
+   3.13,
+   3.44
   ],
   "godot_procs": 0
  },
@@ -4423,7 +4428,7 @@
   "dirty": [],
   "total_commits": 203
  },
- "updated": "2026-11-07T09:57:09+10:00",
+ "updated": "2026-11-07T09:57:11+10:00",
  "qa": [
   {
    "num": 1,
