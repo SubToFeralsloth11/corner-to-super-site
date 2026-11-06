@@ -520,9 +520,9 @@
      "by": "CritNPC",
      "status": "fixed",
      "found": "2026-11-06T20:55:53+10:00",
-     "commit": "9061b62",
-     "note": "customer_test regression fails before (bought through shelf), passes after; full suite 1012/0",
-     "closed": "2026-11-07T07:53:42+10:00"
+     "commit": "017be96",
+     "note": "Build-rule half of N4 (front clearance) also landed",
+     "closed": "2026-11-07T07:59:44+10:00"
     },
     {
      "id": "N5",
@@ -1090,6 +1090,53 @@
      "commit": "67774d3",
      "note": "check.sh clean, checkout_test 65/65; windowed look pending next tour",
      "closed": "2026-11-06T20:50:50+10:00"
+    }
+   ]
+  },
+  {
+   "id": "R6",
+   "area": "Build mode, expansions, fixtures",
+   "started": "2026-11-07T07:59:44+10:00",
+   "finished": null,
+   "findings": [
+    {
+     "id": "B1",
+     "sev": "P2",
+     "title": "One stray Del sells a fixture at half price, no confirmation",
+     "file": "scripts/build/build_mode.gd:433-435",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T07:59:44+10:00",
+     "commit": "017be96",
+     "note": "build_test regressions fail before, pass after; full suite 1019/0",
+     "closed": "2026-11-07T07:59:44+10:00"
+    },
+    {
+     "id": "B2",
+     "sev": "P1",
+     "title": "Shelves can be boxed in so no customer can reach any face (stock silently unsellable)",
+     "file": "scripts/build/build_rules.gd refusal()",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T07:59:44+10:00",
+     "commit": "017be96",
+     "note": "build_test regressions fail before, pass after; full suite 1019/0",
+     "closed": "2026-11-07T07:59:44+10:00"
+    },
+    {
+     "id": "B3",
+     "sev": "P3",
+     "title": "Footprint plate BoxMesh rebuilt every physics frame in build mode",
+     "file": "scripts/build/build_mode.gd:357",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T07:59:44+10:00",
+     "commit": "017be96",
+     "note": "build_test regressions fail before, pass after; full suite 1019/0",
+     "closed": "2026-11-07T07:59:44+10:00"
     }
    ]
   }
@@ -2099,6 +2146,51 @@
    "t": "2026-11-07T07:56:42+10:00",
    "kind": "agent",
    "msg": "Agent soak: stopped Soak paused: it held the engine lock for an hour; will rerun at the end of the cycle"
+  },
+  {
+   "t": "2026-11-07T07:59:44+10:00",
+   "kind": "round",
+   "msg": "Round R6 started: Build mode, expansions, fixtures"
+  },
+  {
+   "t": "2026-11-07T07:59:44+10:00",
+   "kind": "finding",
+   "msg": "R6/B1 [P2] One stray Del sells a fixture at half price, no confirmation"
+  },
+  {
+   "t": "2026-11-07T07:59:44+10:00",
+   "kind": "finding",
+   "msg": "R6/B2 [P1] Shelves can be boxed in so no customer can reach any face (stock silently unsellable)"
+  },
+  {
+   "t": "2026-11-07T07:59:44+10:00",
+   "kind": "finding",
+   "msg": "R6/B3 [P3] Footprint plate BoxMesh rebuilt every physics frame in build mode"
+  },
+  {
+   "t": "2026-11-07T07:59:44+10:00",
+   "kind": "fix",
+   "msg": "R6/B1 fixed 017be96 build_test regressions fail before, pass after; full suite 1019/0"
+  },
+  {
+   "t": "2026-11-07T07:59:44+10:00",
+   "kind": "fix",
+   "msg": "R6/B2 fixed 017be96 build_test regressions fail before, pass after; full suite 1019/0"
+  },
+  {
+   "t": "2026-11-07T07:59:44+10:00",
+   "kind": "fix",
+   "msg": "R6/B3 fixed 017be96 build_test regressions fail before, pass after; full suite 1019/0"
+  },
+  {
+   "t": "2026-11-07T07:59:44+10:00",
+   "kind": "fix",
+   "msg": "R4/N4 fixed 017be96 Build-rule half of N4 (front clearance) also landed"
+  },
+  {
+   "t": "2026-11-07T07:59:44+10:00",
+   "kind": "test",
+   "msg": "Tests: 1019 passed, 0 failed after R6 build fixes"
   }
  ],
  "tests": [
@@ -2125,6 +2217,12 @@
    "passed": 1012,
    "failed": 0,
    "note": "after R4 P1s + R5 P1s"
+  },
+  {
+   "t": "2026-11-07T07:59:44+10:00",
+   "passed": 1019,
+   "failed": 0,
+   "note": "after R6 build fixes"
   }
  ],
  "agents": {
@@ -2170,17 +2268,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T07:56:42+10:00",
+  "t": "2026-11-07T07:59:45+10:00",
   "mem_free_pct": 49,
   "load": [
-   3.33,
-   3.72,
-   5.49
+   3.19,
+   3.28,
+   4.93
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "017be96",
+    "date": "2026-11-07T07:59:38+10:00",
+    "subject": "Keep one reachable side on every shelf, and ask for a second Del before selling",
+    "body": "Shelves could be boxed in so customers had no face to reach (they now skip such slots, which\nsilently lost sales). Placement is refused when a fixture, or a neighbour, would have no face\nwith 0.6 m of floor in front. One stray Del sold a fixture at half price; it now takes two\npresses within 2.5 s. The footprint plate's mesh is no longer rebuilt every frame.\nReview round 2, R6 B1-B3.",
+    "stat": "5 files changed, 139 insertions(+), 11 deletions(-)"
+   },
    {
     "sha": "20de20c",
     "date": "2026-11-07T07:54:30+10:00",
@@ -2593,21 +2698,12 @@
     "subject": "Refresh price labels and the price popup after the morning market drift; GDD: an unset price shows the market price, not --",
     "body": "",
     "stat": "5 files changed, 35 insertions(+), 4 deletions(-)"
-   },
-   {
-    "sha": "f99e6b8",
-    "date": "2026-11-06T00:56:41+10:00",
-    "subject": "Keep the player off a staffed till's reader and cash, and have the cashier count change from what is already in the tray",
-    "body": "",
-    "stat": "3 files changed, 67 insertions(+), 11 deletions(-)"
    }
   ],
-  "dirty": [
-   " M scripts/build/build_rules.gd"
-  ],
-  "total_commits": 148
+  "dirty": [],
+  "total_commits": 149
  },
- "updated": "2026-11-07T07:56:43+10:00",
+ "updated": "2026-11-07T07:59:45+10:00",
  "qa": [
   {
    "num": 1,
