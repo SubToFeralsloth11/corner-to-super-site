@@ -134,10 +134,11 @@
      "file": "checkout.gd:466-470",
      "detail": "",
      "by": "CritCheckout",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:22:44+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "d956452",
+     "note": "Checkout.fetch_from_seat + seated 'Take a pack of X (R)' button; toast no longer says E (which stands you up); new m7_content test_seated_cashier_fetches_smokes_without_standing (smokes 19/0)",
+     "closed": "2026-11-06T20:38:32+10:00"
     },
     {
      "id": "C11",
@@ -967,6 +968,11 @@
    "t": "2026-11-06T20:37:49+10:00",
    "kind": "fix",
    "msg": "R2/C16 fixed a8ccc26 bag tweens to the left hand then Shopper.take_bag hangs it from LeftHand each frame (freed with the shopper; weakref, no freed-lambda capture); m7 every_product test 1/0 with no errors; visual pending windowed tour"
+  },
+  {
+   "t": "2026-11-06T20:38:32+10:00",
+   "kind": "fix",
+   "msg": "R2/C10 fixed d956452 Checkout.fetch_from_seat + seated 'Take a pack of X (R)' button; toast no longer says E (which stands you up); new m7_content test_seated_cashier_fetches_smokes_without_standing (smokes 19/0)"
   }
  ],
  "tests": [
@@ -1001,17 +1007,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:37:49+10:00",
-  "mem_free_pct": 29,
+  "t": "2026-11-06T20:38:32+10:00",
+  "mem_free_pct": 44,
   "load": [
-   2.96,
-   3.0,
-   2.85
+   3.32,
+   3.08,
+   2.89
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "d956452",
+    "date": "2026-11-06T20:38:30+10:00",
+    "subject": "Let a seated cashier fetch Smokes with a Take a pack button or R",
+    "body": "",
+    "stat": "3 files changed, 62 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "a8ccc26",
     "date": "2026-11-06T20:37:47+10:00",
@@ -1424,22 +1437,15 @@
     "subject": "Hook the staff crew to phase changes with a bound method so freed worlds disconnect",
     "body": "",
     "stat": "1 file changed, 6 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "8fe0676",
-    "date": "2026-11-05T21:56:43+10:00",
-    "subject": "Document M6: staff rules, API, tour results and playtest",
-    "body": "",
-    "stat": "5 files changed, 127 insertions(+), 17 deletions(-)"
    }
   ],
   "dirty": [
    " M scripts/fixtures/checkout.gd",
    " M tests/screenshot_tour.gd"
   ],
-  "total_commits": 130
+  "total_commits": 131
  },
- "updated": "2026-11-06T20:37:50+10:00",
+ "updated": "2026-11-06T20:38:32+10:00",
  "qa": [
   {
    "num": 1,
