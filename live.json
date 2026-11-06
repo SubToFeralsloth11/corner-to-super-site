@@ -1886,10 +1886,11 @@
      "file": "scripts/build/build_rules.gd:92-94",
      "detail": "It only forwards to _any_overlap(polys, b) and has one caller (refusal, the neighbour access check). Fix: call _any_overlap directly and delete the wrapper.",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:58+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "46fa054",
+     "note": "wrapper deleted, caller uses _any_overlap; build_test 129/0",
+     "closed": "2026-11-07T09:56:59+10:00"
     },
     {
      "id": "X20",
@@ -3817,6 +3818,11 @@
    "t": "2026-11-07T09:56:56+10:00",
    "kind": "fix",
    "msg": "C2/X6 fixed 46fa054 ACCESS_DEPTH = REACH_STAND + 0.3 = 0.9 m. Measured on the navmesh: 0.6-0.8 m aisles leave 4-8 of 12 gondola slots reachable. test_an_accepted_shelf_is_reachable_on_the_navmesh fails on old rule (x 4.75 accepted, 4/12), passes after; build_test 129/0"
+  },
+  {
+   "t": "2026-11-07T09:56:59+10:00",
+   "kind": "fix",
+   "msg": "C2/X19 fixed 46fa054 wrapper deleted, caller uses _any_overlap; build_test 129/0"
   }
  ],
  "tests": [
@@ -3958,7 +3964,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:56:56+10:00",
+  "t": "2026-11-07T09:56:59+10:00",
   "mem_free_pct": 56,
   "load": [
    2.82,
@@ -4393,7 +4399,7 @@
   "dirty": [],
   "total_commits": 203
  },
- "updated": "2026-11-07T09:56:57+10:00",
+ "updated": "2026-11-07T09:56:59+10:00",
  "qa": [
   {
    "num": 1,
