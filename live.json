@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "R2 (fixer) / R4 next",
   "area": "Shelves, stocking, boxes, pricing",
-  "activity": "Fixer: full test suite after R2 checkout fixes",
+  "activity": "Fixer: R2 checkout fixes done (986/0)",
   "cycle": "1",
-  "since": "2026-11-06T20:43:39+10:00"
+  "since": "2026-11-06T20:44:35+10:00"
  },
  "rounds": [
   {
@@ -1027,6 +1027,11 @@
    "t": "2026-11-06T20:44:17+10:00",
    "kind": "test",
    "msg": "Tests: 986 passed, 0 failed after R2 fixes"
+  },
+  {
+   "t": "2026-11-06T20:44:35+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - Fixer: R2 checkout fixes done (986/0)"
   }
  ],
  "tests": [
@@ -1067,17 +1072,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:44:17+10:00",
+  "t": "2026-11-06T20:44:35+10:00",
   "mem_free_pct": 45,
   "load": [
-   2.99,
-   2.73,
-   2.77
+   2.69,
+   2.67,
+   2.75
   ],
-  "godot_procs": 0
+  "godot_procs": 34
  },
  "game": {
   "commits": [
+   {
+    "sha": "4e7a26b",
+    "date": "2026-11-06T20:44:33+10:00",
+    "subject": "Record review round 2 checkout fixes in PROGRESS",
+    "body": "",
+    "stat": "1 file changed, 35 insertions(+)"
+   },
    {
     "sha": "7f6ffc0",
     "date": "2026-11-06T20:43:31+10:00",
@@ -1490,19 +1502,12 @@
     "subject": "Test every product end to end, the licence furniture, Smokes and the full level-16 store; add the full-store tour",
     "body": "",
     "stat": "11 files changed, 680 insertions(+)"
-   },
-   {
-    "sha": "9f59f62",
-    "date": "2026-11-05T22:30:47+10:00",
-    "subject": "Place the deli corner and cigarette wall with their licences, sell Smokes at the till, hang aisle signs, plant verge trees and fill the car park with trade",
-    "body": "",
-    "stat": "15 files changed, 625 insertions(+), 38 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 136
+  "total_commits": 137
  },
- "updated": "2026-11-06T20:44:18+10:00",
+ "updated": "2026-11-06T20:44:35+10:00",
  "qa": [
   {
    "num": 1,
