@@ -172,10 +172,11 @@
      "file": "change_panel.gd:120",
      "detail": "",
      "by": "CritCheckout",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:22:44+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "ba4975c",
+     "note": "ChangePanel tracks the short hand-over: owed amount updates with the tray and clears when it matches; new checkout_test test_still_owed_goes_once_the_count_is_right (52/0)",
+     "closed": "2026-11-06T20:37:17+10:00"
     },
     {
      "id": "C14",
@@ -943,6 +944,11 @@
    "t": "2026-11-06T20:36:51+10:00",
    "kind": "fix",
    "msg": "R2/C9 fixed 2150d39 TillTarget.interact falls back to sitting; prompts offer [E] Sit at the till; test_e_on_a_till_target_sits_you_down (checkout_test 52/0). 2150d39 repairs hunks misplaced in 8e1c6d0"
+  },
+  {
+   "t": "2026-11-06T20:37:17+10:00",
+   "kind": "fix",
+   "msg": "R2/C13 fixed ba4975c ChangePanel tracks the short hand-over: owed amount updates with the tray and clears when it matches; new checkout_test test_still_owed_goes_once_the_count_is_right (52/0)"
   }
  ],
  "tests": [
@@ -977,17 +983,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:36:51+10:00",
-  "mem_free_pct": 30,
+  "t": "2026-11-06T20:37:17+10:00",
+  "mem_free_pct": 31,
   "load": [
-   3.55,
-   3.07,
-   2.87
+   3.25,
+   3.03,
+   2.86
   ],
   "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "ba4975c",
+    "date": "2026-11-06T20:37:15+10:00",
+    "subject": "Clear the change panel's 'still owed' line once the tray is right",
+    "body": "",
+    "stat": "2 files changed, 36 insertions(+), 3 deletions(-)"
+   },
    {
     "sha": "2150d39",
     "date": "2026-11-06T20:36:50+10:00",
@@ -1400,13 +1413,6 @@
     "subject": "Add staff hiring, tiers, till assignment, wages from the first working day and the Staff app",
     "body": "",
     "stat": "4 files changed, 312 insertions(+), 3 deletions(-)"
-   },
-   {
-    "sha": "b072ba6",
-    "date": "2026-11-05T21:56:42+10:00",
-    "subject": "Share navmesh walking between customers and staff",
-    "body": "",
-    "stat": "3 files changed, 115 insertions(+), 82 deletions(-)"
    }
   ],
   "dirty": [
@@ -1414,13 +1420,12 @@
    " M scripts/fixtures/pos.gd",
    " M scripts/npc/shopper.gd",
    " M scripts/ui/card_keypad.gd",
-   " M scripts/ui/change_panel.gd",
    " M tests/cases/checkout_test.gd",
    " M tests/screenshot_tour.gd"
   ],
-  "total_commits": 126
+  "total_commits": 127
  },
- "updated": "2026-11-06T20:36:52+10:00",
+ "updated": "2026-11-06T20:37:18+10:00",
  "qa": [
   {
    "num": 1,
