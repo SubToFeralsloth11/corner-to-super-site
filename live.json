@@ -121,10 +121,11 @@
      "file": "checkout.gd:114-116,541,550-559",
      "detail": "",
      "by": "CritCheckout",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:22:44+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "8e1c6d0",
+     "note": "TillTarget.interact falls back to Checkout.interact (sit); target prompts offer [E] Sit at the till; new checkout_test test_e_on_a_till_target_sits_you_down (checkout_test 52/0)",
+     "closed": "2026-11-06T20:35:45+10:00"
     },
     {
      "id": "C10",
@@ -932,6 +933,11 @@
    "t": "2026-11-06T20:35:38+10:00",
    "kind": "status",
    "msg": "Status: fixing - R3 closed (16/17 fixed, S3 partly). Spawning R4 customers/NPC critic once fixer finishes"
+  },
+  {
+   "t": "2026-11-06T20:35:45+10:00",
+   "kind": "fix",
+   "msg": "R2/C9 fixed 8e1c6d0 TillTarget.interact falls back to Checkout.interact (sit); target prompts offer [E] Sit at the till; new checkout_test test_e_on_a_till_target_sits_you_down (checkout_test 52/0)"
   }
  ],
  "tests": [
@@ -966,10 +972,10 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:35:38+10:00",
-  "mem_free_pct": 42,
+  "t": "2026-11-06T20:35:45+10:00",
+  "mem_free_pct": 43,
   "load": [
-   3.3,
+   3.25,
    2.91,
    2.8
   ],
@@ -977,6 +983,13 @@
  },
  "game": {
   "commits": [
+   {
+    "sha": "8e1c6d0",
+    "date": "2026-11-06T20:35:43+10:00",
+    "subject": "Let E on the till's reader, cash or POS sit you down when there is nothing to pay",
+    "body": "",
+    "stat": "3 files changed, 66 insertions(+), 25 deletions(-)"
+   },
    {
     "sha": "1fcf7bf",
     "date": "2026-11-06T20:35:31+10:00",
@@ -1389,27 +1402,19 @@
     "subject": "Record the M1 verification in PROGRESS and tick its milestone boxes",
     "body": "",
     "stat": "2 files changed, 79 insertions(+), 8 deletions(-)"
-   },
-   {
-    "sha": "650b884",
-    "date": "2026-11-05T19:42:14+10:00",
-    "subject": "Aim the stock bot at a box's middle and give skipped boxes a second pass",
-    "body": "",
-    "stat": "2 files changed, 18 insertions(+), 15 deletions(-)"
    }
   ],
   "dirty": [
-   "MM scripts/fixtures/checkout.gd",
+   " M scripts/fixtures/checkout.gd",
    " M scripts/fixtures/pos.gd",
-   "M  scripts/fixtures/till_target.gd",
    " M scripts/npc/shopper.gd",
    " M scripts/ui/card_keypad.gd",
    " M scripts/ui/change_panel.gd",
-   "MM tests/cases/checkout_test.gd"
+   " M tests/cases/checkout_test.gd"
   ],
-  "total_commits": 124
+  "total_commits": 125
  },
- "updated": "2026-11-06T20:35:38+10:00",
+ "updated": "2026-11-06T20:35:45+10:00",
  "qa": [
   {
    "num": 1,

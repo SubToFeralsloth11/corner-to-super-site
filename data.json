@@ -1,10 +1,10 @@
 {
  "generated": "2026-11-06T20:35+10:00",
- "head": "1fcf7bf",
+ "head": "8e1c6d0",
  "stats": {
-  "commits": 124,
+  "commits": 125,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-06T20:35:31+10:00",
+  "last_commit": "2026-11-06T20:35:43+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
@@ -900,6 +900,11 @@
    "sha": "1fcf7bf",
    "date": "2026-11-06T20:35:31+10:00",
    "subject": "Let products without a printed front stand turned on a shelf when that holds more"
+  },
+  {
+   "sha": "8e1c6d0",
+   "date": "2026-11-06T20:35:43+10:00",
+   "subject": "Let E on the till's reader, cash or POS sit you down when there is nothing to pay"
   }
  ],
  "commits_per_hour": [
@@ -1017,7 +1022,7 @@
   },
   {
    "hour": "2026-11-06T20:00:00+10:00",
-   "commits": 13
+   "commits": 14
   }
  ],
  "sections": [
