@@ -818,10 +818,11 @@
      "file": "data/customers.json:52-57; scripts/npc/customer_rules.gd:34-37; docs/ECONOMY.md:192",
      "detail": "The in-store cap is `min(20, 2 + 4·tills + L/2)`. Floor area plays no part, and the cap is already 20 with 4 tills from L4, or 3 tills from L12. Arrivals above the cap wait in `pending` and are thrown away at 22:00 (`customer_spawner.gd:28-31`). Buying E4–E8 adds $25–40 a day in rent plus $1.50 a cell in electricity for no extra customers; E8 alone is $7,500. Tills 5–6, sold up to `max: 6`, can't raise the cap. The M9 soak in PROGRESS.md shows customers flat at about 101–117 a day from day 14 to day 30. The AI held $3k–6k cash on days 21–24 and still didn't expand, and it never bought E6–E8. The end of the build-out is a trap. Fix: make the cap depend on unlocked floor area or cells, e.g. `base + per_till·tills + per_cell·cells`, with a higher hard cap. Also correct the stale comment and defaults at customer_rules.gd:34-37, which still say `4 + 2·tills`.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "20de20c",
+     "note": "size_bonus in customers.json; customer_test 97/97. Pacing re-check needs a soak run (queued)",
+     "closed": "2026-11-07T07:54:32+10:00"
     },
     {
      "id": "E4",
@@ -2078,6 +2079,11 @@
    "t": "2026-11-07T07:53:42+10:00",
    "kind": "test",
    "msg": "Tests: 1012 passed, 0 failed after R4 P1s + R5 P1s"
+  },
+  {
+   "t": "2026-11-07T07:54:32+10:00",
+   "kind": "fix",
+   "msg": "R5/E3 fixed 20de20c size_bonus in customers.json; customer_test 97/97. Pacing re-check needs a soak run (queued)"
   }
  ],
  "tests": [
@@ -2144,17 +2150,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T07:53:42+10:00",
+  "t": "2026-11-07T07:54:32+10:00",
   "mem_free_pct": 49,
   "load": [
-   3.95,
-   4.0,
-   5.99
+   3.45,
+   3.85,
+   5.82
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "20de20c",
+    "date": "2026-11-07T07:54:30+10:00",
+    "subject": "Let a bigger shop fill bigger baskets, so late expansions earn their rent",
+    "body": "The in-store cap (20) binds from about level 4, so E4-E8 added rent and power but no sales.\nLists now gain one item per 9 unlocked cells beyond the start shop (+4 in the full store).\nAlso corrects the stale formula comments. Review round 2, E3.",
+    "stat": "5 files changed, 40 insertions(+), 10 deletions(-)"
+   },
    {
     "sha": "9061b62",
     "date": "2026-11-07T07:53:40+10:00",
@@ -2567,19 +2580,12 @@
     "subject": "Keep the player off a staffed till's reader and cash, and have the cashier count change from what is already in the tray",
     "body": "",
     "stat": "3 files changed, 67 insertions(+), 11 deletions(-)"
-   },
-   {
-    "sha": "4251453",
-    "date": "2026-11-06T00:42:51+10:00",
-    "subject": "Refuse to sell a till someone is queued at or staffing, and send a queue whose till vanished to another till instead of crashing",
-    "body": "",
-    "stat": "3 files changed, 41 insertions(+), 2 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 147
+  "total_commits": 148
  },
- "updated": "2026-11-07T07:53:43+10:00",
+ "updated": "2026-11-07T07:54:32+10:00",
  "qa": [
   {
    "num": 1,
