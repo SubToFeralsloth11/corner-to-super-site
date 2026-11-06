@@ -519,10 +519,11 @@
      "file": "scripts/fixtures/pos.gd",
      "detail": "Tiny font on the POS texture in the seated view.",
      "by": "lead",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:48:59+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "67774d3",
+     "note": "check.sh clean, checkout_test 65/65; windowed look pending next tour",
+     "closed": "2026-11-06T20:50:50+10:00"
     }
    ]
   }
@@ -1162,6 +1163,11 @@
    "t": "2026-11-06T20:49:56+10:00",
    "kind": "fix",
    "msg": "R9/U2 fixed f0e3703 Regression test fails before (0 sales), passes after; checkout/staff/m2 suites green"
+  },
+  {
+   "t": "2026-11-06T20:50:50+10:00",
+   "kind": "fix",
+   "msg": "R9/U3 fixed 67774d3 check.sh clean, checkout_test 65/65; windowed look pending next tour"
   }
  ],
  "tests": [
@@ -1217,17 +1223,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:49:56+10:00",
+  "t": "2026-11-06T20:50:50+10:00",
   "mem_free_pct": 57,
   "load": [
-   2.28,
-   2.36,
-   2.57
+   1.92,
+   2.26,
+   2.52
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "67774d3",
+    "date": "2026-11-06T20:50:48+10:00",
+    "subject": "Make the POS screen readable from the till seat: bigger, fewer lines and short status text",
+    "body": "Item lines were 19 px on a screen ~200 px wide in the seated view (about 6 px on screen). Six\n32 px lines, a 60 px total and a status line clipped clear of it. Review round 2, U3.",
+    "stat": "2 files changed, 20 insertions(+), 15 deletions(-)"
+   },
    {
     "sha": "f0e3703",
     "date": "2026-11-06T20:49:51+10:00",
@@ -1640,19 +1653,12 @@
     "subject": "Let staff cashiers fetch Smokes from the cigarette wall",
     "body": "",
     "stat": "3 files changed, 13 insertions(+), 4 deletions(-)"
-   },
-   {
-    "sha": "95ce661",
-    "date": "2026-11-05T22:30:47+10:00",
-    "subject": "Document M7 and tick its product box",
-    "body": "",
-    "stat": "8 files changed, 160 insertions(+), 7 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 138
+  "total_commits": 139
  },
- "updated": "2026-11-06T20:49:56+10:00",
+ "updated": "2026-11-06T20:50:50+10:00",
  "qa": [
   {
    "num": 1,
