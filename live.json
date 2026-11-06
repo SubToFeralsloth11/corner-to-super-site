@@ -3,9 +3,9 @@
   "state": "reviewing",
   "round": "R2+R3",
   "area": "Checkout; shelves/pricing",
-  "activity": "Two critic agents tearing apart checkout and shelf code; baseline test suite running",
+  "activity": "Critics writing up (~18 checkout, ~15 shelf findings); full suite re-running",
   "cycle": "1",
-  "since": "2026-11-06T20:11:25+10:00"
+  "since": "2026-11-06T20:19:42+10:00"
  },
  "rounds": [
   {
@@ -88,6 +88,16 @@
    "t": "2026-11-06T20:14:46+10:00",
    "kind": "plan",
    "msg": "Question box live: issue #1 answered by watcher agent in 19 s (launchd com.agents.cts-ask-watch)"
+  },
+  {
+   "t": "2026-11-06T20:19:41+10:00",
+   "kind": "agent",
+   "msg": "Agent baseline-tests: failed gt test killed at 600s (no --fixed-fps); re-running via tests/run_tests.sh"
+  },
+  {
+   "t": "2026-11-06T20:19:42+10:00",
+   "kind": "status",
+   "msg": "Status: reviewing - Critics writing up (~18 checkout, ~15 shelf findings); full suite re-running"
   }
  ],
  "tests": [
@@ -110,20 +120,20 @@
    "t": "2026-11-06T20:11:25+10:00"
   },
   "baseline-tests": {
-   "state": "running",
-   "task": "gt test . (full suite)",
-   "t": "2026-11-06T20:11:25+10:00"
+   "state": "failed",
+   "task": "gt test killed at 600s (no --fixed-fps); re-running via tests/run_tests.sh",
+   "t": "2026-11-06T20:19:41+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-06T20:14:46+10:00",
-  "mem_free_pct": 43,
+  "t": "2026-11-06T20:19:42+10:00",
+  "mem_free_pct": 39,
   "load": [
-   2.83,
-   3.63,
-   3.37
+   3.24,
+   2.89,
+   3.06
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
@@ -551,7 +561,7 @@
   "dirty": [],
   "total_commits": 111
  },
- "updated": "2026-11-06T20:14:46+10:00",
+ "updated": "2026-11-06T20:19:43+10:00",
  "qa": [
   {
    "num": 1,
