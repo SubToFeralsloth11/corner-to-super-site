@@ -1,10 +1,10 @@
 {
  "generated": "2026-11-06T20:25+10:00",
- "head": "0e86b99",
+ "head": "f05587a",
  "stats": {
-  "commits": 114,
+  "commits": 115,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-06T20:25:17+10:00",
+  "last_commit": "2026-11-06T20:25:51+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
@@ -850,6 +850,11 @@
    "sha": "0e86b99",
    "date": "2026-11-06T20:25:17+10:00",
    "subject": "Wait for the basket to be unloaded before taking payment, so a quick scan can't skip the Smokes ask"
+  },
+  {
+   "sha": "f05587a",
+   "date": "2026-11-06T20:25:51+10:00",
+   "subject": "Save the box a restocker is carrying as a loose box where they stood"
   }
  ],
  "commits_per_hour": [
@@ -967,7 +972,7 @@
   },
   {
    "hour": "2026-11-06T20:00:00+10:00",
-   "commits": 3
+   "commits": 4
   }
  ],
  "sections": [

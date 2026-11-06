@@ -248,10 +248,11 @@
      "file": "scripts/autoload/save.gd:50,57; restocker_job.gd:143",
      "detail": "Box reparented to staff.carry is neither racked nor loose, so Save.capture skips it: lost stock and money.",
      "by": "CritShelves",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "f05587a",
+     "note": "StaffCrew.carried_boxes saved as loose boxes; save_test regression fails before (0 units), passes after",
+     "closed": "2026-11-06T20:25:52+10:00"
     },
     {
      "id": "S3",
@@ -762,6 +763,11 @@
    "t": "2026-11-06T20:25:50+10:00",
    "kind": "status",
    "msg": "Status: fixing - Fixer: C2 smokes route to wall till"
+  },
+  {
+   "t": "2026-11-06T20:25:52+10:00",
+   "kind": "fix",
+   "msg": "R3/S2 fixed f05587a StaffCrew.carried_boxes saved as loose boxes; save_test regression fails before (0 units), passes after"
   }
  ],
  "tests": [
@@ -796,17 +802,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:25:50+10:00",
+  "t": "2026-11-06T20:25:52+10:00",
   "mem_free_pct": 46,
   "load": [
-   3.06,
-   2.57,
-   2.78
+   2.81,
+   2.53,
+   2.77
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "f05587a",
+    "date": "2026-11-06T20:25:51+10:00",
+    "subject": "Save the box a restocker is carrying as a loose box where they stood",
+    "body": "Staff work in PREP, when saving is allowed, and the box in their arms was neither racked nor\nloose, so it and its stock vanished on load. Review round 2, S2.",
+    "stat": "3 files changed, 48 insertions(+)"
+   },
    {
     "sha": "0e86b99",
     "date": "2026-11-06T20:25:17+10:00",
@@ -1219,26 +1232,16 @@
     "subject": "Let the Furniture app count owned fixtures before the delivery service exists",
     "body": "",
     "stat": "1 file changed, 4 insertions(+)"
-   },
-   {
-    "sha": "5788ddc",
-    "date": "2026-11-05T20:52:51+10:00",
-    "subject": "Slide the chest freezer's glass lids open over the half being stocked or shopped",
-    "body": "",
-    "stat": "4 files changed, 79 insertions(+), 8 deletions(-)"
    }
   ],
   "dirty": [
-   " M scripts/autoload/save.gd",
    " M scripts/npc/shopper_brain.gd",
-   " M scripts/npc/staff_crew.gd",
    " M scripts/world/world.gd",
-   " M tests/cases/m7_content_test.gd",
-   " M tests/cases/save_test.gd"
+   " M tests/cases/m7_content_test.gd"
   ],
-  "total_commits": 114
+  "total_commits": 115
  },
- "updated": "2026-11-06T20:25:50+10:00",
+ "updated": "2026-11-06T20:25:53+10:00",
  "qa": [
   {
    "num": 1,
