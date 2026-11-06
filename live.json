@@ -1355,6 +1355,19 @@
      "commit": "cfa35ef",
      "note": "Shift = 5 boxes",
      "closed": "2026-11-07T08:20:03+10:00"
+    },
+    {
+     "id": "M3",
+     "sev": "P2",
+     "title": "PC screen text smeared: 3D renders below native + FXAA; HUD covers ShopOS bar; muted text faint",
+     "file": "scripts/fixtures/pc_desk.gd",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T09:03:17+10:00",
+     "commit": "bfe790a",
+     "note": "full-res, no FXAA at the PC; HUD hidden; verified in tour shot 12",
+     "closed": "2026-11-07T09:03:17+10:00"
     }
    ]
   },
@@ -1376,6 +1389,19 @@
      "commit": "f495311",
      "note": "save_test: 36 PEAS all back (freezer + box)",
      "closed": "2026-11-07T08:24:43+10:00"
+    },
+    {
+     "id": "V2",
+     "sev": "P3",
+     "title": "nav_test flaky under load: waited for a rebake that hadn't started",
+     "file": "tests/cases/nav_test.gd",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T09:03:17+10:00",
+     "commit": "ff5b859",
+     "note": "3/3 runs pass",
+     "closed": "2026-11-07T09:03:17+10:00"
     }
    ]
   }
@@ -2855,6 +2881,41 @@
    "t": "2026-11-07T08:55:23+10:00",
    "kind": "fix",
    "msg": "R9/U11 fixed 26924f8 fixed"
+  },
+  {
+   "t": "2026-11-07T09:03:17+10:00",
+   "kind": "finding",
+   "msg": "R8/M3 [P2] PC screen text smeared: 3D renders below native + FXAA; HUD covers ShopOS bar; muted text faint"
+  },
+  {
+   "t": "2026-11-07T09:03:17+10:00",
+   "kind": "fix",
+   "msg": "R8/M3 fixed bfe790a full-res, no FXAA at the PC; HUD hidden; verified in tour shot 12"
+  },
+  {
+   "t": "2026-11-07T09:03:17+10:00",
+   "kind": "finding",
+   "msg": "R10/V2 [P3] nav_test flaky under load: waited for a rebake that hadn't started"
+  },
+  {
+   "t": "2026-11-07T09:03:17+10:00",
+   "kind": "fix",
+   "msg": "R10/V2 fixed ff5b859 3/3 runs pass"
+  },
+  {
+   "t": "2026-11-07T09:03:17+10:00",
+   "kind": "test",
+   "msg": "Tests: 1040 passed, 0 failed after PC readability"
+  },
+  {
+   "t": "2026-11-07T09:03:19+10:00",
+   "kind": "shots",
+   "msg": "Screenshots refreshed: 56 images PC Market now readable; real cans; receipt itemised"
+  },
+  {
+   "t": "2026-11-07T09:03:19+10:00",
+   "kind": "round",
+   "msg": "Cycle 1 (rounds R2-R10) complete: ~95 findings closed. Next: full-store performance check (M9's deferred windowed check), then cycle 2 critique."
   }
  ],
  "tests": [
@@ -2929,6 +2990,12 @@
    "passed": 1040,
    "failed": 0,
    "note": "after pacing retune"
+  },
+  {
+   "t": "2026-11-07T09:03:17+10:00",
+   "passed": 1040,
+   "failed": 0,
+   "note": "after PC readability"
   }
  ],
  "agents": {
@@ -2974,17 +3041,38 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T08:55:24+10:00",
-  "mem_free_pct": 46,
+  "t": "2026-11-07T09:03:20+10:00",
+  "mem_free_pct": 45,
   "load": [
-   3.78,
-   4.07,
-   4.18
+   3.0,
+   3.06,
+   3.61
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "ff5b859",
+    "date": "2026-11-07T09:03:09+10:00",
+    "subject": "Wait for the navmesh rebake to start before waiting for it to finish in nav tests",
+    "body": "The off-navmesh test failed once under load when the threaded rebake hadn't started yet.",
+    "stat": "1 file changed, 8 insertions(+), 2 deletions(-)"
+   },
+   {
+    "sha": "bfe790a",
+    "date": "2026-11-07T09:03:09+10:00",
+    "subject": "Render the PC screen at full resolution without FXAA, hide the HUD there, and darken muted text",
+    "body": "The presets render 3D below native and FXAA blurs, which smeared ShopOS's small text; the HUD\ncovered its top bar; muted grey on white was faint. Checked in the screenshot tour (shot 12).",
+    "stat": "3 files changed, 17 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "a8027d1",
+    "date": "2026-11-07T08:57:39+10:00",
+    "subject": "Check for a window's tween meta before reading it (null default still errors)",
+    "body": "",
+    "stat": "1 file changed, 3 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "0da31b5",
     "date": "2026-11-07T08:55:14+10:00",
@@ -3383,33 +3471,12 @@
     "subject": "Drop Checkout.is_attended_by_staff for has_cashier",
     "body": "",
     "stat": "1 file changed, 3 insertions(+), 8 deletions(-)"
-   },
-   {
-    "sha": "e08817b",
-    "date": "2026-11-06T20:27:36+10:00",
-    "subject": "Let prices follow the market again, price boxed stock, and make the price popup forgiving",
-    "body": "'Market price' and 'All to market' pinned today's market price for good; they now drop your own\nprice (Game.clear_price), shown as '(market)' / '*'. The Pricing app lists stock in boxes and on\nracks too. The popup focuses its field, takes '4,20', says when input is rejected, steps land on\nwhole 5c, and warns in red above the refuse-all ratio. Review round 2, S5 S8 S15 S16 S17.\n(The progression_test hunk for this went in with 4401ca4.)",
-    "stat": "3 files changed, 81 insertions(+), 27 deletions(-)"
-   },
-   {
-    "sha": "4401ca4",
-    "date": "2026-11-06T20:27:27+10:00",
-    "subject": "Award the perfect-change bonus only when there was change to count",
-    "body": "",
-    "stat": "3 files changed, 15 insertions(+), 5 deletions(-)"
-   },
-   {
-    "sha": "18bfd25",
-    "date": "2026-11-06T20:26:57+10:00",
-    "subject": "Stop the queue-wait satisfaction drain and long-queue moan once the till starts serving",
-    "body": "",
-    "stat": "4 files changed, 31 insertions(+), 5 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 176
+  "total_commits": 179
  },
- "updated": "2026-11-07T08:55:25+10:00",
+ "updated": "2026-11-07T09:03:21+10:00",
  "qa": [
   {
    "num": 1,
@@ -3469,8 +3536,8 @@
   }
  ],
  "shots": {
-  "t": "2026-11-07T08:24:45+10:00",
-  "note": "After font spacing, receipt other-money, chest freezer, real cans",
+  "t": "2026-11-07T09:03:19+10:00",
+  "note": "PC Market now readable; real cans; receipt itemised",
   "files": [
    "01_exterior_from_road.jpg",
    "02_entrance_looking_in.jpg",

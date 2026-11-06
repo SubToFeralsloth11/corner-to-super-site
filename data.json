@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T08:55+10:00",
- "head": "0da31b5",
+ "generated": "2026-11-07T09:03+10:00",
+ "head": "ff5b859",
  "stats": {
-  "commits": 176,
+  "commits": 179,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T08:55:14+10:00",
+  "last_commit": "2026-11-07T09:03:09+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 28272,
+  "gd_lines": 28296,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1181,6 +1181,21 @@
    "sha": "0da31b5",
    "date": "2026-11-07T08:55:14+10:00",
    "subject": "Hide Continue on the main menu when there is no save to continue"
+  },
+  {
+   "sha": "a8027d1",
+   "date": "2026-11-07T08:57:39+10:00",
+   "subject": "Check for a window's tween meta before reading it (null default still errors)"
+  },
+  {
+   "sha": "bfe790a",
+   "date": "2026-11-07T09:03:09+10:00",
+   "subject": "Render the PC screen at full resolution without FXAA, hide the HUD there, and darken muted text"
+  },
+  {
+   "sha": "ff5b859",
+   "date": "2026-11-07T09:03:09+10:00",
+   "subject": "Wait for the navmesh rebake to start before waiting for it to finish in nav tests"
   }
  ],
  "commits_per_hour": [
@@ -1346,7 +1361,11 @@
   },
   {
    "hour": "2026-11-07T08:00:00+10:00",
-   "commits": 27
+   "commits": 28
+  },
+  {
+   "hour": "2026-11-07T09:00:00+10:00",
+   "commits": 2
   }
  ],
  "sections": [
