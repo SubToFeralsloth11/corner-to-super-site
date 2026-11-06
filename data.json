@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T09:42+10:00",
- "head": "3983702",
+ "generated": "2026-11-07T09:43+10:00",
+ "head": "92519bd",
  "stats": {
-  "commits": 184,
+  "commits": 186,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T09:42:19+10:00",
+  "last_commit": "2026-11-07T09:43:34+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 28494,
+  "gd_lines": 28512,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1221,6 +1221,16 @@
    "sha": "3983702",
    "date": "2026-11-07T09:42:19+10:00",
    "subject": "Show what each worker is doing in the Staff app and when aimed at, and ask before firing"
+  },
+  {
+   "sha": "c7a046f",
+   "date": "2026-11-07T09:43:33+10:00",
+   "subject": "Hide the crosshair, prompt and tutorial card while using the PC"
+  },
+  {
+   "sha": "92519bd",
+   "date": "2026-11-07T09:43:34+10:00",
+   "subject": "List the store phone, selling fixtures and closing early on the Controls page (Y9)"
   }
  ],
  "commits_per_hour": [
@@ -1390,7 +1400,7 @@
   },
   {
    "hour": "2026-11-07T09:00:00+10:00",
-   "commits": 7
+   "commits": 9
   }
  ],
  "sections": [

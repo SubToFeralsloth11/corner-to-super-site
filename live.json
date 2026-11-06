@@ -1532,10 +1532,11 @@
      "file": "scripts/ui/prompt.gd:58-64, scripts/fixtures/pc_desk.gd:90, scripts/tutorial/tutorial_hint.gd:20-36",
      "detail": "bfe790a hides only the `hud` group when you sit at the PC. `PromptOverlay` (layer 5) keeps drawing its 5 px crosshair dot at screen centre, on top of ShopOS's Market text, and at the till seat while you click with a free cursor (two pointers). `TutorialHint` (layer 5, a card at least 620 px wide at bottom centre) stays over ShopOS during the \"order\" step, which is the step where you use the PC. Hiding the whole HUD also hides the \"N waiting · Till 1\" chip while customers pile up during OPEN. Fix: hide `_cross` and `_label` while `player.locked` (or put PromptOverlay in the `hud` group), and hide or move the tutorial card while the PC is focused. Then hide only the top-centre and top-right HUD cards (or move the waiting chip) instead of the whole HUD.",
      "by": "CritPlayer",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:40:30+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "c7a046f",
+     "note": "prompt in hud group; tutorial card hidden at PC",
+     "closed": "2026-11-07T09:43:35+10:00"
     },
     {
      "id": "Y7",
@@ -1568,10 +1569,11 @@
      "file": "scripts/ui/controls.gd:11-27",
      "detail": "ROWS has no row for `phone` (P, game.gd:1406), `sell` (Del/Backspace, game.gd:1402) or holding E on the OPEN sign to close early. The interact-hold row only says \"end the day at the sign\". Its doc claims \"every key and mouse button\". Without the row, the level-6 phone and early close are only discoverable by accident. Fix: add `[\"Store phone\", [\"phone\"], \"\"]` and `[\"Sell a fixture in build mode\", [\"sell\"], \"twice\"]`, and change the hold row to \"…, close early or end the day at the sign\".",
      "by": "CritPlayer",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:40:31+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "92519bd",
+     "note": "rows added",
+     "closed": "2026-11-07T09:43:35+10:00"
     },
     {
      "id": "Y10",
@@ -3338,6 +3340,16 @@
    "t": "2026-11-07T09:42:21+10:00",
    "kind": "fix",
    "msg": "C2/Y4 fixed 3983702 two-press fire tested"
+  },
+  {
+   "t": "2026-11-07T09:43:35+10:00",
+   "kind": "fix",
+   "msg": "C2/Y6 fixed c7a046f prompt in hud group; tutorial card hidden at PC"
+  },
+  {
+   "t": "2026-11-07T09:43:35+10:00",
+   "kind": "fix",
+   "msg": "C2/Y9 fixed 92519bd rows added"
   }
  ],
  "tests": [
@@ -3479,17 +3491,31 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:42:21+10:00",
+  "t": "2026-11-07T09:43:35+10:00",
   "mem_free_pct": 35,
   "load": [
-   2.4,
-   3.31,
-   3.76
+   2.43,
+   3.18,
+   3.68
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "92519bd",
+    "date": "2026-11-07T09:43:34+10:00",
+    "subject": "List the store phone, selling fixtures and closing early on the Controls page (Y9)",
+    "body": "",
+    "stat": "1 file changed, 3 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "c7a046f",
+    "date": "2026-11-07T09:43:33+10:00",
+    "subject": "Hide the crosshair, prompt and tutorial card while using the PC",
+    "body": "The crosshair dot sat on the Market's text and the tutorial card covered ShopOS's dock. Review\nround 2, Y6.",
+    "stat": "3 files changed, 17 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "3983702",
     "date": "2026-11-07T09:42:19+10:00",
@@ -3895,26 +3921,12 @@
     "subject": "Clear the change panel's 'still owed' line once the tray is right",
     "body": "",
     "stat": "2 files changed, 36 insertions(+), 3 deletions(-)"
-   },
-   {
-    "sha": "2150d39",
-    "date": "2026-11-06T20:36:50+10:00",
-    "subject": "Put the till-target sit change back in place after a misapplied partial stage",
-    "body": "",
-    "stat": "2 files changed, 38 insertions(+), 38 deletions(-)"
-   },
-   {
-    "sha": "8e1c6d0",
-    "date": "2026-11-06T20:35:43+10:00",
-    "subject": "Let E on the till's reader, cash or POS sit you down when there is nothing to pay",
-    "body": "",
-    "stat": "3 files changed, 66 insertions(+), 25 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 184
+  "total_commits": 186
  },
- "updated": "2026-11-07T09:42:22+10:00",
+ "updated": "2026-11-07T09:43:36+10:00",
  "qa": [
   {
    "num": 1,
