@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "R3",
   "area": "Shelves, stocking, boxes, pricing",
-  "activity": "Fixing R3 findings, P1s first",
+  "activity": "Fixer: C3 smokes ask skipped on quick scan",
   "cycle": "1",
-  "since": "2026-11-06T20:20:21+10:00"
+  "since": "2026-11-06T20:24:19+10:00"
  },
  "rounds": [
   {
@@ -13,7 +13,212 @@
    "area": "Checkout, payment, change, till",
    "started": "2026-11-06T20:11:25+10:00",
    "finished": null,
-   "findings": []
+   "findings": [
+    {
+     "id": "C1",
+     "sev": "P1",
+     "title": "E to sit at the till seats you and stands you up on the same keypress",
+     "file": "player.gd:156-160, checkout.gd:749-781,828-836",
+     "detail": "Player handles E first (reverse tree order) without set_input_as_handled; Checkout then sees seated and stands you up. Tests miss it by calling _unhandled_input directly.",
+     "by": "CritCheckout",
+     "status": "open",
+     "found": "2026-11-06T20:22:43+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "C2",
+     "sev": "P1",
+     "title": "Smokes only sell at the till the cigarette wall serves; other tills book them as out of stock",
+     "file": "checkout.gd:454-459,490-494,508-511; shopper_brain.gd:284",
+     "detail": "False out-of-stock complaints, -12 satisfaction, lost sales at tills 2-4.",
+     "by": "CritCheckout",
+     "status": "open",
+     "found": "2026-11-06T20:22:44+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "C3",
+     "sev": "P1",
+     "title": "Scanning the last item within 0.35 s skips the Smokes ask; customer pays and the request vanishes",
+     "file": "checkout.gd:406-407,313-319",
+     "detail": "_maybe_pay moves UNLOADING to PAYING before counter asks become 'asked'.",
+     "by": "CritCheckout",
+     "status": "open",
+     "found": "2026-11-06T20:22:44+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "C4",
+     "sev": "P2",
+     "title": "Queue-wait penalty and 'queue isn't moving' moan run while being served",
+     "file": "shopper_brain.gd:304-310",
+     "detail": "Trolley customers get drained during their own scan.",
+     "by": "CritCheckout",
+     "status": "open",
+     "found": "2026-11-06T20:22:44+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "C5",
+     "sev": "P2",
+     "title": "Customers never leave an unattended queue for an attended till",
+     "file": "shopper_brain.gd:284-304",
+     "detail": "",
+     "by": "CritCheckout",
+     "status": "open",
+     "found": "2026-11-06T20:22:44+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "C6",
+     "sev": "P2",
+     "title": "Queue runs past the reserved lane into shelving",
+     "file": "checkout.gd:237-252, build_rules.gd:17-21",
+     "detail": "",
+     "by": "CritCheckout",
+     "status": "open",
+     "found": "2026-11-06T20:22:44+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "C7",
+     "sev": "P2",
+     "title": "Overflow queue collapses everyone onto one spot",
+     "file": "checkout.gd:222, world.gd:442-452",
+     "detail": "",
+     "by": "CritCheckout",
+     "status": "open",
+     "found": "2026-11-06T20:22:44+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "C8",
+     "sev": "P2",
+     "title": "Trolley spacing inverted; trolley swings into counter at the till",
+     "file": "checkout.gd:221, shopper.gd:14,101",
+     "detail": "",
+     "by": "CritCheckout",
+     "status": "open",
+     "found": "2026-11-06T20:22:44+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "C9",
+     "sev": "P2",
+     "title": "Aiming at POS/reader/cash outside payment does nothing and offers no sit",
+     "file": "checkout.gd:114-116,541,550-559",
+     "detail": "",
+     "by": "CritCheckout",
+     "status": "open",
+     "found": "2026-11-06T20:22:44+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "C10",
+     "sev": "P2",
+     "title": "Fetching Smokes while seated is a 5-step chore; hint says press the key that stands you up",
+     "file": "checkout.gd:466-470",
+     "detail": "",
+     "by": "CritCheckout",
+     "status": "open",
+     "found": "2026-11-06T20:22:44+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "C11",
+     "sev": "P3",
+     "title": "Perfect-change +10 XP free for exact-cash customers",
+     "file": "sale_record.gd:38-39",
+     "detail": "",
+     "by": "CritCheckout",
+     "status": "open",
+     "found": "2026-11-06T20:22:44+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "C12",
+     "sev": "P3",
+     "title": "Cash prompt still says take the cash after the drawer swallowed it",
+     "file": "checkout.gd:557",
+     "detail": "",
+     "by": "CritCheckout",
+     "status": "open",
+     "found": "2026-11-06T20:22:44+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "C13",
+     "sev": "P3",
+     "title": "'I'm still owed' message stays after fixing the count",
+     "file": "change_panel.gd:120",
+     "detail": "",
+     "by": "CritCheckout",
+     "status": "open",
+     "found": "2026-11-06T20:22:44+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "C14",
+     "sev": "P3",
+     "title": "Keypad OK on '.' or '0' declines and costs satisfaction",
+     "file": "card_keypad.gd:81-90",
+     "detail": "",
+     "by": "CritCheckout",
+     "status": "open",
+     "found": "2026-11-06T20:22:44+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "C15",
+     "sev": "P3",
+     "title": "POS clock blank all morning; every till says REG 1",
+     "file": "pos.gd:31-54",
+     "detail": "",
+     "by": "CritCheckout",
+     "status": "open",
+     "found": "2026-11-06T20:22:44+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "C16",
+     "sev": "P3",
+     "title": "Bag vanishes mid-air; customer leaves empty-handed",
+     "file": "checkout.gd:686-693",
+     "detail": "",
+     "by": "CritCheckout",
+     "status": "open",
+     "found": "2026-11-06T20:22:44+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "C17",
+     "sev": "P3",
+     "title": "is_attended_by_staff duplicates has_cashier without validity check",
+     "file": "checkout.gd:474-481",
+     "detail": "",
+     "by": "CritCheckout",
+     "status": "open",
+     "found": "2026-11-06T20:22:44+10:00",
+     "commit": "",
+     "note": ""
+    }
+   ]
   },
   {
    "id": "R3",
@@ -445,6 +650,101 @@
    "t": "2026-11-06T20:22:27+10:00",
    "kind": "fix",
    "msg": "R3/S4 fixed f9b156b label_pos puts labels on the rim; visual check pending screenshot tour"
+  },
+  {
+   "t": "2026-11-06T20:22:43+10:00",
+   "kind": "finding",
+   "msg": "R2/C1 [P1] E to sit at the till seats you and stands you up on the same keypress"
+  },
+  {
+   "t": "2026-11-06T20:22:44+10:00",
+   "kind": "finding",
+   "msg": "R2/C2 [P1] Smokes only sell at the till the cigarette wall serves; other tills book them as out of stock"
+  },
+  {
+   "t": "2026-11-06T20:22:44+10:00",
+   "kind": "finding",
+   "msg": "R2/C3 [P1] Scanning the last item within 0.35 s skips the Smokes ask; customer pays and the request vanishes"
+  },
+  {
+   "t": "2026-11-06T20:22:44+10:00",
+   "kind": "finding",
+   "msg": "R2/C4 [P2] Queue-wait penalty and 'queue isn't moving' moan run while being served"
+  },
+  {
+   "t": "2026-11-06T20:22:44+10:00",
+   "kind": "finding",
+   "msg": "R2/C5 [P2] Customers never leave an unattended queue for an attended till"
+  },
+  {
+   "t": "2026-11-06T20:22:44+10:00",
+   "kind": "finding",
+   "msg": "R2/C6 [P2] Queue runs past the reserved lane into shelving"
+  },
+  {
+   "t": "2026-11-06T20:22:44+10:00",
+   "kind": "finding",
+   "msg": "R2/C7 [P2] Overflow queue collapses everyone onto one spot"
+  },
+  {
+   "t": "2026-11-06T20:22:44+10:00",
+   "kind": "finding",
+   "msg": "R2/C8 [P2] Trolley spacing inverted; trolley swings into counter at the till"
+  },
+  {
+   "t": "2026-11-06T20:22:44+10:00",
+   "kind": "finding",
+   "msg": "R2/C9 [P2] Aiming at POS/reader/cash outside payment does nothing and offers no sit"
+  },
+  {
+   "t": "2026-11-06T20:22:44+10:00",
+   "kind": "finding",
+   "msg": "R2/C10 [P2] Fetching Smokes while seated is a 5-step chore; hint says press the key that stands you up"
+  },
+  {
+   "t": "2026-11-06T20:22:44+10:00",
+   "kind": "finding",
+   "msg": "R2/C11 [P3] Perfect-change +10 XP free for exact-cash customers"
+  },
+  {
+   "t": "2026-11-06T20:22:44+10:00",
+   "kind": "finding",
+   "msg": "R2/C12 [P3] Cash prompt still says take the cash after the drawer swallowed it"
+  },
+  {
+   "t": "2026-11-06T20:22:44+10:00",
+   "kind": "finding",
+   "msg": "R2/C13 [P3] 'I'm still owed' message stays after fixing the count"
+  },
+  {
+   "t": "2026-11-06T20:22:44+10:00",
+   "kind": "finding",
+   "msg": "R2/C14 [P3] Keypad OK on '.' or '0' declines and costs satisfaction"
+  },
+  {
+   "t": "2026-11-06T20:22:44+10:00",
+   "kind": "finding",
+   "msg": "R2/C15 [P3] POS clock blank all morning; every till says REG 1"
+  },
+  {
+   "t": "2026-11-06T20:22:44+10:00",
+   "kind": "finding",
+   "msg": "R2/C16 [P3] Bag vanishes mid-air; customer leaves empty-handed"
+  },
+  {
+   "t": "2026-11-06T20:22:44+10:00",
+   "kind": "finding",
+   "msg": "R2/C17 [P3] is_attended_by_staff duplicates has_cashier without validity check"
+  },
+  {
+   "t": "2026-11-06T20:22:44+10:00",
+   "kind": "agent",
+   "msg": "Agent CritCheckout: done 17 findings (3 P1)"
+  },
+  {
+   "t": "2026-11-06T20:24:19+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - Fixer: C3 smokes ask skipped on quick scan"
   }
  ],
  "tests": [
@@ -463,9 +763,9 @@
  ],
  "agents": {
   "CritCheckout": {
-   "state": "running",
-   "task": "Reviewer: checkout/payment (read-only)",
-   "t": "2026-11-06T20:11:25+10:00"
+   "state": "done",
+   "task": "17 findings (3 P1)",
+   "t": "2026-11-06T20:22:44+10:00"
   },
   "CritShelves": {
    "state": "done",
@@ -479,14 +779,14 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:22:27+10:00",
-  "mem_free_pct": 51,
+  "t": "2026-11-06T20:24:19+10:00",
+  "mem_free_pct": 41,
   "load": [
-   2.31,
-   2.5,
-   2.85
+   2.33,
+   2.37,
+   2.75
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
@@ -911,10 +1211,15 @@
     "stat": "58 files changed, 2566 insertions(+), 96 deletions(-)"
    }
   ],
-  "dirty": [],
+  "dirty": [
+   " M scripts/entities/player.gd",
+   " M scripts/fixtures/checkout.gd",
+   " M tests/cases/m7_content_test.gd",
+   " M tests/stock_bot.gd"
+  ],
   "total_commits": 112
  },
- "updated": "2026-11-06T20:22:28+10:00",
+ "updated": "2026-11-06T20:24:20+10:00",
  "qa": [
   {
    "num": 1,
