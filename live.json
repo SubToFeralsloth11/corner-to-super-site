@@ -1114,6 +1114,32 @@
      "commit": "67774d3",
      "note": "check.sh clean, checkout_test 65/65; windowed look pending next tour",
      "closed": "2026-11-06T20:50:50+10:00"
+    },
+    {
+     "id": "U4",
+     "sev": "P2",
+     "title": "HUD words run together ('Profittoday'): UI font's space is 3 px",
+     "file": "scripts/ui/ui_kit.gd",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T08:24:43+10:00",
+     "commit": "f8ffad7",
+     "note": "FontVariation +2 px space; checked in screenshot tour",
+     "closed": "2026-11-07T08:24:43+10:00"
+    },
+    {
+     "id": "U5",
+     "sev": "P2",
+     "title": "Tutorial says 'scan every item' but never says how (sit with E, click items, click cash)",
+     "file": "data/tutorial.json",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T08:24:43+10:00",
+     "commit": "56ef26f",
+     "note": "steps rewritten",
+     "closed": "2026-11-07T08:24:43+10:00"
     }
    ]
   },
@@ -1216,6 +1242,27 @@
      "commit": "cfa35ef",
      "note": "Shift = 5 boxes",
      "closed": "2026-11-07T08:20:03+10:00"
+    }
+   ]
+  },
+  {
+   "id": "R10",
+   "area": "Save/load, player, audio, visuals, performance",
+   "started": "2026-11-07T08:24:43+10:00",
+   "finished": null,
+   "findings": [
+    {
+     "id": "V1",
+     "sev": "P1",
+     "title": "Loading an older save drops shelf stock that no longer fits a slot (chest-freezer change)",
+     "file": "scripts/world/world.gd:_restore_fixtures",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T08:24:43+10:00",
+     "commit": "f495311",
+     "note": "save_test: 36 PEAS all back (freezer + box)",
+     "closed": "2026-11-07T08:24:43+10:00"
     }
    ]
   }
@@ -2490,6 +2537,46 @@
    "t": "2026-11-07T08:21:25+10:00",
    "kind": "test",
    "msg": "Tests: 1036 passed, 0 failed after real-size cans"
+  },
+  {
+   "t": "2026-11-07T08:24:43+10:00",
+   "kind": "finding",
+   "msg": "R9/U4 [P2] HUD words run together ('Profittoday'): UI font's space is 3 px"
+  },
+  {
+   "t": "2026-11-07T08:24:43+10:00",
+   "kind": "fix",
+   "msg": "R9/U4 fixed f8ffad7 FontVariation +2 px space; checked in screenshot tour"
+  },
+  {
+   "t": "2026-11-07T08:24:43+10:00",
+   "kind": "finding",
+   "msg": "R9/U5 [P2] Tutorial says 'scan every item' but never says how (sit with E, click items, click cash)"
+  },
+  {
+   "t": "2026-11-07T08:24:43+10:00",
+   "kind": "fix",
+   "msg": "R9/U5 fixed 56ef26f steps rewritten"
+  },
+  {
+   "t": "2026-11-07T08:24:43+10:00",
+   "kind": "round",
+   "msg": "Round R10 started: Save/load, player, audio, visuals, performance"
+  },
+  {
+   "t": "2026-11-07T08:24:43+10:00",
+   "kind": "finding",
+   "msg": "R10/V1 [P1] Loading an older save drops shelf stock that no longer fits a slot (chest-freezer change)"
+  },
+  {
+   "t": "2026-11-07T08:24:43+10:00",
+   "kind": "fix",
+   "msg": "R10/V1 fixed f495311 save_test: 36 PEAS all back (freezer + box)"
+  },
+  {
+   "t": "2026-11-07T08:24:45+10:00",
+   "kind": "shots",
+   "msg": "Screenshots refreshed: 56 images After font spacing, receipt other-money, chest freezer, real cans"
   }
  ],
  "tests": [
@@ -2597,17 +2684,38 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T08:21:25+10:00",
-  "mem_free_pct": 46,
+  "t": "2026-11-07T08:24:45+10:00",
+  "mem_free_pct": 47,
   "load": [
-   2.95,
-   2.58,
-   3.02
+   2.15,
+   2.4,
+   2.85
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "56ef26f",
+    "date": "2026-11-07T08:24:36+10:00",
+    "subject": "Tell new players how to actually serve: sit with E, click to scan, click the cash",
+    "body": "The tutorial said 'scan every item' without saying how; also mentions catching boxes and\nclosing early. Review round 2, U5.",
+    "stat": "1 file changed, 4 insertions(+), 4 deletions(-)"
+   },
+   {
+    "sha": "f8ffad7",
+    "date": "2026-11-07T08:24:36+10:00",
+    "subject": "Widen the UI font's word spacing so HUD text doesn't run together",
+    "body": "Archivo's space is 0.2 em, about 3 px at HUD sizes: 'Profit today' read as 'Profittoday'. A\nFontVariation adds 2 px per space (checked in the screenshot tour). Review round 2, U4.",
+    "stat": "2 files changed, 10 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "f495311",
+    "date": "2026-11-07T08:24:36+10:00",
+    "subject": "Box up saved shelf stock that no longer fits a slot instead of dropping it on load",
+    "body": "The chest-freezer change (and any later capacity change) clamped old saves' slot counts, losing\nthe rest. Loading now puts the excess in an open box in front of the fixture. Also keeps test\nand tour cash out of the receipt's other-money lines. Review round 2, R10.",
+    "stat": "3 files changed, 35 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "8a8888c",
     "date": "2026-11-07T08:21:22+10:00",
@@ -3006,33 +3114,12 @@
     "subject": "Add the M9 soak simulator and a first economy tuning pass (pacing not yet met)",
     "body": "tests/soak.sh runs an AI player (tests/soak_player.gd) for N days at Engine.time_scale: it\nprices at market +10%, serves with perfect change, orders and stocks through the van, buys\nlicences, tills, expansions, furniture, racks and staff and takes/repays loans by simple rules;\nit fails on engine/script errors, stuck NPCs, a store that won't empty and repossession, logs\nlevel/money/profit/spend/perf per day and per hour, and checks the ECONOMY.md pacing table.\nTuning so far: cheaper expansions, licences and fixtures, tiered cost cuts for later licences,\narrival base 2.8, list spread 2 + level, concurrency 4 + 3 per till, faster walkers, XP steps\n625 + 250(L-1). Day 15 level and day 30 profit are still short; ECONOMY.md not yet updated.",
     "stat": "10 files changed, 1453 insertions(+), 90 deletions(-)"
-   },
-   {
-    "sha": "e561fda",
-    "date": "2026-11-06T02:11:00+10:00",
-    "subject": "Make pricing a decision and start a new store's reputation from a full window",
-    "body": "Refusals above market are now ((ratio - 1) x elasticity)^2 (customers.json exponent 2) with a\nper-product elasticity in products.json: staples punish markups, treats tolerate them, so the\nbest markup sits around +25-55% instead of profit being flat (review #4). A new game seeds the\nsatisfaction window with 40 customers at the starting stars, so the first customer no longer\nsets the stars on their own (review #20). Data-coupled tests read their numbers from data.",
-    "stat": "9 files changed, 93 insertions(+), 44 deletions(-)"
-   },
-   {
-    "sha": "636cd50",
-    "date": "2026-11-06T01:05:46+10:00",
-    "subject": "Start day 1 with four kinds of stock and show the shelf range on the clipboard",
-    "body": "The free first order is now a box each of Cola, Chipz, Candy and Noodles: with two products\nthe variety factor sat at its 0.3 floor and the tutorial day saw about 11 customers. The Tab\nclipboard shows how many kinds are on the shelves against the 12 that bring full traffic\n(review #7).",
-    "stat": "4 files changed, 22 insertions(+), 4 deletions(-)"
-   },
-   {
-    "sha": "1697c0a",
-    "date": "2026-11-06T01:05:38+10:00",
-    "subject": "Work out the arrival rate once a second instead of every physics frame",
-    "body": "It scans every slot for the products in stock, 564 slots in a full store (review #18).",
-    "stat": "1 file changed, 11 insertions(+), 1 deletion(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 161
+  "total_commits": 164
  },
- "updated": "2026-11-07T08:21:26+10:00",
+ "updated": "2026-11-07T08:24:45+10:00",
  "qa": [
   {
    "num": 1,
@@ -3092,8 +3179,8 @@
   }
  ],
  "shots": {
-  "t": "2026-11-07T08:21:25+10:00",
-  "note": "After R3-R6 fixes: real-size cans, chest freezer, POS",
+  "t": "2026-11-07T08:24:45+10:00",
+  "note": "After font spacing, receipt other-money, chest freezer, real cans",
   "files": [
    "01_exterior_from_road.jpg",
    "02_entrance_looking_in.jpg",

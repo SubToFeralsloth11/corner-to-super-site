@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T08:21+10:00",
- "head": "8a8888c",
+ "generated": "2026-11-07T08:24+10:00",
+ "head": "56ef26f",
  "stats": {
-  "commits": 161,
+  "commits": 164,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T08:21:22+10:00",
+  "last_commit": "2026-11-07T08:24:36+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 28023,
+  "gd_lines": 28058,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1099,6 +1099,21 @@
    "sha": "8a8888c",
    "date": "2026-11-07T08:21:22+10:00",
    "subject": "Draw cans at real size, one layer deep: 30 to a cooler shelf instead of 6"
+  },
+  {
+   "sha": "f495311",
+   "date": "2026-11-07T08:24:36+10:00",
+   "subject": "Box up saved shelf stock that no longer fits a slot instead of dropping it on load"
+  },
+  {
+   "sha": "f8ffad7",
+   "date": "2026-11-07T08:24:36+10:00",
+   "subject": "Widen the UI font's word spacing so HUD text doesn't run together"
+  },
+  {
+   "sha": "56ef26f",
+   "date": "2026-11-07T08:24:36+10:00",
+   "subject": "Tell new players how to actually serve: sit with E, click to scan, click the cash"
   }
  ],
  "commits_per_hour": [
@@ -1264,7 +1279,7 @@
   },
   {
    "hour": "2026-11-07T08:00:00+10:00",
-   "commits": 12
+   "commits": 15
   }
  ],
  "sections": [
