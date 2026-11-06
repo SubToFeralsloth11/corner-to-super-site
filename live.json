@@ -1435,6 +1435,32 @@
      "commit": "995e7da",
      "note": "-4 not carried, -12 ran out; customer_test covers both; suite 1041/0",
      "closed": "2026-11-07T09:23:57+10:00"
+    },
+    {
+     "id": "K2",
+     "sev": "P1",
+     "title": "Putting away an abandoned basket destroys the stock in it (and saves drop it)",
+     "file": "scripts/entities/dropped_basket.gd",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T09:34:27+10:00",
+     "commit": "f97bf2c",
+     "note": "save_test: reshelved + boxed, saved as boxes",
+     "closed": "2026-11-07T09:34:27+10:00"
+    },
+    {
+     "id": "K3",
+     "sev": "P2",
+     "title": "Licence cards don't say the products need a fixture you don't own",
+     "file": "scripts/ui/pc/app_licences.gd",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T09:34:27+10:00",
+     "commit": "e1fd948",
+     "note": "warning line",
+     "closed": "2026-11-07T09:34:27+10:00"
     }
    ]
   }
@@ -2999,6 +3025,31 @@
    "t": "2026-11-07T09:27:56+10:00",
    "kind": "plan",
    "msg": "User: subagents aren't out of tokens. Resumed critic agents for cycle 2."
+  },
+  {
+   "t": "2026-11-07T09:34:27+10:00",
+   "kind": "finding",
+   "msg": "C2/K2 [P1] Putting away an abandoned basket destroys the stock in it (and saves drop it)"
+  },
+  {
+   "t": "2026-11-07T09:34:27+10:00",
+   "kind": "fix",
+   "msg": "C2/K2 fixed f97bf2c save_test: reshelved + boxed, saved as boxes"
+  },
+  {
+   "t": "2026-11-07T09:34:27+10:00",
+   "kind": "finding",
+   "msg": "C2/K3 [P2] Licence cards don't say the products need a fixture you don't own"
+  },
+  {
+   "t": "2026-11-07T09:34:27+10:00",
+   "kind": "fix",
+   "msg": "C2/K3 fixed e1fd948 warning line"
+  },
+  {
+   "t": "2026-11-07T09:34:27+10:00",
+   "kind": "test",
+   "msg": "Tests: 1043 passed, 0 failed cycle 2"
   }
  ],
  "tests": [
@@ -3079,6 +3130,12 @@
    "passed": 1040,
    "failed": 0,
    "note": "after PC readability"
+  },
+  {
+   "t": "2026-11-07T09:34:27+10:00",
+   "passed": 1043,
+   "failed": 0,
+   "note": "cycle 2"
   }
  ],
  "agents": {
@@ -3134,17 +3191,31 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:27:56+10:00",
-  "mem_free_pct": 30,
+  "t": "2026-11-07T09:34:27+10:00",
+  "mem_free_pct": 36,
   "load": [
-   2.66,
-   3.85,
-   4.38
+   5.82,
+   3.73,
+   3.97
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "e1fd948",
+    "date": "2026-11-07T09:34:25+10:00",
+    "subject": "Warn on a licence card when the store has no fixture its products stand on",
+    "body": "A dairy licence alone sells nothing without a fridge, and the card didn't say so.",
+    "stat": "1 file changed, 28 insertions(+)"
+   },
+   {
+    "sha": "f97bf2c",
+    "date": "2026-11-07T09:34:25+10:00",
+    "subject": "Reshelve an abandoned basket's items instead of throwing them away, and keep them in saves",
+    "body": "Putting away a dropped basket destroyed the stock customers had taken off the shelves, and a\nsave dropped it too. Items go back on a slot of their product with room; the rest, and anything\nsaved, comes back as open boxes. Review round 2, cycle 2.",
+    "stat": "4 files changed, 69 insertions(+), 4 deletions(-)"
+   },
    {
     "sha": "995e7da",
     "date": "2026-11-07T09:23:55+10:00",
@@ -3550,32 +3621,12 @@
     "subject": "Read the SPECIAL label threshold from customers.json bargain_ratio",
     "body": "The label hard-coded 85% while customers decide bargains from data. Review round 2, S11.",
     "stat": "1 file changed, 3 insertions(+), 3 deletions(-)"
-   },
-   {
-    "sha": "e428892",
-    "date": "2026-11-06T20:35:31+10:00",
-    "subject": "Make box handling forgiving: any empty box takes a shelf back, E never rips a box open at the PC or till, doors shut after stocking",
-    "body": "- An empty box adopts the aimed slot's product, so R can clear or swap any shelf (S6).\n- With a box in hand, E at something you use with empty hands says to put the box down\n  instead of opening it; a cooler door opened by stocking shuts 1 s after you stop, and\n  restockers open and shut doors too (S7, S14).\n- Racks refuse empty boxes; the rack prompt and sound respect the mop (S9).\n- The open-box delay resets on pick-up, box mass follows its contents, and the slot glow\n  no longer rebuilds its mesh every frame (S10, S12, S13).\nReview round 2.",
-    "stat": "5 files changed, 141 insertions(+), 8 deletions(-)"
-   },
-   {
-    "sha": "cb5ee4a",
-    "date": "2026-11-06T20:28:15+10:00",
-    "subject": "Say the cash is in the drawer once it has been taken",
-    "body": "",
-    "stat": "1 file changed, 6 insertions(+), 1 deletion(-)"
    }
   ],
-  "dirty": [
-   " M scripts/autoload/save.gd",
-   " M scripts/entities/dropped_basket.gd",
-   " M scripts/ui/pc/app_licences.gd",
-   " M scripts/world/hygiene.gd",
-   " M tests/cases/save_test.gd"
-  ],
-  "total_commits": 180
+  "dirty": [],
+  "total_commits": 182
  },
- "updated": "2026-11-07T09:27:58+10:00",
+ "updated": "2026-11-07T09:34:28+10:00",
  "qa": [
   {
    "num": 1,
