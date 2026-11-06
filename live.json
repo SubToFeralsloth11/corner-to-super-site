@@ -1,11 +1,11 @@
 {
  "status": {
-  "state": "fixing",
-  "round": "R4/R5 leftovers",
-  "area": "Customers + economy P2s",
-  "activity": "Lead fixing remaining R4/R5 P2s (subagents rate-limited)",
+  "state": "reviewing",
+  "round": "R10",
+  "area": "Player, audio, visuals, perf",
+  "activity": "Soak running (engine busy ~1 h); lead reading player controller and audio code",
   "cycle": "1",
-  "since": "2026-11-07T08:03:10+10:00"
+  "since": "2026-11-07T08:24:56+10:00"
  },
  "rounds": [
   {
@@ -2577,6 +2577,16 @@
    "t": "2026-11-07T08:24:45+10:00",
    "kind": "shots",
    "msg": "Screenshots refreshed: 56 images After font spacing, receipt other-money, chest freezer, real cans"
+  },
+  {
+   "t": "2026-11-07T08:24:56+10:00",
+   "kind": "agent",
+   "msg": "Agent soak: running 30-day headless soak after round 2 (pacing + stability); lead reviewing player/audio code meanwhile"
+  },
+  {
+   "t": "2026-11-07T08:24:56+10:00",
+   "kind": "status",
+   "msg": "Status: reviewing - Soak running (engine busy ~1 h); lead reading player controller and audio code"
   }
  ],
  "tests": [
@@ -2678,20 +2688,20 @@
    "t": "2026-11-07T07:47:58+10:00"
   },
   "soak": {
-   "state": "stopped",
-   "task": "Soak paused: it held the engine lock for an hour; will rerun at the end of the cycle",
-   "t": "2026-11-07T07:56:42+10:00"
+   "state": "running",
+   "task": "30-day headless soak after round 2 (pacing + stability); lead reviewing player/audio code meanwhile",
+   "t": "2026-11-07T08:24:56+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T08:24:45+10:00",
+  "t": "2026-11-07T08:24:56+10:00",
   "mem_free_pct": 47,
   "load": [
-   2.15,
-   2.4,
-   2.85
+   1.9,
+   2.33,
+   2.82
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
@@ -3119,7 +3129,7 @@
   "dirty": [],
   "total_commits": 164
  },
- "updated": "2026-11-07T08:24:45+10:00",
+ "updated": "2026-11-07T08:24:56+10:00",
  "qa": [
   {
    "num": 1,
