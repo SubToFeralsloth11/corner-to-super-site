@@ -428,6 +428,11 @@
    "t": "2026-11-06T20:21:57+10:00",
    "kind": "question",
    "msg": "Question #3 answering: Is the live loop working or started yet?"
+  },
+  {
+   "t": "2026-11-06T20:22:13+10:00",
+   "kind": "question",
+   "msg": "Question #3 answered: Is the live loop working or started yet?"
   }
  ],
  "tests": [
@@ -462,8 +467,8 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:21:57+10:00",
-  "mem_free_pct": 53,
+  "t": "2026-11-06T20:22:13+10:00",
+  "mem_free_pct": 50,
   "load": [],
   "godot_procs": 3
  },
@@ -901,7 +906,7 @@
   ],
   "total_commits": 111
  },
- "updated": "2026-11-06T20:21:57+10:00",
+ "updated": "2026-11-06T20:22:14+10:00",
  "qa": [
   {
    "num": 1,
@@ -923,9 +928,9 @@
    "num": 3,
    "title": "Is the live loop working or started yet?",
    "question": "",
-   "answer": "",
-   "state": "answering",
-   "t": "2026-11-06T20:21:57+10:00"
+   "answer": "Yes. The loop has started and is running now.\n\n- **Status:** `fixing`, round **R3** (cycle 1). It is fixing round 3's findings, P1s first. It entered this state at 20:20:21.\n- **Current area:** shelves, stocking, boxes and pricing. The critique agent `CritShelves` finished with **17 findings, 2 of them P1**.\n- **Last update:** `live.json` was written at 20:21:57, a few seconds before this answer. The file holds 2 earlier rounds, 2 test runs and 40 log entries.\n\nSource: `/Users/lastminuteplays/Code/corner-to-super-site/live.json`, under `status` and `log`.",
+   "state": "answered",
+   "t": "2026-11-06T20:22:13+10:00"
   }
  ]
 }
