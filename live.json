@@ -1,11 +1,11 @@
 {
  "status": {
-  "state": "reviewing",
-  "round": "R2+R3",
-  "area": "Checkout; shelves/pricing",
-  "activity": "Critics writing up (~18 checkout, ~15 shelf findings); full suite re-running",
+  "state": "fixing",
+  "round": "R3",
+  "area": "Shelves, stocking, boxes, pricing",
+  "activity": "Fixing R3 findings, P1s first",
   "cycle": "1",
-  "since": "2026-11-06T20:19:42+10:00"
+  "since": "2026-11-06T20:20:21+10:00"
  },
  "rounds": [
   {
@@ -20,7 +20,212 @@
    "area": "Shelves, stocking, boxes, pricing",
    "started": "2026-11-06T20:11:25+10:00",
    "finished": null,
-   "findings": []
+   "findings": [
+    {
+     "id": "S1",
+     "sev": "P1",
+     "title": "Chest-freezer stock stacks straight up through the closed glass lid",
+     "file": "scripts/fixtures/slot.gd:202-205, stock_math.gd:12-15",
+     "detail": "capacity_mult adds height layers with no clearance check: peas/chips tower to ~1.55 m on a 0.9 m cabinet.",
+     "by": "CritShelves",
+     "status": "open",
+     "found": "2026-11-06T20:20:21+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "S2",
+     "sev": "P1",
+     "title": "Box a restocker is carrying vanishes when you save during PREP",
+     "file": "scripts/autoload/save.gd:50,57; restocker_job.gd:143",
+     "detail": "Box reparented to staff.carry is neither racked nor loose, so Save.capture skips it: lost stock and money.",
+     "by": "CritShelves",
+     "status": "open",
+     "found": "2026-11-06T20:20:21+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "S3",
+     "sev": "P2",
+     "title": "Slot capacities are tiny: cans are 2x real size, toilet paper 1 per slot, pizza 0 in chest freezer",
+     "file": "stock_math.gd:12-15, data/products.json",
+     "detail": "Only one orientation tried; can meshes double size. Stocking is tedious, shelves empty instantly.",
+     "by": "CritShelves",
+     "status": "open",
+     "found": "2026-11-06T20:20:21+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "S4",
+     "sev": "P2",
+     "title": "Chest-freezer price labels hidden inside the cabinet",
+     "file": "slot.gd:53",
+     "detail": "Labels placed at slot front, which is below the rim/behind the front wall for chest freezers. [unverified render]",
+     "by": "CritShelves",
+     "status": "open",
+     "found": "2026-11-06T20:20:21+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "S5",
+     "sev": "P2",
+     "title": "'Market price' / 'All to market' pin the price forever; no way back to following market",
+     "file": "price_popup.gd:67, app_pricing.gd:10,123, game.gd:688",
+     "detail": "GDD says unset prices follow market; these buttons write a fixed price instead.",
+     "by": "CritShelves",
+     "status": "open",
+     "found": "2026-11-06T20:20:21+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "S6",
+     "sev": "P2",
+     "title": "Can't take items back into an empty box of a different product",
+     "file": "player.gd:556",
+     "detail": "Clearing or reassigning a slot needs a box of the same product; Supermarket Simulator lets any empty box take any product.",
+     "by": "CritShelves",
+     "status": "open",
+     "found": "2026-11-06T20:20:21+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "S7",
+     "sev": "P2",
+     "title": "E with a box in hand tears your box open at PC/till/sign; stocked cooler doors stay open",
+     "file": "player.gd:480-493, 300-331, 543",
+     "detail": "E always routes to Open; doors opened by stocking are never closed.",
+     "by": "CritShelves",
+     "status": "open",
+     "found": "2026-11-06T20:20:21+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "S8",
+     "sev": "P2",
+     "title": "Price popup field not focused; bad input fails silently, no comma decimals",
+     "file": "price_popup.gd:79-89,114-118",
+     "detail": "",
+     "by": "CritShelves",
+     "status": "open",
+     "found": "2026-11-06T20:20:21+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "S9",
+     "sev": "P2",
+     "title": "Racks accept empty boxes for good; rack prompt lies and plays sound with mop in hand",
+     "file": "storage_rack.gd:58-65,131,146-149",
+     "detail": "",
+     "by": "CritShelves",
+     "status": "open",
+     "found": "2026-11-06T20:20:21+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "S10",
+     "sev": "P3",
+     "title": "Open-box delay carries over between stocking sessions/boxes",
+     "file": "player.gd:514,541,559",
+     "detail": "",
+     "by": "CritShelves",
+     "status": "open",
+     "found": "2026-11-06T20:20:21+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "S11",
+     "sev": "P3",
+     "title": "SPECIAL label threshold hard-coded 0.85 instead of customers.json bargain_ratio",
+     "file": "price_label.gd:13,91",
+     "detail": "",
+     "by": "CritShelves",
+     "status": "open",
+     "found": "2026-11-06T20:20:21+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "S12",
+     "sev": "P3",
+     "title": "Box mass never changes as it empties",
+     "file": "stock_box.gd:46",
+     "detail": "",
+     "by": "CritShelves",
+     "status": "open",
+     "found": "2026-11-06T20:20:21+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "S13",
+     "sev": "P3",
+     "title": "Slot highlight BoxMesh rebuilt every physics frame",
+     "file": "player.gd:577",
+     "detail": "",
+     "by": "CritShelves",
+     "status": "open",
+     "found": "2026-11-06T20:20:21+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "S14",
+     "sev": "P3",
+     "title": "Restockers stock coolers/freezers through closed doors",
+     "file": "restocker_job.gd:164",
+     "detail": "",
+     "by": "CritShelves",
+     "status": "open",
+     "found": "2026-11-06T20:20:21+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "S15",
+     "sev": "P3",
+     "title": "Price +/- steps keep odd cents; label lacks unit info",
+     "file": "price_popup.gd:110, price_label.gd:85-94",
+     "detail": "",
+     "by": "CritShelves",
+     "status": "open",
+     "found": "2026-11-06T20:20:21+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "S16",
+     "sev": "P3",
+     "title": "Pricing app only lists products already on a shelf",
+     "file": "app_pricing.gd:54-62",
+     "detail": "",
+     "by": "CritShelves",
+     "status": "open",
+     "found": "2026-11-06T20:20:21+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "S17",
+     "sev": "P3",
+     "title": "Price popup doesn't warn when price is above refuse-all ratio",
+     "file": "price_popup.gd _refresh",
+     "detail": "",
+     "by": "CritShelves",
+     "status": "open",
+     "found": "2026-11-06T20:20:21+10:00",
+     "commit": "",
+     "note": ""
+    }
+   ]
   }
  ],
  "log": [
@@ -113,6 +318,101 @@
    "t": "2026-11-06T20:19:59+10:00",
    "kind": "finding",
    "msg": "Note: headless M7 full-store probe reports CPU/frame mean 292 ms, p95 1325 ms (20 shoppers, 564 slots) - queued for perf round R10"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "finding",
+   "msg": "R3/S1 [P1] Chest-freezer stock stacks straight up through the closed glass lid"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "finding",
+   "msg": "R3/S2 [P1] Box a restocker is carrying vanishes when you save during PREP"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "finding",
+   "msg": "R3/S3 [P2] Slot capacities are tiny: cans are 2x real size, toilet paper 1 per slot, pizza 0 in chest freezer"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "finding",
+   "msg": "R3/S4 [P2] Chest-freezer price labels hidden inside the cabinet"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "finding",
+   "msg": "R3/S5 [P2] 'Market price' / 'All to market' pin the price forever; no way back to following market"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "finding",
+   "msg": "R3/S6 [P2] Can't take items back into an empty box of a different product"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "finding",
+   "msg": "R3/S7 [P2] E with a box in hand tears your box open at PC/till/sign; stocked cooler doors stay open"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "finding",
+   "msg": "R3/S8 [P2] Price popup field not focused; bad input fails silently, no comma decimals"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "finding",
+   "msg": "R3/S9 [P2] Racks accept empty boxes for good; rack prompt lies and plays sound with mop in hand"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "finding",
+   "msg": "R3/S10 [P3] Open-box delay carries over between stocking sessions/boxes"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "finding",
+   "msg": "R3/S11 [P3] SPECIAL label threshold hard-coded 0.85 instead of customers.json bargain_ratio"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "finding",
+   "msg": "R3/S12 [P3] Box mass never changes as it empties"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "finding",
+   "msg": "R3/S13 [P3] Slot highlight BoxMesh rebuilt every physics frame"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "finding",
+   "msg": "R3/S14 [P3] Restockers stock coolers/freezers through closed doors"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "finding",
+   "msg": "R3/S15 [P3] Price +/- steps keep odd cents; label lacks unit info"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "finding",
+   "msg": "R3/S16 [P3] Pricing app only lists products already on a shelf"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "finding",
+   "msg": "R3/S17 [P3] Price popup doesn't warn when price is above refuse-all ratio"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "agent",
+   "msg": "Agent CritShelves: done 17 findings (2 P1)"
+  },
+  {
+   "t": "2026-11-06T20:20:21+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - Fixing R3 findings, P1s first"
   }
  ],
  "tests": [
@@ -136,9 +436,9 @@
    "t": "2026-11-06T20:11:25+10:00"
   },
   "CritShelves": {
-   "state": "running",
-   "task": "Reviewer: shelves/boxes/pricing (read-only)",
-   "t": "2026-11-06T20:11:25+10:00"
+   "state": "done",
+   "task": "17 findings (2 P1)",
+   "t": "2026-11-06T20:20:21+10:00"
   },
   "baseline-tests": {
    "state": "done",
@@ -147,12 +447,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:19:59+10:00",
+  "t": "2026-11-06T20:20:21+10:00",
   "mem_free_pct": 46,
   "load": [
-   2.68,
-   2.79,
-   3.01
+   2.34,
+   2.7,
+   2.98
   ],
   "godot_procs": 0
  },
@@ -582,7 +882,7 @@
   "dirty": [],
   "total_commits": 111
  },
- "updated": "2026-11-06T20:20:00+10:00",
+ "updated": "2026-11-06T20:20:22+10:00",
  "qa": [
   {
    "num": 1,
