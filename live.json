@@ -145,10 +145,11 @@
      "file": "sale_record.gd:38-39",
      "detail": "",
      "by": "CritCheckout",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:22:44+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "4401ca4",
+     "note": "perfect_change requires received > charged; progression_test checks exact cash earns 8 XP not 18 (69/0)",
+     "closed": "2026-11-06T20:27:29+10:00"
     },
     {
      "id": "C12",
@@ -795,6 +796,11 @@
    "t": "2026-11-06T20:27:23+10:00",
    "kind": "question",
    "msg": "Question #4 answering: What have the criticises or improvement suggested for the game so far?"
+  },
+  {
+   "t": "2026-11-06T20:27:29+10:00",
+   "kind": "fix",
+   "msg": "R2/C11 fixed 4401ca4 perfect_change requires received > charged; progression_test checks exact cash earns 8 XP not 18 (69/0)"
   }
  ],
  "tests": [
@@ -829,13 +835,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:27:23+10:00",
-  "mem_free_pct": 48,
-  "load": [],
-  "godot_procs": 3
+  "t": "2026-11-06T20:27:29+10:00",
+  "mem_free_pct": 53,
+  "load": [
+   2.89,
+   2.52,
+   2.73
+  ],
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "4401ca4",
+    "date": "2026-11-06T20:27:27+10:00",
+    "subject": "Award the perfect-change bonus only when there was change to count",
+    "body": "",
+    "stat": "3 files changed, 15 insertions(+), 5 deletions(-)"
+   },
    {
     "sha": "18bfd25",
     "date": "2026-11-06T20:26:57+10:00",
@@ -1248,26 +1265,16 @@
     "subject": "Add the main menu with its store backdrop, options, controls, credits, the day-1 tutorial, Dale's walk-in and the F3 overlay",
     "body": "",
     "stat": "19 files changed, 1498 insertions(+), 58 deletions(-)"
-   },
-   {
-    "sha": "0c56422",
-    "date": "2026-11-05T20:26:06+10:00",
-    "subject": "Track the wanted mouse capture in Cursor; flash the scanner line and roll the HUD cash up",
-    "body": "",
-    "stat": "6 files changed, 90 insertions(+), 9 deletions(-)"
    }
   ],
   "dirty": [
-   " M docs/ECONOMY.md",
    " M scripts/autoload/game.gd",
-   " M scripts/core/sale_record.gd",
    " M scripts/ui/pc/app_pricing.gd",
-   " M scripts/ui/price_popup.gd",
-   " M tests/cases/progression_test.gd"
+   " M scripts/ui/price_popup.gd"
   ],
-  "total_commits": 117
+  "total_commits": 118
  },
- "updated": "2026-11-06T20:27:24+10:00",
+ "updated": "2026-11-06T20:27:29+10:00",
  "qa": [
   {
    "num": 1,

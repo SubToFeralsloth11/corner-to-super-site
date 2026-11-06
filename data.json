@@ -1,10 +1,10 @@
 {
  "generated": "2026-11-06T20:27+10:00",
- "head": "18bfd25",
+ "head": "4401ca4",
  "stats": {
-  "commits": 117,
+  "commits": 118,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-06T20:26:57+10:00",
+  "last_commit": "2026-11-06T20:27:27+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
@@ -865,6 +865,11 @@
    "sha": "18bfd25",
    "date": "2026-11-06T20:26:57+10:00",
    "subject": "Stop the queue-wait satisfaction drain and long-queue moan once the till starts serving"
+  },
+  {
+   "sha": "4401ca4",
+   "date": "2026-11-06T20:27:27+10:00",
+   "subject": "Award the perfect-change bonus only when there was change to count"
   }
  ],
  "commits_per_hour": [
@@ -982,7 +987,7 @@
   },
   {
    "hour": "2026-11-06T20:00:00+10:00",
-   "commits": 6
+   "commits": 7
   }
  ],
  "sections": [
