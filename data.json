@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-07T08:27+10:00",
+ "generated": "2026-11-07T08:39+10:00",
  "head": "56ef26f",
  "stats": {
   "commits": 164,
@@ -11,7 +11,7 @@
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 28142,
+  "gd_lines": 28224,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1371,6 +1371,10 @@
    "deferred": [
     "the bag hanging from the hand (C16), the trolley at the till and the gap in front of it (C8), overflow customers waiting in the aisle (C7), and the seated \"Take a pack\" button layout (C10): `tests/gameplay_tour.sh` and `tests/screenshot_tour.sh`."
    ]
+  },
+  {
+   "title": "Review round 2: everything else (2026-11-06/07, lead)",
+   "deferred": []
   }
  ],
  "economy": {

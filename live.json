@@ -1069,6 +1069,30 @@
      "commit": "",
      "note": "The paper's rating is a weekly summary of reputation, which already drives arrivals; giving it a second effect would double-count",
      "closed": "2026-11-07T08:27:08+10:00"
+    },
+    {
+     "id": "E22",
+     "sev": "P1",
+     "title": "Soak: serving the front customer only at served tills starved a second till (62 left the queue on day 11)",
+     "file": "scripts/fixtures/checkout.gd _served_elsewhere",
+     "detail": "",
+     "by": "soak",
+     "status": "open",
+     "found": "2026-11-07T08:39:45+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "E23",
+     "sev": "P2",
+     "title": "Soak: the economy now runs ~40% richer than the pacing table (day 7 $647 vs $250-450; day 30 $4,014)",
+     "file": "data/customers.json, docs/ECONOMY.md",
+     "detail": "",
+     "by": "soak",
+     "status": "open",
+     "found": "2026-11-07T08:39:45+10:00",
+     "commit": "",
+     "note": ""
     }
    ]
   },
@@ -2599,6 +2623,21 @@
    "t": "2026-11-07T08:27:08+10:00",
    "kind": "fix",
    "msg": "R4/N24 wontfix  AGENTS.md puts prices, costs and gates in data; animation/reach timings are code constants by design. Revisit if tuning is needed"
+  },
+  {
+   "t": "2026-11-07T08:39:44+10:00",
+   "kind": "agent",
+   "msg": "Agent soak: done 30 days, 0 errors; pacing: day 7 profit $647 over band ($250-450); day 30 $4,014; level 16 by day 24. Day 11: 62 left the queue (N2 fix starved an unserved till) - fixing"
+  },
+  {
+   "t": "2026-11-07T08:39:45+10:00",
+   "kind": "finding",
+   "msg": "R5/E22 [P1] Soak: serving the front customer only at served tills starved a second till (62 left the queue on day 11)"
+  },
+  {
+   "t": "2026-11-07T08:39:45+10:00",
+   "kind": "finding",
+   "msg": "R5/E23 [P2] Soak: the economy now runs ~40% richer than the pacing table (day 7 $647 vs $250-450; day 30 $4,014)"
   }
  ],
  "tests": [
@@ -2700,20 +2739,20 @@
    "t": "2026-11-07T07:47:58+10:00"
   },
   "soak": {
-   "state": "running",
-   "task": "30-day headless soak after round 2 (pacing + stability); lead reviewing player/audio code meanwhile",
-   "t": "2026-11-07T08:24:56+10:00"
+   "state": "done",
+   "task": "30 days, 0 errors; pacing: day 7 profit $647 over band ($250-450); day 30 $4,014; level 16 by day 24. Day 11: 62 left the queue (N2 fix starved an unserved till) - fixing",
+   "t": "2026-11-07T08:39:44+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T08:27:09+10:00",
-  "mem_free_pct": 33,
+  "t": "2026-11-07T08:39:45+10:00",
+  "mem_free_pct": 35,
   "load": [
-   12.25,
-   5.78,
-   4.08
+   3.93,
+   4.11,
+   4.16
   ],
-  "godot_procs": 4
+  "godot_procs": 3
  },
  "game": {
   "commits": [
@@ -3140,16 +3179,22 @@
   ],
   "dirty": [
    " M data/events.json",
+   " M docs/GDD.md",
+   " M docs/PROGRESS.md",
    " M scripts/autoload/game.gd",
+   " M scripts/autoload/settings.gd",
    " M scripts/core/weekly_review.gd",
+   " M scripts/entities/player.gd",
    " M scripts/fixtures/checkout.gd",
+   " M scripts/npc/dale.gd",
    " M scripts/npc/shopper.gd",
    " M scripts/npc/shopper_brain.gd",
+   " M scripts/ui/options.gd",
    " M tests/cases/day_test.gd"
   ],
   "total_commits": 164
  },
- "updated": "2026-11-07T08:27:13+10:00",
+ "updated": "2026-11-07T08:39:48+10:00",
  "qa": [
   {
    "num": 1,
