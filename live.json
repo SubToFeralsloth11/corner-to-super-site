@@ -198,10 +198,11 @@
      "file": "pos.gd:31-54",
      "detail": "",
      "by": "CritCheckout",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:22:44+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "c28ea7e",
+     "note": "PosScreen fills the clock in _ready and titles itself REG n from World.checkouts() order on every new sale; check.sh clean, checkout_test 52/0",
+     "closed": "2026-11-06T20:37:33+10:00"
     },
     {
      "id": "C16",
@@ -955,6 +956,11 @@
    "t": "2026-11-06T20:37:25+10:00",
    "kind": "fix",
    "msg": "R2/C14 fixed cfffc0d CardKeypad.submit: amount <= 0 shows 'Type the total first.' and never calls submit_card; new checkout_test test_ok_with_no_amount_is_not_a_decline (52/0)"
+  },
+  {
+   "t": "2026-11-06T20:37:33+10:00",
+   "kind": "fix",
+   "msg": "R2/C15 fixed c28ea7e PosScreen fills the clock in _ready and titles itself REG n from World.checkouts() order on every new sale; check.sh clean, checkout_test 52/0"
   }
  ],
  "tests": [
@@ -989,17 +995,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:37:25+10:00",
-  "mem_free_pct": 28,
+  "t": "2026-11-06T20:37:33+10:00",
+  "mem_free_pct": 27,
   "load": [
-   3.66,
-   3.12,
-   2.89
+   3.44,
+   3.09,
+   2.88
   ],
   "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "c28ea7e",
+    "date": "2026-11-06T20:37:31+10:00",
+    "subject": "Show the clock on the POS from the start and number each register",
+    "body": "",
+    "stat": "1 file changed, 17 insertions(+), 3 deletions(-)"
+   },
    {
     "sha": "cfffc0d",
     "date": "2026-11-06T20:37:23+10:00",
@@ -1412,24 +1425,16 @@
     "subject": "Test staff wages, cashier change, rack-only restocking and cleaning; add the staff tour and soak",
     "body": "",
     "stat": "9 files changed, 770 insertions(+), 6 deletions(-)"
-   },
-   {
-    "sha": "814184e",
-    "date": "2026-11-05T21:56:43+10:00",
-    "subject": "Add staff in the store: cashiers, restockers and cleaners; customers prefer staffed tills",
-    "body": "",
-    "stat": "14 files changed, 994 insertions(+), 6 deletions(-)"
    }
   ],
   "dirty": [
    " M scripts/fixtures/checkout.gd",
-   " M scripts/fixtures/pos.gd",
    " M scripts/npc/shopper.gd",
    " M tests/screenshot_tour.gd"
   ],
-  "total_commits": 128
+  "total_commits": 129
  },
- "updated": "2026-11-06T20:37:26+10:00",
+ "updated": "2026-11-06T20:37:33+10:00",
  "qa": [
   {
    "num": 1,

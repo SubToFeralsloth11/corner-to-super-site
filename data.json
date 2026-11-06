@@ -1,10 +1,10 @@
 {
  "generated": "2026-11-06T20:37+10:00",
- "head": "cfffc0d",
+ "head": "c28ea7e",
  "stats": {
-  "commits": 128,
+  "commits": 129,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-06T20:37:23+10:00",
+  "last_commit": "2026-11-06T20:37:31+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
@@ -920,6 +920,11 @@
    "sha": "cfffc0d",
    "date": "2026-11-06T20:37:23+10:00",
    "subject": "Treat OK on an empty or zero card amount as a misclick, not a decline"
+  },
+  {
+   "sha": "c28ea7e",
+   "date": "2026-11-06T20:37:31+10:00",
+   "subject": "Show the clock on the POS from the start and number each register"
   }
  ],
  "commits_per_hour": [
@@ -1037,7 +1042,7 @@
   },
   {
    "hour": "2026-11-06T20:00:00+10:00",
-   "commits": 17
+   "commits": 18
   }
  ],
  "sections": [
