@@ -1,0 +1,540 @@
+{
+ "status": {
+  "state": "reviewing",
+  "round": "R2+R3",
+  "area": "Checkout; shelves/pricing",
+  "activity": "Two critic agents tearing apart checkout and shelf code; baseline test suite running",
+  "cycle": "1",
+  "since": "2026-11-06T20:11:25+10:00"
+ },
+ "rounds": [
+  {
+   "id": "R2",
+   "area": "Checkout, payment, change, till",
+   "started": "2026-11-06T20:11:25+10:00",
+   "finished": null,
+   "findings": []
+  },
+  {
+   "id": "R3",
+   "area": "Shelves, stocking, boxes, pricing",
+   "started": "2026-11-06T20:11:25+10:00",
+   "finished": null,
+   "findings": []
+  }
+ ],
+ "log": [
+  {
+   "t": "2026-11-06T20:11:25+10:00",
+   "kind": "status",
+   "msg": "Status: reviewing - Two critic agents tearing apart checkout and shelf code; baseline test suite running"
+  },
+  {
+   "t": "2026-11-06T20:11:25+10:00",
+   "kind": "plan",
+   "msg": "Loop started by user: merciless critique, fix, repeat until stopped"
+  },
+  {
+   "t": "2026-11-06T20:11:25+10:00",
+   "kind": "plan",
+   "msg": "Plan: R2 checkout, R3 shelves/pricing, R4 customers/NPC, R5 economy/progression, R6 build mode, R7 staff, R8 van/market, R9 UI/menus/tutorial, R10 save/player/audio/visuals; then cycle again"
+  },
+  {
+   "t": "2026-11-06T20:11:25+10:00",
+   "kind": "test",
+   "msg": "Tests: 930 passed, 0 failed last recorded full suite before loop (PROGRESS.md M9)"
+  },
+  {
+   "t": "2026-11-06T20:11:25+10:00",
+   "kind": "round",
+   "msg": "Round R2 started: Checkout, payment, change, till"
+  },
+  {
+   "t": "2026-11-06T20:11:25+10:00",
+   "kind": "round",
+   "msg": "Round R3 started: Shelves, stocking, boxes, pricing"
+  },
+  {
+   "t": "2026-11-06T20:11:25+10:00",
+   "kind": "agent",
+   "msg": "Agent CritCheckout: running Reviewer: checkout/payment (read-only)"
+  },
+  {
+   "t": "2026-11-06T20:11:25+10:00",
+   "kind": "agent",
+   "msg": "Agent CritShelves: running Reviewer: shelves/boxes/pricing (read-only)"
+  },
+  {
+   "t": "2026-11-06T20:11:25+10:00",
+   "kind": "agent",
+   "msg": "Agent baseline-tests: running gt test . (full suite)"
+  },
+  {
+   "t": "2026-11-06T20:11:25+10:00",
+   "kind": "action",
+   "msg": "Built live page live.html"
+  }
+ ],
+ "tests": [
+  {
+   "t": "2026-11-06T20:11:25+10:00",
+   "passed": 930,
+   "failed": 0,
+   "note": "last recorded full suite before loop (PROGRESS.md M9)"
+  }
+ ],
+ "agents": {
+  "CritCheckout": {
+   "state": "running",
+   "task": "Reviewer: checkout/payment (read-only)",
+   "t": "2026-11-06T20:11:25+10:00"
+  },
+  "CritShelves": {
+   "state": "running",
+   "task": "Reviewer: shelves/boxes/pricing (read-only)",
+   "t": "2026-11-06T20:11:25+10:00"
+  },
+  "baseline-tests": {
+   "state": "running",
+   "task": "gt test . (full suite)",
+   "t": "2026-11-06T20:11:25+10:00"
+  }
+ },
+ "machine": {
+  "t": "2026-11-06T20:11:25+10:00",
+  "mem_free_pct": 38,
+  "load": [
+   1.34,
+   2.99,
+   3.05
+  ],
+  "godot_procs": 0
+ },
+ "game": {
+  "commits": [
+   {
+    "sha": "666830b",
+    "date": "2026-11-06T15:22:29+10:00",
+    "subject": "Pause the game when the window loses focus",
+    "body": "",
+    "stat": "2 files changed, 32 insertions(+)"
+   },
+   {
+    "sha": "d0d1e91",
+    "date": "2026-11-06T15:22:29+10:00",
+    "subject": "Keep HUD cards in their corners instead of overlapping across the top",
+    "body": "",
+    "stat": "7 files changed, 35 insertions(+), 10 deletions(-)"
+   },
+   {
+    "sha": "1d536c6",
+    "date": "2026-11-06T07:14:22+10:00",
+    "subject": "Record M9: soak table, tuning and perf in PROGRESS, tick the soak and tuning boxes, README How to play",
+    "body": "PROGRESS also marks review #18 and #20 fixed. The perf-on-High box and the 1-hour manual session\nwait for a windowed run.",
+    "stat": "4 files changed, 216 insertions(+), 11 deletions(-)"
+   },
+   {
+    "sha": "eaac1f5",
+    "date": "2026-11-06T06:55:14+10:00",
+    "subject": "Read the list cap and the start rent from data in the customer and save tests",
+    "body": "",
+    "stat": "2 files changed, 7 insertions(+), 3 deletions(-)"
+   },
+   {
+    "sha": "8f05db5",
+    "date": "2026-11-06T06:35:34+10:00",
+    "subject": "Tune the economy so three 30-day soaks in a row hit every pacing row",
+    "body": "XP 500 + 225(L-1); arrivals 2.5 + level; shoppers at once 2 + 4 per till + level/2 (cap 20);\nlists 1 + randi() % (2 + level), cap 16; start rent $20; costs 10% lower across the board.\nThe soak AI buys a till first, then licences, shelving, the shed and one restocker, then\nexpansions; it borrows only for a till's spot or a licence. The 2nd and 3rd tills stand in the\nE3 wings and a chest freezer fits in the start store. ECONOMY.md and GDD follow the data;\norder_test reads costs from products.json.",
+    "stat": "10 files changed, 197 insertions(+), 178 deletions(-)"
+   },
+   {
+    "sha": "4775e30",
+    "date": "2026-11-06T04:19:18+10:00",
+    "subject": "Read the start rent, fixture and expansion prices and the level-2 XP from data in the bills, build, day and progression tests",
+    "body": "The M9 tuning changed them; progression_test's levels dictionary is typed (a Variant-inferred var is a parse error).",
+    "stat": "4 files changed, 39 insertions(+), 20 deletions(-)"
+   },
+   {
+    "sha": "dfe5dee",
+    "date": "2026-11-06T02:11:00+10:00",
+    "subject": "Add the M9 soak simulator and a first economy tuning pass (pacing not yet met)",
+    "body": "tests/soak.sh runs an AI player (tests/soak_player.gd) for N days at Engine.time_scale: it\nprices at market +10%, serves with perfect change, orders and stocks through the van, buys\nlicences, tills, expansions, furniture, racks and staff and takes/repays loans by simple rules;\nit fails on engine/script errors, stuck NPCs, a store that won't empty and repossession, logs\nlevel/money/profit/spend/perf per day and per hour, and checks the ECONOMY.md pacing table.\nTuning so far: cheaper expansions, licences and fixtures, tiered cost cuts for later licences,\narrival base 2.8, list spread 2 + level, concurrency 4 + 3 per till, faster walkers, XP steps\n625 + 250(L-1). Day 15 level and day 30 profit are still short; ECONOMY.md not yet updated.",
+    "stat": "10 files changed, 1453 insertions(+), 90 deletions(-)"
+   },
+   {
+    "sha": "e561fda",
+    "date": "2026-11-06T02:11:00+10:00",
+    "subject": "Make pricing a decision and start a new store's reputation from a full window",
+    "body": "Refusals above market are now ((ratio - 1) x elasticity)^2 (customers.json exponent 2) with a\nper-product elasticity in products.json: staples punish markups, treats tolerate them, so the\nbest markup sits around +25-55% instead of profit being flat (review #4). A new game seeds the\nsatisfaction window with 40 customers at the starting stars, so the first customer no longer\nsets the stars on their own (review #20). Data-coupled tests read their numbers from data.",
+    "stat": "9 files changed, 93 insertions(+), 44 deletions(-)"
+   },
+   {
+    "sha": "636cd50",
+    "date": "2026-11-06T01:05:46+10:00",
+    "subject": "Start day 1 with four kinds of stock and show the shelf range on the clipboard",
+    "body": "The free first order is now a box each of Cola, Chipz, Candy and Noodles: with two products\nthe variety factor sat at its 0.3 floor and the tutorial day saw about 11 customers. The Tab\nclipboard shows how many kinds are on the shelves against the 12 that bring full traffic\n(review #7).",
+    "stat": "4 files changed, 22 insertions(+), 4 deletions(-)"
+   },
+   {
+    "sha": "1697c0a",
+    "date": "2026-11-06T01:05:38+10:00",
+    "subject": "Work out the arrival rate once a second instead of every physics frame",
+    "body": "It scans every slot for the products in stock, 564 slots in a full store (review #18).",
+    "stat": "1 file changed, 11 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "6dd808f",
+    "date": "2026-11-06T01:05:28+10:00",
+    "subject": "Cut the full store's draw calls: one shadowless MultiMesh per slot, batched troffers, price labels drawn only up close",
+    "body": "Stock no longer casts sun shadows (it sits inside its fixture under the roof) and each slot\ndraws all its rows in one MultiMesh, leaving distant stock to the import LODs; the ceiling\ntroffers are one MultiMesh per part; price label text stops drawing past 10 m and the card\npast 20 m. The full-store tour now records CPU per frame by the wall clock and a headless\ndraw estimate (frustum + visibility ranges, shadow casters).",
+    "stat": "7 files changed, 128 insertions(+), 31 deletions(-)"
+   },
+   {
+    "sha": "f9ea641",
+    "date": "2026-11-06T04:14:06+10:00",
+    "subject": "Record the round-1 review fixes in PROGRESS, with the windowed checks still to do",
+    "body": "",
+    "stat": "1 file changed, 42 insertions(+)"
+   },
+   {
+    "sha": "2ddbc82",
+    "date": "2026-11-06T04:14:06+10:00",
+    "subject": "Re-route walking NPCs when a fixture moves or the navmesh is rebaked, and wait instead of walking through walls when there is no route",
+    "body": "Review #17. Shoppers also work out their stand point or queue spot again. Nav.path is empty\nwith no navmesh or from more than 0.6 m off it; the walker asks again every 0.5 s and after 3 s\nhops to the nearest navmesh point (PLAN.md). The nav region and map now sync on the physics\nframe, and rebaked fires once the map uses the new mesh (it fired a sync early before).",
+    "stat": "7 files changed, 287 insertions(+), 21 deletions(-)"
+   },
+   {
+    "sha": "fe4e7ca",
+    "date": "2026-11-06T02:11:37+10:00",
+    "subject": "Send game-over New game through the menu's slot picker so the autosave isn't replaced unasked, and fix two tutorial instructions",
+    "body": "",
+    "stat": "2 files changed, 7 insertions(+), 3 deletions(-)"
+   },
+   {
+    "sha": "aec01df",
+    "date": "2026-11-06T02:11:37+10:00",
+    "subject": "Show stock on hand and Restock to full in the Market, split orders over 30 boxes into van trips, and restore a carried box into the player's hands on load",
+    "body": "",
+    "stat": "9 files changed, 213 insertions(+), 37 deletions(-)"
+   },
+   {
+    "sha": "7095d1a",
+    "date": "2026-11-06T02:11:36+10:00",
+    "subject": "Run patience until the first scan, ring a counter bell and show a waiting chip for unstaffed tills, grey out Give change with an empty tray, and keep customers off a shelf carried in build mode",
+    "body": "",
+    "stat": "12 files changed, 258 insertions(+), 25 deletions(-)"
+   },
+   {
+    "sha": "7a89d95",
+    "date": "2026-11-06T02:11:36+10:00",
+    "subject": "Name products in prompts and hints instead of their ids, and stop an empty box offering to fold or glowing green at a slot where E does nothing; test build mode needs empty hands",
+    "body": "",
+    "stat": "9 files changed, 72 insertions(+), 16 deletions(-)"
+   },
+   {
+    "sha": "55b69d0",
+    "date": "2026-11-06T02:11:36+10:00",
+    "subject": "Refuse build mode while holding the mop (GDD §1: empty hands only)",
+    "body": "",
+    "stat": "1 file changed, 3 insertions(+)"
+   },
+   {
+    "sha": "29f75fd",
+    "date": "2026-11-06T02:11:36+10:00",
+    "subject": "Keep the deli corner clear in build mode once E7 is built, and place licence furniture only where it fits, asking the player to clear the spot",
+    "body": "",
+    "stat": "3 files changed, 97 insertions(+), 17 deletions(-)"
+   },
+   {
+    "sha": "82f9a11",
+    "date": "2026-11-06T01:51:55+10:00",
+    "subject": "Record the round-1 review additions in PROGRESS",
+    "body": "",
+    "stat": "1 file changed, 57 insertions(+)"
+   },
+   {
+    "sha": "e9e336b",
+    "date": "2026-11-06T01:31:04+10:00",
+    "subject": "Add the round-1 review additions: catch boxes from the van, rare misfires that set off a car alarm, the store phone, the My Store look app, Sunday's newspaper review and the rival's sale week",
+    "body": "",
+    "stat": "42 files changed, 2080 insertions(+), 64 deletions(-)"
+   },
+   {
+    "sha": "5fe4304",
+    "date": "2026-11-06T00:57:18+10:00",
+    "subject": "Refresh price labels and the price popup after the morning market drift; GDD: an unset price shows the market price, not --",
+    "body": "",
+    "stat": "5 files changed, 35 insertions(+), 4 deletions(-)"
+   },
+   {
+    "sha": "f99e6b8",
+    "date": "2026-11-06T00:56:41+10:00",
+    "subject": "Keep the player off a staffed till's reader and cash, and have the cashier count change from what is already in the tray",
+    "body": "",
+    "stat": "3 files changed, 67 insertions(+), 11 deletions(-)"
+   },
+   {
+    "sha": "4251453",
+    "date": "2026-11-06T00:42:51+10:00",
+    "subject": "Refuse to sell a till someone is queued at or staffing, and send a queue whose till vanished to another till instead of crashing",
+    "body": "",
+    "stat": "3 files changed, 41 insertions(+), 2 deletions(-)"
+   },
+   {
+    "sha": "f609d0b",
+    "date": "2026-11-05T23:45:39+10:00",
+    "subject": "Pick up bay boxes the stock bot's way in the M5 acceptance test and rack any two of them, noting why one fails",
+    "body": "",
+    "stat": "1 file changed, 14 insertions(+), 14 deletions(-)"
+   },
+   {
+    "sha": "59b40f1",
+    "date": "2026-11-05T23:45:39+10:00",
+    "subject": "Take a racked box with E on the rack: racked boxes sit inside its collider, so the crosshair never found them",
+    "body": "",
+    "stat": "2 files changed, 57 insertions(+), 3 deletions(-)"
+   },
+   {
+    "sha": "5ce061b",
+    "date": "2026-11-05T22:59:35+10:00",
+    "subject": "Order and stock dairy right after placing the multideck; walk the stock bot round fixtures along the navmesh",
+    "body": "",
+    "stat": "3 files changed, 47 insertions(+), 6 deletions(-)"
+   },
+   {
+    "sha": "93b6a1f",
+    "date": "2026-11-05T22:48:54+10:00",
+    "subject": "Type the next expansion's cells in the plot map so it draws once every expansion is bought",
+    "body": "",
+    "stat": "1 file changed, 3 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "5c137e1",
+    "date": "2026-11-05T22:48:54+10:00",
+    "subject": "Keep ShopOS app windows above the dock so the Market's bottom row takes clicks; scroll long carts",
+    "body": "",
+    "stat": "3 files changed, 80 insertions(+), 15 deletions(-)"
+   },
+   {
+    "sha": "9a8c523",
+    "date": "2026-11-05T22:48:54+10:00",
+    "subject": "Line the store's brick with the shed's own wall where store col 0 meets the stockroom",
+    "body": "",
+    "stat": "3 files changed, 95 insertions(+), 7 deletions(-)"
+   },
+   {
+    "sha": "106ae36",
+    "date": "2026-11-05T22:48:28+10:00",
+    "subject": "Record the M7 full-suite result",
+    "body": "",
+    "stat": "1 file changed, 3 insertions(+), 2 deletions(-)"
+   },
+   {
+    "sha": "6d4d20b",
+    "date": "2026-11-05T22:33:09+10:00",
+    "subject": "Let staff cashiers fetch Smokes from the cigarette wall",
+    "body": "",
+    "stat": "3 files changed, 13 insertions(+), 4 deletions(-)"
+   },
+   {
+    "sha": "95ce661",
+    "date": "2026-11-05T22:30:47+10:00",
+    "subject": "Document M7 and tick its product box",
+    "body": "",
+    "stat": "8 files changed, 160 insertions(+), 7 deletions(-)"
+   },
+   {
+    "sha": "d2ac697",
+    "date": "2026-11-05T22:30:47+10:00",
+    "subject": "Test every product end to end, the licence furniture, Smokes and the full level-16 store; add the full-store tour",
+    "body": "",
+    "stat": "11 files changed, 680 insertions(+)"
+   },
+   {
+    "sha": "9f59f62",
+    "date": "2026-11-05T22:30:47+10:00",
+    "subject": "Place the deli corner and cigarette wall with their licences, sell Smokes at the till, hang aisle signs, plant verge trees and fill the car park with trade",
+    "body": "",
+    "stat": "15 files changed, 625 insertions(+), 38 deletions(-)"
+   },
+   {
+    "sha": "eeea6a8",
+    "date": "2026-11-05T22:30:47+10:00",
+    "subject": "Keep the background navmesh bake from calling into a freed world",
+    "body": "",
+    "stat": "1 file changed, 6 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "333f733",
+    "date": "2026-11-05T22:30:47+10:00",
+    "subject": "Alternate produce and wine meshes with a produce colour spread; hide rear stock rows past 25 m",
+    "body": "",
+    "stat": "2 files changed, 127 insertions(+), 31 deletions(-)"
+   },
+   {
+    "sha": "54e47b1",
+    "date": "2026-11-05T22:30:47+10:00",
+    "subject": "Add outdoor traffic and birdsong loops; play fridge door, rack slide and box flap sounds",
+    "body": "",
+    "stat": "9 files changed, 175 insertions(+), 8 deletions(-)"
+   },
+   {
+    "sha": "aef84dd",
+    "date": "2026-11-05T22:32:41+10:00",
+    "subject": "Record the M6 acceptance day and full-suite results",
+    "body": "",
+    "stat": "1 file changed, 5 insertions(+)"
+   },
+   {
+    "sha": "78d9272",
+    "date": "2026-11-05T22:32:41+10:00",
+    "subject": "Hook the staff crew to phase changes with a bound method so freed worlds disconnect",
+    "body": "",
+    "stat": "1 file changed, 6 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "8fe0676",
+    "date": "2026-11-05T21:56:43+10:00",
+    "subject": "Document M6: staff rules, API, tour results and playtest",
+    "body": "",
+    "stat": "5 files changed, 127 insertions(+), 17 deletions(-)"
+   },
+   {
+    "sha": "2a23bc6",
+    "date": "2026-11-05T21:56:43+10:00",
+    "subject": "Test staff wages, cashier change, rack-only restocking and cleaning; add the staff tour and soak",
+    "body": "",
+    "stat": "9 files changed, 770 insertions(+), 6 deletions(-)"
+   },
+   {
+    "sha": "814184e",
+    "date": "2026-11-05T21:56:43+10:00",
+    "subject": "Add staff in the store: cashiers, restockers and cleaners; customers prefer staffed tills",
+    "body": "",
+    "stat": "14 files changed, 994 insertions(+), 6 deletions(-)"
+   },
+   {
+    "sha": "0c8d566",
+    "date": "2026-11-05T21:56:42+10:00",
+    "subject": "Add staff hiring, tiers, till assignment, wages from the first working day and the Staff app",
+    "body": "",
+    "stat": "4 files changed, 312 insertions(+), 3 deletions(-)"
+   },
+   {
+    "sha": "b072ba6",
+    "date": "2026-11-05T21:56:42+10:00",
+    "subject": "Share navmesh walking between customers and staff",
+    "body": "",
+    "stat": "3 files changed, 115 insertions(+), 82 deletions(-)"
+   },
+   {
+    "sha": "26cfcf5",
+    "date": "2026-11-05T20:32:01+10:00",
+    "subject": "Record the M1 verification in PROGRESS and tick its milestone boxes",
+    "body": "",
+    "stat": "2 files changed, 79 insertions(+), 8 deletions(-)"
+   },
+   {
+    "sha": "650b884",
+    "date": "2026-11-05T19:42:14+10:00",
+    "subject": "Aim the stock bot at a box's middle and give skipped boxes a second pass",
+    "body": "",
+    "stat": "2 files changed, 18 insertions(+), 15 deletions(-)"
+   },
+   {
+    "sha": "200a22d",
+    "date": "2026-11-05T19:42:14+10:00",
+    "subject": "Tune the van's speeds so a 6-box visit lands by 10 s and leaves by 15 s",
+    "body": "",
+    "stat": "3 files changed, 19 insertions(+), 11 deletions(-)"
+   },
+   {
+    "sha": "768ffc3",
+    "date": "2026-11-05T19:42:13+10:00",
+    "subject": "Keep delivered boxes in the bay: probe spots, fill from the van side, soften landings",
+    "body": "",
+    "stat": "2 files changed, 81 insertions(+), 49 deletions(-)"
+   },
+   {
+    "sha": "028d243",
+    "date": "2026-11-05T19:42:13+10:00",
+    "subject": "Run delayed box and dust-puff callbacks from node tweens, not timer lambdas",
+    "body": "",
+    "stat": "2 files changed, 5 insertions(+), 7 deletions(-)"
+   },
+   {
+    "sha": "1bf9648",
+    "date": "2026-11-05T21:47:40+10:00",
+    "subject": "Add the M4 progression tour and document M4: drift, licences, apps, cleanliness, mop",
+    "body": "",
+    "stat": "10 files changed, 338 insertions(+), 9 deletions(-)"
+   },
+   {
+    "sha": "60772ba",
+    "date": "2026-11-05T21:18:51+10:00",
+    "subject": "Test the menus, options, mouse capture and the day-1 tutorial; add the M8 tour shots, ambience and docs",
+    "body": "",
+    "stat": "28 files changed, 779 insertions(+), 29 deletions(-)"
+   },
+   {
+    "sha": "6626f8b",
+    "date": "2026-11-05T20:26:06+10:00",
+    "subject": "Add the main menu with its store backdrop, options, controls, credits, the day-1 tutorial, Dale's walk-in and the F3 overlay",
+    "body": "",
+    "stat": "19 files changed, 1498 insertions(+), 58 deletions(-)"
+   },
+   {
+    "sha": "0c56422",
+    "date": "2026-11-05T20:26:06+10:00",
+    "subject": "Track the wanted mouse capture in Cursor; flash the scanner line and roll the HUD cash up",
+    "body": "",
+    "stat": "6 files changed, 90 insertions(+), 9 deletions(-)"
+   },
+   {
+    "sha": "0c2cc3a",
+    "date": "2026-11-05T20:26:06+10:00",
+    "subject": "Add the mixer buses, per-bus volumes, day length setting and the crossfading music player",
+    "body": "",
+    "stat": "8 files changed, 246 insertions(+), 24 deletions(-)"
+   },
+   {
+    "sha": "e644fe0",
+    "date": "2026-11-05T21:23:18+10:00",
+    "subject": "Let the Furniture app count owned fixtures before the delivery service exists",
+    "body": "",
+    "stat": "1 file changed, 4 insertions(+)"
+   },
+   {
+    "sha": "5788ddc",
+    "date": "2026-11-05T20:52:51+10:00",
+    "subject": "Slide the chest freezer's glass lids open over the half being stocked or shopped",
+    "body": "",
+    "stat": "4 files changed, 79 insertions(+), 8 deletions(-)"
+   },
+   {
+    "sha": "579ae23",
+    "date": "2026-11-05T20:31:54+10:00",
+    "subject": "Add M4 progression: licences, daily market drift, Pricing and Stats apps, cleanliness, customer messes and the level-up banner",
+    "body": "",
+    "stat": "24 files changed, 1131 insertions(+), 8 deletions(-)"
+   },
+   {
+    "sha": "579696c",
+    "date": "2026-11-05T20:57:37+10:00",
+    "subject": "Add build mode, furniture flat-packs, expansions and the stockroom shed with racks",
+    "body": "",
+    "stat": "58 files changed, 2566 insertions(+), 96 deletions(-)"
+   },
+   {
+    "sha": "765bcc5",
+    "date": "2026-11-05T20:41:18+10:00",
+    "subject": "Add the staff_uniform_m/f humans with the store badge",
+    "body": "",
+    "stat": "11 files changed, 201 insertions(+), 6 deletions(-)"
+   }
+  ],
+  "dirty": [],
+  "total_commits": 111
+ },
+ "updated": "2026-11-06T20:11:26+10:00"
+}

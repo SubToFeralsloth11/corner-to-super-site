@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corner to Super: live review loop</title>
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="live.css">
+<script src="live.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="logo" aria-hidden="true"></span>Corner to Super</a>
+  <nav aria-label="Sections">
+    <a href="#now">Now</a>
+    <a href="#findings">Findings</a>
+    <a href="#log">Activity log</a>
+    <a href="#tests">Tests</a>
+    <a href="#commits">Game commits</a>
+    <a href="#machine">Machine</a>
+    <a href="index.html">Build log</a>
+  </nav>
+</header>
+<main>
+<section id="now">
+  <h2>Live: merciless critique &rarr; fix loop</h2>
+  <p class="muted">An agent keeps critiquing every part of the game, fixing what it finds, and repeats until stopped.
+    This page refreshes itself every 30 s. <span id="fresh"></span></p>
+  <div class="cards" id="statuscards"></div>
+  <h3>Agents</h3>
+  <div id="agents"></div>
+</section>
+<section id="findings">
+  <h2>Findings by round</h2>
+  <div class="filters">
+    <label><input type="checkbox" id="hideClosed"> Hide fixed</label>
+    <select id="sevFilter"><option value="">All severities</option><option>P0</option><option>P1</option><option>P2</option><option>P3</option></select>
+  </div>
+  <div id="rounds"></div>
+</section>
+<section id="log">
+  <h2>Activity log</h2>
+  <select id="kindFilter"><option value="">Everything</option></select>
+  <ol id="logList" class="loglist" reversed></ol>
+</section>
+<section id="tests">
+  <h2>Test runs</h2>
+  <div id="testTable"></div>
+</section>
+<section id="commits">
+  <h2>Latest game commits</h2>
+  <p class="muted" id="dirty"></p>
+  <div id="commitList"></div>
+</section>
+<section id="machine">
+  <h2>Machine</h2>
+  <div class="cards" id="machineCards"></div>
+</section>
+</main>
+</body>
+</html>

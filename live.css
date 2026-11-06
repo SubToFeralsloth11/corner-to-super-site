@@ -1,0 +1,33 @@
+main { max-width: 1100px; margin: 0 auto; padding: 0 16px 64px; }
+section { margin: 32px 0; }
+.muted { color: var(--muted); }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; box-shadow: var(--shadow); }
+.card .k { font-size: .8em; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.card .v { font-size: 1.25em; font-weight: 600; word-break: break-word; }
+.pill { display: inline-block; padding: 0 .55em; border-radius: 99px; font-size: .8em; font-weight: 600; background: var(--surface-2); }
+.P0 { background: var(--red); color: #fff; }
+.P1 { background: #e8833a; color: #fff; }
+.P2 { background: var(--gold); color: #222; }
+.P3 { background: var(--surface-2); }
+.st-open { background: var(--red); color: #fff; }
+.st-fixed { background: var(--green); color: #fff; }
+.st-wontfix, .st-dup { background: var(--muted); color: #fff; }
+.st-wip { background: var(--gold); color: #222; }
+details.round { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0; }
+details.round summary { cursor: pointer; font-weight: 600; }
+.finding { border-top: 1px solid var(--line); padding: 8px 0; }
+.finding .detail { white-space: pre-wrap; font-size: .92em; color: var(--muted); margin-top: 4px; }
+.bar { height: 8px; background: var(--surface-2); border-radius: 99px; overflow: hidden; margin: 6px 0; }
+.bar > span { display: block; height: 100%; background: var(--green); }
+.loglist { font: .88em/1.5 var(--mono); padding-left: 0; list-style: none; max-height: 70vh; overflow: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px; }
+.loglist li { padding: 2px 0; border-bottom: 1px dashed var(--line); }
+.loglist time { color: var(--muted); margin-right: .6em; }
+table { border-collapse: collapse; width: 100%; font-size: .92em; }
+th, td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.commit { border-bottom: 1px solid var(--line); padding: 6px 0; }
+.commit pre { white-space: pre-wrap; font-size: .85em; color: var(--muted); margin: 4px 0 0; }
+.filters { display: flex; gap: 16px; align-items: center; margin-bottom: 8px; }
+.live-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--green); margin-right: 6px; animation: pulse 1.6s infinite; }
+@keyframes pulse { 50% { opacity: .3; } }
+@media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }

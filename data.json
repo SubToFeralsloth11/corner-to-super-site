@@ -1,21 +1,21 @@
 {
- "generated": "2026-11-06T06:54+10:00",
- "head": "f9ea641",
+ "generated": "2026-11-06T20:11+10:00",
+ "head": "666830b",
  "stats": {
-  "commits": 100,
+  "commits": 111,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-06T04:14:06+10:00",
+  "last_commit": "2026-11-06T15:22:29+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
-  "gd_files": 146,
-  "gd_lines": 24799,
+  "gd_files": 148,
+  "gd_lines": 26356,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
-  "tests_passing": 1225
+  "tests_passing": 930
  },
  "test_points": [
   {
@@ -101,6 +101,13 @@
    "failed": 0,
    "source": "PROGRESS.md (f9ea641)",
    "note": "Full suite: **1225 passed, 0 failed** (after #17)."
+  },
+  {
+   "date": "2026-11-06T07:14:22+10:00",
+   "passed": 930,
+   "failed": 0,
+   "source": "PROGRESS.md (1d536c6)",
+   "note": "Full suite after rebasing onto main (2ddbc82 + f9ea641): **930 passed, 0 failed** (fewer than"
   }
  ],
  "events": [
@@ -264,6 +271,13 @@
    "kind": "process",
    "title": "Review additions, batch B started",
    "text": "Customer types, a requests board with daily goals, supplier deals and shoplifters. In progress."
+  },
+  {
+   "date": "2026-11-06T07:14:22+10:00",
+   "kind": "milestone",
+   "title": "M9: Balance, performance, soak (2026-11-06, BuildM9 and FinishM9)",
+   "text": "New section in PROGRESS.md (1d536c6).",
+   "progress": "M9: Balance, performance, soak (2026-11-06, BuildM9 and FinishM9)"
   }
  ],
  "commits": [
@@ -766,6 +780,61 @@
    "sha": "f9ea641",
    "date": "2026-11-06T04:14:06+10:00",
    "subject": "Record the round-1 review fixes in PROGRESS, with the windowed checks still to do"
+  },
+  {
+   "sha": "6dd808f",
+   "date": "2026-11-06T01:05:28+10:00",
+   "subject": "Cut the full store's draw calls: one shadowless MultiMesh per slot, batched troffers, price labels drawn only up close"
+  },
+  {
+   "sha": "1697c0a",
+   "date": "2026-11-06T01:05:38+10:00",
+   "subject": "Work out the arrival rate once a second instead of every physics frame"
+  },
+  {
+   "sha": "636cd50",
+   "date": "2026-11-06T01:05:46+10:00",
+   "subject": "Start day 1 with four kinds of stock and show the shelf range on the clipboard"
+  },
+  {
+   "sha": "e561fda",
+   "date": "2026-11-06T02:11:00+10:00",
+   "subject": "Make pricing a decision and start a new store's reputation from a full window"
+  },
+  {
+   "sha": "dfe5dee",
+   "date": "2026-11-06T02:11:00+10:00",
+   "subject": "Add the M9 soak simulator and a first economy tuning pass (pacing not yet met)"
+  },
+  {
+   "sha": "4775e30",
+   "date": "2026-11-06T04:19:18+10:00",
+   "subject": "Read the start rent, fixture and expansion prices and the level-2 XP from data in the bills, build, day and progression tests"
+  },
+  {
+   "sha": "8f05db5",
+   "date": "2026-11-06T06:35:34+10:00",
+   "subject": "Tune the economy so three 30-day soaks in a row hit every pacing row"
+  },
+  {
+   "sha": "eaac1f5",
+   "date": "2026-11-06T06:55:14+10:00",
+   "subject": "Read the list cap and the start rent from data in the customer and save tests"
+  },
+  {
+   "sha": "1d536c6",
+   "date": "2026-11-06T07:14:22+10:00",
+   "subject": "Record M9: soak table, tuning and perf in PROGRESS, tick the soak and tuning boxes, README How to play"
+  },
+  {
+   "sha": "d0d1e91",
+   "date": "2026-11-06T15:22:29+10:00",
+   "subject": "Keep HUD cards in their corners instead of overlapping across the top"
+  },
+  {
+   "sha": "666830b",
+   "date": "2026-11-06T15:22:29+10:00",
+   "subject": "Pause the game when the window loses focus"
   }
  ],
  "commits_per_hour": [
@@ -807,11 +876,11 @@
   },
   {
    "hour": "2026-11-06T01:00:00+10:00",
-   "commits": 2
+   "commits": 5
   },
   {
    "hour": "2026-11-06T02:00:00+10:00",
-   "commits": 6
+   "commits": 8
   },
   {
    "hour": "2026-11-06T03:00:00+10:00",
@@ -819,6 +888,50 @@
   },
   {
    "hour": "2026-11-06T04:00:00+10:00",
+   "commits": 3
+  },
+  {
+   "hour": "2026-11-06T05:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-06T06:00:00+10:00",
+   "commits": 2
+  },
+  {
+   "hour": "2026-11-06T07:00:00+10:00",
+   "commits": 1
+  },
+  {
+   "hour": "2026-11-06T08:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-06T09:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-06T10:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-06T11:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-06T12:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-06T13:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-06T14:00:00+10:00",
+   "commits": 0
+  },
+  {
+   "hour": "2026-11-06T15:00:00+10:00",
    "commits": 2
   }
  ],
@@ -897,11 +1010,19 @@
     "Counter bell: rings once when a customer reaches an unstaffed till; level against the shop.",
     "Till prompts: nothing happens clicking the reader or cash at a staffed till, Give greyed out with an empty tray, product names (not ids) in prompts."
    ]
+  },
+  {
+   "title": "M9: Balance, performance, soak (2026-11-06, BuildM9 and FinishM9)",
+   "deferred": [
+    "`tests/full_store_tour.sh` on High and Medium: >= 60 fps (never below 45), real draw calls (< 2,500), triangles with LOD (< 3 M) and VRAM (< 1.5 GB).",
+    "The 1-hour manual session (the soak is its bot stand-in): use the playtest list below.",
+    "Look at price labels close up and from 10-20 m (text and card drop out at those distances)."
+   ]
   }
  ],
  "economy": {
   "start_cash": 600.0,
-  "start_rent": 40.0,
+  "start_rent": 20.0,
   "licences": [
    {
     "name": "Starter",
@@ -912,49 +1033,49 @@
    {
     "name": "Dairy",
     "level": 2,
-    "price": 400.0,
+    "price": 250.0,
     "needs": ""
    },
    {
     "name": "Frozen",
     "level": 3,
-    "price": 600.0,
+    "price": 350.0,
     "needs": ""
    },
    {
     "name": "Produce",
     "level": 5,
-    "price": 900.0,
+    "price": 500.0,
     "needs": ""
    },
    {
     "name": "Pantry",
     "level": 6,
-    "price": 800.0,
+    "price": 500.0,
     "needs": ""
    },
    {
     "name": "Household",
     "level": 8,
-    "price": 1000.0,
+    "price": 700.0,
     "needs": ""
    },
    {
     "name": "Bottle shop",
     "level": 10,
-    "price": 2000.0,
+    "price": 1200.0,
     "needs": ""
    },
    {
     "name": "Deli",
     "level": 12,
-    "price": 2500.0,
+    "price": 1500.0,
     "needs": "E7"
    },
    {
     "name": "Tobacco",
     "level": 14,
-    "price": 1500.0,
+    "price": 1000.0,
     "needs": ""
    }
   ],
@@ -963,49 +1084,49 @@
     "id": "E1",
     "name": "Back room knock-through",
     "level": 2,
-    "price": 1000.0,
+    "price": 500.0,
     "rent_after": 55.0
    },
    {
     "id": "E3",
     "name": "Side wings",
     "level": 4,
-    "price": 2500.0,
+    "price": 1000.0,
     "rent_after": 80.0
    },
    {
     "id": "E4",
     "name": "Middle aisles",
     "level": 6,
-    "price": 4000.0,
+    "price": 1800.0,
     "rent_after": 105.0
    },
    {
     "id": "E5",
     "name": "Corner wings",
     "level": 8,
-    "price": 6500.0,
+    "price": 2800.0,
     "rent_after": 135.0
    },
    {
     "id": "E6",
     "name": "Back aisles",
     "level": 10,
-    "price": 9000.0,
+    "price": 4000.0,
     "rent_after": 165.0
    },
    {
     "id": "E7",
     "name": "Back corners",
     "level": 12,
-    "price": 13000.0,
+    "price": 5500.0,
     "rent_after": 190.0
    },
    {
     "id": "E8",
     "name": "Full depth",
     "level": 15,
-    "price": 18000.0,
+    "price": 7500.0,
     "rent_after": 230.0
    }
   ],
@@ -1014,21 +1135,21 @@
     "id": "S1",
     "name": "Stockroom shed",
     "level": 2,
-    "price": 800.0,
+    "price": 400.0,
     "rent_add": 10.0
    },
    {
     "id": "S2",
     "name": "Stockroom extension",
     "level": 7,
-    "price": 2000.0,
+    "price": 1000.0,
     "rent_add": 20.0
    },
    {
     "id": "S3",
     "name": "Big stockroom",
     "level": 11,
-    "price": 4000.0,
+    "price": 2000.0,
     "rent_add": 30.0
    }
   ],
@@ -1125,7 +1246,6 @@
   }
  ],
  "unmerged_branches": [
-  "additions-b",
-  "m9-build"
+  "additions-b"
  ]
 }
