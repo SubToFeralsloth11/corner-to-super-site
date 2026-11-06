@@ -1687,10 +1687,11 @@
      "file": "scripts/fixtures/checkout.gd:323-332",
      "detail": "_served_elsewhere() stops begin() whenever another in-use till is attended with an empty queue. The hold assumes _maybe_switch_queue will move the customer. A customer with counter_asks calls shortest_queue(true), which always returns the wall till, so `best == checkout` and they never switch (shopper_brain.gd:518-519). Example: the player or a cashier works till 2 with nobody queued while the wall stands behind till 1. The Smokes customer stands at till 1's serve point and nothing happens: no unload, no counter bell. Patience drains and they give up, unless someone happens to join till 2. Fix: skip the hold when queue[0].brain.counter_asks is non-empty, or when the customer can't use the served till (`w.cig_wall_till() == self`).",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:57+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "3dd9256",
+     "note": "_served_elsewhere now asks shortest_queue(counter_asks) like _maybe_switch_queue, so a Smokes buyer (always routed to the wall till) is never held. test_smokes_buyer_is_not_held_for_another_served_till fails on 1724812 (phase 0), passes after; m7_content 83/0",
+     "closed": "2026-11-07T09:51:16+10:00"
     },
     {
      "id": "X4",
@@ -3776,6 +3777,11 @@
    "t": "2026-11-07T09:51:06+10:00",
    "kind": "fix",
    "msg": "C2/X2 fixed 84de3a0 shortest_queue ranks attended > room > staffed > shorter queue (world.gd swept into 84de3a0; its regression test swept into bf35689). test_a_full_served_lane_beats_an_unserved_till fails on 1724812, passes after; old full-lane test now asserts room wins only when nobody serves. checkout_test 74/0"
+  },
+  {
+   "t": "2026-11-07T09:51:16+10:00",
+   "kind": "fix",
+   "msg": "C2/X3 fixed 3dd9256 _served_elsewhere now asks shortest_queue(counter_asks) like _maybe_switch_queue, so a Smokes buyer (always routed to the wall till) is never held. test_smokes_buyer_is_not_held_for_another_served_till fails on 1724812 (phase 0), passes after; m7_content 83/0"
   }
  ],
  "tests": [
@@ -3917,17 +3923,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:51:06+10:00",
+  "t": "2026-11-07T09:51:16+10:00",
   "mem_free_pct": 56,
   "load": [
-   4.32,
-   4.17,
-   3.9
+   4.11,
+   4.13,
+   3.89
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "3dd9256",
+    "date": "2026-11-07T09:51:11+10:00",
+    "subject": "Hold the front customer only when their own queue switch would move them, to a till someone works (X3, X20)",
+    "body": "",
+    "stat": "3 files changed, 38 insertions(+), 11 deletions(-)"
+   },
    {
     "sha": "bf35689",
     "date": "2026-11-07T09:50:55+10:00",
@@ -4340,24 +4353,14 @@
     "subject": "Record review round 2 checkout fixes in PROGRESS",
     "body": "",
     "stat": "1 file changed, 35 insertions(+)"
-   },
-   {
-    "sha": "7f6ffc0",
-    "date": "2026-11-06T20:43:31+10:00",
-    "subject": "Give each till's queue a capacity and let overflow wait in place",
-    "body": "",
-    "stat": "6 files changed, 69 insertions(+), 13 deletions(-)"
    }
   ],
   "dirty": [
-   " M scripts/build/build_mode.gd",
-   " M scripts/fixtures/checkout.gd",
-   " M scripts/npc/shopper_brain.gd",
-   " M tests/cases/m7_content_test.gd"
+   " M scripts/build/build_mode.gd"
   ],
-  "total_commits": 195
+  "total_commits": 196
  },
- "updated": "2026-11-07T09:51:06+10:00",
+ "updated": "2026-11-07T09:51:17+10:00",
  "qa": [
   {
    "num": 1,
