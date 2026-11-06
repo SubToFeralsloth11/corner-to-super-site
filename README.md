@@ -57,3 +57,14 @@ Things that change by hand: the feature text and the status section in `index.ht
 
 To preview locally: `python3 -m http.server` in this folder, then open http://localhost:8000/
 (opening `index.html` as a file blocks the `data.json` fetch).
+
+## Question box (live page)
+
+The live page's **Ask the agent** box files a GitHub issue labelled `question` (directly through the
+API when a fine-grained token with Issues read/write on this repo is saved in that browser,
+otherwise by opening GitHub's prefilled new-issue form). `ask_watch.py` runs 24/7 under launchd
+(`com.agents.cts-ask-watch.plist`, copy into `~/Library/LaunchAgents/` and
+`launchctl load` it). Once a minute it lists open `question` issues opened by the owner; only
+when there is one does it start a read-only answering agent (`omp -p`, no game engine), comment
+the answer on the issue, close it, and add the Q&A to `live.json`. Each question is also appended
+to `inbox.jsonl` for the loop agent. Log: `ask_watch.log`.

@@ -15,6 +15,7 @@ data.json, snapshots the machine and the game repo, commits and pushes, so the l
 """
 
 import argparse
+import fcntl
 import json
 import re
 import subprocess
@@ -138,13 +139,22 @@ def main():
     lg = sub.add_parser("log")
     lg.add_argument("msg"); lg.add_argument("--kind", default="action")
 
+    q = sub.add_parser("qa")
+    q.add_argument("num", type=int); q.add_argument("title")
+    q.add_argument("--question", default=""); q.add_argument("--answer", default="")
+    q.add_argument("--state", default="answering")
+
     sub.add_parser("push")
     # `--push` may come anywhere on the line, so pull it out before argparse sees the subcommand.
     argv = sys.argv[1:]
     want_push = "--push" in argv
     args = ap.parse_args([a for a in argv if a != "--push"])
     args.push = want_push
+    # The loop agent and ask_watch.py both write live.json and push; serialize them.
+    lock = open(HERE / ".live.lock", "w")
+    fcntl.flock(lock, fcntl.LOCK_EX)
     d = load()
+    d.setdefault("qa", [])
 
     if args.cmd == "status":
         for k in ("state", "round", "area", "activity", "cycle"):
@@ -189,6 +199,11 @@ def main():
 
     elif args.cmd == "log":
         log(d, args.msg, args.kind)
+    elif args.cmd == "qa":
+        d["qa"] = [x for x in d["qa"] if x["num"] != args.num]
+        d["qa"].append({"num": args.num, "title": args.title, "question": args.question,
+                        "answer": args.answer, "state": args.state, "t": now()})
+        log(d, f"Question #{args.num} {args.state}: {args.title}", "question")
 
     if args.cmd == "push" or args.push:
         push(d, "Live: " + (d["log"][-1]["msg"][:60] if d["log"] else "update"))

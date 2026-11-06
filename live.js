@@ -77,6 +77,7 @@ function render() {
   $("#commitList").innerHTML = (g.commits || []).map((c) => `<div class="commit"><code>${esc(c.sha)}</code> ${esc(c.subject)}
     <span class="muted">${esc(when(c.date))} &middot; ${esc(c.stat)}</span>${c.body ? `<pre>${esc(c.body)}</pre>` : ""}</div>`).join("");
 
+  renderQA();
   const m = d.machine || {};
   $("#machineCards").innerHTML = [
     card("Free memory", (m.mem_free_pct ?? "-") + "%"),
@@ -93,3 +94,52 @@ for (const id of ["#hideClosed", "#sevFilter", "#kindFilter"]) document.addEvent
 tick();
 setInterval(tick, 30000);
 setInterval(() => data && ($("#fresh").innerHTML = `<span class="live-dot"></span>Last update ${esc(when(data.updated))} (${ago(data.updated)})`), 5000);
+
+// Question box. With a GitHub token saved on this device (fine-grained, this repo, Issues:
+// read/write) it files the issue directly; without one it opens GitHub's prefilled new-issue
+// form. The token never leaves the browser except to api.github.com.
+const REPO = "SubToFeralsloth11/corner-to-super-site";
+function renderQA() {
+  const qa = (data?.qa || []).slice().reverse();
+  $("#qaList").innerHTML = qa.map((q) => `<div class="qa"><b>#${q.num}</b> ${esc(q.title)}
+    <span class="pill ${q.state === "answered" ? "st-fixed" : "st-wip"}">${esc(q.state)}</span>
+    <span class="muted">${esc(when(q.t))}</span>
+    ${q.question ? `<div class="muted">${esc(q.question)}</div>` : ""}
+    ${q.answer ? `<div class="answer">${md(q.answer)}</div>` : ""}
+    <div><a href="https://github.com/${REPO}/issues/${q.num}">issue</a></div></div>`).join("");
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const tokenLink = $("#tokenLink");
+  const showToken = () => tokenLink.textContent = localStorage.ghToken ? "Token saved (tap to change/remove)" : "Set token for one-tap sending";
+  showToken();
+  tokenLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    const t = prompt("GitHub fine-grained token (repo corner-to-super-site, Issues: read and write). Leave empty to remove.", "");
+    if (t === null) return;
+    if (t.trim()) localStorage.ghToken = t.trim(); else delete localStorage.ghToken;
+    showToken();
+  });
+  $("#askForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const title = $("#askTitle").value.trim(), body = $("#askBody").value.trim();
+    if (!title) return;
+    const msg = $("#askMsg");
+    if (!localStorage.ghToken) {
+      window.open(`https://github.com/${REPO}/issues/new?labels=question&title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`, "_blank");
+      msg.textContent = "Opened GitHub: press Create there.";
+      return;
+    }
+    msg.textContent = "Sending...";
+    try {
+      const r = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
+        method: "POST",
+        headers: { Authorization: "Bearer " + localStorage.ghToken, Accept: "application/vnd.github+json" },
+        body: JSON.stringify({ title, body, labels: ["question"] }),
+      });
+      if (!r.ok) throw new Error(r.status + " " + (await r.text()).slice(0, 120));
+      const j = await r.json();
+      msg.innerHTML = `Sent as <a href="${j.html_url}">#${j.number}</a>. The watcher picks it up within a minute.`;
+      $("#askTitle").value = ""; $("#askBody").value = "";
+    } catch (err) { msg.textContent = "Failed: " + err.message; }
+  });
+});

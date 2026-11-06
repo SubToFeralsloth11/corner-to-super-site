@@ -14,6 +14,7 @@
   <a class="brand" href="index.html"><span class="logo" aria-hidden="true"></span>Corner to Super</a>
   <nav aria-label="Sections">
     <a href="#now">Now</a>
+    <a href="#ask">Ask</a>
     <a href="#findings">Findings</a>
     <a href="#log">Activity log</a>
     <a href="#tests">Tests</a>
@@ -30,6 +31,21 @@
   <div class="cards" id="statuscards"></div>
   <h3>Agents</h3>
   <div id="agents"></div>
+</section>
+<section id="ask">
+  <h2>Ask the agent</h2>
+  <p class="muted">A watcher on the Mac checks for new questions once a minute and starts an agent to answer each one.
+    The answer shows up here and on the GitHub issue, usually within a few minutes. Instructions for the loop work too.</p>
+  <form id="askForm" class="askbox">
+    <input id="askTitle" placeholder="Question (one line)" required maxlength="200">
+    <textarea id="askBody" rows="3" placeholder="Details (optional)"></textarea>
+    <div class="filters">
+      <button type="submit">Send</button>
+      <span id="askMsg" class="muted"></span>
+      <a href="#" id="tokenLink" class="muted">Set token for one-tap sending</a>
+    </div>
+  </form>
+  <div id="qaList"></div>
 </section>
 <section id="findings">
   <h2>Findings by round</h2>

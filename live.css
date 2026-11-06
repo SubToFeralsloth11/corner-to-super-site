@@ -31,3 +31,8 @@ th, td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--line
 .live-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--green); margin-right: 6px; animation: pulse 1.6s infinite; }
 @keyframes pulse { 50% { opacity: .3; } }
 @media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
+.askbox { display: grid; gap: 8px; max-width: 700px; }
+.askbox input, .askbox textarea { font: inherit; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--text); }
+.askbox button { font: inherit; font-weight: 600; padding: 6px 18px; border: 0; border-radius: 10px; background: var(--green); color: #fff; cursor: pointer; }
+.qa { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0; }
+.qa .answer { white-space: pre-wrap; margin-top: 6px; }
