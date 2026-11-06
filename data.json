@@ -1,17 +1,17 @@
 {
  "generated": "2026-11-06T20:49+10:00",
- "head": "4e7a26b",
+ "head": "f0e3703",
  "stats": {
-  "commits": 137,
+  "commits": 138,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-06T20:44:33+10:00",
+  "last_commit": "2026-11-06T20:49:51+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 27082,
+  "gd_lines": 27107,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -979,6 +979,11 @@
    "sha": "4e7a26b",
    "date": "2026-11-06T20:44:33+10:00",
    "subject": "Record review round 2 checkout fixes in PROGRESS"
+  },
+  {
+   "sha": "f0e3703",
+   "date": "2026-11-06T20:49:51+10:00",
+   "subject": "Close an exact-cash sale as the cash is taken, and move the till hint below the HUD clock"
   }
  ],
  "commits_per_hour": [
@@ -1096,7 +1101,7 @@
   },
   {
    "hour": "2026-11-06T20:00:00+10:00",
-   "commits": 26
+   "commits": 27
   }
  ],
  "sections": [

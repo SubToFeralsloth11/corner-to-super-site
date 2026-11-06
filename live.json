@@ -493,10 +493,11 @@
      "file": "scripts/fixtures/checkout.gd:139-143",
      "detail": "Seen in /tmp/cts_play_r2 play_03 and change_panel shots: hint at offset_top 16 overlaps the top-centre clock.",
      "by": "lead",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:48:59+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "f0e3703",
+     "note": "Hint offset 76 px, below the clock card (windowed check pending next tour)",
+     "closed": "2026-11-06T20:49:56+10:00"
     },
     {
      "id": "U2",
@@ -505,10 +506,11 @@
      "file": "scripts/fixtures/checkout.gd (cash payment)",
      "detail": "Tedious extra click every exact-cash sale (25% of cash customers).",
      "by": "lead",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:48:59+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "f0e3703",
+     "note": "Regression test fails before (0 sales), passes after; checkout/staff/m2 suites green",
+     "closed": "2026-11-06T20:49:56+10:00"
     },
     {
      "id": "U3",
@@ -1150,6 +1152,16 @@
    "t": "2026-11-06T20:48:59+10:00",
    "kind": "finding",
    "msg": "R9/U3 [P3] POS screen text is unreadable from the seat"
+  },
+  {
+   "t": "2026-11-06T20:49:56+10:00",
+   "kind": "fix",
+   "msg": "R9/U1 fixed f0e3703 Hint offset 76 px, below the clock card (windowed check pending next tour)"
+  },
+  {
+   "t": "2026-11-06T20:49:56+10:00",
+   "kind": "fix",
+   "msg": "R9/U2 fixed f0e3703 Regression test fails before (0 sales), passes after; checkout/staff/m2 suites green"
   }
  ],
  "tests": [
@@ -1205,17 +1217,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:48:59+10:00",
+  "t": "2026-11-06T20:49:56+10:00",
   "mem_free_pct": 57,
   "load": [
-   2.3,
+   2.28,
    2.36,
-   2.58
+   2.57
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "f0e3703",
+    "date": "2026-11-06T20:49:51+10:00",
+    "subject": "Close an exact-cash sale as the cash is taken, and move the till hint below the HUD clock",
+    "body": "Exact cash opened the change panel with $0.00 due and waited for a Give click; the seated\nhint line was drawn over the clock card (seen in the windowed gameplay tour). Review round 2,\nU1 and U2.",
+    "stat": "2 files changed, 26 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "4e7a26b",
     "date": "2026-11-06T20:44:33+10:00",
@@ -1628,19 +1647,12 @@
     "subject": "Document M7 and tick its product box",
     "body": "",
     "stat": "8 files changed, 160 insertions(+), 7 deletions(-)"
-   },
-   {
-    "sha": "d2ac697",
-    "date": "2026-11-05T22:30:47+10:00",
-    "subject": "Test every product end to end, the licence furniture, Smokes and the full level-16 store; add the full-store tour",
-    "body": "",
-    "stat": "11 files changed, 680 insertions(+)"
    }
   ],
   "dirty": [],
-  "total_commits": 137
+  "total_commits": 138
  },
- "updated": "2026-11-06T20:49:00+10:00",
+ "updated": "2026-11-06T20:49:56+10:00",
  "qa": [
   {
    "num": 1,
