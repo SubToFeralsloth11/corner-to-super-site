@@ -1,10 +1,10 @@
 {
- "generated": "2026-11-06T20:25+10:00",
- "head": "f05587a",
+ "generated": "2026-11-06T20:26+10:00",
+ "head": "72f2b03",
  "stats": {
-  "commits": 115,
+  "commits": 116,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-06T20:25:51+10:00",
+  "last_commit": "2026-11-06T20:26:13+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
@@ -855,6 +855,11 @@
    "sha": "f05587a",
    "date": "2026-11-06T20:25:51+10:00",
    "subject": "Save the box a restocker is carrying as a loose box where they stood"
+  },
+  {
+   "sha": "72f2b03",
+   "date": "2026-11-06T20:26:13+10:00",
+   "subject": "Send customers with Smokes on their list to the till the cigarette wall serves"
   }
  ],
  "commits_per_hour": [
@@ -972,7 +977,7 @@
   },
   {
    "hour": "2026-11-06T20:00:00+10:00",
-   "commits": 4
+   "commits": 5
   }
  ],
  "sections": [

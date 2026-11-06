@@ -34,10 +34,11 @@
      "file": "checkout.gd:454-459,490-494,508-511; shopper_brain.gd:284",
      "detail": "False out-of-stock complaints, -12 satisfaction, lost sales at tills 2-4.",
      "by": "CritCheckout",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:22:44+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "72f2b03",
+     "note": "World.shortest_queue(counter_asks) returns the wall's till; new m7_content test_smokes_buyers_queue_at_the_wall_till passes (smokes 16/0, queue 11/0)",
+     "closed": "2026-11-06T20:26:15+10:00"
     },
     {
      "id": "C3",
@@ -768,6 +769,11 @@
    "t": "2026-11-06T20:25:52+10:00",
    "kind": "fix",
    "msg": "R3/S2 fixed f05587a StaffCrew.carried_boxes saved as loose boxes; save_test regression fails before (0 units), passes after"
+  },
+  {
+   "t": "2026-11-06T20:26:15+10:00",
+   "kind": "fix",
+   "msg": "R2/C2 fixed 72f2b03 World.shortest_queue(counter_asks) returns the wall's till; new m7_content test_smokes_buyers_queue_at_the_wall_till passes (smokes 16/0, queue 11/0)"
   }
  ],
  "tests": [
@@ -802,17 +808,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:25:52+10:00",
-  "mem_free_pct": 46,
+  "t": "2026-11-06T20:26:15+10:00",
+  "mem_free_pct": 47,
   "load": [
-   2.81,
-   2.53,
-   2.77
+   2.22,
+   2.41,
+   2.72
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "72f2b03",
+    "date": "2026-11-06T20:26:13+10:00",
+    "subject": "Send customers with Smokes on their list to the till the cigarette wall serves",
+    "body": "",
+    "stat": "4 files changed, 63 insertions(+), 7 deletions(-)"
+   },
    {
     "sha": "f05587a",
     "date": "2026-11-06T20:25:51+10:00",
@@ -1225,23 +1238,12 @@
     "subject": "Add the mixer buses, per-bus volumes, day length setting and the crossfading music player",
     "body": "",
     "stat": "8 files changed, 246 insertions(+), 24 deletions(-)"
-   },
-   {
-    "sha": "e644fe0",
-    "date": "2026-11-05T21:23:18+10:00",
-    "subject": "Let the Furniture app count owned fixtures before the delivery service exists",
-    "body": "",
-    "stat": "1 file changed, 4 insertions(+)"
    }
   ],
-  "dirty": [
-   " M scripts/npc/shopper_brain.gd",
-   " M scripts/world/world.gd",
-   " M tests/cases/m7_content_test.gd"
-  ],
-  "total_commits": 115
+  "dirty": [],
+  "total_commits": 116
  },
- "updated": "2026-11-06T20:25:53+10:00",
+ "updated": "2026-11-06T20:26:16+10:00",
  "qa": [
   {
    "num": 1,
