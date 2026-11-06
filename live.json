@@ -2979,6 +2979,26 @@
    "t": "2026-11-07T09:23:57+10:00",
    "kind": "status",
    "msg": "Status: reviewing - Cycle 2: lead re-reviewing every area (critic agents return when the API limit lifts)"
+  },
+  {
+   "t": "2026-11-07T09:27:56+10:00",
+   "kind": "agent",
+   "msg": "Agent CritRegress: running Reviewer: regressions in today's ~70 commits"
+  },
+  {
+   "t": "2026-11-07T09:27:56+10:00",
+   "kind": "agent",
+   "msg": "Agent CritPlayer: running Reviewer: player, staff, delivery, UI, saves, audio"
+  },
+  {
+   "t": "2026-11-07T09:27:56+10:00",
+   "kind": "agent",
+   "msg": "Agent FixNPC: done (earlier 429 was a transient rate limit; agents back in use)"
+  },
+  {
+   "t": "2026-11-07T09:27:56+10:00",
+   "kind": "plan",
+   "msg": "User: subagents aren't out of tokens. Resumed critic agents for cycle 2."
   }
  ],
  "tests": [
@@ -3093,25 +3113,35 @@
    "t": "2026-11-06T20:56:05+10:00"
   },
   "FixNPC": {
-   "state": "failed",
-   "task": "API rate limit (429, retry in ~10 h); lead continues alone",
-   "t": "2026-11-07T07:47:58+10:00"
+   "state": "done",
+   "task": "(earlier 429 was a transient rate limit; agents back in use)",
+   "t": "2026-11-07T09:27:56+10:00"
   },
   "soak": {
    "state": "done",
    "task": "Soak #2 passed all pacing rows, 0 errors, 761 s",
    "t": "2026-11-07T08:55:23+10:00"
+  },
+  "CritRegress": {
+   "state": "running",
+   "task": "Reviewer: regressions in today's ~70 commits",
+   "t": "2026-11-07T09:27:56+10:00"
+  },
+  "CritPlayer": {
+   "state": "running",
+   "task": "Reviewer: player, staff, delivery, UI, saves, audio",
+   "t": "2026-11-07T09:27:56+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T09:23:57+10:00",
-  "mem_free_pct": 46,
+  "t": "2026-11-07T09:27:56+10:00",
+  "mem_free_pct": 30,
   "load": [
-   2.58,
-   4.66,
-   4.74
+   2.66,
+   3.85,
+   4.38
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
@@ -3536,10 +3566,16 @@
     "stat": "1 file changed, 6 insertions(+), 1 deletion(-)"
    }
   ],
-  "dirty": [],
+  "dirty": [
+   " M scripts/autoload/save.gd",
+   " M scripts/entities/dropped_basket.gd",
+   " M scripts/ui/pc/app_licences.gd",
+   " M scripts/world/hygiene.gd",
+   " M tests/cases/save_test.gd"
+  ],
   "total_commits": 180
  },
- "updated": "2026-11-07T09:23:58+10:00",
+ "updated": "2026-11-07T09:27:58+10:00",
  "qa": [
   {
    "num": 1,
