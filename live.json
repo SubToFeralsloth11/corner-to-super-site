@@ -123,9 +123,9 @@
      "by": "CritCheckout",
      "status": "fixed",
      "found": "2026-11-06T20:22:44+10:00",
-     "commit": "8e1c6d0",
-     "note": "TillTarget.interact falls back to Checkout.interact (sit); target prompts offer [E] Sit at the till; new checkout_test test_e_on_a_till_target_sits_you_down (checkout_test 52/0)",
-     "closed": "2026-11-06T20:35:45+10:00"
+     "commit": "2150d39",
+     "note": "TillTarget.interact falls back to sitting; prompts offer [E] Sit at the till; test_e_on_a_till_target_sits_you_down (checkout_test 52/0). 2150d39 repairs hunks misplaced in 8e1c6d0",
+     "closed": "2026-11-06T20:36:51+10:00"
     },
     {
      "id": "C10",
@@ -938,6 +938,11 @@
    "t": "2026-11-06T20:35:45+10:00",
    "kind": "fix",
    "msg": "R2/C9 fixed 8e1c6d0 TillTarget.interact falls back to Checkout.interact (sit); target prompts offer [E] Sit at the till; new checkout_test test_e_on_a_till_target_sits_you_down (checkout_test 52/0)"
+  },
+  {
+   "t": "2026-11-06T20:36:51+10:00",
+   "kind": "fix",
+   "msg": "R2/C9 fixed 2150d39 TillTarget.interact falls back to sitting; prompts offer [E] Sit at the till; test_e_on_a_till_target_sits_you_down (checkout_test 52/0). 2150d39 repairs hunks misplaced in 8e1c6d0"
   }
  ],
  "tests": [
@@ -972,17 +977,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:35:45+10:00",
-  "mem_free_pct": 43,
+  "t": "2026-11-06T20:36:51+10:00",
+  "mem_free_pct": 30,
   "load": [
-   3.25,
-   2.91,
-   2.8
+   3.55,
+   3.07,
+   2.87
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "2150d39",
+    "date": "2026-11-06T20:36:50+10:00",
+    "subject": "Put the till-target sit change back in place after a misapplied partial stage",
+    "body": "",
+    "stat": "2 files changed, 38 insertions(+), 38 deletions(-)"
+   },
    {
     "sha": "8e1c6d0",
     "date": "2026-11-06T20:35:43+10:00",
@@ -1395,13 +1407,6 @@
     "subject": "Share navmesh walking between customers and staff",
     "body": "",
     "stat": "3 files changed, 115 insertions(+), 82 deletions(-)"
-   },
-   {
-    "sha": "26cfcf5",
-    "date": "2026-11-05T20:32:01+10:00",
-    "subject": "Record the M1 verification in PROGRESS and tick its milestone boxes",
-    "body": "",
-    "stat": "2 files changed, 79 insertions(+), 8 deletions(-)"
    }
   ],
   "dirty": [
@@ -1410,11 +1415,12 @@
    " M scripts/npc/shopper.gd",
    " M scripts/ui/card_keypad.gd",
    " M scripts/ui/change_panel.gd",
-   " M tests/cases/checkout_test.gd"
+   " M tests/cases/checkout_test.gd",
+   " M tests/screenshot_tour.gd"
   ],
-  "total_commits": 125
+  "total_commits": 126
  },
- "updated": "2026-11-06T20:35:45+10:00",
+ "updated": "2026-11-06T20:36:52+10:00",
  "qa": [
   {
    "num": 1,

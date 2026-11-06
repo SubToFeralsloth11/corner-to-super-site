@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-06T20:35+10:00",
- "head": "8e1c6d0",
+ "generated": "2026-11-06T20:36+10:00",
+ "head": "2150d39",
  "stats": {
-  "commits": 125,
+  "commits": 126,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-06T20:35:43+10:00",
+  "last_commit": "2026-11-06T20:36:50+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 26911,
+  "gd_lines": 26918,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -905,6 +905,11 @@
    "sha": "8e1c6d0",
    "date": "2026-11-06T20:35:43+10:00",
    "subject": "Let E on the till's reader, cash or POS sit you down when there is nothing to pay"
+  },
+  {
+   "sha": "2150d39",
+   "date": "2026-11-06T20:36:50+10:00",
+   "subject": "Put the till-target sit change back in place after a misapplied partial stage"
   }
  ],
  "commits_per_hour": [
@@ -1022,7 +1027,7 @@
   },
   {
    "hour": "2026-11-06T20:00:00+10:00",
-   "commits": 14
+   "commits": 15
   }
  ],
  "sections": [
