@@ -1752,10 +1752,11 @@
      "file": "scripts/npc/shopper_brain.gd:185-186",
      "detail": "c98c03f (N3) merges repeat picks into a quantity, but the counter_wall path expands them back into one counter_asks entry per unit. When the wall is empty, _ask_for_counter_items (checkout.gd:499-505) charges -12 and plays an out_of_stock bark for each pack. 3 Smokes is -36 and three bubbles. When the wall has stock, fetch_smokes (checkout.gd:578) rolls CustomerRules.decide separately for each pack, so one customer can buy a pack and then refuse the next at the same price, -8 each time. Fix: pass {id, qty} to the till. Do one has_pack check and one complaint for the shortfall, and one decide() per product with the verdict cached for the remaining packs.",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:57+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "a0aedee",
+     "note": "one decide() per wall product cached per customer; refusal/out-of-stock drains the remaining packs as lost sales with one complaint and one sat hit. test_several_packs_are_one_decision_and_one_complaint passes; m7_content 90/0",
+     "closed": "2026-11-07T09:57:06+10:00"
     },
     {
      "id": "X9",
@@ -3835,6 +3836,11 @@
    "t": "2026-11-07T09:57:04+10:00",
    "kind": "fix",
    "msg": "C2/X7 fixed 9e96aa2 OOS walk re-scans slots every OOS_RECHECK 0.5 s instead of every physics tick; customer_test 54/0"
+  },
+  {
+   "t": "2026-11-07T09:57:06+10:00",
+   "kind": "fix",
+   "msg": "C2/X8 fixed a0aedee one decide() per wall product cached per customer; refusal/out-of-stock drains the remaining packs as lost sales with one complaint and one sat hit. test_several_packs_are_one_decision_and_one_complaint passes; m7_content 90/0"
   }
  ],
  "tests": [
@@ -3976,12 +3982,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:57:04+10:00",
-  "mem_free_pct": 56,
+  "t": "2026-11-07T09:57:06+10:00",
+  "mem_free_pct": 55,
   "load": [
-   2.76,
-   3.1,
-   3.44
+   2.78,
+   3.09,
+   3.43
   ],
   "godot_procs": 0
  },
@@ -4411,7 +4417,7 @@
   "dirty": [],
   "total_commits": 203
  },
- "updated": "2026-11-07T09:57:04+10:00",
+ "updated": "2026-11-07T09:57:06+10:00",
  "qa": [
   {
    "num": 1,
