@@ -1546,10 +1546,11 @@
      "file": "scripts/entities/player.gd:445-460",
      "detail": "The carried box sits at `CARRY_POS` in camera space. With the crouched eye at 1.0 m and pitch ≤ about −15°, the box origin works out to below y = 0 (about −0.17 m at −45°). The held box already clips through the floor. In `_free_drop_point`, all 9 probes use the same `held.y`, so each padded query overlaps the Floor (LAYER_WORLD). The function then returns `from`, the player's own x/z at that depth, without testing it. The box therefore appears inside your capsule and part-way into the floor. Crouching to stock bottom shelves and then dropping the box is a common move. [UNVERIFIED: the exact physics after the 0.4 s collision exception ends.] Fix: clamp the probe height to `maxf(held.y, global_position.y + 0.02)`, keep a minimum forward offset of about 0.5 m, and never return a point inside the player's capsule. Optionally raise CARRY_POS while crouching so the held box doesn't clip.",
      "by": "CritPlayer",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:40:30+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "9a71f1d",
+     "note": "drop point clamped above floor, 0.5 m out",
+     "closed": "2026-11-07T09:49:54+10:00"
     },
     {
      "id": "Y8",
@@ -1634,10 +1635,11 @@
      "file": "scripts/autoload/save.gd:56-65, scripts/delivery/delivery_service.gd:118-124",
      "detail": "Saving is allowed in PREP, when deliveries happen. A box already fired is a child of Loose, so `capture` saves it as a loose box at its mid-air position. `undelivered()` only lists boxes not yet fired. On load the box falls from up to about 3 m between the van and the bay, maybe onto a parked car. Fix: in `capture`, for a box with the `in_flight` meta, save the bay spot it was heading for (`bay.allocate`), or add it to `deliveries` instead of `boxes`.",
      "by": "CritPlayer",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:40:31+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "b189cf7",
+     "note": "in-flight boxes saved as deliveries; save/delivery tests pass",
+     "closed": "2026-11-07T09:49:54+10:00"
     },
     {
      "id": "Y15",
@@ -1814,10 +1816,11 @@
      "file": "scripts/world/world.gd:339",
      "detail": "V1's overflow spawns one box with all `spare` units. Old 3×-multiplier chest-freezer slots can leave dozens, far beyond units_per_box, and put_one then refuses because the box is \"full\". The box spawns 0.8 m in front of the slot, which can be inside the next fixture in a tight aisle, and before later fixtures are added and without _hold_still. Dropped-basket saving (save.gd:79-82) also puts every product's box at the same point (basket position + 0.3), and they burst apart on load. Fix: split into ceil(n / units_per_box) boxes, offset each box's spawn point, and add them to the restored list that _hold_still freezes.",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:58+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "84de3a0",
+     "note": "spare boxed per box-load",
+     "closed": "2026-11-07T09:49:54+10:00"
     },
     {
      "id": "X15",
@@ -1850,10 +1853,11 @@
      "file": "scripts/entities/player.gd:608",
      "detail": "place_one overwrites _door_fx with the new fixture and never closes the previous one. Holding E across a row of coolers or freezers (the normal way to stock them) leaves every door but the last standing open until a customer happens to open and close it. In PREP nobody does. Fix: if `_door_fx != slot.fixture and is_instance_valid(_door_fx)`, close the old door before switching.",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:58+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "22aae8b",
+     "note": "same as Y8",
+     "closed": "2026-11-07T09:49:55+10:00"
     },
     {
      "id": "X18",
@@ -3729,6 +3733,26 @@
    "t": "2026-11-07T09:48:13+10:00",
    "kind": "fix",
    "msg": "C2/Y13 fixed 1724812 latest_slot skips unreadable"
+  },
+  {
+   "t": "2026-11-07T09:49:54+10:00",
+   "kind": "fix",
+   "msg": "C2/X14 fixed 84de3a0 spare boxed per box-load"
+  },
+  {
+   "t": "2026-11-07T09:49:54+10:00",
+   "kind": "fix",
+   "msg": "C2/Y14 fixed b189cf7 in-flight boxes saved as deliveries; save/delivery tests pass"
+  },
+  {
+   "t": "2026-11-07T09:49:54+10:00",
+   "kind": "fix",
+   "msg": "C2/Y7 fixed 9a71f1d drop point clamped above floor, 0.5 m out"
+  },
+  {
+   "t": "2026-11-07T09:49:55+10:00",
+   "kind": "fix",
+   "msg": "C2/X17 fixed 22aae8b same as Y8"
   }
  ],
  "tests": [
@@ -3870,17 +3894,38 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:48:13+10:00",
-  "mem_free_pct": 35,
+  "t": "2026-11-07T09:49:55+10:00",
+  "mem_free_pct": 46,
   "load": [
-   4.24,
-   3.52,
-   3.65
+   4.53,
+   3.75,
+   3.72
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "9a71f1d",
+    "date": "2026-11-07T09:49:38+10:00",
+    "subject": "Keep a dropped box above the floor and out of your own capsule when crouching (Y7)",
+    "body": "",
+    "stat": "1 file changed, 6 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "b189cf7",
+    "date": "2026-11-07T09:49:38+10:00",
+    "subject": "Save boxes still flying from the van as deliveries, not mid-air loose boxes (Y14)",
+    "body": "",
+    "stat": "1 file changed, 6 insertions(+)"
+   },
+   {
+    "sha": "84de3a0",
+    "date": "2026-11-07T09:49:38+10:00",
+    "subject": "Box spare stock from an old save a box-load at a time, side by side (X14)",
+    "body": "",
+    "stat": "1 file changed, 19 insertions(+), 18 deletions(-)"
+   },
    {
     "sha": "1724812",
     "date": "2026-11-07T09:48:12+10:00",
@@ -4279,35 +4324,17 @@
     "subject": "Leave the trolley gap in front of the pusher and keep trolleys out of the counter at the till",
     "body": "",
     "stat": "3 files changed, 39 insertions(+), 7 deletions(-)"
-   },
-   {
-    "sha": "127e227",
-    "date": "2026-11-06T20:41:17+10:00",
-    "subject": "Keep the checkout queue inside the lane build mode reserves",
-    "body": "",
-    "stat": "2 files changed, 18 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "0bb8294",
-    "date": "2026-11-06T20:40:49+10:00",
-    "subject": "Put chest-freezer price labels on the front bumper and add a stocked chest freezer to the screenshot tour",
-    "body": "At the rim the labels sat in the plane of the body's front face; on the bumper they read from\nthe aisle (checked in 49_chest_freezer_stocked). Review round 2, S4.",
-    "stat": "2 files changed, 9 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "d956452",
-    "date": "2026-11-06T20:38:30+10:00",
-    "subject": "Let a seated cashier fetch Smokes with a Take a pack button or R",
-    "body": "",
-    "stat": "3 files changed, 62 insertions(+), 2 deletions(-)"
    }
   ],
   "dirty": [
-   " M tests/cases/checkout_test.gd"
+   " M scripts/fixtures/checkout.gd",
+   " M scripts/npc/shopper_brain.gd",
+   " M tests/cases/checkout_test.gd",
+   " M tests/cases/m7_content_test.gd"
   ],
-  "total_commits": 190
+  "total_commits": 193
  },
- "updated": "2026-11-07T09:48:15+10:00",
+ "updated": "2026-11-07T09:50:00+10:00",
  "qa": [
   {
    "num": 1,
