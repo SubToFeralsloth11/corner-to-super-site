@@ -1660,10 +1660,11 @@
      "file": "scripts/fixtures/checkout.gd:649-667",
      "detail": "5329992 added the exact-cash path. If you're standing and click or E the cash, the call goes TillTarget.on_primary → use_target → open_payment(player). Because seated==null, that calls sit(player) (653), and sit() calls open_payment(player) again (888). This inner call runs drawer.open()+give_change(), which leads to _complete→_end and sets method=&\"\". When control returns to the outer open_payment, `method == &\"cash\"` is now false, so it falls into the else branch: change_panel.close(); keypad.open() (667). The player sits down after a cash sale and sees a CARD keypad for no payment. Digits they type drive reader_typed on an idle reader. The keypad keeps whatever was typed into the next card sale, because open() only clears when it's not visible. Sitting with E while exact cash is waiting also completes the sale straight away, which contradicts \"waits until the player takes it\". Fix: return from open_payment as soon as `phase != Phase.PAYING` after sit(); or have sit() pass auto=true and let only the explicit cash click complete the sale.",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:57+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "da10481",
+     "note": "sit() opens payment in auto mode: exact cash waits; standing cash click books the sale and leaves no keypad/change panel open. test_exact_cash_taken_standing_leaves_no_keypad_open fails on 1724812 (2 checks), passes after; checkout_test 74/0",
+     "closed": "2026-11-07T09:50:49+10:00"
     },
     {
      "id": "X2",
@@ -3753,6 +3754,11 @@
    "t": "2026-11-07T09:49:55+10:00",
    "kind": "fix",
    "msg": "C2/X17 fixed 22aae8b same as Y8"
+  },
+  {
+   "t": "2026-11-07T09:50:49+10:00",
+   "kind": "fix",
+   "msg": "C2/X1 fixed da10481 sit() opens payment in auto mode: exact cash waits; standing cash click books the sale and leaves no keypad/change panel open. test_exact_cash_taken_standing_leaves_no_keypad_open fails on 1724812 (2 checks), passes after; checkout_test 74/0"
   }
  ],
  "tests": [
@@ -3894,17 +3900,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:49:55+10:00",
-  "mem_free_pct": 46,
+  "t": "2026-11-07T09:50:49+10:00",
+  "mem_free_pct": 55,
   "load": [
-   4.53,
-   3.75,
-   3.72
+   5.37,
+   4.35,
+   3.96
   ],
   "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "da10481",
+    "date": "2026-11-07T09:50:47+10:00",
+    "subject": "Leave exact cash waiting when sitting at the till, so taking it standing opens no card keypad (X1)",
+    "body": "",
+    "stat": "2 files changed, 27 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "9a71f1d",
     "date": "2026-11-07T09:49:38+10:00",
@@ -4317,24 +4330,20 @@
     "subject": "Move customers from an unserved queue to a till someone opens",
     "body": "",
     "stat": "3 files changed, 46 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "029856b",
-    "date": "2026-11-06T20:41:59+10:00",
-    "subject": "Leave the trolley gap in front of the pusher and keep trolleys out of the counter at the till",
-    "body": "",
-    "stat": "3 files changed, 39 insertions(+), 7 deletions(-)"
    }
   ],
   "dirty": [
+   " M scripts/autoload/settings.gd",
+   " M scripts/build/build_mode.gd",
    " M scripts/fixtures/checkout.gd",
    " M scripts/npc/shopper_brain.gd",
+   " M scripts/world/lighting.gd",
    " M tests/cases/checkout_test.gd",
    " M tests/cases/m7_content_test.gd"
   ],
-  "total_commits": 193
+  "total_commits": 194
  },
- "updated": "2026-11-07T09:50:00+10:00",
+ "updated": "2026-11-07T09:50:50+10:00",
  "qa": [
   {
    "num": 1,
