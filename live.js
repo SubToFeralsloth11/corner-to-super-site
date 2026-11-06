@@ -78,6 +78,13 @@ function render() {
     <span class="muted">${esc(when(c.date))} &middot; ${esc(c.stat)}</span>${c.body ? `<pre>${esc(c.body)}</pre>` : ""}</div>`).join("");
 
   renderQA();
+  const sh = d.shots || { files: [] };
+  $("#shotsNote").textContent = sh.files.length ? `${sh.files.length} images from the windowed screenshot tour, ${when(sh.t)}. ${sh.note || ""}` : "None yet.";
+  const grid = $("#shotGrid");
+  if (grid.dataset.t !== sh.t) {
+    grid.dataset.t = sh.t || "";
+    grid.innerHTML = sh.files.map((f) => `<figure><a href="shots/${esc(f)}?t=${encodeURIComponent(sh.t)}"><img loading="lazy" src="shots/${esc(f)}?t=${encodeURIComponent(sh.t)}" alt="${esc(f)}"></a><figcaption>${esc(f.replace(/\.jpg$/, "").replace(/_/g, " "))}</figcaption></figure>`).join("");
+  }
   const m = d.machine || {};
   $("#machineCards").innerHTML = [
     card("Free memory", (m.mem_free_pct ?? "-") + "%"),

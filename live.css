@@ -36,3 +36,7 @@ th, td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--line
 .askbox button { font: inherit; font-weight: 600; padding: 6px 18px; border: 0; border-radius: 10px; background: var(--green); color: #fff; cursor: pointer; }
 .qa { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0; }
 .qa .answer { white-space: pre-wrap; margin-top: 6px; }
+.shotgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.shotgrid figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.shotgrid img { width: 100%; display: block; }
+.shotgrid figcaption { font-size: .8em; padding: 4px 8px; color: var(--muted); }

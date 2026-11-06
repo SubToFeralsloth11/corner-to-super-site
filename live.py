@@ -144,6 +144,9 @@ def main():
     q.add_argument("--question", default=""); q.add_argument("--answer", default="")
     q.add_argument("--state", default="answering")
 
+    sh_ = sub.add_parser("shots")
+    sh_.add_argument("dir"); sh_.add_argument("--note", default="")
+
     sub.add_parser("push")
     # `--push` may come anywhere on the line, so pull it out before argparse sees the subcommand.
     argv = sys.argv[1:]
@@ -204,6 +207,20 @@ def main():
         d["qa"].append({"num": args.num, "title": args.title, "question": args.question,
                         "answer": args.answer, "state": args.state, "t": now()})
         log(d, f"Question #{args.num} {args.state}: {args.title}", "question")
+    elif args.cmd == "shots":
+        # In-game screenshots from a tour, shrunk to 960 px JPEGs (same names overwrite, so the
+        # repo holds one set).
+        out = HERE / "shots"
+        out.mkdir(exist_ok=True)
+        files = []
+        for png in sorted(Path(args.dir).glob("*.png")):
+            jpg = out / (png.stem + ".jpg")
+            subprocess.run(["sips", "-s", "format", "jpeg", "-s", "formatOptions", "70",
+                            "-Z", "960", str(png), "--out", str(jpg)], capture_output=True)
+            if jpg.exists():
+                files.append(jpg.name)
+        d["shots"] = {"t": now(), "note": args.note, "files": files}
+        log(d, f"Screenshots refreshed: {len(files)} images {args.note}".strip(), "shots")
 
     if args.cmd == "push" or args.push:
         push(d, "Live: " + (d["log"][-1]["msg"][:60] if d["log"] else "update"))
