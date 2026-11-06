@@ -287,9 +287,9 @@
      "by": "CritShelves",
      "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "f9b156b",
-     "note": "label_pos puts labels on the rim; visual check pending screenshot tour",
-     "closed": "2026-11-06T20:22:27+10:00"
+     "commit": "0bb8294",
+     "note": "Visually verified in screenshot tour shot 49: four bays inside the well, pizza fits, labels readable on the bumper",
+     "closed": "2026-11-06T20:40:51+10:00"
     },
     {
      "id": "S5",
@@ -978,6 +978,11 @@
    "t": "2026-11-06T20:38:51+10:00",
    "kind": "status",
    "msg": "Status: fixing - Fixer: C6 cap queue lane"
+  },
+  {
+   "t": "2026-11-06T20:40:51+10:00",
+   "kind": "fix",
+   "msg": "R3/S4 fixed 0bb8294 Visually verified in screenshot tour shot 49: four bays inside the well, pizza fits, labels readable on the bumper"
   }
  ],
  "tests": [
@@ -1012,17 +1017,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:38:51+10:00",
+  "t": "2026-11-06T20:40:51+10:00",
   "mem_free_pct": 45,
   "load": [
-   3.47,
-   3.12,
-   2.91
+   2.68,
+   2.97,
+   2.88
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "0bb8294",
+    "date": "2026-11-06T20:40:49+10:00",
+    "subject": "Put chest-freezer price labels on the front bumper and add a stocked chest freezer to the screenshot tour",
+    "body": "At the rim the labels sat in the plane of the body's front face; on the bumper they read from\nthe aisle (checked in 49_chest_freezer_stocked). Review round 2, S4.",
+    "stat": "2 files changed, 9 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "d956452",
     "date": "2026-11-06T20:38:30+10:00",
@@ -1435,24 +1447,16 @@
     "subject": "Record the M6 acceptance day and full-suite results",
     "body": "",
     "stat": "1 file changed, 5 insertions(+)"
-   },
-   {
-    "sha": "78d9272",
-    "date": "2026-11-05T22:32:41+10:00",
-    "subject": "Hook the staff crew to phase changes with a bound method so freed worlds disconnect",
-    "body": "",
-    "stat": "1 file changed, 6 insertions(+), 1 deletion(-)"
    }
   ],
   "dirty": [
-   " M data/fixtures.json",
    " M scripts/fixtures/checkout.gd",
-   " M tests/cases/checkout_test.gd",
-   " M tests/screenshot_tour.gd"
+   " M scripts/npc/shopper_brain.gd",
+   " M tests/cases/checkout_test.gd"
   ],
-  "total_commits": 131
+  "total_commits": 132
  },
- "updated": "2026-11-06T20:38:52+10:00",
+ "updated": "2026-11-06T20:40:52+10:00",
  "qa": [
   {
    "num": 1,
