@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "R4+R5",
   "area": "NPCs; economy",
-  "activity": "FixNPC agent on R4 (+E3/E7/E10 customer-side); lead fixing R5 economy",
+  "activity": "FixNPC: N1 carried till queue",
   "cycle": "1",
-  "since": "2026-11-06T20:56:05+10:00"
+  "since": "2026-11-06T20:57:21+10:00"
  },
  "rounds": [
   {
@@ -1972,6 +1972,11 @@
    "t": "2026-11-06T20:56:05+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixNPC agent on R4 (+E3/E7/E10 customer-side); lead fixing R5 economy"
+  },
+  {
+   "t": "2026-11-06T20:57:21+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixNPC: N1 carried till queue"
   }
  ],
  "tests": [
@@ -2027,12 +2032,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:56:05+10:00",
+  "t": "2026-11-06T20:57:21+10:00",
   "mem_free_pct": 57,
   "load": [
-   2.47,
-   2.43,
-   2.49
+   1.69,
+   2.2,
+   2.4
   ],
   "godot_procs": 0
  },
@@ -2459,10 +2464,12 @@
     "stat": "1 file changed, 3 insertions(+), 2 deletions(-)"
    }
   ],
-  "dirty": [],
+  "dirty": [
+   " M scripts/autoload/game.gd"
+  ],
   "total_commits": 140
  },
- "updated": "2026-11-06T20:56:06+10:00",
+ "updated": "2026-11-06T20:57:22+10:00",
  "qa": [
   {
    "num": 1,
