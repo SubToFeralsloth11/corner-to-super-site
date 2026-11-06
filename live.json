@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "R3",
   "area": "Shelves, stocking, boxes, pricing",
-  "activity": "Fixer: C4 no queue drain while served",
+  "activity": "Fixer: C11 perfect change needs change",
   "cycle": "1",
-  "since": "2026-11-06T20:26:48+10:00"
+  "since": "2026-11-06T20:27:18+10:00"
  },
  "rounds": [
   {
@@ -785,6 +785,11 @@
    "t": "2026-11-06T20:26:58+10:00",
    "kind": "fix",
    "msg": "R2/C4 fixed 18bfd25 drain/moan gated on not served; GDD+ECONOMY say so; new checkout_test test_queue_drain_stops_once_they_are_served (46/0)"
+  },
+  {
+   "t": "2026-11-06T20:27:18+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - Fixer: C11 perfect change needs change"
   }
  ],
  "tests": [
@@ -819,12 +824,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:26:58+10:00",
-  "mem_free_pct": 47,
+  "t": "2026-11-06T20:27:18+10:00",
+  "mem_free_pct": 48,
   "load": [
-   2.71,
-   2.47,
-   2.72
+   2.59,
+   2.46,
+   2.71
   ],
   "godot_procs": 0
  },
@@ -1252,12 +1257,16 @@
    }
   ],
   "dirty": [
+   " M docs/ECONOMY.md",
    " M scripts/autoload/game.gd",
-   " M scripts/ui/price_popup.gd"
+   " M scripts/core/sale_record.gd",
+   " M scripts/ui/pc/app_pricing.gd",
+   " M scripts/ui/price_popup.gd",
+   " M tests/cases/progression_test.gd"
   ],
   "total_commits": 117
  },
- "updated": "2026-11-06T20:26:59+10:00",
+ "updated": "2026-11-06T20:27:19+10:00",
  "qa": [
   {
    "num": 1,
