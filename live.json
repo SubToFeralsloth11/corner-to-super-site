@@ -479,6 +479,50 @@
    "started": "2026-11-06T20:45:22+10:00",
    "finished": null,
    "findings": []
+  },
+  {
+   "id": "R9",
+   "area": "UI / HUD / menus / tutorial / settings",
+   "started": "2026-11-06T20:48:59+10:00",
+   "finished": null,
+   "findings": [
+    {
+     "id": "U1",
+     "sev": "P2",
+     "title": "Seated-till hint text is drawn over the HUD clock card",
+     "file": "scripts/fixtures/checkout.gd:139-143",
+     "detail": "Seen in /tmp/cts_play_r2 play_03 and change_panel shots: hint at offset_top 16 overlaps the top-centre clock.",
+     "by": "lead",
+     "status": "open",
+     "found": "2026-11-06T20:48:59+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "U2",
+     "sev": "P2",
+     "title": "Exact-cash customer still opens the change panel with $0.00 due and needs Give change",
+     "file": "scripts/fixtures/checkout.gd (cash payment)",
+     "detail": "Tedious extra click every exact-cash sale (25% of cash customers).",
+     "by": "lead",
+     "status": "open",
+     "found": "2026-11-06T20:48:59+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "U3",
+     "sev": "P3",
+     "title": "POS screen text is unreadable from the seat",
+     "file": "scripts/fixtures/pos.gd",
+     "detail": "Tiny font on the POS texture in the seated view.",
+     "by": "lead",
+     "status": "open",
+     "found": "2026-11-06T20:48:59+10:00",
+     "commit": "",
+     "note": ""
+    }
+   ]
   }
  ],
  "log": [
@@ -1081,6 +1125,31 @@
    "t": "2026-11-06T20:45:22+10:00",
    "kind": "status",
    "msg": "Status: reviewing - Critics on R4/R5; lead running windowed gameplay tour to eyeball R2 fixes (bag in hand, trolley, overflow queue)"
+  },
+  {
+   "t": "2026-11-06T20:48:59+10:00",
+   "kind": "finding",
+   "msg": "Gameplay tour (3 min windowed): 6 customers served, no errors. Spotted: till hint text overlaps the HUD clock; exact-cash customers still open the change panel with $0 due; POS screen text unreadable - queued for R9"
+  },
+  {
+   "t": "2026-11-06T20:48:59+10:00",
+   "kind": "round",
+   "msg": "Round R9 started: UI / HUD / menus / tutorial / settings"
+  },
+  {
+   "t": "2026-11-06T20:48:59+10:00",
+   "kind": "finding",
+   "msg": "R9/U1 [P2] Seated-till hint text is drawn over the HUD clock card"
+  },
+  {
+   "t": "2026-11-06T20:48:59+10:00",
+   "kind": "finding",
+   "msg": "R9/U2 [P2] Exact-cash customer still opens the change panel with $0.00 due and needs Give change"
+  },
+  {
+   "t": "2026-11-06T20:48:59+10:00",
+   "kind": "finding",
+   "msg": "R9/U3 [P3] POS screen text is unreadable from the seat"
   }
  ],
  "tests": [
@@ -1136,12 +1205,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:45:22+10:00",
-  "mem_free_pct": 51,
+  "t": "2026-11-06T20:48:59+10:00",
+  "mem_free_pct": 57,
   "load": [
-   2.58,
-   2.63,
-   2.73
+   2.3,
+   2.36,
+   2.58
   ],
   "godot_procs": 0
  },
@@ -1571,7 +1640,7 @@
   "dirty": [],
   "total_commits": 137
  },
- "updated": "2026-11-06T20:45:23+10:00",
+ "updated": "2026-11-06T20:49:00+10:00",
  "qa": [
   {
    "num": 1,
