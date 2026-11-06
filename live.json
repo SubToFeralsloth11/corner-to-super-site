@@ -555,10 +555,11 @@
      "file": "scripts/npc/shopper_brain.gd:135-143",
      "detail": "`_find_slot_or_lose` checks every slot in the store instantly. With none in stock, the \"No {product}? Seriously?\" bark and the −12 happen where the customer is standing, often by the door or at the previous shelf. They never walk to the empty shelf, which still has its label (`remove_one(true)` keeps `product_id`). You cannot tell which shelf is the problem. Supermarket Simulator customers go to the spot and react there. Fix: if a labelled slot with count 0 exists for the product, walk to it, play a short look-around, then complain. Fall back to complaining in place only when no slot is labelled for it.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:53+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e9d5269",
+     "note": "full suite 1034/0; N7 regression fails before (4.1 m away), passes after",
+     "closed": "2026-11-07T08:12:12+10:00"
     },
     {
      "id": "N8",
@@ -632,10 +633,11 @@
      "file": "scripts/npc/shopper_brain.gd:116-133",
      "detail": "`_next_item` takes `list[list_i]` in the order the random draw produced. A 10-item trolley customer bounces between the far ends of the store. That adds walking time, clutters the aisles and does not look like real shopping. Fix: pick the next item as the nearest by distance to its nearest stocked slot (greedy nearest-next). Keep out-of-stock and wall items at the end.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:53+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e9d5269",
+     "note": "full suite 1034/0; N7 regression fails before (4.1 m away), passes after",
+     "closed": "2026-11-07T08:12:12+10:00"
     },
     {
      "id": "N14",
@@ -669,10 +671,11 @@
      "file": "scripts/npc/shopper_brain.gd:153-158,182,224-227",
      "detail": "Only the customer who found the door closed takes ownership (`_opened_door`). If B reaches into the same cooler while A has it open, A's `_take()` → `_close_door()` shuts it in B's face, and B then takes an item through the closed door. Fix: count users on the fixture (`open_door` and `close_door` increment and decrement) and close only when the count reaches 0.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:54+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e9d5269",
+     "note": "full suite 1034/0; N7 regression fails before (4.1 m away), passes after",
+     "closed": "2026-11-07T08:12:13+10:00"
     },
     {
      "id": "N17",
@@ -681,10 +684,11 @@
      "file": "scripts/npc/walker.gd:144-160",
      "detail": "`rig.set_walk(speed, …)` uses the requested speed, not the actual movement after `move_and_slide()`. A blocked walker walks on the spot at full pace for `STUCK_TIME` (3 s), then is moved straight to the next path corner, through whatever is in the way, possibly in view of the player. Fix: drive the animation from `get_real_velocity()` length. Before teleporting, try a re-plan or a sideways nudge, and only teleport when the player cannot see the spot.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:54+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e9d5269",
+     "note": "full suite 1034/0; N7 regression fails before (4.1 m away), passes after",
+     "closed": "2026-11-07T08:12:13+10:00"
     },
     {
      "id": "N18",
@@ -705,10 +709,11 @@
      "file": "scripts/npc/human_rig.gd:134-146",
      "detail": "`set_walk(0)` always plays the one `Idle` clip from time 0, and nothing more happens while standing. GDD §6 asks for \"a random idle sway\", and nothing randomises it. A six-person queue all breathes in the same loop, with no fidget, phone check or glance at the clock. Fix: seek to a random phase per rig on setup. Choose among the UAL idle clips. Every 6–12 s of queueing, play a short one-shot (look at watch, shift weight), and more often as patience drops.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:54+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e9d5269",
+     "note": "full suite 1034/0; N7 regression fails before (4.1 m away), passes after",
+     "closed": "2026-11-07T08:12:13+10:00"
     },
     {
      "id": "N20",
@@ -717,10 +722,11 @@
      "file": "scripts/npc/customer_spawner.gd:67; scripts/npc/shopper_brain.gd:437-446",
      "detail": "They spawn exactly on an `EXITS` point and disappear on reaching one, in the open where you may see it from the car park. `leave()` picks the exit by straight-line distance. From the store (x≈0) the east end is 34.8 m and the west 38.3 m, so almost everyone exits east whichever way they came. Fix: spawn and despawn beyond the plot edge, out of view, or at parked cars. Have a customer leave the way they came, stored at spawn.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:54+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e9d5269",
+     "note": "full suite 1034/0; N7 regression fails before (4.1 m away), passes after",
+     "closed": "2026-11-07T08:12:13+10:00"
     },
     {
      "id": "N21",
@@ -742,10 +748,11 @@
      "file": "scripts/npc/shopper.gd:3,35; scripts/npc/customer_rules.gd:34-35,40-41; docs/GDD.md:126-127",
      "detail": "- shopper.gd says shoppers walk at 0.9–1.3 m/s and falls back to `[0.9, 1.3]`; data and ECONOMY say 1.2–1.6.<br>- `max_concurrent`'s comment says `4 + 2*tills`; the data says `2 + 4*tills`.<br>- `list_length`'s comment says `(2 + level/2)`, at most 12; the data says `(2 + level)`, cap 16.<br>- GDD §6 says \"1–2 items at level 1, … cap of 12\"; level 1 actually gives 1–3.<br><br>Fix: update the comments and the GDD, and make the fallbacks match `customers.json` (or drop them, since Catalog validates the data).",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:54+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e9d5269",
+     "note": "full suite 1034/0; N7 regression fails before (4.1 m away), passes after",
+     "closed": "2026-11-07T08:12:13+10:00"
     },
     {
      "id": "N23",
@@ -2327,6 +2334,46 @@
    "t": "2026-11-07T08:10:47+10:00",
    "kind": "question",
    "msg": "Question #7 answered: Are you using subagents to help you or just yourself"
+  },
+  {
+   "t": "2026-11-07T08:12:12+10:00",
+   "kind": "fix",
+   "msg": "R4/N7 fixed e9d5269 full suite 1034/0; N7 regression fails before (4.1 m away), passes after"
+  },
+  {
+   "t": "2026-11-07T08:12:12+10:00",
+   "kind": "fix",
+   "msg": "R4/N13 fixed e9d5269 full suite 1034/0; N7 regression fails before (4.1 m away), passes after"
+  },
+  {
+   "t": "2026-11-07T08:12:13+10:00",
+   "kind": "fix",
+   "msg": "R4/N16 fixed e9d5269 full suite 1034/0; N7 regression fails before (4.1 m away), passes after"
+  },
+  {
+   "t": "2026-11-07T08:12:13+10:00",
+   "kind": "fix",
+   "msg": "R4/N17 fixed e9d5269 full suite 1034/0; N7 regression fails before (4.1 m away), passes after"
+  },
+  {
+   "t": "2026-11-07T08:12:13+10:00",
+   "kind": "fix",
+   "msg": "R4/N19 fixed e9d5269 full suite 1034/0; N7 regression fails before (4.1 m away), passes after"
+  },
+  {
+   "t": "2026-11-07T08:12:13+10:00",
+   "kind": "fix",
+   "msg": "R4/N20 fixed e9d5269 full suite 1034/0; N7 regression fails before (4.1 m away), passes after"
+  },
+  {
+   "t": "2026-11-07T08:12:13+10:00",
+   "kind": "fix",
+   "msg": "R4/N22 fixed e9d5269 full suite 1034/0; N7 regression fails before (4.1 m away), passes after"
+  },
+  {
+   "t": "2026-11-07T08:12:13+10:00",
+   "kind": "test",
+   "msg": "Tests: 1034 passed, 0 failed after customer behaviour batch"
   }
  ],
  "tests": [
@@ -2377,6 +2424,12 @@
    "passed": 1032,
    "failed": 0,
    "note": "after R5 batch"
+  },
+  {
+   "t": "2026-11-07T08:12:13+10:00",
+   "passed": 1034,
+   "failed": 0,
+   "note": "after customer behaviour batch"
   }
  ],
  "agents": {
@@ -2422,13 +2475,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T08:10:47+10:00",
-  "mem_free_pct": 47,
-  "load": [],
-  "godot_procs": 3
+  "t": "2026-11-07T08:12:13+10:00",
+  "mem_free_pct": 42,
+  "load": [
+   2.8,
+   2.66,
+   3.53
+  ],
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "e9d5269",
+    "date": "2026-11-07T08:12:11+10:00",
+    "subject": "Make customers shop like people: walking order, complaints at the empty shelf, shared doors",
+    "body": "- They walk to an empty labelled slot before complaining, so you can see which shelf is bare (N7).\n- A long list is shopped nearest-first instead of zig-zagging the store (N13).\n- A customer leaving a cooler doesn't shut it on another still reaching in; the job passes on (N16).\n- The walk animation follows the actual movement (no striding on the spot against a wall) (N17).\n- Idle loops start at each person's own phase, so queues don't breathe in step (N19).\n- Customers go home the way they came instead of nearly all leaving east (N20).\n- GDD list length and picking rules brought up to date (N22).\nReview round 2.",
+    "stat": "7 files changed, 113 insertions(+), 8 deletions(-)"
+   },
    {
     "sha": "d00c8ae",
     "date": "2026-11-07T08:09:47+10:00",
@@ -2841,25 +2905,12 @@
     "subject": "Send game-over New game through the menu's slot picker so the autosave isn't replaced unasked, and fix two tutorial instructions",
     "body": "",
     "stat": "2 files changed, 7 insertions(+), 3 deletions(-)"
-   },
-   {
-    "sha": "aec01df",
-    "date": "2026-11-06T02:11:37+10:00",
-    "subject": "Show stock on hand and Restock to full in the Market, split orders over 30 boxes into van trips, and restore a carried box into the player's hands on load",
-    "body": "",
-    "stat": "9 files changed, 213 insertions(+), 37 deletions(-)"
    }
   ],
-  "dirty": [
-   " M scripts/npc/customer_spawner.gd",
-   " M scripts/npc/human_rig.gd",
-   " M scripts/npc/shopper.gd",
-   " M scripts/npc/shopper_brain.gd",
-   " M scripts/npc/walker.gd"
-  ],
-  "total_commits": 156
+  "dirty": [],
+  "total_commits": 157
  },
- "updated": "2026-11-07T08:10:49+10:00",
+ "updated": "2026-11-07T08:12:13+10:00",
  "qa": [
   {
    "num": 1,

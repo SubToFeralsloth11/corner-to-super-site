@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T08:10+10:00",
- "head": "d00c8ae",
+ "generated": "2026-11-07T08:12+10:00",
+ "head": "e9d5269",
  "stats": {
-  "commits": 156,
+  "commits": 157,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T08:09:47+10:00",
+  "last_commit": "2026-11-07T08:12:11+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 27881,
+  "gd_lines": 27932,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1074,6 +1074,11 @@
    "sha": "d00c8ae",
    "date": "2026-11-07T08:09:47+10:00",
    "subject": "Read the start state and level cap from data, show an expansion's full running cost, and warn about short days"
+  },
+  {
+   "sha": "e9d5269",
+   "date": "2026-11-07T08:12:11+10:00",
+   "subject": "Make customers shop like people: walking order, complaints at the empty shelf, shared doors"
   }
  ],
  "commits_per_hour": [
@@ -1239,7 +1244,7 @@
   },
   {
    "hour": "2026-11-07T08:00:00+10:00",
-   "commits": 7
+   "commits": 8
   }
  ],
  "sections": [
