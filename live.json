@@ -1,11 +1,11 @@
 {
  "status": {
-  "state": "fixing",
-  "round": "R4+R5",
-  "area": "NPCs; economy",
-  "activity": "FixNPC: N1 carried till queue",
+  "state": "reviewing",
+  "round": "R6",
+  "area": "Build mode, expansions, fixtures",
+  "activity": "Lead critiquing build mode by reading code while the soak runs",
   "cycle": "1",
-  "since": "2026-11-06T20:57:21+10:00"
+  "since": "2026-11-07T07:54:44+10:00"
  },
  "rounds": [
   {
@@ -2084,6 +2084,16 @@
    "t": "2026-11-07T07:54:32+10:00",
    "kind": "fix",
    "msg": "R5/E3 fixed 20de20c size_bonus in customers.json; customer_test 97/97. Pacing re-check needs a soak run (queued)"
+  },
+  {
+   "t": "2026-11-07T07:54:44+10:00",
+   "kind": "agent",
+   "msg": "Agent soak: running 30-day headless soak (pacing + stability) after round 2 fixes"
+  },
+  {
+   "t": "2026-11-07T07:54:44+10:00",
+   "kind": "status",
+   "msg": "Status: reviewing - Lead critiquing build mode by reading code while the soak runs"
   }
  ],
  "tests": [
@@ -2147,15 +2157,20 @@
    "state": "failed",
    "task": "API rate limit (429, retry in ~10 h); lead continues alone",
    "t": "2026-11-07T07:47:58+10:00"
+  },
+  "soak": {
+   "state": "running",
+   "task": "30-day headless soak (pacing + stability) after round 2 fixes",
+   "t": "2026-11-07T07:54:44+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T07:54:32+10:00",
-  "mem_free_pct": 49,
+  "t": "2026-11-07T07:54:44+10:00",
+  "mem_free_pct": 50,
   "load": [
-   3.45,
-   3.85,
-   5.82
+   2.99,
+   3.73,
+   5.74
   ],
   "godot_procs": 0
  },
@@ -2585,7 +2600,7 @@
   "dirty": [],
   "total_commits": 148
  },
- "updated": "2026-11-07T07:54:32+10:00",
+ "updated": "2026-11-07T07:54:45+10:00",
  "qa": [
   {
    "num": 1,
