@@ -73,6 +73,11 @@
    "t": "2026-11-06T20:11:25+10:00",
    "kind": "action",
    "msg": "Built live page live.html"
+  },
+  {
+   "t": "2026-11-06T20:14:06+10:00",
+   "kind": "question",
+   "msg": "Question #1 answering: Test: what round is the loop on right now?"
   }
  ],
  "tests": [
@@ -101,13 +106,9 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:11:25+10:00",
-  "mem_free_pct": 38,
-  "load": [
-   1.34,
-   2.99,
-   3.05
-  ],
+  "t": "2026-11-06T20:14:06+10:00",
+  "mem_free_pct": 36,
+  "load": [],
   "godot_procs": 0
  },
  "game": {
@@ -536,5 +537,15 @@
   "dirty": [],
   "total_commits": 111
  },
- "updated": "2026-11-06T20:11:26+10:00"
+ "updated": "2026-11-06T20:14:07+10:00",
+ "qa": [
+  {
+   "num": 1,
+   "title": "Test: what round is the loop on right now?",
+   "question": "Smoke test of the question box.",
+   "answer": "",
+   "state": "answering",
+   "t": "2026-11-06T20:14:06+10:00"
+  }
+ ]
 }
