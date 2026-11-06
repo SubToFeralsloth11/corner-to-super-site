@@ -1,10 +1,10 @@
 {
  "generated": "2026-11-07T09:50+10:00",
- "head": "da10481",
+ "head": "bf35689",
  "stats": {
-  "commits": 194,
+  "commits": 195,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T09:50:47+10:00",
+  "last_commit": "2026-11-07T09:50:55+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
@@ -1271,6 +1271,11 @@
    "sha": "da10481",
    "date": "2026-11-07T09:50:47+10:00",
    "subject": "Leave exact cash waiting when sitting at the till, so taking it standing opens no card keypad (X1)"
+  },
+  {
+   "sha": "bf35689",
+   "date": "2026-11-07T09:50:55+10:00",
+   "subject": "Write settings once a slider settles, and only re-apply graphics when the preset changes"
   }
  ],
  "commits_per_hour": [
@@ -1440,7 +1445,7 @@
   },
   {
    "hour": "2026-11-07T09:00:00+10:00",
-   "commits": 17
+   "commits": 18
   }
  ],
  "sections": [

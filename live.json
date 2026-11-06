@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C2",
   "area": "Second pass",
-  "activity": "FixRegress: X1 exact-cash keypad",
+  "activity": "FixRegress: X2 attended above room",
   "cycle": "2",
-  "since": "2026-11-07T09:47:21+10:00"
+  "since": "2026-11-07T09:50:55+10:00"
  },
  "rounds": [
   {
@@ -3759,6 +3759,11 @@
    "t": "2026-11-07T09:50:49+10:00",
    "kind": "fix",
    "msg": "C2/X1 fixed da10481 sit() opens payment in auto mode: exact cash waits; standing cash click books the sale and leaves no keypad/change panel open. test_exact_cash_taken_standing_leaves_no_keypad_open fails on 1724812 (2 checks), passes after; checkout_test 74/0"
+  },
+  {
+   "t": "2026-11-07T09:50:55+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixRegress: X2 attended above room"
   }
  ],
  "tests": [
@@ -3900,17 +3905,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:50:49+10:00",
+  "t": "2026-11-07T09:50:55+10:00",
   "mem_free_pct": 55,
   "load": [
-   5.37,
-   4.35,
-   3.96
+   5.02,
+   4.3,
+   3.95
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "bf35689",
+    "date": "2026-11-07T09:50:55+10:00",
+    "subject": "Write settings once a slider settles, and only re-apply graphics when the preset changes",
+    "body": "Every slider tick rewrote settings.cfg and re-ran the graphics preset, which also undid the PC's\nfull-resolution view. Review round 2, Y10.",
+    "stat": "3 files changed, 58 insertions(+), 5 deletions(-)"
+   },
    {
     "sha": "da10481",
     "date": "2026-11-07T09:50:47+10:00",
@@ -4323,27 +4335,17 @@
     "subject": "Give each till's queue a capacity and let overflow wait in place",
     "body": "",
     "stat": "6 files changed, 69 insertions(+), 13 deletions(-)"
-   },
-   {
-    "sha": "b16ea41",
-    "date": "2026-11-06T20:42:15+10:00",
-    "subject": "Move customers from an unserved queue to a till someone opens",
-    "body": "",
-    "stat": "3 files changed, 46 insertions(+), 1 deletion(-)"
    }
   ],
   "dirty": [
-   " M scripts/autoload/settings.gd",
    " M scripts/build/build_mode.gd",
    " M scripts/fixtures/checkout.gd",
    " M scripts/npc/shopper_brain.gd",
-   " M scripts/world/lighting.gd",
-   " M tests/cases/checkout_test.gd",
    " M tests/cases/m7_content_test.gd"
   ],
-  "total_commits": 194
+  "total_commits": 195
  },
- "updated": "2026-11-07T09:50:50+10:00",
+ "updated": "2026-11-07T09:50:56+10:00",
  "qa": [
   {
    "num": 1,
