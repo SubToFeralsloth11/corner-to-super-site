@@ -21,10 +21,11 @@
      "file": "player.gd:156-160, checkout.gd:749-781,828-836",
      "detail": "Player handles E first (reverse tree order) without set_input_as_handled; Checkout then sees seated and stands you up. Tests miss it by calling _unhandled_input directly.",
      "by": "CritCheckout",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:22:43+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "63fb369",
+     "note": "Player consumes E; bot taps via push_input; m2_acceptance 0/8 before, 8/8 after",
+     "closed": "2026-11-06T20:24:51+10:00"
     },
     {
      "id": "C2",
@@ -745,6 +746,11 @@
    "t": "2026-11-06T20:24:19+10:00",
    "kind": "status",
    "msg": "Status: fixing - Fixer: C3 smokes ask skipped on quick scan"
+  },
+  {
+   "t": "2026-11-06T20:24:51+10:00",
+   "kind": "fix",
+   "msg": "R2/C1 fixed 63fb369 Player consumes E; bot taps via push_input; m2_acceptance 0/8 before, 8/8 after"
   }
  ],
  "tests": [
@@ -779,17 +785,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:24:19+10:00",
-  "mem_free_pct": 41,
+  "t": "2026-11-06T20:24:51+10:00",
+  "mem_free_pct": 43,
   "load": [
-   2.33,
-   2.37,
+   2.53,
+   2.42,
    2.75
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "63fb369",
+    "date": "2026-11-06T20:24:42+10:00",
+    "subject": "Consume E (and a used LMB) in the player so sitting at the till doesn't stand you straight back up",
+    "body": "The checkout earlier in the tree saw the same E press while seated and called stand(). The test\nbot now taps through Viewport.push_input, the real dispatch order, which reproduces the bug in\nm2_acceptance (0/8 before, 8/8 after). Review round 2, C1.",
+    "stat": "2 files changed, 7 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "f9b156b",
     "date": "2026-11-06T20:22:22+10:00",
@@ -1202,24 +1215,16 @@
     "subject": "Add M4 progression: licences, daily market drift, Pricing and Stats apps, cleanliness, customer messes and the level-up banner",
     "body": "",
     "stat": "24 files changed, 1131 insertions(+), 8 deletions(-)"
-   },
-   {
-    "sha": "579696c",
-    "date": "2026-11-05T20:57:37+10:00",
-    "subject": "Add build mode, furniture flat-packs, expansions and the stockroom shed with racks",
-    "body": "",
-    "stat": "58 files changed, 2566 insertions(+), 96 deletions(-)"
    }
   ],
   "dirty": [
-   " M scripts/entities/player.gd",
    " M scripts/fixtures/checkout.gd",
    " M tests/cases/m7_content_test.gd",
-   " M tests/stock_bot.gd"
+   " M tests/cases/staff_test.gd"
   ],
-  "total_commits": 112
+  "total_commits": 113
  },
- "updated": "2026-11-06T20:24:20+10:00",
+ "updated": "2026-11-06T20:24:51+10:00",
  "qa": [
   {
    "num": 1,

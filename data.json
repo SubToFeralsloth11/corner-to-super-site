@@ -1,10 +1,10 @@
 {
  "generated": "2026-11-06T20:24+10:00",
- "head": "f9b156b",
+ "head": "63fb369",
  "stats": {
-  "commits": 112,
+  "commits": 113,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-06T20:22:22+10:00",
+  "last_commit": "2026-11-06T20:24:42+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
@@ -840,6 +840,11 @@
    "sha": "f9b156b",
    "date": "2026-11-06T20:22:22+10:00",
    "subject": "Pile chest-freezer stock inside the well instead of through the lid, and put its price labels on the rim"
+  },
+  {
+   "sha": "63fb369",
+   "date": "2026-11-06T20:24:42+10:00",
+   "subject": "Consume E (and a used LMB) in the player so sitting at the till doesn't stand you straight back up"
   }
  ],
  "commits_per_hour": [
@@ -957,7 +962,7 @@
   },
   {
    "hour": "2026-11-06T20:00:00+10:00",
-   "commits": 1
+   "commits": 2
   }
  ],
  "sections": [
