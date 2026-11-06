@@ -754,10 +754,11 @@
      "file": "data/customers.json:91-95,103-107",
      "detail": "`payment.card_share` is never read (`pays_cash` uses only `cash_share`). `reputation.start` is never read: `Game.new_game` and load use `settings.json` `start.reputation`. Two values for the starting stars can drift apart without anyone noticing. Fix: delete `card_share` and `reputation.start`, or make the code read the one source.",
      "by": "CritNPC",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:55:54+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "d00c8ae",
+     "note": "dead keys removed",
+     "closed": "2026-11-07T08:09:49+10:00"
     },
     {
      "id": "N24",
@@ -900,10 +901,11 @@
      "file": "scripts/npc/customer_spawner.gd:36-41; data/settings.json `day.length_options` [8,12,16,20]",
      "detail": "Arrivals are counted per in-game hour (`delta * clock.rate()`), but walking, shopping and checkout take real seconds, and the cap counts shoppers alive in real time. Once the cap binds, customers per day are roughly cap × real day length ÷ visit time. An 8-minute day serves about a third fewer customers than a 12-minute one [INFERENCE: 20 × 480 s / ~150 s ≈ 64 against ≈ 96]. A 20-minute day serves more, yet rent, wages and loans are charged per day. Picking \"short days\" in Options quietly cuts income and pushes the player toward overdue bills. Fix: scale the cap or arrival rate by `12 / day_length_min`, or tune and soak at each option.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "d00c8ae",
+     "note": "full suite 1032/0",
+     "closed": "2026-11-07T08:09:48+10:00"
     },
     {
      "id": "E10",
@@ -1015,10 +1017,11 @@
      "file": "scripts/ui/pc/app_expansions.gd:82",
      "detail": "Only \"Rent X/day now, Y/day after\" is shown. Each new cell also adds $1.50 a day of electricity (E8: +$10.50), so the real extra daily cost is understated. That matters given E3. Fix: show `rent + Bills.electricity(lit cells)` before and after as \"Daily running cost\".",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "d00c8ae",
+     "note": "full suite 1032/0",
+     "closed": "2026-11-07T08:09:49+10:00"
     },
     {
      "id": "E19",
@@ -1027,10 +1030,11 @@
      "file": "scripts/autoload/game.gd:171-172, 197, 1259-1260, 1270; scripts/ui/main_menu.gd:17-18; data/customers.json:109",
      "detail": "`new_game` hard-codes `level = 1`, `xp = 0` and `cleanliness = 100.0`, so settings.json `start.level`, `start.xp` and `start.cleanliness` are ignored. customers.json `reputation.start` is never read; settings.json `start.reputation` is used. The max level 16 is hard-coded in `sandbox_overrides`, `_flag_overrides` and the main menu slider instead of `levels.json max_level`. The Sandbox money limits are written twice: `SANDBOX_MONEY_*` in game.gd and `SANDBOX_*_DOLLARS` in main_menu.gd. Fix: read them all from data, delete the dead keys, and use `Game.max_level()`.",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "d00c8ae",
+     "note": "full suite 1032/0",
+     "closed": "2026-11-07T08:09:49+10:00"
     },
     {
      "id": "E20",
@@ -2288,6 +2292,31 @@
    "t": "2026-11-07T08:08:30+10:00",
    "kind": "fix",
    "msg": "R5/E8 fixed a9ed98a progression_test checks both effects"
+  },
+  {
+   "t": "2026-11-07T08:09:48+10:00",
+   "kind": "fix",
+   "msg": "R5/E9 fixed d00c8ae full suite 1032/0"
+  },
+  {
+   "t": "2026-11-07T08:09:49+10:00",
+   "kind": "fix",
+   "msg": "R5/E18 fixed d00c8ae full suite 1032/0"
+  },
+  {
+   "t": "2026-11-07T08:09:49+10:00",
+   "kind": "fix",
+   "msg": "R5/E19 fixed d00c8ae full suite 1032/0"
+  },
+  {
+   "t": "2026-11-07T08:09:49+10:00",
+   "kind": "fix",
+   "msg": "R4/N23 fixed d00c8ae dead keys removed"
+  },
+  {
+   "t": "2026-11-07T08:09:49+10:00",
+   "kind": "test",
+   "msg": "Tests: 1032 passed, 0 failed after R5 batch"
   }
  ],
  "tests": [
@@ -2332,6 +2361,12 @@
    "passed": 1028,
    "failed": 0,
    "note": "after E6/E10/E11/E13"
+  },
+  {
+   "t": "2026-11-07T08:09:49+10:00",
+   "passed": 1032,
+   "failed": 0,
+   "note": "after R5 batch"
   }
  ],
  "agents": {
@@ -2377,17 +2412,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T08:08:30+10:00",
-  "mem_free_pct": 48,
+  "t": "2026-11-07T08:09:49+10:00",
+  "mem_free_pct": 47,
   "load": [
-   1.72,
-   2.48,
-   3.77
+   1.67,
+   2.32,
+   3.59
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "d00c8ae",
+    "date": "2026-11-07T08:09:47+10:00",
+    "subject": "Read the start state and level cap from data, show an expansion's full running cost, and warn about short days",
+    "body": "- new_game reads start level, XP and cleanliness from settings.json; the sandbox picker, dev\n  flag and main menu read the level cap from levels.json and the money range from one place;\n  unused customers.json keys removed (E19, N23).\n- The Expansions card shows rent plus lights before and after, not rent alone (E18).\n- Options says shorter days fit fewer customers while bills stay the same (E9).\nReview round 2.",
+    "stat": "5 files changed, 20 insertions(+), 14 deletions(-)"
+   },
    {
     "sha": "a9ed98a",
     "date": "2026-11-07T08:08:28+10:00",
@@ -2800,19 +2842,12 @@
     "subject": "Show stock on hand and Restock to full in the Market, split orders over 30 boxes into van trips, and restore a carried box into the player's hands on load",
     "body": "",
     "stat": "9 files changed, 213 insertions(+), 37 deletions(-)"
-   },
-   {
-    "sha": "7095d1a",
-    "date": "2026-11-06T02:11:36+10:00",
-    "subject": "Run patience until the first scan, ring a counter bell and show a waiting chip for unstaffed tills, grey out Give change with an empty tray, and keep customers off a shelf carried in build mode",
-    "body": "",
-    "stat": "12 files changed, 258 insertions(+), 25 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 155
+  "total_commits": 156
  },
- "updated": "2026-11-07T08:08:30+10:00",
+ "updated": "2026-11-07T08:09:49+10:00",
  "qa": [
   {
    "num": 1,

@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T08:08+10:00",
- "head": "a9ed98a",
+ "generated": "2026-11-07T08:09+10:00",
+ "head": "d00c8ae",
  "stats": {
-  "commits": 155,
+  "commits": 156,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T08:08:28+10:00",
+  "last_commit": "2026-11-07T08:09:47+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 27822,
+  "gd_lines": 27830,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1069,6 +1069,11 @@
    "sha": "a9ed98a",
    "date": "2026-11-07T08:08:28+10:00",
    "subject": "Give levels 13 and 16 real unlocks: loyalty cards and a head office franchise"
+  },
+  {
+   "sha": "d00c8ae",
+   "date": "2026-11-07T08:09:47+10:00",
+   "subject": "Read the start state and level cap from data, show an expansion's full running cost, and warn about short days"
   }
  ],
  "commits_per_hour": [
@@ -1234,7 +1239,7 @@
   },
   {
    "hour": "2026-11-07T08:00:00+10:00",
-   "commits": 6
+   "commits": 7
   }
  ],
  "sections": [
