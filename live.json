@@ -1801,10 +1801,11 @@
      "file": "scripts/npc/shopper_brain.gd:607-608",
      "detail": "Only _find_slot_or_lose and _take set _let_down. _ask_for_counter_items (wall empty, checkout.gd:499-505), fetch_smokes (out of stock or too dear, 573-582) and _lose_counter_asks never set it. A customer who complained \"no Smokes\" therefore still gets +8 at checkout. Fix: set customer.brain._let_down = true (via a brain method) on each of those paths.",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:58+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "a0aedee",
+     "note": "wall misses and lost counter asks set _let_down via ShopperBrain.let_down(); asserted in the same test",
+     "closed": "2026-11-07T09:57:08+10:00"
     },
     {
      "id": "X13",
@@ -3841,6 +3842,11 @@
    "t": "2026-11-07T09:57:06+10:00",
    "kind": "fix",
    "msg": "C2/X8 fixed a0aedee one decide() per wall product cached per customer; refusal/out-of-stock drains the remaining packs as lost sales with one complaint and one sat hit. test_several_packs_are_one_decision_and_one_complaint passes; m7_content 90/0"
+  },
+  {
+   "t": "2026-11-07T09:57:08+10:00",
+   "kind": "fix",
+   "msg": "C2/X12 fixed a0aedee wall misses and lost counter asks set _let_down via ShopperBrain.let_down(); asserted in the same test"
   }
  ],
  "tests": [
@@ -3982,7 +3988,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:57:06+10:00",
+  "t": "2026-11-07T09:57:08+10:00",
   "mem_free_pct": 55,
   "load": [
    2.78,
@@ -4417,7 +4423,7 @@
   "dirty": [],
   "total_commits": 203
  },
- "updated": "2026-11-07T09:57:06+10:00",
+ "updated": "2026-11-07T09:57:09+10:00",
  "qa": [
   {
    "num": 1,
