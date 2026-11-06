@@ -85,10 +85,11 @@
      "file": "checkout.gd:237-252, build_rules.gd:17-21",
      "detail": "",
      "by": "CritCheckout",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:22:44+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "127e227",
+     "note": "lane_length() capped at LANE_MAX = SERVE_POINT.z - BuildRules.LANE_Z0 - 0.3 (4.65 m) instead of 12 m; new checkout_test test_queue_stays_inside_the_kept_clear_lane (2/0)",
+     "closed": "2026-11-06T20:41:19+10:00"
     },
     {
      "id": "C7",
@@ -988,6 +989,11 @@
    "t": "2026-11-06T20:41:17+10:00",
    "kind": "shots",
    "msg": "Screenshots refreshed: 56 images After R3 fixes (chest freezer shot 49 added)"
+  },
+  {
+   "t": "2026-11-06T20:41:19+10:00",
+   "kind": "fix",
+   "msg": "R2/C6 fixed 127e227 lane_length() capped at LANE_MAX = SERVE_POINT.z - BuildRules.LANE_Z0 - 0.3 (4.65 m) instead of 12 m; new checkout_test test_queue_stays_inside_the_kept_clear_lane (2/0)"
   }
  ],
  "tests": [
@@ -1022,17 +1028,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:40:51+10:00",
+  "t": "2026-11-06T20:41:19+10:00",
   "mem_free_pct": 45,
   "load": [
-   2.68,
-   2.97,
-   2.88
+   2.71,
+   2.96,
+   2.87
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "127e227",
+    "date": "2026-11-06T20:41:17+10:00",
+    "subject": "Keep the checkout queue inside the lane build mode reserves",
+    "body": "",
+    "stat": "2 files changed, 18 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "0bb8294",
     "date": "2026-11-06T20:40:49+10:00",
@@ -1445,13 +1458,6 @@
     "subject": "Add outdoor traffic and birdsong loops; play fridge door, rack slide and box flap sounds",
     "body": "",
     "stat": "9 files changed, 175 insertions(+), 8 deletions(-)"
-   },
-   {
-    "sha": "aef84dd",
-    "date": "2026-11-05T22:32:41+10:00",
-    "subject": "Record the M6 acceptance day and full-suite results",
-    "body": "",
-    "stat": "1 file changed, 5 insertions(+)"
    }
   ],
   "dirty": [
@@ -1459,9 +1465,9 @@
    " M scripts/npc/shopper_brain.gd",
    " M tests/cases/checkout_test.gd"
   ],
-  "total_commits": 132
+  "total_commits": 133
  },
- "updated": "2026-11-06T20:41:17+10:00",
+ "updated": "2026-11-06T20:41:19+10:00",
  "qa": [
   {
    "num": 1,
