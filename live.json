@@ -110,10 +110,11 @@
      "file": "checkout.gd:221, shopper.gd:14,101",
      "detail": "",
      "by": "CritCheckout",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:22:44+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "029856b",
+     "note": "queue spacing adds TROLLEY_SPACING ahead of each trolley pusher (Checkout._queue_depth); trolley pushers keep facing along the lane at the till; new checkout_test test_trolley_room_is_in_front_of_the_pusher (3/0); visual pending windowed tour",
+     "closed": "2026-11-06T20:42:01+10:00"
     },
     {
      "id": "C9",
@@ -994,6 +995,11 @@
    "t": "2026-11-06T20:41:19+10:00",
    "kind": "fix",
    "msg": "R2/C6 fixed 127e227 lane_length() capped at LANE_MAX = SERVE_POINT.z - BuildRules.LANE_Z0 - 0.3 (4.65 m) instead of 12 m; new checkout_test test_queue_stays_inside_the_kept_clear_lane (2/0)"
+  },
+  {
+   "t": "2026-11-06T20:42:01+10:00",
+   "kind": "fix",
+   "msg": "R2/C8 fixed 029856b queue spacing adds TROLLEY_SPACING ahead of each trolley pusher (Checkout._queue_depth); trolley pushers keep facing along the lane at the till; new checkout_test test_trolley_room_is_in_front_of_the_pusher (3/0); visual pending windowed tour"
   }
  ],
  "tests": [
@@ -1028,17 +1034,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:41:25+10:00",
+  "t": "2026-11-06T20:42:01+10:00",
   "mem_free_pct": 45,
   "load": [
-   2.5,
-   2.91,
-   2.86
+   2.42,
+   2.84,
+   2.83
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "029856b",
+    "date": "2026-11-06T20:41:59+10:00",
+    "subject": "Leave the trolley gap in front of the pusher and keep trolleys out of the counter at the till",
+    "body": "",
+    "stat": "3 files changed, 39 insertions(+), 7 deletions(-)"
+   },
    {
     "sha": "127e227",
     "date": "2026-11-06T20:41:17+10:00",
@@ -1451,23 +1464,15 @@
     "subject": "Alternate produce and wine meshes with a produce colour spread; hide rear stock rows past 25 m",
     "body": "",
     "stat": "2 files changed, 127 insertions(+), 31 deletions(-)"
-   },
-   {
-    "sha": "54e47b1",
-    "date": "2026-11-05T22:30:47+10:00",
-    "subject": "Add outdoor traffic and birdsong loops; play fridge door, rack slide and box flap sounds",
-    "body": "",
-    "stat": "9 files changed, 175 insertions(+), 8 deletions(-)"
    }
   ],
   "dirty": [
-   " M scripts/fixtures/checkout.gd",
    " M scripts/npc/shopper_brain.gd",
    " M tests/cases/checkout_test.gd"
   ],
-  "total_commits": 133
+  "total_commits": 134
  },
- "updated": "2026-11-06T20:41:25+10:00",
+ "updated": "2026-11-06T20:42:01+10:00",
  "qa": [
   {
    "num": 1,
