@@ -1316,11 +1316,11 @@
      "file": "scripts/npc/restocker_job.gd",
      "detail": "",
      "by": "lead",
-     "status": "fixed",
+     "status": "wip",
      "found": "2026-11-07T08:20:03+10:00",
-     "commit": "fdd9e9f",
-     "note": "status explains",
-     "closed": "2026-11-07T08:20:03+10:00"
+     "commit": "",
+     "note": "Reopened by Y2: status never shown in game",
+     "closed": "2026-11-07T09:40:31+10:00"
     }
    ]
   },
@@ -1461,6 +1461,186 @@
      "commit": "e1fd948",
      "note": "warning line",
      "closed": "2026-11-07T09:34:27+10:00"
+    },
+    {
+     "id": "Y1",
+     "sev": "P1",
+     "title": "Holding E on the CLOSED sign opens the store, then closes it early",
+     "file": "scripts/entities/player.gd:651-684 (with fixtures/open_sign.gd:96-97)",
+     "detail": "In PREP the sign's hold time is 0, so the E press opens the store at once through `_try_instant_interact` (`Game.open_store`). On the same held press, `_update_hold_interact` reads the hold time again. The phase is now OPEN, so it reads 0.6 s, and `_hold_lock` is still false, so the hold keeps counting. After 0.6 s it calls `interact`, which runs `Game.close_early()`. That means a press of about 0.7 s flips the sign twice and throws away the whole trading day, with no confirm and no undo. The tutorial teaches \"hold E on the sign to end the day\", so players will hold E here. Fix: set `_hold_lock = true` after any instant interact (and after `try_catch`), so a hold needs a fresh press. Also consider a confirm before closing early if it is before about 12:00.",
+     "by": "CritPlayer",
+     "status": "open",
+     "found": "2026-11-07T09:40:30+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "Y2",
+     "sev": "P1",
+     "title": "T1 is marked fixed, but the restocker's idle reason never reaches the player",
+     "file": "scripts/npc/restocker_job.gd:330-343, scripts/npc/staff.gd:149-155, scripts/ui/pc/app_staff.gd:112-136",
+     "detail": "Commit fdd9e9f only added \"Idle: no boxes on the stockroom racks\" to `RestockerJob.status()`. `Staff.status()` is only called from tests/soak.gd:217 and tests/staff_tour.gd:285. Nothing in the game shows it: the Staff app member card has no status line, and staff have no `get_prompt`, so aiming at them shows nothing. A $200 restocker still stands idle with no explanation, which is exactly what T1 reported. Fix: add `status()` to `_member_card`, refreshed by a timer while the app is open or by a crew signal. Also give `Staff` a `get_prompt` that returns its role, id and `status()`. Reopen T1.",
+     "by": "CritPlayer",
+     "status": "open",
+     "found": "2026-11-07T09:40:30+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "Y3",
+     "sev": "P2",
+     "title": "Selling a till moves every cashier, takes the till from the wrong one, and drops sales in progress",
+     "file": "scripts/autoload/game.gd:1020-1033, scripts/world/world.gd:433-437, scripts/npc/cashier_job.gd:44-52",
+     "detail": "Cashier tills are indexes into `world.checkouts()`, which is just the order of the fixtures' children. `fit_tills` only resets cashiers whose index is now too high. Example: tills A, B, C with cashiers X, Y, Z; sell A. X (index 0) now works B, Y works C, and Z gets −1 and has no till. In `CashierJob.tick`, `_resolve()` returns a new checkout, so it calls `_leave_post()` (cashier = null, `_serving` = null) on B and C mid-scan or mid-payment and walks to the other till. GDD §10 says \"its cashier moves to a free till or has none\". Players see staff swap tills, customers left half-served, and the wrong worker standing idle on full pay. The HUD till numbers change too. Fix: key assignments to a stable till id kept on the Checkout (for example a saved `till_no`), not to the child index. In `fit_tills`, unassign only the cashier whose till went.",
+     "by": "CritPlayer",
+     "status": "open",
+     "found": "2026-11-07T09:40:30+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "Y4",
+     "sev": "P2",
+     "title": "Fire lets a worker go in one click, next to Upgrade",
+     "file": "scripts/ui/pc/app_staff.gd:132-136,157",
+     "detail": "`UiKit.button(row, \"Fire\", fire.bind(id))` calls `Game.fire_staff` straight away: no refund, and a rehire costs the $150–200 hire fee again, starts tomorrow and resets the tier (upgrades of $400 and $800 are lost). It sits in the same row as the green Upgrade button, so a misclick is easy. B1 got a second-Del confirm for selling; this is the same kind of loss. Fix: a two-step button (\"Fire?\" → \"Confirm fire\") that times out back after about 3 s.",
+     "by": "CritPlayer",
+     "status": "open",
+     "found": "2026-11-07T09:40:30+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "Y5",
+     "sev": "P2",
+     "title": "Pause-menu Load and \"Quit to menu (without saving)\" throw away the day without asking",
+     "file": "scripts/ui/pause_menu.gd:67-71",
+     "detail": "Each Load slot button emits `load_requested(n)` at once, and `Main.load_slot` rebuilds the world. Quit emits `quit_requested`, which goes to `show_main_menu`. Saving is blocked during OPEN, so either misclick mid-day loses everything since the morning. The current slot's own Load button is enabled too, so \"reload\" silently rolls back the day. The main menu's New game page already warns before replacing a slot. Fix: a confirm step (\"Lose today's progress since 07:30?\") on both, at least when `Save.can_save()` is false or the day has moved since the last save.",
+     "by": "CritPlayer",
+     "status": "open",
+     "found": "2026-11-07T09:40:30+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "Y6",
+     "sev": "P2",
+     "title": "At the PC and the till, the crosshair and tutorial card stay over the screen; the waiting chip is hidden",
+     "file": "scripts/ui/prompt.gd:58-64, scripts/fixtures/pc_desk.gd:90, scripts/tutorial/tutorial_hint.gd:20-36",
+     "detail": "bfe790a hides only the `hud` group when you sit at the PC. `PromptOverlay` (layer 5) keeps drawing its 5 px crosshair dot at screen centre, on top of ShopOS's Market text, and at the till seat while you click with a free cursor (two pointers). `TutorialHint` (layer 5, a card at least 620 px wide at bottom centre) stays over ShopOS during the \"order\" step, which is the step where you use the PC. Hiding the whole HUD also hides the \"N waiting · Till 1\" chip while customers pile up during OPEN. Fix: hide `_cross` and `_label` while `player.locked` (or put PromptOverlay in the `hud` group), and hide or move the tutorial card while the PC is focused. Then hide only the top-centre and top-right HUD cards (or move the waiting chip) instead of the whole HUD.",
+     "by": "CritPlayer",
+     "status": "open",
+     "found": "2026-11-07T09:40:30+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "Y7",
+     "sev": "P2",
+     "title": "Crouching and dropping a box while looking down puts it at your feet, sunk into the floor",
+     "file": "scripts/entities/player.gd:445-460",
+     "detail": "The carried box sits at `CARRY_POS` in camera space. With the crouched eye at 1.0 m and pitch ≤ about −15°, the box origin works out to below y = 0 (about −0.17 m at −45°). The held box already clips through the floor. In `_free_drop_point`, all 9 probes use the same `held.y`, so each padded query overlaps the Floor (LAYER_WORLD). The function then returns `from`, the player's own x/z at that depth, without testing it. The box therefore appears inside your capsule and part-way into the floor. Crouching to stock bottom shelves and then dropping the box is a common move. [UNVERIFIED: the exact physics after the 0.4 s collision exception ends.] Fix: clamp the probe height to `maxf(held.y, global_position.y + 0.02)`, keep a minimum forward offset of about 0.5 m, and never return a point inside the player's capsule. Optionally raise CARRY_POS while crouching so the held box doesn't clip.",
+     "by": "CritPlayer",
+     "status": "open",
+     "found": "2026-11-07T09:40:30+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "Y8",
+     "sev": "P3",
+     "title": "Stocking two coolers side by side leaves the first door open; R takes stock through a closed door",
+     "file": "scripts/entities/player.gd:566-569,581-597,531,602-611",
+     "detail": "`_door_fx` holds only one fixture. If you stock cooler A and then start on cooler B within 1 s, `_door_fx` becomes B and A is never closed. Customers only close doors they opened themselves. `take_back_one` never calls `open_door`, so items come out through shut glass; S14 fixed the same problem for restockers. Also, `_update_box` returns on `locked` before `_close_idle_door`, so sitting at the PC or till straight after stocking leaves the door open. Fix: before switching to a new fixture, close the old `_door_fx`. Call `slot.fixture.open_door(...)` and set `_door_fx` in `take_back_one`. Run `_close_idle_door` before the `locked` return.",
+     "by": "CritPlayer",
+     "status": "open",
+     "found": "2026-11-07T09:40:30+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "Y9",
+     "sev": "P3",
+     "title": "The Controls page leaves out the phone, selling fixtures and closing early",
+     "file": "scripts/ui/controls.gd:11-27",
+     "detail": "ROWS has no row for `phone` (P, game.gd:1406), `sell` (Del/Backspace, game.gd:1402) or holding E on the OPEN sign to close early. The interact-hold row only says \"end the day at the sign\". Its doc claims \"every key and mouse button\". Without the row, the level-6 phone and early close are only discoverable by accident. Fix: add `[\"Store phone\", [\"phone\"], \"\"]` and `[\"Sell a fixture in build mode\", [\"sell\"], \"twice\"]`, and change the hold row to \"…, close early or end the day at the sign\".",
+     "by": "CritPlayer",
+     "status": "open",
+     "found": "2026-11-07T09:40:31+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "Y10",
+     "sev": "P3",
+     "title": "Each Options slider tick rewrites settings.cfg and re-applies graphics; at the PC it undoes the full-res view",
+     "file": "scripts/autoload/settings.gd:145-152, scripts/ui/options.gd:69-72,118-122, scripts/world/lighting.gd:67, scripts/fixtures/pc_desk.gd:86-89,100-101",
+     "detail": "Every `value_changed` calls `_store`, which does a ConfigFile load and save to disk and then `changed.emit()`. `Lighting.apply_quality` runs on every emit and resets `scaling_3d_scale` and FXAA, and sets the shadow atlas and environment. Dragging a volume slider therefore writes the file about 20 times. With today's focus-loss pause, you can open Options while sitting at the PC. Any change there (even volume) sets the viewport back to 0.85 with FXAA, so ShopOS smears again (M3). Standing up then restores the `_scale_before` taken before the change. Fix: save on `drag_ended` and debounce, emit a graphics-specific signal that `apply_quality` listens to, and have PcDesk re-apply its overrides or read the preset again on unfocus.",
+     "by": "CritPlayer",
+     "status": "open",
+     "found": "2026-11-07T09:40:31+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "Y11",
+     "sev": "P3",
+     "title": "Save in the pause menu shows no confirmation until you resume",
+     "file": "scripts/main.gd:190-198, scripts/ui/toast.gd:36-55",
+     "detail": "`_on_save_requested(false)` posts \"Saved to slot N\", but the Toasts layer belongs to World, which is paused. The card's tween is bound to the paused node, so it stays at alpha 0, and it sits under the pause dim on layer 10 anyway. `refresh()` rewrites the slot line with the same day, cash and level as before. The player clicks Save, sees nothing, and gets the toast after closing the menu. Fix: show the result in the pause menu's `_hint` (for example \"Saved to slot 1 at 07:42\"), or give Toasts `process_mode = PROCESS_MODE_ALWAYS` and a layer above the pause menu.",
+     "by": "CritPlayer",
+     "status": "open",
+     "found": "2026-11-07T09:40:31+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "Y12",
+     "sev": "P3",
+     "title": "Closing the game while Sunday's newspaper is up loses the weekly review",
+     "file": "scripts/main.gd:180-186, scripts/autoload/game.gd:1148-1153,1249",
+     "detail": "The autosave runs before `newspaper.open(...)`. `pending_review` is not in `save_state()`, and `load_state()` clears it. The head-office bonus is already in `money`, but the review and its bonus line are gone after a quit or crash on the paper. Fix: save `pending_review` and re-open the paper after loading while it is not empty, or save again after the paper closes.",
+     "by": "CritPlayer",
+     "status": "open",
+     "found": "2026-11-07T09:40:31+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "Y13",
+     "sev": "P3",
+     "title": "A corrupt newest save leaves a Continue button that does nothing",
+     "file": "scripts/autoload/save.gd:150-160, scripts/ui/main_menu.gd:68,105-111, scripts/main.gd:104-107",
+     "detail": "`latest_slot()` goes by file modified time and only checks that the file exists. `read()` returns `{}` for bad JSON. Continue still shows (with \"Slot N · empty\" under it), and clicking it gets `false` back from `load_slot` with no message. It never falls back to an older slot that is fine. Fix: have `latest_slot()` skip slots where `read(n)` is empty, and show a toast when `load_slot` fails.",
+     "by": "CritPlayer",
+     "status": "open",
+     "found": "2026-11-07T09:40:31+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "Y14",
+     "sev": "P3",
+     "title": "Boxes in flight are saved at their mid-air position and drop wherever they were on load",
+     "file": "scripts/autoload/save.gd:56-65, scripts/delivery/delivery_service.gd:118-124",
+     "detail": "Saving is allowed in PREP, when deliveries happen. A box already fired is a child of Loose, so `capture` saves it as a loose box at its mid-air position. `undelivered()` only lists boxes not yet fired. On load the box falls from up to about 3 m between the van and the bay, maybe onto a parked car. Fix: in `capture`, for a box with the `in_flight` meta, save the bay spot it was heading for (`bay.allocate`), or add it to `deliveries` instead of `boxes`.",
+     "by": "CritPlayer",
+     "status": "open",
+     "found": "2026-11-07T09:40:31+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "Y15",
+     "sev": "P3",
+     "title": "`Player.box_caught` is emitted but nothing in the game listens to it",
+     "file": "scripts/entities/player.gd:44,386",
+     "detail": "The only connection is in tests/cases/additions_test.gd:56. The catch's effects (XP, chime, toast, tutorial notify) already happen inline in `try_catch` and `BoxCannon.caught`. AGENTS.md says not to test wiring, and this signal exists only for that test. Fix: remove the signal and have the test check `held_box` and the XP gain instead.",
+     "by": "CritPlayer",
+     "status": "open",
+     "found": "2026-11-07T09:40:31+10:00",
+     "commit": "",
+     "note": ""
     }
    ]
   }
@@ -3050,6 +3230,91 @@
    "t": "2026-11-07T09:34:27+10:00",
    "kind": "test",
    "msg": "Tests: 1043 passed, 0 failed cycle 2"
+  },
+  {
+   "t": "2026-11-07T09:40:30+10:00",
+   "kind": "finding",
+   "msg": "C2/Y1 [P1] Holding E on the CLOSED sign opens the store, then closes it early"
+  },
+  {
+   "t": "2026-11-07T09:40:30+10:00",
+   "kind": "finding",
+   "msg": "C2/Y2 [P1] T1 is marked fixed, but the restocker's idle reason never reaches the player"
+  },
+  {
+   "t": "2026-11-07T09:40:30+10:00",
+   "kind": "finding",
+   "msg": "C2/Y3 [P2] Selling a till moves every cashier, takes the till from the wrong one, and drops sales in progress"
+  },
+  {
+   "t": "2026-11-07T09:40:30+10:00",
+   "kind": "finding",
+   "msg": "C2/Y4 [P2] Fire lets a worker go in one click, next to Upgrade"
+  },
+  {
+   "t": "2026-11-07T09:40:30+10:00",
+   "kind": "finding",
+   "msg": "C2/Y5 [P2] Pause-menu Load and \"Quit to menu (without saving)\" throw away the day without asking"
+  },
+  {
+   "t": "2026-11-07T09:40:30+10:00",
+   "kind": "finding",
+   "msg": "C2/Y6 [P2] At the PC and the till, the crosshair and tutorial card stay over the screen; the waiting chip is hidden"
+  },
+  {
+   "t": "2026-11-07T09:40:30+10:00",
+   "kind": "finding",
+   "msg": "C2/Y7 [P2] Crouching and dropping a box while looking down puts it at your feet, sunk into the floor"
+  },
+  {
+   "t": "2026-11-07T09:40:30+10:00",
+   "kind": "finding",
+   "msg": "C2/Y8 [P3] Stocking two coolers side by side leaves the first door open; R takes stock through a closed door"
+  },
+  {
+   "t": "2026-11-07T09:40:31+10:00",
+   "kind": "finding",
+   "msg": "C2/Y9 [P3] The Controls page leaves out the phone, selling fixtures and closing early"
+  },
+  {
+   "t": "2026-11-07T09:40:31+10:00",
+   "kind": "finding",
+   "msg": "C2/Y10 [P3] Each Options slider tick rewrites settings.cfg and re-applies graphics; at the PC it undoes the full-res view"
+  },
+  {
+   "t": "2026-11-07T09:40:31+10:00",
+   "kind": "finding",
+   "msg": "C2/Y11 [P3] Save in the pause menu shows no confirmation until you resume"
+  },
+  {
+   "t": "2026-11-07T09:40:31+10:00",
+   "kind": "finding",
+   "msg": "C2/Y12 [P3] Closing the game while Sunday's newspaper is up loses the weekly review"
+  },
+  {
+   "t": "2026-11-07T09:40:31+10:00",
+   "kind": "finding",
+   "msg": "C2/Y13 [P3] A corrupt newest save leaves a Continue button that does nothing"
+  },
+  {
+   "t": "2026-11-07T09:40:31+10:00",
+   "kind": "finding",
+   "msg": "C2/Y14 [P3] Boxes in flight are saved at their mid-air position and drop wherever they were on load"
+  },
+  {
+   "t": "2026-11-07T09:40:31+10:00",
+   "kind": "finding",
+   "msg": "C2/Y15 [P3] `Player.box_caught` is emitted but nothing in the game listens to it"
+  },
+  {
+   "t": "2026-11-07T09:40:31+10:00",
+   "kind": "fix",
+   "msg": "R7/T1 wip  Reopened by Y2: status never shown in game"
+  },
+  {
+   "t": "2026-11-07T09:40:31+10:00",
+   "kind": "agent",
+   "msg": "Agent CritPlayer: done 15 findings (2 P1)"
   }
  ],
  "tests": [
@@ -3185,18 +3450,18 @@
    "t": "2026-11-07T09:27:56+10:00"
   },
   "CritPlayer": {
-   "state": "running",
-   "task": "Reviewer: player, staff, delivery, UI, saves, audio",
-   "t": "2026-11-07T09:27:56+10:00"
+   "state": "done",
+   "task": "15 findings (2 P1)",
+   "t": "2026-11-07T09:40:31+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T09:34:27+10:00",
-  "mem_free_pct": 36,
+  "t": "2026-11-07T09:40:31+10:00",
+  "mem_free_pct": 37,
   "load": [
-   5.82,
-   3.73,
-   3.97
+   2.89,
+   3.74,
+   3.96
   ],
   "godot_procs": 0
  },
@@ -3626,7 +3891,7 @@
   "dirty": [],
   "total_commits": 182
  },
- "updated": "2026-11-07T09:34:28+10:00",
+ "updated": "2026-11-07T09:40:32+10:00",
  "qa": [
   {
    "num": 1,
