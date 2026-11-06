@@ -1,11 +1,11 @@
 {
  "status": {
   "state": "fixing",
-  "round": "R3",
+  "round": "R2 (fixer) / R4 next",
   "area": "Shelves, stocking, boxes, pricing",
-  "activity": "Fixer: C9 till targets sit you down",
+  "activity": "R3 closed (16/17 fixed, S3 partly). Spawning R4 customers/NPC critic once fixer finishes",
   "cycle": "1",
-  "since": "2026-11-06T20:29:01+10:00"
+  "since": "2026-11-06T20:35:38+10:00"
  },
  "rounds": [
   {
@@ -231,7 +231,7 @@
    "id": "R3",
    "area": "Shelves, stocking, boxes, pricing",
    "started": "2026-11-06T20:11:25+10:00",
-   "finished": null,
+   "finished": "2026-11-06T20:35:38+10:00",
    "findings": [
     {
      "id": "S1",
@@ -266,10 +266,11 @@
      "file": "stock_math.gd:12-15, data/products.json",
      "detail": "Only one orientation tried; can meshes double size. Stocking is tedious, shelves empty instantly.",
      "by": "CritShelves",
-     "status": "open",
+     "status": "wip",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "1fcf7bf",
+     "note": "Turnable products (TP 1->2 per slot). Oversized can/bag meshes need an asset+economy pass: deferred to a later round",
+     "closed": "2026-11-06T20:35:38+10:00"
     },
     {
      "id": "S4",
@@ -304,10 +305,11 @@
      "file": "player.gd:556",
      "detail": "Clearing or reassigning a slot needs a box of the same product; Supermarket Simulator lets any empty box take any product.",
      "by": "CritShelves",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e428892",
+     "note": "stock_test 81/81 incl. new regressions (empty box adopts, E at PC keeps box sealed, rack refuses empty)",
+     "closed": "2026-11-06T20:35:37+10:00"
     },
     {
      "id": "S7",
@@ -316,10 +318,11 @@
      "file": "player.gd:480-493, 300-331, 543",
      "detail": "E always routes to Open; doors opened by stocking are never closed.",
      "by": "CritShelves",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e428892",
+     "note": "stock_test 81/81 incl. new regressions (empty box adopts, E at PC keeps box sealed, rack refuses empty)",
+     "closed": "2026-11-06T20:35:37+10:00"
     },
     {
      "id": "S8",
@@ -341,10 +344,11 @@
      "file": "storage_rack.gd:58-65,131,146-149",
      "detail": "",
      "by": "CritShelves",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e428892",
+     "note": "stock_test 81/81 incl. new regressions (empty box adopts, E at PC keeps box sealed, rack refuses empty)",
+     "closed": "2026-11-06T20:35:37+10:00"
     },
     {
      "id": "S10",
@@ -353,10 +357,11 @@
      "file": "player.gd:514,541,559",
      "detail": "",
      "by": "CritShelves",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e428892",
+     "note": "stock_test 81/81 incl. new regressions (empty box adopts, E at PC keeps box sealed, rack refuses empty)",
+     "closed": "2026-11-06T20:35:37+10:00"
     },
     {
      "id": "S11",
@@ -365,10 +370,11 @@
      "file": "price_label.gd:13,91",
      "detail": "",
      "by": "CritShelves",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "a37e5ec",
+     "note": "bargain_ratio from customers.json",
+     "closed": "2026-11-06T20:35:37+10:00"
     },
     {
      "id": "S12",
@@ -377,10 +383,11 @@
      "file": "stock_box.gd:46",
      "detail": "",
      "by": "CritShelves",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e428892",
+     "note": "stock_test 81/81 incl. new regressions (empty box adopts, E at PC keeps box sealed, rack refuses empty)",
+     "closed": "2026-11-06T20:35:37+10:00"
     },
     {
      "id": "S13",
@@ -389,10 +396,11 @@
      "file": "player.gd:577",
      "detail": "",
      "by": "CritShelves",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e428892",
+     "note": "stock_test 81/81 incl. new regressions (empty box adopts, E at PC keeps box sealed, rack refuses empty)",
+     "closed": "2026-11-06T20:35:37+10:00"
     },
     {
      "id": "S14",
@@ -401,10 +409,11 @@
      "file": "restocker_job.gd:164",
      "detail": "",
      "by": "CritShelves",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e428892",
+     "note": "stock_test 81/81 incl. new regressions (empty box adopts, E at PC keeps box sealed, rack refuses empty)",
+     "closed": "2026-11-06T20:35:37+10:00"
     },
     {
      "id": "S15",
@@ -868,6 +877,61 @@
    "t": "2026-11-06T20:32:37+10:00",
    "kind": "question",
    "msg": "Question #5 answered: What have the current suggestions/things going to be added to the game been so far"
+  },
+  {
+   "t": "2026-11-06T20:35:37+10:00",
+   "kind": "fix",
+   "msg": "R3/S6 fixed e428892 stock_test 81/81 incl. new regressions (empty box adopts, E at PC keeps box sealed, rack refuses empty)"
+  },
+  {
+   "t": "2026-11-06T20:35:37+10:00",
+   "kind": "fix",
+   "msg": "R3/S7 fixed e428892 stock_test 81/81 incl. new regressions (empty box adopts, E at PC keeps box sealed, rack refuses empty)"
+  },
+  {
+   "t": "2026-11-06T20:35:37+10:00",
+   "kind": "fix",
+   "msg": "R3/S9 fixed e428892 stock_test 81/81 incl. new regressions (empty box adopts, E at PC keeps box sealed, rack refuses empty)"
+  },
+  {
+   "t": "2026-11-06T20:35:37+10:00",
+   "kind": "fix",
+   "msg": "R3/S10 fixed e428892 stock_test 81/81 incl. new regressions (empty box adopts, E at PC keeps box sealed, rack refuses empty)"
+  },
+  {
+   "t": "2026-11-06T20:35:37+10:00",
+   "kind": "fix",
+   "msg": "R3/S12 fixed e428892 stock_test 81/81 incl. new regressions (empty box adopts, E at PC keeps box sealed, rack refuses empty)"
+  },
+  {
+   "t": "2026-11-06T20:35:37+10:00",
+   "kind": "fix",
+   "msg": "R3/S13 fixed e428892 stock_test 81/81 incl. new regressions (empty box adopts, E at PC keeps box sealed, rack refuses empty)"
+  },
+  {
+   "t": "2026-11-06T20:35:37+10:00",
+   "kind": "fix",
+   "msg": "R3/S14 fixed e428892 stock_test 81/81 incl. new regressions (empty box adopts, E at PC keeps box sealed, rack refuses empty)"
+  },
+  {
+   "t": "2026-11-06T20:35:37+10:00",
+   "kind": "fix",
+   "msg": "R3/S11 fixed a37e5ec bargain_ratio from customers.json"
+  },
+  {
+   "t": "2026-11-06T20:35:38+10:00",
+   "kind": "fix",
+   "msg": "R3/S3 wip 1fcf7bf Turnable products (TP 1->2 per slot). Oversized can/bag meshes need an asset+economy pass: deferred to a later round"
+  },
+  {
+   "t": "2026-11-06T20:35:38+10:00",
+   "kind": "round",
+   "msg": "Round R3 closed"
+  },
+  {
+   "t": "2026-11-06T20:35:38+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - R3 closed (16/17 fixed, S3 partly). Spawning R4 customers/NPC critic once fixer finishes"
   }
  ],
  "tests": [
@@ -902,13 +966,38 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:32:37+10:00",
-  "mem_free_pct": 53,
-  "load": [],
-  "godot_procs": 4
+  "t": "2026-11-06T20:35:38+10:00",
+  "mem_free_pct": 42,
+  "load": [
+   3.3,
+   2.91,
+   2.8
+  ],
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "1fcf7bf",
+    "date": "2026-11-06T20:35:31+10:00",
+    "subject": "Let products without a printed front stand turned on a shelf when that holds more",
+    "body": "Toilet paper fit one roll pack per gondola slot; with 'turnable' it fits two. Bananas,\ncarrots and roast chickens gain 33-50%. Printed packs still face the customer. Can and bag\nsizes themselves are left for an asset pass. Review round 2, S3 (part).",
+    "stat": "5 files changed, 37 insertions(+), 10 deletions(-)"
+   },
+   {
+    "sha": "a37e5ec",
+    "date": "2026-11-06T20:35:31+10:00",
+    "subject": "Read the SPECIAL label threshold from customers.json bargain_ratio",
+    "body": "The label hard-coded 85% while customers decide bargains from data. Review round 2, S11.",
+    "stat": "1 file changed, 3 insertions(+), 3 deletions(-)"
+   },
+   {
+    "sha": "e428892",
+    "date": "2026-11-06T20:35:31+10:00",
+    "subject": "Make box handling forgiving: any empty box takes a shelf back, E never rips a box open at the PC or till, doors shut after stocking",
+    "body": "- An empty box adopts the aimed slot's product, so R can clear or swap any shelf (S6).\n- With a box in hand, E at something you use with empty hands says to put the box down\n  instead of opening it; a cooler door opened by stocking shuts 1 s after you stop, and\n  restockers open and shut doors too (S7, S14).\n- Racks refuse empty boxes; the rack prompt and sound respect the mop (S9).\n- The open-box delay resets on pick-up, box mass follows its contents, and the slot glow\n  no longer rebuilds its mesh every frame (S10, S12, S13).\nReview round 2.",
+    "stat": "5 files changed, 141 insertions(+), 8 deletions(-)"
+   },
    {
     "sha": "cb5ee4a",
     "date": "2026-11-06T20:28:15+10:00",
@@ -1307,51 +1396,20 @@
     "subject": "Aim the stock bot at a box's middle and give skipped boxes a second pass",
     "body": "",
     "stat": "2 files changed, 18 insertions(+), 15 deletions(-)"
-   },
-   {
-    "sha": "200a22d",
-    "date": "2026-11-05T19:42:14+10:00",
-    "subject": "Tune the van's speeds so a 6-box visit lands by 10 s and leaves by 15 s",
-    "body": "",
-    "stat": "3 files changed, 19 insertions(+), 11 deletions(-)"
-   },
-   {
-    "sha": "768ffc3",
-    "date": "2026-11-05T19:42:13+10:00",
-    "subject": "Keep delivered boxes in the bay: probe spots, fill from the van side, soften landings",
-    "body": "",
-    "stat": "2 files changed, 81 insertions(+), 49 deletions(-)"
-   },
-   {
-    "sha": "028d243",
-    "date": "2026-11-05T19:42:13+10:00",
-    "subject": "Run delayed box and dust-puff callbacks from node tweens, not timer lambdas",
-    "body": "",
-    "stat": "2 files changed, 5 insertions(+), 7 deletions(-)"
    }
   ],
   "dirty": [
-   " M data/products.json",
-   " M docs/ARCHITECTURE.md",
-   " M scripts/autoload/catalog.gd",
-   " M scripts/core/stock_math.gd",
-   " M scripts/entities/player.gd",
-   " M scripts/entities/stock_box.gd",
-   " M scripts/fixtures/checkout.gd",
+   "MM scripts/fixtures/checkout.gd",
    " M scripts/fixtures/pos.gd",
-   " M scripts/fixtures/price_label.gd",
-   " M scripts/fixtures/slot.gd",
-   " M scripts/fixtures/storage_rack.gd",
-   " M scripts/fixtures/till_target.gd",
-   " M scripts/npc/restocker_job.gd",
+   "M  scripts/fixtures/till_target.gd",
+   " M scripts/npc/shopper.gd",
    " M scripts/ui/card_keypad.gd",
    " M scripts/ui/change_panel.gd",
-   " M tests/cases/checkout_test.gd",
-   " M tests/cases/stock_test.gd"
+   "MM tests/cases/checkout_test.gd"
   ],
-  "total_commits": 121
+  "total_commits": 124
  },
- "updated": "2026-11-06T20:32:38+10:00",
+ "updated": "2026-11-06T20:35:38+10:00",
  "qa": [
   {
    "num": 1,

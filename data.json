@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-06T20:32+10:00",
- "head": "cb5ee4a",
+ "generated": "2026-11-06T20:35+10:00",
+ "head": "1fcf7bf",
  "stats": {
-  "commits": 121,
+  "commits": 124,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-06T20:28:15+10:00",
+  "last_commit": "2026-11-06T20:35:31+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 26852,
+  "gd_lines": 26911,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -885,6 +885,21 @@
    "sha": "cb5ee4a",
    "date": "2026-11-06T20:28:15+10:00",
    "subject": "Say the cash is in the drawer once it has been taken"
+  },
+  {
+   "sha": "e428892",
+   "date": "2026-11-06T20:35:31+10:00",
+   "subject": "Make box handling forgiving: any empty box takes a shelf back, E never rips a box open at the PC or till, doors shut after stocking"
+  },
+  {
+   "sha": "a37e5ec",
+   "date": "2026-11-06T20:35:31+10:00",
+   "subject": "Read the SPECIAL label threshold from customers.json bargain_ratio"
+  },
+  {
+   "sha": "1fcf7bf",
+   "date": "2026-11-06T20:35:31+10:00",
+   "subject": "Let products without a printed front stand turned on a shelf when that holds more"
   }
  ],
  "commits_per_hour": [
@@ -1002,7 +1017,7 @@
   },
   {
    "hour": "2026-11-06T20:00:00+10:00",
-   "commits": 10
+   "commits": 13
   }
  ],
  "sections": [
