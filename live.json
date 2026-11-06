@@ -923,10 +923,11 @@
      "file": "scripts/ui/day_summary.gd:118-138; scripts/core/day_report.gd:61-63",
      "detail": "\"Net after bills\" is sales minus cost of goods minus bills. Stock orders, the $5 delivery fees, furniture, licences, expansions, hire fees, staff upgrades, loan payouts and repayments, and fixture refunds don't appear anywhere. A typical day-2 receipt shows \"+$150\" while cash fell $400 after a restock and a licence, and there is no opening-cash line to reconcile against. Supermarket Simulator's end-of-day report itemises expenses [UNVERIFIED]. Fix: total `money_changed` deltas by reason in `today` (`spent[reason]`, `opening_cash`), and print \"Spent today\" lines plus \"Cash at open → Cash now\".",
      "by": "CritEconomy",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:56:05+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "9bc60ec",
+     "note": "day_test: open + sales + other = cash now",
+     "closed": "2026-11-07T08:05:36+10:00"
     },
     {
      "id": "E12",
@@ -2260,6 +2261,11 @@
    "t": "2026-11-07T08:04:29+10:00",
    "kind": "fix",
    "msg": "R5/E10 fixed 7914cd7 customer_test checks turned_away count at closing"
+  },
+  {
+   "t": "2026-11-07T08:05:36+10:00",
+   "kind": "fix",
+   "msg": "R5/E11 fixed 9bc60ec day_test: open + sales + other = cash now"
   }
  ],
  "tests": [
@@ -2343,17 +2349,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T08:04:29+10:00",
+  "t": "2026-11-07T08:05:36+10:00",
   "mem_free_pct": 47,
   "load": [
-   3.7,
-   3.07,
-   4.32
+   3.15,
+   3.05,
+   4.22
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "9bc60ec",
+    "date": "2026-11-07T08:05:34+10:00",
+    "subject": "Itemise the day's other money on the receipt so it adds up to the cash",
+    "body": "Orders, furniture, licences, expansions, staff, upgrades and loans never showed, so a '+$150'\nnight could end with less cash than the morning. The receipt now lists them and the cash at\nopen (saved with the day). Review round 2, E11.",
+    "stat": "4 files changed, 63 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "7914cd7",
     "date": "2026-11-07T08:04:27+10:00",
@@ -2766,19 +2779,12 @@
     "subject": "Refuse build mode while holding the mop (GDD §1: empty hands only)",
     "body": "",
     "stat": "1 file changed, 3 insertions(+)"
-   },
-   {
-    "sha": "29f75fd",
-    "date": "2026-11-06T02:11:36+10:00",
-    "subject": "Keep the deli corner clear in build mode once E7 is built, and place licence furniture only where it fits, asking the player to clear the spot",
-    "body": "",
-    "stat": "3 files changed, 97 insertions(+), 17 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 152
+  "total_commits": 153
  },
- "updated": "2026-11-07T08:04:29+10:00",
+ "updated": "2026-11-07T08:05:36+10:00",
  "qa": [
   {
    "num": 1,

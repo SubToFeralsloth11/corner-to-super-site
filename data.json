@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T08:04+10:00",
- "head": "7914cd7",
+ "generated": "2026-11-07T08:05+10:00",
+ "head": "9bc60ec",
  "stats": {
-  "commits": 152,
+  "commits": 153,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T08:04:27+10:00",
+  "last_commit": "2026-11-07T08:05:34+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 27699,
+  "gd_lines": 27761,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1054,6 +1054,11 @@
    "sha": "7914cd7",
    "date": "2026-11-07T08:04:27+10:00",
    "subject": "Show on the receipt how many customers a full store turned away"
+  },
+  {
+   "sha": "9bc60ec",
+   "date": "2026-11-07T08:05:34+10:00",
+   "subject": "Itemise the day's other money on the receipt so it adds up to the cash"
   }
  ],
  "commits_per_hour": [
@@ -1219,7 +1224,7 @@
   },
   {
    "hour": "2026-11-07T08:00:00+10:00",
-   "commits": 3
+   "commits": 4
   }
  ],
  "sections": [
