@@ -1,11 +1,11 @@
 {
  "status": {
-  "state": "verifying",
-  "round": "R5 (pacing)",
-  "area": "Economy pacing",
-  "activity": "Second 30-day soak with retuned in-store cap; reviewing remaining code meanwhile",
-  "cycle": "1",
-  "since": "2026-11-07T08:40:55+10:00"
+  "state": "reviewing",
+  "round": "C2",
+  "area": "Second pass",
+  "activity": "Cycle 2: lead re-reviewing every area (critic agents return when the API limit lifts)",
+  "cycle": "2",
+  "since": "2026-11-07T09:23:57+10:00"
  },
  "rounds": [
   {
@@ -1414,6 +1414,27 @@
      "found": "2026-11-07T09:21:21+10:00",
      "commit": "",
      "note": ""
+    }
+   ]
+  },
+  {
+   "id": "C2",
+   "area": "Cycle 2: second pass over every area",
+   "started": "2026-11-07T09:23:57+10:00",
+   "finished": null,
+   "findings": [
+    {
+     "id": "K1",
+     "sev": "P2",
+     "title": "Customers punish you -12 for a product you never carried (same as an empty shelf)",
+     "file": "scripts/npc/shopper_brain.gd _find_slot_or_lose",
+     "detail": "",
+     "by": "lead",
+     "status": "fixed",
+     "found": "2026-11-07T09:23:57+10:00",
+     "commit": "995e7da",
+     "note": "-4 not carried, -12 ran out; customer_test covers both; suite 1041/0",
+     "closed": "2026-11-07T09:23:57+10:00"
     }
    ]
   }
@@ -2938,6 +2959,26 @@
    "t": "2026-11-07T09:21:22+10:00",
    "kind": "finding",
    "msg": "Windowed runs crashed (SIGBUS in memmove) with a warm shader cache: my old-commit worktree run, and the user's editor running the same project, share user://shader_cache. Clearing it fixes the next run. Not a game bug."
+  },
+  {
+   "t": "2026-11-07T09:23:57+10:00",
+   "kind": "round",
+   "msg": "Round C2 started: Cycle 2: second pass over every area"
+  },
+  {
+   "t": "2026-11-07T09:23:57+10:00",
+   "kind": "finding",
+   "msg": "C2/K1 [P2] Customers punish you -12 for a product you never carried (same as an empty shelf)"
+  },
+  {
+   "t": "2026-11-07T09:23:57+10:00",
+   "kind": "fix",
+   "msg": "C2/K1 fixed 995e7da -4 not carried, -12 ran out; customer_test covers both; suite 1041/0"
+  },
+  {
+   "t": "2026-11-07T09:23:57+10:00",
+   "kind": "status",
+   "msg": "Status: reviewing - Cycle 2: lead re-reviewing every area (critic agents return when the API limit lifts)"
   }
  ],
  "tests": [
@@ -3063,17 +3104,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:21:22+10:00",
-  "mem_free_pct": 47,
+  "t": "2026-11-07T09:23:57+10:00",
+  "mem_free_pct": 46,
   "load": [
-   4.54,
-   6.38,
-   5.27
+   2.58,
+   4.66,
+   4.74
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "995e7da",
+    "date": "2026-11-07T09:23:55+10:00",
+    "subject": "Make not carrying a product a milder letdown than an empty shelf",
+    "body": "Customers took the full -12 out-of-stock hit for products the store never sold, so a new store\nwas punished for its range rather than its stocking. An empty labelled slot is still -12; a\nproduct with no slot at all is -4 with its own lines. Still a lost sale (the demand signal).\nReview round 2, cycle 2.",
+    "stat": "5 files changed, 34 insertions(+), 4 deletions(-)"
+   },
    {
     "sha": "ff5b859",
     "date": "2026-11-07T09:03:09+10:00",
@@ -3486,19 +3534,12 @@
     "subject": "Say the cash is in the drawer once it has been taken",
     "body": "",
     "stat": "1 file changed, 6 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "8aebda2",
-    "date": "2026-11-06T20:27:48+10:00",
-    "subject": "Drop Checkout.is_attended_by_staff for has_cashier",
-    "body": "",
-    "stat": "1 file changed, 3 insertions(+), 8 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 179
+  "total_commits": 180
  },
- "updated": "2026-11-07T09:21:23+10:00",
+ "updated": "2026-11-07T09:23:58+10:00",
  "qa": [
   {
    "num": 1,
