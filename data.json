@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T09:47+10:00",
- "head": "697e847",
+ "generated": "2026-11-07T09:48+10:00",
+ "head": "1724812",
  "stats": {
-  "commits": 188,
+  "commits": 190,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T09:46:10+10:00",
+  "last_commit": "2026-11-07T09:48:12+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 28546,
+  "gd_lines": 28573,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1241,6 +1241,16 @@
    "sha": "697e847",
    "date": "2026-11-07T09:46:10+10:00",
    "subject": "Ask before pause-menu Load or Quit throws away a day that can't be saved yet"
+  },
+  {
+   "sha": "d991999",
+   "date": "2026-11-07T09:48:11+10:00",
+   "subject": "Confirm a pause-menu save on the menu itself (its toast was paused underneath) (Y11)"
+  },
+  {
+   "sha": "1724812",
+   "date": "2026-11-07T09:48:12+10:00",
+   "subject": "Point Continue at the newest save that reads, not the newest file (Y13)"
   }
  ],
  "commits_per_hour": [
@@ -1410,7 +1420,7 @@
   },
   {
    "hour": "2026-11-07T09:00:00+10:00",
-   "commits": 11
+   "commits": 13
   }
  ],
  "sections": [

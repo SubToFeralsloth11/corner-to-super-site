@@ -1596,10 +1596,11 @@
      "file": "scripts/main.gd:190-198, scripts/ui/toast.gd:36-55",
      "detail": "`_on_save_requested(false)` posts \"Saved to slot N\", but the Toasts layer belongs to World, which is paused. The card's tween is bound to the paused node, so it stays at alpha 0, and it sits under the pause dim on layer 10 anyway. `refresh()` rewrites the slot line with the same day, cash and level as before. The player clicks Save, sees nothing, and gets the toast after closing the menu. Fix: show the result in the pause menu's `_hint` (for example \"Saved to slot 1 at 07:42\"), or give Toasts `process_mode = PROCESS_MODE_ALWAYS` and a layer above the pause menu.",
      "by": "CritPlayer",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:40:31+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "d991999",
+     "note": "hint line says saved + time",
+     "closed": "2026-11-07T09:48:13+10:00"
     },
     {
      "id": "Y12",
@@ -1620,10 +1621,11 @@
      "file": "scripts/autoload/save.gd:150-160, scripts/ui/main_menu.gd:68,105-111, scripts/main.gd:104-107",
      "detail": "`latest_slot()` goes by file modified time and only checks that the file exists. `read()` returns `{}` for bad JSON. Continue still shows (with \"Slot N · empty\" under it), and clicking it gets `false` back from `load_slot` with no message. It never falls back to an older slot that is fine. Fix: have `latest_slot()` skip slots where `read(n)` is empty, and show a toast when `load_slot` fails.",
      "by": "CritPlayer",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:40:31+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "1724812",
+     "note": "latest_slot skips unreadable",
+     "closed": "2026-11-07T09:48:13+10:00"
     },
     {
      "id": "Y14",
@@ -3717,6 +3719,16 @@
    "t": "2026-11-07T09:47:21+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixRegress: X1 exact-cash keypad"
+  },
+  {
+   "t": "2026-11-07T09:48:13+10:00",
+   "kind": "fix",
+   "msg": "C2/Y11 fixed d991999 hint line says saved + time"
+  },
+  {
+   "t": "2026-11-07T09:48:13+10:00",
+   "kind": "fix",
+   "msg": "C2/Y13 fixed 1724812 latest_slot skips unreadable"
   }
  ],
  "tests": [
@@ -3858,17 +3870,31 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:47:21+10:00",
-  "mem_free_pct": 36,
+  "t": "2026-11-07T09:48:13+10:00",
+  "mem_free_pct": 35,
   "load": [
-   3.86,
-   3.32,
-   3.6
+   4.24,
+   3.52,
+   3.65
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "1724812",
+    "date": "2026-11-07T09:48:12+10:00",
+    "subject": "Point Continue at the newest save that reads, not the newest file (Y13)",
+    "body": "",
+    "stat": "1 file changed, 2 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "d991999",
+    "date": "2026-11-07T09:48:11+10:00",
+    "subject": "Confirm a pause-menu save on the menu itself (its toast was paused underneath) (Y11)",
+    "body": "",
+    "stat": "2 files changed, 8 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "697e847",
     "date": "2026-11-07T09:46:10+10:00",
@@ -4274,29 +4300,14 @@
     "subject": "Let a seated cashier fetch Smokes with a Take a pack button or R",
     "body": "",
     "stat": "3 files changed, 62 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "a8ccc26",
-    "date": "2026-11-06T20:37:47+10:00",
-    "subject": "Hand the bag to the customer to carry out instead of freeing it mid-air",
-    "body": "",
-    "stat": "2 files changed, 25 insertions(+), 3 deletions(-)"
-   },
-   {
-    "sha": "c28ea7e",
-    "date": "2026-11-06T20:37:31+10:00",
-    "subject": "Show the clock on the POS from the start and number each register",
-    "body": "",
-    "stat": "1 file changed, 17 insertions(+), 3 deletions(-)"
    }
   ],
   "dirty": [
-   " M scripts/main.gd",
-   " M scripts/ui/pause_menu.gd"
+   " M tests/cases/checkout_test.gd"
   ],
-  "total_commits": 188
+  "total_commits": 190
  },
- "updated": "2026-11-07T09:47:23+10:00",
+ "updated": "2026-11-07T09:48:15+10:00",
  "qa": [
   {
    "num": 1,
