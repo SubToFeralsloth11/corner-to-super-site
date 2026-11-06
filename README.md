@@ -22,6 +22,7 @@ contact sheets copied from the game repo, not in-game screenshots.
 | `img/` | Asset contact sheets (fixtures, products, humans) resized to 1600 px |
 | `live.html`, `live.js`, `live.css` | The live page for the critique-and-fix loop: current status, agents, findings per round, the full activity log, test runs, the latest game commits and machine load. Polls `live.json` every 30 s from the raw GitHub URL so it updates without waiting for a Pages build |
 | `live.json` | Written by `live.py`. Do not edit by hand |
+| `shots/` | In-game screenshots from the windowed tour (`live.py shots <dir>`), 960 px JPEGs; each refresh overwrites the set |
 | `live.py` | CLI the agent calls for every step (`status`, `round`, `finding`, `fix`, `test`, `agent`, `log`); `--push` or `push` also refreshes `data.json`, samples the machine and the game repo, commits and pushes |
 
 There is no build step, no CDN and no tracker. GitHub Pages serves `main` at `/`.
