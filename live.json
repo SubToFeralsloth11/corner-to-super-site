@@ -1789,10 +1789,11 @@
      "file": "data/upgrades.json:19-24",
      "detail": "It costs $10,000 and pays $100 per star each Sunday (game.gd:1150). At 4.35 stars that is about $435 a week, so it takes about 23 weeks (over 160 days) to break even. Level 16 arrives around day 27 at about $2,000 a day (PROGRESS M9 playtest notes), so the \"real unlock\" is a money sink nobody should buy. Fix: pay per day (e.g. $50/star each night) or cut the price to about $2,500. Show payback days on the card.",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:57+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "78b9606",
+     "note": "price $10,000 -> $6,000, Sunday pay $100 -> $1,000 per star: 12 days payback at 3.5 stars, 10 at 4.35; card text states it; ECONOMY.md table + rationale. test_late_upgrades_do_something asserts payback <= 2 weeks, 5/0",
+     "closed": "2026-11-07T09:57:57+10:00"
     },
     {
      "id": "X12",
@@ -3852,6 +3853,11 @@
    "t": "2026-11-07T09:57:11+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixRegress: X11 franchise payback"
+  },
+  {
+   "t": "2026-11-07T09:57:57+10:00",
+   "kind": "fix",
+   "msg": "C2/X11 fixed 78b9606 price $10,000 -> $6,000, Sunday pay $100 -> $1,000 per star: 12 days payback at 3.5 stars, 10 at 4.35; card text states it; ECONOMY.md table + rationale. test_late_upgrades_do_something asserts payback <= 2 weeks, 5/0"
   }
  ],
  "tests": [
@@ -3993,17 +3999,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:57:11+10:00",
+  "t": "2026-11-07T09:57:57+10:00",
   "mem_free_pct": 56,
   "load": [
-   2.95,
-   3.13,
-   3.44
+   3.02,
+   3.12,
+   3.42
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "78b9606",
+    "date": "2026-11-07T09:57:56+10:00",
+    "subject": "Price the head office franchise to pay back in under two weeks at 3.5 stars (X11)",
+    "body": "",
+    "stat": "3 files changed, 13 insertions(+), 5 deletions(-)"
+   },
    {
     "sha": "a0aedee",
     "date": "2026-11-07T09:56:44+10:00",
@@ -4416,19 +4429,12 @@
     "subject": "Don't start serving at an unserved till while another till is served, and drop dead queue code",
     "body": "The front customer unloaded onto the empty counter and waited out their patience there instead\nof moving to the served till. Also removes unreachable lines after cig_wall_till's return.\nReview round 2, N2 and N21.",
     "stat": "3 files changed, 35 insertions(+), 11 deletions(-)"
-   },
-   {
-    "sha": "9c37344",
-    "date": "2026-11-07T07:47:56+10:00",
-    "subject": "Document closing early, the short-night warnings, and the streak reset at the Bank",
-    "body": "",
-    "stat": "2 files changed, 11 insertions(+), 6 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 203
+  "total_commits": 204
  },
- "updated": "2026-11-07T09:57:11+10:00",
+ "updated": "2026-11-07T09:57:58+10:00",
  "qa": [
   {
    "num": 1,

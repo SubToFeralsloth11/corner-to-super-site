@@ -1,17 +1,17 @@
 {
  "generated": "2026-11-07T09:57+10:00",
- "head": "a0aedee",
+ "head": "78b9606",
  "stats": {
-  "commits": 203,
+  "commits": 204,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T09:56:44+10:00",
+  "last_commit": "2026-11-07T09:57:56+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 28808,
+  "gd_lines": 28812,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1316,6 +1316,11 @@
    "sha": "a0aedee",
    "date": "2026-11-07T09:56:44+10:00",
    "subject": "One complaint and one price decision per wall product, and no found-everything bonus after a wall letdown (X8, X12)"
+  },
+  {
+   "sha": "78b9606",
+   "date": "2026-11-07T09:57:56+10:00",
+   "subject": "Price the head office franchise to pay back in under two weeks at 3.5 stars (X11)"
   }
  ],
  "commits_per_hour": [
@@ -1485,7 +1490,7 @@
   },
   {
    "hour": "2026-11-07T09:00:00+10:00",
-   "commits": 26
+   "commits": 27
   }
  ],
  "sections": [
