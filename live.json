@@ -28,10 +28,11 @@
      "file": "scripts/fixtures/slot.gd:202-205, stock_math.gd:12-15",
      "detail": "capacity_mult adds height layers with no clearance check: peas/chips tower to ~1.55 m on a 0.9 m cabinet.",
      "by": "CritShelves",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "f9b156b",
+     "note": "Four front-to-back bays piled to the rim; stock/m7 tests pass (72/76)",
+     "closed": "2026-11-06T20:22:27+10:00"
     },
     {
      "id": "S2",
@@ -64,10 +65,11 @@
      "file": "slot.gd:53",
      "detail": "Labels placed at slot front, which is below the rim/behind the front wall for chest freezers. [unverified render]",
      "by": "CritShelves",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-06T20:20:21+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "f9b156b",
+     "note": "label_pos puts labels on the rim; visual check pending screenshot tour",
+     "closed": "2026-11-06T20:22:27+10:00"
     },
     {
      "id": "S5",
@@ -433,6 +435,16 @@
    "t": "2026-11-06T20:22:13+10:00",
    "kind": "question",
    "msg": "Question #3 answered: Is the live loop working or started yet?"
+  },
+  {
+   "t": "2026-11-06T20:22:27+10:00",
+   "kind": "fix",
+   "msg": "R3/S1 fixed f9b156b Four front-to-back bays piled to the rim; stock/m7 tests pass (72/76)"
+  },
+  {
+   "t": "2026-11-06T20:22:27+10:00",
+   "kind": "fix",
+   "msg": "R3/S4 fixed f9b156b label_pos puts labels on the rim; visual check pending screenshot tour"
   }
  ],
  "tests": [
@@ -467,13 +479,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-06T20:22:13+10:00",
-  "mem_free_pct": 50,
-  "load": [],
-  "godot_procs": 3
+  "t": "2026-11-06T20:22:27+10:00",
+  "mem_free_pct": 51,
+  "load": [
+   2.31,
+   2.5,
+   2.85
+  ],
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "f9b156b",
+    "date": "2026-11-06T20:22:22+10:00",
+    "subject": "Pile chest-freezer stock inside the well instead of through the lid, and put its price labels on the rim",
+    "body": "The 3x capacity_mult stacked bags up to 0.65 m above the closed lid. The well is now four\nfront-to-back bays piled to the rim (fixture key 'piled'), which also fits PIZZA, and the\nfixture's 'label_pos' lifts the labels out of the cabinet. Review round 2, S1 and S4.",
+    "stat": "7 files changed, 39 insertions(+), 30 deletions(-)"
+   },
    {
     "sha": "666830b",
     "date": "2026-11-06T15:22:29+10:00",
@@ -886,27 +909,12 @@
     "subject": "Add build mode, furniture flat-packs, expansions and the stockroom shed with racks",
     "body": "",
     "stat": "58 files changed, 2566 insertions(+), 96 deletions(-)"
-   },
-   {
-    "sha": "765bcc5",
-    "date": "2026-11-05T20:41:18+10:00",
-    "subject": "Add the staff_uniform_m/f humans with the store badge",
-    "body": "",
-    "stat": "11 files changed, 201 insertions(+), 6 deletions(-)"
    }
   ],
-  "dirty": [
-   " M data/fixtures.json",
-   " M docs/ARCHITECTURE.md",
-   " M docs/ECONOMY.md",
-   " M scripts/autoload/catalog.gd",
-   " M scripts/core/stock_math.gd",
-   " M scripts/fixtures/slot.gd",
-   " M tests/cases/m7_content_test.gd"
-  ],
-  "total_commits": 111
+  "dirty": [],
+  "total_commits": 112
  },
- "updated": "2026-11-06T20:22:14+10:00",
+ "updated": "2026-11-06T20:22:28+10:00",
  "qa": [
   {
    "num": 1,
