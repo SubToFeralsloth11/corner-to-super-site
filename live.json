@@ -98,6 +98,21 @@
    "t": "2026-11-06T20:19:42+10:00",
    "kind": "status",
    "msg": "Status: reviewing - Critics writing up (~18 checkout, ~15 shelf findings); full suite re-running"
+  },
+  {
+   "t": "2026-11-06T20:19:59+10:00",
+   "kind": "test",
+   "msg": "Tests: 947 passed, 0 failed baseline before cycle 1 fixes (tests/run_tests.sh, 30 s)"
+  },
+  {
+   "t": "2026-11-06T20:19:59+10:00",
+   "kind": "agent",
+   "msg": "Agent baseline-tests: done 947 passed, 0 failed"
+  },
+  {
+   "t": "2026-11-06T20:19:59+10:00",
+   "kind": "finding",
+   "msg": "Note: headless M7 full-store probe reports CPU/frame mean 292 ms, p95 1325 ms (20 shoppers, 564 slots) - queued for perf round R10"
   }
  ],
  "tests": [
@@ -106,6 +121,12 @@
    "passed": 930,
    "failed": 0,
    "note": "last recorded full suite before loop (PROGRESS.md M9)"
+  },
+  {
+   "t": "2026-11-06T20:19:59+10:00",
+   "passed": 947,
+   "failed": 0,
+   "note": "baseline before cycle 1 fixes (tests/run_tests.sh, 30 s)"
   }
  ],
  "agents": {
@@ -120,20 +141,20 @@
    "t": "2026-11-06T20:11:25+10:00"
   },
   "baseline-tests": {
-   "state": "failed",
-   "task": "gt test killed at 600s (no --fixed-fps); re-running via tests/run_tests.sh",
-   "t": "2026-11-06T20:19:41+10:00"
+   "state": "done",
+   "task": "947 passed, 0 failed",
+   "t": "2026-11-06T20:19:59+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-06T20:19:42+10:00",
-  "mem_free_pct": 39,
+  "t": "2026-11-06T20:19:59+10:00",
+  "mem_free_pct": 46,
   "load": [
-   3.24,
-   2.89,
-   3.06
+   2.68,
+   2.79,
+   3.01
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
@@ -561,7 +582,7 @@
   "dirty": [],
   "total_commits": 111
  },
- "updated": "2026-11-06T20:19:43+10:00",
+ "updated": "2026-11-06T20:20:00+10:00",
  "qa": [
   {
    "num": 1,
