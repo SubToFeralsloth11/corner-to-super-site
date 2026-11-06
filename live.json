@@ -1585,10 +1585,11 @@
      "file": "scripts/autoload/settings.gd:145-152, scripts/ui/options.gd:69-72,118-122, scripts/world/lighting.gd:67, scripts/fixtures/pc_desk.gd:86-89,100-101",
      "detail": "Every `value_changed` calls `_store`, which does a ConfigFile load and save to disk and then `changed.emit()`. `Lighting.apply_quality` runs on every emit and resets `scaling_3d_scale` and FXAA, and sets the shadow atlas and environment. Dragging a volume slider therefore writes the file about 20 times. With today's focus-loss pause, you can open Options while sitting at the PC. Any change there (even volume) sets the viewport back to 0.85 with FXAA, so ShopOS smears again (M3). Standing up then restores the `_scale_before` taken before the change. Fix: save on `drag_ended` and debounce, emit a graphics-specific signal that `apply_quality` listens to, and have PcDesk re-apply its overrides or read the preset again on unfocus.",
      "by": "CritPlayer",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:40:31+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "bf35689",
+     "note": "menu_test 81/81 incl. settings round trip",
+     "closed": "2026-11-07T09:50:58+10:00"
     },
     {
      "id": "Y11",
@@ -3764,6 +3765,11 @@
    "t": "2026-11-07T09:50:55+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixRegress: X2 attended above room"
+  },
+  {
+   "t": "2026-11-07T09:50:58+10:00",
+   "kind": "fix",
+   "msg": "C2/Y10 fixed bf35689 menu_test 81/81 incl. settings round trip"
   }
  ],
  "tests": [
@@ -3905,8 +3911,8 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:50:55+10:00",
-  "mem_free_pct": 55,
+  "t": "2026-11-07T09:50:58+10:00",
+  "mem_free_pct": 56,
   "load": [
    5.02,
    4.3,
@@ -4345,7 +4351,7 @@
   ],
   "total_commits": 195
  },
- "updated": "2026-11-07T09:50:56+10:00",
+ "updated": "2026-11-07T09:50:58+10:00",
  "qa": [
   {
    "num": 1,
