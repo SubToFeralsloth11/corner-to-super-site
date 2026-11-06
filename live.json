@@ -1808,10 +1808,11 @@
      "file": "scripts/ui/day_summary.gd:134",
      "detail": "max_concurrent(tills, level) has no staff term, so \"Another till or a cashier lets more people in at once\" is wrong about cashiers. Also, CustomerSpawner books all `pending` as turned away whenever phase != OPEN (customer_spawner.gd:30), including after a voluntary close_early. Those people show as \"Turned away, store full\" with advice to buy a till. Fix: drop \"or a cashier\". Only count pending at the 22:00 close, or tag close-early leavers separately.",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:58+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e65fe0e",
+     "note": "text fixed; close-early count part left to FixRegress (spawner)",
+     "closed": "2026-11-07T09:51:21+10:00"
     },
     {
      "id": "X14",
@@ -3788,6 +3789,11 @@
    "t": "2026-11-07T09:51:19+10:00",
    "kind": "fix",
    "msg": "C2/X20 fixed 3dd9256 hold and queue switch target only is_staffed() tills (seated/cashier); standing behind a counter still counts for picking a queue (shortest_queue ranks staffed above merely attended). checkout_test 74/0"
+  },
+  {
+   "t": "2026-11-07T09:51:21+10:00",
+   "kind": "fix",
+   "msg": "C2/X13 fixed e65fe0e text fixed; close-early count part left to FixRegress (spawner)"
   }
  ],
  "tests": [
@@ -3929,7 +3935,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:51:19+10:00",
+  "t": "2026-11-07T09:51:21+10:00",
   "mem_free_pct": 56,
   "load": [
    3.94,
@@ -4366,7 +4372,7 @@
   ],
   "total_commits": 197
  },
- "updated": "2026-11-07T09:51:19+10:00",
+ "updated": "2026-11-07T09:51:22+10:00",
  "qa": [
   {
    "num": 1,
