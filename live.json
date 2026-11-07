@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C2",
   "area": "Second pass",
-  "activity": "FixRegress: Y3 cashier till identity, Y12 review save",
+  "activity": "FixRegress: Y3 stable till ids",
   "cycle": "2",
-  "since": "2026-11-07T10:04:40+10:00"
+  "since": "2026-11-07T10:05:34+10:00"
  },
  "rounds": [
   {
@@ -3919,6 +3919,11 @@
    "t": "2026-11-07T10:05:27+10:00",
    "kind": "fix",
    "msg": "C2/Y12 fixed da7cfff game.gd half: pending_review in save_state/load_state (+ARCHITECTURE save format). Reopen-after-load and clear-on-close in main.gd handed to lead. test_an_unread_weekly_review_survives_a_save; save_test 33/0"
+  },
+  {
+   "t": "2026-11-07T10:05:34+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixRegress: Y3 stable till ids"
   }
  ],
  "tests": [
@@ -4060,12 +4065,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:05:27+10:00",
+  "t": "2026-11-07T10:05:34+10:00",
   "mem_free_pct": 43,
   "load": [
-   6.03,
-   4.77,
-   3.99
+   5.8,
+   4.76,
+   4.0
   ],
   "godot_procs": 3
  },
@@ -4497,7 +4502,7 @@
   ],
   "total_commits": 213
  },
- "updated": "2026-11-07T10:05:28+10:00",
+ "updated": "2026-11-07T10:05:35+10:00",
  "qa": [
   {
    "num": 1,
