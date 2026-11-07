@@ -2538,10 +2538,11 @@
      "file": "data/customers.json:113; scripts/autoload/game.gd:918-925",
      "detail": "Late days serve 122-134 customers, so the stars reflect the last ~3 game hours. End-of-day stars went 3.47 → 3.98 → 3.59 on days 28-30. The head-office payment (reputation at Sunday close × $1,000) is a lottery worth about ±$400 a week. Fix: window = clamp(yesterday's customers, 40, 150), or a moving average with weight 1/100. Expected: day-to-day swing ≈±0.1 and steady weekly payouts.",
      "by": "CritBalance",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:18:41+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "22bd582",
+     "note": "reputation window = clamp(yesterday customers,40,150); test_busy_stores_average_their_stars_over_the_day",
+     "closed": "2026-11-07T12:38:43+10:00"
     },
     {
      "id": "B9",
@@ -6051,6 +6052,11 @@
    "t": "2026-11-07T12:38:40+10:00",
    "kind": "fix",
    "msg": "C4/B7 fixed 22bd582 cap_at = min(cap,max(6,round(cap*min(1,curve*0.75)))); test_the_store_fills_up_at_the_rushes"
+  },
+  {
+   "t": "2026-11-07T12:38:43+10:00",
+   "kind": "fix",
+   "msg": "C4/B8 fixed 22bd582 reputation window = clamp(yesterday customers,40,150); test_busy_stores_average_their_stars_over_the_day"
   }
  ],
  "tests": [
@@ -6261,7 +6267,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:38:40+10:00",
+  "t": "2026-11-07T12:38:43+10:00",
   "mem_free_pct": 54,
   "load": [
    1.95,
@@ -6700,7 +6706,7 @@
   ],
   "total_commits": 276
  },
- "updated": "2026-11-07T12:38:41+10:00",
+ "updated": "2026-11-07T12:38:43+10:00",
  "qa": [
   {
    "num": 1,
