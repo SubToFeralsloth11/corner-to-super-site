@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T11:01+10:00",
- "head": "b7eee56",
+ "generated": "2026-11-07T11:12+10:00",
+ "head": "58a68a9",
  "stats": {
-  "commits": 239,
+  "commits": 240,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T10:59:12+10:00",
+  "last_commit": "2026-11-07T11:12:27+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 29633,
+  "gd_lines": 29828,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1503,6 +1503,11 @@
    "sha": "b7eee56",
    "date": "2026-11-07T10:59:12+10:00",
    "subject": "Record review cycles 2 and 3 in PROGRESS"
+  },
+  {
+   "sha": "58a68a9",
+   "date": "2026-11-07T11:12:27+10:00",
+   "subject": "Open a staff doorway from the shed into the shop once col 0 stands beside it (L2)"
   }
  ],
  "commits_per_hour": [
@@ -1677,6 +1682,10 @@
   {
    "hour": "2026-11-07T10:00:00+10:00",
    "commits": 35
+  },
+  {
+   "hour": "2026-11-07T11:00:00+10:00",
+   "commits": 1
   }
  ],
  "sections": [

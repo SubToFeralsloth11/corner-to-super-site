@@ -2204,10 +2204,11 @@
      "file": "data/fixtures.json:1106; scripts/world/stockroom.gd:15,81-82,113-121; scripts/npc/restocker_job.gd:181-197",
      "detail": "`storage_rack` has `placement: \"stockroom\"`. The shed stands at x −22…−14, and its only opening is the roller door facing the car park (door point (−16, 0, 1.2)). After E5 the store's column 0 sits right against the shed, but `_module` just lines that wall and adds no doorway. Every rack-to-shelf trip, for the player and for restockers, goes out of the roller door, about 16 m along the apron, in through the front door, then up to 24 m into the store, and back again. [INFERENCE from coordinates] One tier-1 restocker (1.2 m/s) takes roughly 50–85 s per slot refill, about 10 refills in a 12-minute day. Four of them move about 1,000 units a day, while a level-16 store sells several thousand ((2.5+16)×0.88×1.5 ≈ 24 customers an hour × ~14-item lists). Hiring restockers barely helps. **Fix:** cut a doorway in the shared wall once column 0 row 0 or 1 is unlocked (build it in `Stockroom._module` when `store_side`, gap it in `Building`, and keep a clear strip in `BuildRules`). Or let racks stand in the shop (`placement: \"any\"`).",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:09+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "58a68a9",
+     "note": "Staff doorway shed->shop (x=-14, z -2.9..-1.5) once E5+shed; nav-only blocker + STAFF-layer NavigationLink3D so customers never route through the shed. staff_jobs_test: rack->col0 shelf staff route 12.6 m vs 38.1 m before, first item 15.8 s vs 34.8 s; restocker never leaves by roller door (before: z 1.29). build/building/nav/m5/save tests pass.",
+     "closed": "2026-11-07T11:12:33+10:00"
     },
     {
      "id": "L3",
@@ -4926,6 +4927,11 @@
    "t": "2026-11-07T11:01:35+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixLate: L2 shed doorway"
+  },
+  {
+   "t": "2026-11-07T11:12:33+10:00",
+   "kind": "fix",
+   "msg": "C3/L2 fixed 58a68a9 Staff doorway shed->shop (x=-14, z -2.9..-1.5) once E5+shed; nav-only blocker + STAFF-layer NavigationLink3D so customers never route through the shed. staff_jobs_test: rack->col0 shelf staff route 12.6 m vs 38.1 m before, first item 15.8 s vs 34.8 s; restocker never leaves by roller door (before: z 1.29). build/building/nav/m5/save tests pass."
   }
  ],
  "tests": [
@@ -5104,17 +5110,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:01:35+10:00",
-  "mem_free_pct": 64,
+  "t": "2026-11-07T11:12:33+10:00",
+  "mem_free_pct": 59,
   "load": [
-   2.69,
-   2.7,
-   2.77
+   2.16,
+   2.45,
+   2.55
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "58a68a9",
+    "date": "2026-11-07T11:12:27+10:00",
+    "subject": "Open a staff doorway from the shed into the shop once col 0 stands beside it (L2)",
+    "body": "Racks only stand in the shed, whose only way out was the roller door, so every rack-to-shelf\ntrip went round the car park and in at the front. With E5 and a shed, the shared wall at\nx = -14 gets a 1.4 x 2.4 m doorway; a nav-only blocker plus a staff-layer NavigationLink3D\nkeep customers routing by the front while staff take the short way. Build mode keeps 1.2 m\nclear either side. The soak logs staff restocks per day.",
+    "stat": "16 files changed, 247 insertions(+), 39 deletions(-)"
+   },
    {
     "sha": "b7eee56",
     "date": "2026-11-07T10:59:12+10:00",
@@ -5527,19 +5540,12 @@
     "subject": "Reshelve an abandoned basket's items instead of throwing them away, and keep them in saves",
     "body": "Putting away a dropped basket destroyed the stock customers had taken off the shelves, and a\nsave dropped it too. Items go back on a slot of their product with room; the rest, and anything\nsaved, comes back as open boxes. Review round 2, cycle 2.",
     "stat": "4 files changed, 69 insertions(+), 4 deletions(-)"
-   },
-   {
-    "sha": "995e7da",
-    "date": "2026-11-07T09:23:55+10:00",
-    "subject": "Make not carrying a product a milder letdown than an empty shelf",
-    "body": "Customers took the full -12 out-of-stock hit for products the store never sold, so a new store\nwas punished for its range rather than its stocking. An empty labelled slot is still -12; a\nproduct with no slot at all is -4 with its own lines. Still a lost sale (the demand signal).\nReview round 2, cycle 2.",
-    "stat": "5 files changed, 34 insertions(+), 4 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 239
+  "total_commits": 240
  },
- "updated": "2026-11-07T11:01:36+10:00",
+ "updated": "2026-11-07T11:12:34+10:00",
  "qa": [
   {
    "num": 1,
