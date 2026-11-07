@@ -2384,10 +2384,11 @@
      "file": "scripts/build/build_mode.gd:104,234",
      "detail": "The navmesh only rebakes in `exit()`. Each `place()`/`sell()` just emits `fixtures_changed`, so walkers replan on the old mesh. They walk into the new shelf, get stuck for 3 s, then hop to the next path point through it. **Fix:** call `world.layout_changed()` after each `place()`/`sell()` during OPEN; `Nav.rebake` already merges back-to-back requests.",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:09+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "2c4a4cd",
+     "note": "BuildMode.place/sell call world.layout_changed() when StaffCrew.shift_on() (PREP-CLOSING). build_test: shelf moved during OPEN, still in build mode -> navmesh clear of its footprint (before: walkable point at its centre).",
+     "closed": "2026-11-07T11:21:42+10:00"
     },
     {
      "id": "L17",
@@ -4993,6 +4994,11 @@
    "t": "2026-11-07T11:20:41+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixLate: L16 rebake during OPEN builds"
+  },
+  {
+   "t": "2026-11-07T11:21:42+10:00",
+   "kind": "fix",
+   "msg": "C3/L16 fixed 2c4a4cd BuildMode.place/sell call world.layout_changed() when StaffCrew.shift_on() (PREP-CLOSING). build_test: shelf moved during OPEN, still in build mode -> navmesh clear of its footprint (before: walkable point at its centre)."
   }
  ],
  "tests": [
@@ -5171,17 +5177,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:20:41+10:00",
-  "mem_free_pct": 55,
+  "t": "2026-11-07T11:21:42+10:00",
+  "mem_free_pct": 52,
   "load": [
-   2.23,
-   2.16,
-   2.3
+   2.21,
+   2.15,
+   2.29
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "2c4a4cd",
+    "date": "2026-11-07T11:21:40+10:00",
+    "subject": "Rebake the navmesh after each placement or sale while people are about (L16)",
+    "body": "",
+    "stat": "3 files changed, 33 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "a02bea2",
     "date": "2026-11-07T11:20:37+10:00",
@@ -5594,19 +5607,12 @@
     "subject": "Shut the previous cooler when stocking the next, open the case when taking stock back, and shut it when you sit down",
     "body": "Review round 2, Y8.",
     "stat": "1 file changed, 14 insertions(+), 4 deletions(-)"
-   },
-   {
-    "sha": "92519bd",
-    "date": "2026-11-07T09:43:34+10:00",
-    "subject": "List the store phone, selling fixtures and closing early on the Controls page (Y9)",
-    "body": "",
-    "stat": "1 file changed, 3 insertions(+), 1 deletion(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 245
+  "total_commits": 246
  },
- "updated": "2026-11-07T11:20:42+10:00",
+ "updated": "2026-11-07T11:21:43+10:00",
  "qa": [
   {
    "num": 1,

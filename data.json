@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T11:20+10:00",
- "head": "a02bea2",
+ "generated": "2026-11-07T11:21+10:00",
+ "head": "2c4a4cd",
  "stats": {
-  "commits": 245,
+  "commits": 246,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T11:20:37+10:00",
+  "last_commit": "2026-11-07T11:21:40+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 30109,
+  "gd_lines": 30140,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1533,6 +1533,11 @@
    "sha": "a02bea2",
    "date": "2026-11-07T11:20:37+10:00",
    "subject": "Have the cleaner do shop-floor messes first and wait by the mop bucket (L10)"
+  },
+  {
+   "sha": "2c4a4cd",
+   "date": "2026-11-07T11:21:40+10:00",
+   "subject": "Rebake the navmesh after each placement or sale while people are about (L16)"
   }
  ],
  "commits_per_hour": [
@@ -1710,7 +1715,7 @@
   },
   {
    "hour": "2026-11-07T11:00:00+10:00",
-   "commits": 6
+   "commits": 7
   }
  ],
  "sections": [
