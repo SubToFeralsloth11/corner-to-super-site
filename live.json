@@ -2269,10 +2269,11 @@
      "file": "scripts/npc/staff_crew.gd:43-61,101-107",
      "detail": "At PREP, `sync()` spawns a new Staff for any member whose old body `is_leaving()` and overwrites `members[id]`. The old restocker, still in WIND_DOWN carrying a box back to the shed (20–40 s at 1.2 m/s), is no longer in `members`, so `carried_boxes()` (and therefore `Save`) misses its box. End day → Pay → Next day is quick enough to trigger this, and its autosave loses up to 40 units if the player quits there. Two identical copies of the same worker (same rig seed) are also visible on the plot. **Fix:** let a leaving member go back to WORK instead of spawning a second body (reset `state` and keep the job), or have `carried_boxes()` walk the `staff` group rather than `members`.",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:09+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "9803a6d",
+     "note": "StaffCrew.sync calls Staff.back_to_work on a leaving member instead of spawning a second body. staff_jobs_test: restocker winding down with a box, sync -> 1 body back at work, box in carried_boxes (before: 2 bodies, box missing).",
+     "closed": "2026-11-07T11:19:33+10:00"
     },
     {
      "id": "L8",
@@ -4971,6 +4972,11 @@
    "t": "2026-11-07T11:17:18+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixLate: L7 restocker twin at PREP"
+  },
+  {
+   "t": "2026-11-07T11:19:33+10:00",
+   "kind": "fix",
+   "msg": "C3/L7 fixed 9803a6d StaffCrew.sync calls Staff.back_to_work on a leaving member instead of spawning a second body. staff_jobs_test: restocker winding down with a box, sync -> 1 body back at work, box in carried_boxes (before: 2 bodies, box missing)."
   }
  ],
  "tests": [
@@ -5149,17 +5155,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:17:18+10:00",
-  "mem_free_pct": 60,
+  "t": "2026-11-07T11:19:33+10:00",
+  "mem_free_pct": 52,
   "load": [
-   2.27,
-   2.11,
-   2.33
+   2.74,
+   2.26,
+   2.35
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "9803a6d",
+    "date": "2026-11-07T11:19:32+10:00",
+    "subject": "Send a worker still leaving back to work at the next shift instead of spawning a twin (L7)",
+    "body": "The old body kept its box out of carried_boxes() and so out of the autosave.",
+    "stat": "4 files changed, 44 insertions(+), 3 deletions(-)"
+   },
    {
     "sha": "64e284c",
     "date": "2026-11-07T11:17:10+10:00",
@@ -5572,19 +5585,12 @@
     "subject": "Hide the crosshair, prompt and tutorial card while using the PC",
     "body": "The crosshair dot sat on the Market's text and the tutorial card covered ShopOS's dock. Review\nround 2, Y6.",
     "stat": "3 files changed, 17 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "3983702",
-    "date": "2026-11-07T09:42:19+10:00",
-    "subject": "Show what each worker is doing in the Staff app and when aimed at, and ask before firing",
-    "body": "Staff.status() was only read by tests, so the restocker's idle reason never reached the player.\nCards now carry a live 'Now: ...' line, aiming at a worker shows their status, and Fire takes\ntwo presses within 3 s. Review round 2, Y2 and Y4.",
-    "stat": "3 files changed, 59 insertions(+), 2 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 243
+  "total_commits": 244
  },
- "updated": "2026-11-07T11:17:18+10:00",
+ "updated": "2026-11-07T11:19:34+10:00",
  "qa": [
   {
    "num": 1,
