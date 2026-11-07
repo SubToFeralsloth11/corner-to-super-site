@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C4",
   "area": "Visuals; balance",
-  "activity": "FixBalance2: soak with --markup=1.3",
+  "activity": "FixBalance2: full test suite",
   "cycle": "5",
-  "since": "2026-11-07T13:51:19+10:00"
+  "since": "2026-11-07T13:57:58+10:00"
  },
  "rounds": [
   {
@@ -6501,6 +6501,11 @@
    "t": "2026-11-07T13:51:19+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixBalance2: soak with --markup=1.3"
+  },
+  {
+   "t": "2026-11-07T13:57:58+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixBalance2: full test suite"
   }
  ],
  "tests": [
@@ -6733,12 +6738,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T13:51:19+10:00",
-  "mem_free_pct": 45,
+  "t": "2026-11-07T13:57:58+10:00",
+  "mem_free_pct": 50,
   "load": [
-   3.25,
-   4.29,
-   4.62
+   3.17,
+   3.78,
+   4.26
   ],
   "godot_procs": 0
  },
@@ -7174,12 +7179,11 @@
    " M scripts/ui/prompt.gd",
    " M scripts/world/building.gd",
    " M scripts/world/world.gd",
-   " M tests/cases/building_test.gd",
-   "?? tests/_dbg_slogan.gd.uid"
+   " M tests/cases/building_test.gd"
   ],
   "total_commits": 292
  },
- "updated": "2026-11-07T13:51:20+10:00",
+ "updated": "2026-11-07T13:57:59+10:00",
  "qa": [
   {
    "num": 1,
