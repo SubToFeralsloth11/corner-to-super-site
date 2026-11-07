@@ -2577,10 +2577,11 @@
      "file": "data/upgrades.json:11-16",
      "detail": "+3 satisfaction ≈ +0.15 stars. Stars don't move customers (B1), so the only return is head office's $1,000/star/week ≈ $150 a week, which takes 20 weeks to pay back and $0 without head office. It is the only unlock at L13. Fix: give it a basket effect (`list_bonus` +1 for members, i.e. +1 item per basket), or make it +3 satisfaction plus +1 item. Expected: about +$430/day at day 30 and roughly a 7-day payback.",
      "by": "CritBalance",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:18:41+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "4bde2d4",
+     "note": "loyalty effect list_bonus +1; test_loyalty_members_fill_bigger_baskets",
+     "closed": "2026-11-07T12:48:08+10:00"
     },
     {
      "id": "B12",
@@ -6108,6 +6109,11 @@
    "t": "2026-11-07T12:48:05+10:00",
    "kind": "fix",
    "msg": "C4/B10 fixed 76c58ba expansion loan L13, $10k/30 days ($383/day)"
+  },
+  {
+   "t": "2026-11-07T12:48:08+10:00",
+   "kind": "fix",
+   "msg": "C4/B11 fixed 4bde2d4 loyalty effect list_bonus +1; test_loyalty_members_fill_bigger_baskets"
   }
  ],
  "tests": [
@@ -6318,12 +6324,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:48:05+10:00",
+  "t": "2026-11-07T12:48:08+10:00",
   "mem_free_pct": 54,
   "load": [
-   3.93,
-   3.03,
-   2.65
+   3.69,
+   3.0,
+   2.64
   ],
   "godot_procs": 3
  },
@@ -6755,7 +6761,7 @@
   ],
   "total_commits": 285
  },
- "updated": "2026-11-07T12:48:06+10:00",
+ "updated": "2026-11-07T12:48:09+10:00",
  "qa": [
   {
    "num": 1,
