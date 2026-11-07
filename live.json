@@ -3930,6 +3930,11 @@
    "t": "2026-11-07T10:06:46+10:00",
    "kind": "fix",
    "msg": "C2/Y3 fixed 18e915f build sell calls Game.till_removed(index) after removal: sold till's cashier -> none (fit_tills gives a free one), later cashiers' indexes drop by one so they keep the same Checkout; CashierJob.set_till keeps its post when the index changes but the till doesn't. test_selling_a_till_leaves_the_other_cashiers_where_they_are; staff_test 61/0"
+  },
+  {
+   "t": "2026-11-07T10:07:46+10:00",
+   "kind": "test",
+   "msg": "Tests: 1086 passed, 0 failed after FixRegress X1-X13,X15,X16,X18-X20,Y3,Y12 fixes; check.sh clean"
   }
  ],
  "tests": [
@@ -4016,6 +4021,12 @@
    "passed": 1043,
    "failed": 0,
    "note": "cycle 2"
+  },
+  {
+   "t": "2026-11-07T10:07:46+10:00",
+   "passed": 1086,
+   "failed": 0,
+   "note": "after FixRegress X1-X13,X15,X16,X18-X20,Y3,Y12 fixes; check.sh clean"
   }
  ],
  "agents": {
@@ -4071,12 +4082,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:06:46+10:00",
-  "mem_free_pct": 47,
+  "t": "2026-11-07T10:07:46+10:00",
+  "mem_free_pct": 46,
   "load": [
-   4.24,
-   4.58,
-   3.99
+   3.19,
+   4.26,
+   3.91
   ],
   "godot_procs": 0
  },
@@ -4506,7 +4517,7 @@
   "dirty": [],
   "total_commits": 215
  },
- "updated": "2026-11-07T10:06:47+10:00",
+ "updated": "2026-11-07T10:07:46+10:00",
  "qa": [
   {
    "num": 1,
