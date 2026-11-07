@@ -2967,7 +2967,188 @@
    "area": "Cycle 5: regressions from cycle 4",
    "started": "2026-11-07T13:20:01+10:00",
    "finished": null,
-   "findings": []
+   "findings": [
+    {
+     "id": "R5-01",
+     "sev": "P2",
+     "title": "Racks get overfilled, so restockers leave boxes on the shed floor where no restocker will collect them",
+     "file": "scripts/npc/restocker_job.gd:193-220, 462-466",
+     "detail": "`_find_haul` adds up `StorageRack.free_spots()` (storage_rack.gd:49, just spots minus stored boxes) and claims up to `min(capacity, free)` bay boxes. It does not hold back spots for boxes already in other restockers' arms: the part-used boxes going back from a shelf trip, or another hauler's load. Two tier-2+ restockers idle in the same 0.75 s look both count the same free spots. A shelf trip takes 2-5 boxes off a rack, a hauler fills those spots straight away, and then the part-used boxes come back to a full rack. When no rack has room, `_head_for_rack` calls `_drop(box)`, which leaves a loose box on the floor beside the rack. `_find_haul` only looks inside `BuildRules.bay_zones()` and `_find` only takes racked boxes, so a box dropped in the shed stays there until the player moves it. The soak AI's \"fill free rack spots\" habit (B14) makes this the normal late-game state. Fix: in `_find_haul`, take away from `free` the stocked boxes in every restocker's arms and the bay boxes other restockers have claimed (`crew.carried_boxes()` plus the claims). Also let `_find_haul` pick up loose stocked boxes inside the stockroom rect, so anything already dropped gets racked again.",
+     "by": "CritRegress5",
+     "status": "open",
+     "found": "2026-11-07T13:47:55+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "R5-02",
+     "sev": "P2",
+     "title": "The green feature wall is painted straight over the shed's staff doorway",
+     "file": "scripts/world/building.gd:337-347 (with :76-77, stockroom.gd INNER_DOOR_Z)",
+     "detail": "`add_feature_wall` paints the whole merged run nearest the first till, corner to corner (2d943a6), with no gap for the doorway (58a68a9). With the default till at (-3.6,-2.6) from settings.json, the nearest non-front run once E5 is owned is x=-14, z 0..-12, about 10.4 m away. The back runs are at least 11.4 m away. That x=-14 run is the one `_wall_round_shed_door` splits for the doorway (z -2.9..-1.5, 2.4 m high). So on the normal progression (S1 at L2, E5 at L8, till never moved), a green plaster panel covers the opening from 1.23 m to 2.4 m while staff walk through it. Fix: when `Stockroom.has_inner_door(...)` and `_holds_shed_door(best)`, build the skin in two pieces either side of `inner_door_span()` plus a lintel piece from INNER_DOOR_H up to WALL_H, the same way `_wall_round_shed_door` does.",
+     "by": "CritRegress5",
+     "status": "open",
+     "found": "2026-11-07T13:47:55+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "R5-03",
+     "sev": "P2",
+     "title": "Clicking a Market tab or the Needs-stock switch frees the button while it is still emitting its signal",
+     "file": "scripts/ui/pc/app_market.gd:180-198 (show_tab and show_needs → _rebuild → _build_tabs `c.free()`)",
+     "detail": "`UiKit.button` connects `pressed` directly (ui_kit.gd:84). `show_tab` and `show_needs` call `_rebuild()` synchronously, and `_build_tabs()` immediately `free()`s every child of `_tabs`, including the Button or CheckButton that is emitting `pressed` or `toggled`. In Godot 4 that logs \"freed … while a signal is being emitted from it\", and BaseButton then keeps running on a deleted object. Tests and the soak call `show_tab()` directly, so the click path is never exercised. Other apps defer their rebuilds (my_store `_queue_refresh`). [UNVERIFIED at runtime] Fix: connect with `CONNECT_DEFERRED` or call `_rebuild.call_deferred()` from `show_tab` and `show_needs`, or `queue_free()` plus `remove_child` in `_build_tabs`.",
+     "by": "CritRegress5",
+     "status": "open",
+     "found": "2026-11-07T13:47:55+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "R5-04",
+     "sev": "P2",
+     "title": "A missed handful of produce costs the \"found everything\" bonus by itself",
+     "file": "scripts/npc/shopper_brain.gd:82, 611-613; scripts/npc/customer_rules.gd:110-112",
+     "detail": "B2 made the bonus allow misses up to 10% of `_wanted_units`, and `_wanted_units = p_list.size()` counts units. B4 then put 3-6 units on the list per produce pick. One refused or not-stocked produce product adds 3-6 to `_missed` (shopper_brain.gd:266/314). A 15-unit late-game basket allows 1.5, so missing one produce product loses the bonus where missing any other single product doesn't. The 15% `unstocked_pick_chance` draws from every licensed product, so a store holding the Produce licence but not stocking all six produce items triggers this often. Fix: count misses and the total per product (one per list entry or qty key), or weight each pick as one.",
+     "by": "CritRegress5",
+     "status": "open",
+     "found": "2026-11-07T13:47:55+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "R5-05",
+     "sev": "P3",
+     "title": "A restocker opens a fresh box of a product while still carrying a part-used box of that same product",
+     "file": "scripts/npc/restocker_job.gd:370-375, 382-400",
+     "detail": "`_after_slot` only chains the box in hand to a slot under LOW_FILL (0.5) beyond 6 m. `_next_box` then tries the boxes in their arms with `_claim_next_slot(1.0)`. `_rack_extras` deliberately picks the same product first, so a full box of that product often qualifies for a 50-99% slot that the part-used box was just refused. The part-used box goes back on the pile and a new one is opened, so two part-used boxes of one product go back to the racks and take extra spots. Fix: in `_after_slot`, when the pile holds more of `box.product_id`, chain the box in hand with `below = 1.0`. Or have `_next_box` skip boxes of the held box's product while the held box still has stock.",
+     "by": "CritRegress5",
+     "status": "open",
+     "found": "2026-11-07T13:47:55+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "R5-06",
+     "sev": "P3",
+     "title": "Produce handfuls give most produce shoppers a trolley",
+     "file": "scripts/npc/shopper.gd:42; customer_rules.gd:110-112",
+     "detail": "`uses_trolley = list.size() > basket_max_items (6)` counts units, and since B4 one produce pick adds 3-6 units. A one-pick list with 6 apples plus any second item already needs a trolley, so trolley use rises a lot after the Produce licence. Trolleys behave differently: parking, `abandon_carrier`, and the dropped \"trolley\" mess. Fix: compare `brain.list.size()` (distinct products) or the number of picks with `basket_max_items`, or pass the pick count separately.",
+     "by": "CritRegress5",
+     "status": "open",
+     "found": "2026-11-07T13:47:55+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "R5-07",
+     "sev": "P3",
+     "title": "The star window is sized by sales, not visits, and shrinks after a single quiet day",
+     "file": "scripts/autoload/game.gd:921-924 (with :142, shopper_brain.gd:670)",
+     "detail": "`reputation_window()` uses `stats_days[-1].customers`, which `_count_sale` only increases for paying customers. `record_satisfaction` runs for every visitor who leaves, including walk-outs and people who give up. One poor day (empty shelves, closed early) cuts yesterday's 130-150 window to 40, and the next `record_satisfaction` pops about 100 entries at once. That brings back the day-to-day swing B8 was meant to remove; game_test `test_busy_stores_average…` even shows the collapse. Fix: count visits (a `today.visits` incremented in `_gone`, saved with the day stats) and either ease the window down by a limited amount per day or average it over a few days.",
+     "by": "CritRegress5",
+     "status": "open",
+     "found": "2026-11-07T13:47:55+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "R5-08",
+     "sev": "P3",
+     "title": "Saved restocker boxes stack in one pile counter across all restockers, so later boxes spawn metres up",
+     "file": "scripts/autoload/save.gd:72-77",
+     "detail": "`pile` is set to 0 once and goes up for every box from `crew.carried_boxes()`. With 6 restockers carrying 2-5 boxes each (B3), the 12th box is saved at y = 5.55 m and the 20th at 9.55 m. They spawn above the 3.2 m ceiling and the 4.2 m shed roof, neither of which has a collider (building.gd:143-174), and drop onto the floor and shelves on load. The comment says each restocker makes its own pile. Fix: loop over `crew.workers()`, reset `pile = 0` for each worker, then add that worker's `job.carried()`.",
+     "by": "CritRegress5",
+     "status": "open",
+     "found": "2026-11-07T13:47:56+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "R5-09",
+     "sev": "P3",
+     "title": "The level banner still plays over ShopOS while you are seated",
+     "file": "scripts/ui/level_banner.gd:99-125",
+     "detail": "`_held` is only checked in `show_level` and `set_pc_focused`. A banner that is already up when you sit down keeps showing. When it ends, `tw.chain().tween_callback(_next)` pops the next queued level without checking `_held`, so a second queued banner plays over ShopOS. Fix: start `_next()` with `if _held: _busy = false; _band.visible = false; return`, and hide or pause the current banner in `set_pc_focused(true)`.",
+     "by": "CritRegress5",
+     "status": "open",
+     "found": "2026-11-07T13:47:56+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "R5-10",
+     "sev": "P3",
+     "title": "The aim-prompt pill stays off-centre after a window resize or UI-scale switch",
+     "file": "scripts/ui/prompt.gd:71-78",
+     "detail": "The pill is only positioned when the prompt text changes. If the window crosses the 900 px line that `Settings._apply_ui_scale` uses (fullscreen toggle, resize), the layout goes from 1600x900 to about 1920x1080, but the pill keeps its old place until you aim at something else. Fix: reposition every frame, or on the parent's `resized` and the window's `size_changed`.",
+     "by": "CritRegress5",
+     "status": "open",
+     "found": "2026-11-07T13:47:56+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "R5-11",
+     "sev": "P3",
+     "title": "The Options \"Change helper\" toggle missed the new switch style",
+     "file": "scripts/ui/options.gd:73-80",
+     "detail": "V12 (01bfa7f) styled `_toggle()` (options.gd:147), the change panel and the Market, but the Change-helper CheckButton built directly at :73 never calls `UiKit.style_switch`. It still shows the default near-invisible \"off\" dot the commit was meant to fix. Fix: call `UiKit.style_switch(_helper)` after creating it.",
+     "by": "CritRegress5",
+     "status": "open",
+     "found": "2026-11-07T13:47:56+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "R5-12",
+     "sev": "P3",
+     "title": "Gondola end caps hard-code the store name",
+     "file": "scripts/fixtures/fixture.gd:138",
+     "detail": "`l.text = \"CORNER TO SUPER\"`, while every other name surface reads `Catalog.settings()[\"store_name\"]` (pos.gd:67, day_summary.gd:155, shop_os.gd:108, main_menu.gd:66). Changing the name in settings.json leaves every gondola end showing the old one. Fix: use `str(Catalog.settings().get(\"store_name\", \"\")).to_upper()`.",
+     "by": "CritRegress5",
+     "status": "open",
+     "found": "2026-11-07T13:47:56+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "R5-13",
+     "sev": "P3",
+     "title": "Knock-through rubble always falls white, even when the wall coming down is the green feature wall",
+     "file": "scripts/build/expansion.gd:43-59",
+     "detail": "V21 says the pieces take \"the wall's own finish\", but the material is always the fixed plaster or wainscot colour. The start shop's feature wall is the x=-6 wall, nearest the default till, and E3 knocks it out, so the first big knock-through drops white pieces out of a green wall. Fix: if a removed piece lies on the feature-wall run (`world.building` can return that run), use `Building.STORE_GREEN` for the rows above WAINSCOT_H.",
+     "by": "CritRegress5",
+     "status": "open",
+     "found": "2026-11-07T13:47:56+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "R5-14",
+     "sev": "P3",
+     "title": "Docs and code comments lag behind tier 4 and the box chaining order",
+     "file": "docs/GDD.md:287; scripts/npc/restocker_job.gd:3-6; scripts/npc/cleaner_job.gd:5",
+     "detail": "GDD §10 says \"2/3/4 boxes by tier\" and the restocker header says \"0.30/0.20/0.12 s, 1.2/1.5/1.8 m/s, 2/3/4 boxes\". staff.json now has 4 tiers: 2/3/4/5 boxes, 0.08 s and 2.1 m/s at tier 4. The cleaner header still says 2.0/1.3/0.8 s, but tier 4 is 0.5. GDD also says \"the next box goes to its product's emptiest slot\", but `_claim_next_slot` picks the nearest slot within 6 m first. Fix: add the tier-4 numbers and say \"nearest within 6 m, else the emptiest\".",
+     "by": "CritRegress5",
+     "status": "open",
+     "found": "2026-11-07T13:47:56+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "R5-15",
+     "sev": "P3",
+     "title": "The slogan test reads a private field instead of checking what's in the scene",
+     "file": "tests/cases/building_test.gd:79",
+     "detail": "`w.building.get(\"_slogans\")` ties the test to an internal array of [segment, Label3D]. Renaming it or storing it differently fails the test (or `get` returns null) even when the lettering is fine. Fix: find the `WallSlogan` Label3D nodes under `w.building` (`find_children(\"WallSlogan\", \"Label3D\")`) and check their pose against `w.building.segments`.",
+     "by": "CritRegress5",
+     "status": "open",
+     "found": "2026-11-07T13:47:56+10:00",
+     "commit": "",
+     "note": ""
+    }
+   ]
   }
  ],
  "log": [
@@ -6225,6 +6406,86 @@
    "t": "2026-11-07T13:20:01+10:00",
    "kind": "status",
    "msg": "Status: fixing - C4 visual fixes in (22 of 25); FixBalance2 tuning soak; CritRegress5 reviewing"
+  },
+  {
+   "t": "2026-11-07T13:47:55+10:00",
+   "kind": "finding",
+   "msg": "C5/R5-01 [P2] Racks get overfilled, so restockers leave boxes on the shed floor where no restocker will collect them"
+  },
+  {
+   "t": "2026-11-07T13:47:55+10:00",
+   "kind": "finding",
+   "msg": "C5/R5-02 [P2] The green feature wall is painted straight over the shed's staff doorway"
+  },
+  {
+   "t": "2026-11-07T13:47:55+10:00",
+   "kind": "finding",
+   "msg": "C5/R5-03 [P2] Clicking a Market tab or the Needs-stock switch frees the button while it is still emitting its signal"
+  },
+  {
+   "t": "2026-11-07T13:47:55+10:00",
+   "kind": "finding",
+   "msg": "C5/R5-04 [P2] A missed handful of produce costs the \"found everything\" bonus by itself"
+  },
+  {
+   "t": "2026-11-07T13:47:55+10:00",
+   "kind": "finding",
+   "msg": "C5/R5-05 [P3] A restocker opens a fresh box of a product while still carrying a part-used box of that same product"
+  },
+  {
+   "t": "2026-11-07T13:47:55+10:00",
+   "kind": "finding",
+   "msg": "C5/R5-06 [P3] Produce handfuls give most produce shoppers a trolley"
+  },
+  {
+   "t": "2026-11-07T13:47:55+10:00",
+   "kind": "finding",
+   "msg": "C5/R5-07 [P3] The star window is sized by sales, not visits, and shrinks after a single quiet day"
+  },
+  {
+   "t": "2026-11-07T13:47:56+10:00",
+   "kind": "finding",
+   "msg": "C5/R5-08 [P3] Saved restocker boxes stack in one pile counter across all restockers, so later boxes spawn metres up"
+  },
+  {
+   "t": "2026-11-07T13:47:56+10:00",
+   "kind": "finding",
+   "msg": "C5/R5-09 [P3] The level banner still plays over ShopOS while you are seated"
+  },
+  {
+   "t": "2026-11-07T13:47:56+10:00",
+   "kind": "finding",
+   "msg": "C5/R5-10 [P3] The aim-prompt pill stays off-centre after a window resize or UI-scale switch"
+  },
+  {
+   "t": "2026-11-07T13:47:56+10:00",
+   "kind": "finding",
+   "msg": "C5/R5-11 [P3] The Options \"Change helper\" toggle missed the new switch style"
+  },
+  {
+   "t": "2026-11-07T13:47:56+10:00",
+   "kind": "finding",
+   "msg": "C5/R5-12 [P3] Gondola end caps hard-code the store name"
+  },
+  {
+   "t": "2026-11-07T13:47:56+10:00",
+   "kind": "finding",
+   "msg": "C5/R5-13 [P3] Knock-through rubble always falls white, even when the wall coming down is the green feature wall"
+  },
+  {
+   "t": "2026-11-07T13:47:56+10:00",
+   "kind": "finding",
+   "msg": "C5/R5-14 [P3] Docs and code comments lag behind tier 4 and the box chaining order"
+  },
+  {
+   "t": "2026-11-07T13:47:56+10:00",
+   "kind": "finding",
+   "msg": "C5/R5-15 [P3] The slogan test reads a private field instead of checking what's in the scene"
+  },
+  {
+   "t": "2026-11-07T13:47:56+10:00",
+   "kind": "agent",
+   "msg": "Agent CritRegress5: done 15 regression findings (4 P2)"
   }
  ],
  "tests": [
@@ -6451,18 +6712,18 @@
    "t": "2026-11-07T13:06:59+10:00"
   },
   "CritRegress5": {
-   "state": "running",
-   "task": "Reviewing ~60 recent commits for regressions",
-   "t": "2026-11-07T13:20:01+10:00"
+   "state": "done",
+   "task": "15 regression findings (4 P2)",
+   "t": "2026-11-07T13:47:56+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T13:20:01+10:00",
-  "mem_free_pct": 52,
+  "t": "2026-11-07T13:47:56+10:00",
+  "mem_free_pct": 35,
   "load": [
-   4.16,
-   4.0,
-   3.64
+   5.42,
+   5.64,
+   5.09
   ],
   "godot_procs": 3
  },
@@ -6891,13 +7152,15 @@
   ],
   "dirty": [
    " M data/customers.json",
+   " M data/levels.json",
    " M scripts/npc/customer_rules.gd",
+   " M tests/cases/progression_test.gd",
    " M tests/soak_player.gd",
    "?? tests/_dbg_slogan.gd.uid"
   ],
   "total_commits": 290
  },
- "updated": "2026-11-07T13:20:02+10:00",
+ "updated": "2026-11-07T13:47:58+10:00",
  "qa": [
   {
    "num": 1,
