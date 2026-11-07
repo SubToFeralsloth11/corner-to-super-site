@@ -2551,10 +2551,11 @@
      "file": "data/expansions.json:149+; data/upgrades.json",
      "detail": "Day 30: $10,094 cash, $3,883/day net; bills are $1,076, 15% of revenue. Everything left to buy (E7 $5.5k, E8 $7.5k, deli $1.5k, loyalty $3k, head office $6k, staff tiers ≈$7k, extra fixtures and tills) ≈$35k, all affordable by about day 37 [INFERENCE]. After that money has no use. Fix: with B5's basket bonus, raise E6, E7 and E8 to $6k/$9k/$14k (still paying back in ~3-4 weeks at +$350-450/day), and add one recurring sink with a real effect, e.g. a staff T4 tier or self-checkout kiosks. Expected: cash at day 30 around $2-5k and E8 still a goal.",
      "by": "CritBalance",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:18:41+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "66d092f",
+     "note": "staff T4 tier (wages +$35/day each, $1.6k upgrades), E6/E7/E8 $6k/$9k/$14k; test_a_fourth_tier_costs_more_every_night",
+     "closed": "2026-11-07T12:48:02+10:00"
     },
     {
      "id": "B10",
@@ -6096,6 +6097,11 @@
    "t": "2026-11-07T12:47:29+10:00",
    "kind": "shots",
    "msg": "Screenshots refreshed: 56 images Cycle 4: green header, cooler glow, rubble"
+  },
+  {
+   "t": "2026-11-07T12:48:02+10:00",
+   "kind": "fix",
+   "msg": "C4/B9 fixed 66d092f staff T4 tier (wages +$35/day each, $1.6k upgrades), E6/E7/E8 $6k/$9k/$14k; test_a_fourth_tier_costs_more_every_night"
   }
  ],
  "tests": [
@@ -6306,17 +6312,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:47:29+10:00",
-  "mem_free_pct": 55,
+  "t": "2026-11-07T12:48:02+10:00",
+  "mem_free_pct": 54,
   "load": [
-   5.04,
-   3.11,
-   2.66
+   3.93,
+   3.03,
+   2.65
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "3a01935",
+    "date": "2026-11-07T12:47:55+10:00",
+    "subject": "Bring restockers to level 7 and loyalty cards to level 11 so every level unlocks something (B12)",
+    "body": "",
+    "stat": "5 files changed, 38 insertions(+), 10 deletions(-)"
+   },
    {
     "sha": "ade3d4e",
     "date": "2026-11-07T12:47:26+10:00",
@@ -6729,24 +6742,14 @@
     "subject": "Stop rebuilding the hidden tutorial card every frame at the PC (F13)",
     "body": "",
     "stat": "2 files changed, 8 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "36b07c0",
-    "date": "2026-11-07T10:34:39+10:00",
-    "subject": "Show the tutorial's shopping list in the Market note while ordering (F5)",
-    "body": "",
-    "stat": "2 files changed, 12 insertions(+)"
    }
   ],
   "dirty": [
-   " M data/staff.json",
-   " M data/upgrades.json",
-   " M docs/ECONOMY.md",
-   " M tests/cases/game_test.gd"
+   " M scripts/world/building.gd"
   ],
-  "total_commits": 284
+  "total_commits": 285
  },
- "updated": "2026-11-07T12:47:30+10:00",
+ "updated": "2026-11-07T12:48:03+10:00",
  "qa": [
   {
    "num": 1,

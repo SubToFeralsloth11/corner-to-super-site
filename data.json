@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T12:47+10:00",
- "head": "ade3d4e",
+ "generated": "2026-11-07T12:48+10:00",
+ "head": "3a01935",
  "stats": {
-  "commits": 284,
+  "commits": 285,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T12:47:26+10:00",
+  "last_commit": "2026-11-07T12:47:55+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 31658,
+  "gd_lines": 31703,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1728,6 +1728,11 @@
    "sha": "ade3d4e",
    "date": "2026-11-07T12:47:26+10:00",
    "subject": "Tint the surrounding grass suburban green instead of dry brown (V19, ground)"
+  },
+  {
+   "sha": "3a01935",
+   "date": "2026-11-07T12:47:55+10:00",
+   "subject": "Bring restockers to level 7 and loyalty cards to level 11 so every level unlocks something (B12)"
   }
  ],
  "commits_per_hour": [
@@ -1909,7 +1914,7 @@
   },
   {
    "hour": "2026-11-07T12:00:00+10:00",
-   "commits": 37
+   "commits": 38
   }
  ],
  "sections": [
