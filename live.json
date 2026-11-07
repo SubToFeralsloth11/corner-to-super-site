@@ -2256,10 +2256,11 @@
      "file": "scripts/npc/restocker_job.gd:52,176-177; scripts/npc/shopper_brain.gd:378-395",
      "detail": "A customer's `_close_door` only checks other shoppers in PICK. If a customer opened the cooler and a restocker starts stocking it, the customer leaves and shuts the door, and the restocker carries on stocking through glass (the S14/Y8 bug again). The other way round, `_after_slot` always calls `close_door()` and shuts it on a customer who is still reaching in (the N16 bug again). On a chest freezer, a customer reaching into the other half slides the lids and closes the restocker's half. **Fix:** count who is using each fixture's door (`open_door(who)`/`close_door(who)`, close only when nobody is left), or make `_other_at` and `_after_slot` also check for staff stocking and shoppers picking at that fixture.",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:09+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "64e284c",
+     "note": "Fixture.open_door/close_door take a user; door shuts when the last user is done, chest freezer keeps the needed half. staff_jobs_test: restocker finishing a cooler leaves it open for a customer still reaching in; customer leaving keeps it open for a restocker; chest lid not slid off the restocker's half. staff_jobs/progression/player/stock pass.",
+     "closed": "2026-11-07T11:17:15+10:00"
     },
     {
      "id": "L7",
@@ -4960,6 +4961,11 @@
    "t": "2026-11-07T11:14:53+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixLate: L6 shared cooler doors"
+  },
+  {
+   "t": "2026-11-07T11:17:15+10:00",
+   "kind": "fix",
+   "msg": "C3/L6 fixed 64e284c Fixture.open_door/close_door take a user; door shuts when the last user is done, chest freezer keeps the needed half. staff_jobs_test: restocker finishing a cooler leaves it open for a customer still reaching in; customer leaving keeps it open for a restocker; chest lid not slid off the restocker's half. staff_jobs/progression/player/stock pass."
   }
  ],
  "tests": [
@@ -5138,17 +5144,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:14:53+10:00",
-  "mem_free_pct": 59,
+  "t": "2026-11-07T11:17:15+10:00",
+  "mem_free_pct": 60,
   "load": [
-   1.71,
-   2.07,
-   2.37
+   2.27,
+   2.11,
+   2.33
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "64e284c",
+    "date": "2026-11-07T11:17:10+10:00",
+    "subject": "Shut a cooler door or freezer lid only when its last user is done (L6)",
+    "body": "Fixtures count who has them open (customers, restockers, the player); a chest freezer keeps the\nhalf someone still needs. Replaces the customer-to-customer hand-off.",
+    "stat": "6 files changed, 131 insertions(+), 39 deletions(-)"
+   },
    {
     "sha": "31f514c",
     "date": "2026-11-07T11:14:43+10:00",
@@ -5561,19 +5574,12 @@
     "subject": "Show what each worker is doing in the Staff app and when aimed at, and ask before firing",
     "body": "Staff.status() was only read by tests, so the restocker's idle reason never reached the player.\nCards now carry a live 'Now: ...' line, aiming at a worker shows their status, and Fire takes\ntwo presses within 3 s. Review round 2, Y2 and Y4.",
     "stat": "3 files changed, 59 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "d4b2342",
-    "date": "2026-11-07T09:41:08+10:00",
-    "subject": "Stop one held E from opening the store and then closing it early",
-    "body": "An instant interact (or a catch) left the hold timer free, so holding E on the CLOSED sign\nopened the store and 0.6 s later closed it for the day. The press is now spent. Review round 2,\nY1.",
-    "stat": "2 files changed, 27 insertions(+), 1 deletion(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 242
+  "total_commits": 243
  },
- "updated": "2026-11-07T11:14:53+10:00",
+ "updated": "2026-11-07T11:17:15+10:00",
  "qa": [
   {
    "num": 1,

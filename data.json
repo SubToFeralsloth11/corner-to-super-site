@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T11:14+10:00",
- "head": "31f514c",
+ "generated": "2026-11-07T11:17+10:00",
+ "head": "64e284c",
  "stats": {
-  "commits": 242,
+  "commits": 243,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T11:14:43+10:00",
+  "last_commit": "2026-11-07T11:17:10+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 29961,
+  "gd_lines": 30049,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1518,6 +1518,11 @@
    "sha": "31f514c",
    "date": "2026-11-07T11:14:43+10:00",
    "subject": "Describe the restocker's top-ups, box chaining and idle status in the GDD (L3, L12)"
+  },
+  {
+   "sha": "64e284c",
+   "date": "2026-11-07T11:17:10+10:00",
+   "subject": "Shut a cooler door or freezer lid only when its last user is done (L6)"
   }
  ],
  "commits_per_hour": [
@@ -1695,7 +1700,7 @@
   },
   {
    "hour": "2026-11-07T11:00:00+10:00",
-   "commits": 3
+   "commits": 4
   }
  ],
  "sections": [
