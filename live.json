@@ -1970,10 +1970,11 @@
      "file": "data/tutorial.json:9-11; scripts/fixtures/pc_desk.gd:91; scripts/delivery/delivery_service.gd:140",
      "detail": "The van stops about 4.5 s after Order, then 0.8 s settle, 0.5 s aim and about 1.4 s of flight. The first box lands about 7 s after ordering, which fires `delivery_landed`. The player is sitting at the PC 17 m from the bay with the hint hidden. Step 2 (\"Press E as a box flies past to catch it\") and its arrow are almost never shown, and from the PC a catch is impossible anyway. When they stand up, step 3 says \"Carry a box inside\" with no arrow to where the boxes are. Fix: finish the van step when the player first comes within about 6 m of a landed box (not on the landing), keep the arrow until then, and change the text to \"the van fires boxes into the bay; walk out and fetch them (press E on one still flying to catch it for XP)\".",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:26+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "922bfe3",
+     "note": "van step done_when delivery_reached: Tutorial checks every 0.25 s for a landed/held box within near_box_m (6, tutorial.json) of the player; arrow stays until then; text says walk out and fetch (catch for XP). New tutorial_test: box lands with player at PC -> still 'van', player at bay -> 'stock' (fails before: landing finished it); bot walks to the bay; tutorial 29 passed",
+     "closed": "2026-11-07T10:36:38+10:00"
     },
     {
      "id": "F4",
@@ -4769,6 +4770,11 @@
    "t": "2026-11-07T10:35:35+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixFirstHour: F3 van step finishes at the boxes"
+  },
+  {
+   "t": "2026-11-07T10:36:38+10:00",
+   "kind": "fix",
+   "msg": "C3/F3 fixed 922bfe3 van step done_when delivery_reached: Tutorial checks every 0.25 s for a landed/held box within near_box_m (6, tutorial.json) of the player; arrow stays until then; text says walk out and fetch (catch for XP). New tutorial_test: box lands with player at PC -> still 'van', player at bay -> 'stock' (fails before: landing finished it); bot walks to the bay; tutorial 29 passed"
   }
  ],
  "tests": [
@@ -4931,17 +4937,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:35:35+10:00",
-  "mem_free_pct": 66,
+  "t": "2026-11-07T10:36:38+10:00",
+  "mem_free_pct": 67,
   "load": [
-   3.47,
-   3.21,
-   3.23
+   2.66,
+   3.01,
+   3.15
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "922bfe3",
+    "date": "2026-11-07T10:36:36+10:00",
+    "subject": "Finish the tutorial's van step when the player reaches the boxes, not on the first landing (F3)",
+    "body": "",
+    "stat": "4 files changed, 62 insertions(+), 5 deletions(-)"
+   },
    {
     "sha": "dc6951a",
     "date": "2026-11-07T10:35:31+10:00",
@@ -5354,19 +5367,12 @@
     "subject": "Book cost of goods at what the stock cost, not today's drifted cost",
     "body": "Buying on a cheap day never showed as profit. Game.stock_basis keeps a running average per\nproduct (saved). Review round 2, E15.",
     "stat": "2 files changed, 52 insertions(+)"
-   },
-   {
-    "sha": "b2de54c",
-    "date": "2026-11-07T08:40:22+10:00",
-    "subject": "Give Dale a straight-line fallback and stuck recovery on his walk",
-    "body": "With no navmesh route he 'arrived' at once and vanished in front of the player. Review round 2,\nN25.",
-    "stat": "1 file changed, 17 insertions(+), 1 deletion(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 226
+  "total_commits": 227
  },
- "updated": "2026-11-07T10:35:35+10:00",
+ "updated": "2026-11-07T10:36:38+10:00",
  "qa": [
   {
    "num": 1,

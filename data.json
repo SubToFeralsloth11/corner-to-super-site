@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T10:35+10:00",
- "head": "dc6951a",
+ "generated": "2026-11-07T10:36+10:00",
+ "head": "922bfe3",
  "stats": {
-  "commits": 226,
+  "commits": 227,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T10:35:31+10:00",
+  "last_commit": "2026-11-07T10:36:36+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 29214,
+  "gd_lines": 29269,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1431,6 +1431,11 @@
    "sha": "dc6951a",
    "date": "2026-11-07T10:35:31+10:00",
    "subject": "Stop rebuilding the hidden tutorial card every frame at the PC (F13)"
+  },
+  {
+   "sha": "922bfe3",
+   "date": "2026-11-07T10:36:36+10:00",
+   "subject": "Finish the tutorial's van step when the player reaches the boxes, not on the first landing (F3)"
   }
  ],
  "commits_per_hour": [
@@ -1604,7 +1609,7 @@
   },
   {
    "hour": "2026-11-07T10:00:00+10:00",
-   "commits": 22
+   "commits": 23
   }
  ],
  "sections": [
