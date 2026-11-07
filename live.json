@@ -1982,10 +1982,11 @@
      "file": "scripts/fixtures/pc_desk.gd:59-60,90-93; scripts/ui/pc/shop_os.gd:165",
      "detail": "Sitting down hides the HUD, the prompt overlay and the tutorial card. ShopOS has no exit button, and its only \"Close\" closes the app window, leaving you on an empty desktop. Only Esc stands you up, and nothing says so. The till view shows \"Esc to stand up\" and the phone shows \"P or Esc to put it away\", but the PC (the first thing every new player uses) shows nothing. Fix: add a \"Stand up (Esc)\" button to the ShopOS top bar that calls `PcDesk.unfocus()`, and change the PC prompt to \"[E] Use the PC  ·  Esc to stand up\".",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:26+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e04cd9d",
+     "note": "ShopOS top-bar 'Stand up (Esc)' button -> PcDesk.unfocus; prompt '[E] Use the PC · Esc to stand up'; player_test clicks it and checks unlocked (fails before: no button)",
+     "closed": "2026-11-07T10:34:43+10:00"
     },
     {
      "id": "F5",
@@ -4741,6 +4742,11 @@
    "t": "2026-11-07T10:34:41+10:00",
    "kind": "fix",
    "msg": "C3/F1 fixed 0d5e4aa Free first order 4->8 boxes; tutorial step 1 asks for 8 kinds (variety 0.67). Tutorial bot day 1 drew 28 arrivals (was ~13 by formula). soak 10 4 (/tmp/cts_soak_f1): day1 $149.34 (44 cust, ok in ±25%), other runs day1 $66/$50/$69; day3 $189 ($206/$186; one run $288 OFF), day7 $491 ok. ECONOMY.md/GDD updated"
+  },
+  {
+   "t": "2026-11-07T10:34:43+10:00",
+   "kind": "fix",
+   "msg": "C3/F4 fixed e04cd9d ShopOS top-bar 'Stand up (Esc)' button -> PcDesk.unfocus; prompt '[E] Use the PC · Esc to stand up'; player_test clicks it and checks unlocked (fails before: no button)"
   }
  ],
  "tests": [
@@ -4903,7 +4909,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:34:41+10:00",
+  "t": "2026-11-07T10:34:43+10:00",
   "mem_free_pct": 66,
   "load": [
    2.63,
@@ -5338,7 +5344,7 @@
   "dirty": [],
   "total_commits": 225
  },
- "updated": "2026-11-07T10:34:41+10:00",
+ "updated": "2026-11-07T10:34:44+10:00",
  "qa": [
   {
    "num": 1,
