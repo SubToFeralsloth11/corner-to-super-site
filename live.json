@@ -1956,10 +1956,11 @@
      "file": "scripts/tutorial/tutorial_hint.gd:97; scripts/delivery/delivery_service.gd:43-45",
      "detail": "The arrow aims at `w.delivery.bay.global_position`. Neither DeliveryService nor DeliveryBay is ever positioned, and the bay works in raw world coordinates through `centre = (7.5, 4.5)`. So the arrow points at (0, 1.2, 0), the shop entrance, about 8.6 m from the bay marking. screenshot_tour.gd:171 looks at the same wrong point, so its \"arrow on bay\" shot couldn't catch this. Fix: `var bay := Vector3(w.delivery.bay.centre.x, 1.2, w.delivery.bay.centre.y)`.",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:26+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "6325dfc",
+     "note": "Arrow aims at TutorialHint.bay_point (bay.centre, y 1.2); screenshot tour looks there too; tutorial_test asserts bay.contains(point) (origin failed it); tutorial 21 passed",
+     "closed": "2026-11-07T10:27:57+10:00"
     },
     {
      "id": "F3",
@@ -4695,6 +4696,11 @@
    "t": "2026-11-07T10:22:23+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixFirstHour: F2 tutorial bay arrow"
+  },
+  {
+   "t": "2026-11-07T10:27:57+10:00",
+   "kind": "fix",
+   "msg": "C3/F2 fixed 6325dfc Arrow aims at TutorialHint.bay_point (bay.centre, y 1.2); screenshot tour looks there too; tutorial_test asserts bay.contains(point) (origin failed it); tutorial 21 passed"
   }
  ],
  "tests": [
@@ -4857,17 +4863,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:22:23+10:00",
-  "mem_free_pct": 60,
+  "t": "2026-11-07T10:27:57+10:00",
+  "mem_free_pct": 61,
   "load": [
-   2.58,
-   2.77,
-   3.32
+   3.54,
+   3.12,
+   3.28
   ],
   "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "6325dfc",
+    "date": "2026-11-07T10:27:55+10:00",
+    "subject": "Point the tutorial's van arrow at the delivery bay, not the shop door (F2)",
+    "body": "",
+    "stat": "3 files changed, 17 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "244c1af",
     "date": "2026-11-07T10:22:15+10:00",
@@ -5280,23 +5293,19 @@
     "subject": "Say why Order is greyed out, and let Shift add or remove five boxes in the Market",
     "body": "",
     "stat": "1 file changed, 14 insertions(+), 3 deletions(-)"
-   },
-   {
-    "sha": "fdd9e9f",
-    "date": "2026-11-07T08:19:56+10:00",
-    "subject": "Say why a restocker stands idle: no boxes on the stockroom racks",
-    "body": "",
-    "stat": "1 file changed, 3 insertions(+)"
    }
   ],
   "dirty": [
+   " M scripts/autoload/game.gd",
    " M scripts/ui/pc/app_bank.gd",
+   " M scripts/ui/pc/app_market.gd",
    " M scripts/ui/pc/app_my_store.gd",
-   " M scripts/ui/pc/app_staff.gd"
+   " M scripts/ui/pc/app_staff.gd",
+   " M tests/cases/order_test.gd"
   ],
-  "total_commits": 218
+  "total_commits": 219
  },
- "updated": "2026-11-07T10:22:24+10:00",
+ "updated": "2026-11-07T10:27:58+10:00",
  "qa": [
   {
    "num": 1,

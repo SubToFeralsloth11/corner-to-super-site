@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T10:22+10:00",
- "head": "244c1af",
+ "generated": "2026-11-07T10:27+10:00",
+ "head": "6325dfc",
  "stats": {
-  "commits": 218,
+  "commits": 219,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T10:22:15+10:00",
+  "last_commit": "2026-11-07T10:27:55+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 29087,
+  "gd_lines": 29130,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1391,6 +1391,11 @@
    "sha": "244c1af",
    "date": "2026-11-07T10:22:15+10:00",
    "subject": "Book products the store never stocked as 'not carried', not out of stock (F8)"
+  },
+  {
+   "sha": "6325dfc",
+   "date": "2026-11-07T10:27:55+10:00",
+   "subject": "Point the tutorial's van arrow at the delivery bay, not the shop door (F2)"
   }
  ],
  "commits_per_hour": [
@@ -1564,7 +1569,7 @@
   },
   {
    "hour": "2026-11-07T10:00:00+10:00",
-   "commits": 14
+   "commits": 15
   }
  ],
  "sections": [
