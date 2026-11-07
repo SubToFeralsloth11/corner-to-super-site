@@ -2136,10 +2136,11 @@
      "file": "scripts/fixtures/open_sign.gd:62-63,85-87; scripts/autoload/game.gd:281-284",
      "detail": "The sign is next to the door the player walks through first. In PREP, a single E opens the store with empty shelves. The clock starts, customers come in to nothing, and there's no way back to PREP. Fix: when `world.products_in_stock()` is empty, make it a hold and say \"Nothing on the shelves yet: [Hold E] open anyway\".",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:27+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "2918be9",
+     "note": "PREP + world.products_in_stock() empty: sign prompt 'Nothing on the shelves yet: [Hold E] open anyway' and get_hold_time 0.6; day_test taps with empty shelves and stays PREP (fails before), then stocks and taps open; day_test 48, tutorial 42 pass",
+     "closed": "2026-11-07T10:41:29+10:00"
     },
     {
      "id": "F17",
@@ -4824,6 +4825,11 @@
    "t": "2026-11-07T10:40:31+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixFirstHour: F16 open sign with empty shelves"
+  },
+  {
+   "t": "2026-11-07T10:41:29+10:00",
+   "kind": "fix",
+   "msg": "C3/F16 fixed 2918be9 PREP + world.products_in_stock() empty: sign prompt 'Nothing on the shelves yet: [Hold E] open anyway' and get_hold_time 0.6; day_test taps with empty shelves and stays PREP (fails before), then stocks and taps open; day_test 48, tutorial 42 pass"
   }
  ],
  "tests": [
@@ -4986,17 +4992,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:40:31+10:00",
+  "t": "2026-11-07T10:41:29+10:00",
   "mem_free_pct": 59,
   "load": [
-   1.97,
-   2.52,
-   2.9
+   1.49,
+   2.28,
+   2.79
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "2918be9",
+    "date": "2026-11-07T10:41:27+10:00",
+    "subject": "Make opening with empty shelves a hold with a warning (F16)",
+    "body": "",
+    "stat": "3 files changed, 23 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "9925562",
     "date": "2026-11-07T10:40:27+10:00",
@@ -5409,19 +5422,12 @@
     "subject": "Let a ShopOS app reopen while its close animation is still running",
     "body": "",
     "stat": "1 file changed, 23 insertions(+), 4 deletions(-)"
-   },
-   {
-    "sha": "1b985cd",
-    "date": "2026-11-07T08:55:14+10:00",
-    "subject": "Lower the in-store cap's base so week 1 sits on the pacing table again",
-    "body": "With leavers no longer counted, bigger baskets and real-size cans the 30-day soak ran rich\n(day 7 $647 against $250-450). Base 2 -> 0: soak now passes every row (day 1 $129, day 3\n$189, day 7 $542, day 15 $1,111, day 30 $4,315; level 16 by day 24). Review round 2, E4/E23.",
-    "stat": "2 files changed, 5 insertions(+), 2 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 231
+  "total_commits": 232
  },
- "updated": "2026-11-07T10:40:32+10:00",
+ "updated": "2026-11-07T10:41:29+10:00",
  "qa": [
   {
    "num": 1,
