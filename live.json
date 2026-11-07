@@ -1,11 +1,11 @@
 {
  "status": {
-  "state": "fixing",
+  "state": "stopped",
   "round": "C4",
   "area": "Visuals; balance",
-  "activity": "FixBalance2: stopped (done)",
+  "activity": "Stopped by user. Cycle 5 partly done; open items logged.",
   "cycle": "5",
-  "since": "2026-11-07T14:06:07+10:00"
+  "since": "2026-11-07T14:06:32+10:00"
  },
  "rounds": [
   {
@@ -6579,6 +6579,21 @@
    "t": "2026-11-07T14:06:21+10:00",
    "kind": "fix",
    "msg": "Test runner: a test aborted by a script error used to count as passed; it now fails ('ran no checks')"
+  },
+  {
+   "t": "2026-11-07T14:06:32+10:00",
+   "kind": "agent",
+   "msg": "Agent FixBalance2: done Soak passed once (run 4); repeat failed day 3 by $13; markup +30% still pays"
+  },
+  {
+   "t": "2026-11-07T14:06:32+10:00",
+   "kind": "finding",
+   "msg": "Open for next session: day 3 pacing on the edge; high markup not punished; R5-01,04-08,14; V24 dock icons; V20 trees"
+  },
+  {
+   "t": "2026-11-07T14:06:32+10:00",
+   "kind": "status",
+   "msg": "Status: stopped - Stopped by user. Cycle 5 partly done; open items logged."
   }
  ],
  "tests": [
@@ -6806,9 +6821,9 @@
    "t": "2026-11-07T13:06:59+10:00"
   },
   "FixBalance2": {
-   "state": "running",
-   "task": "Tuning early pacing back into band; day-11 soak error",
-   "t": "2026-11-07T13:06:59+10:00"
+   "state": "done",
+   "task": "Soak passed once (run 4); repeat failed day 3 by $13; markup +30% still pays",
+   "t": "2026-11-07T14:06:32+10:00"
   },
   "CritRegress5": {
    "state": "done",
@@ -6817,12 +6832,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T14:06:21+10:00",
+  "t": "2026-11-07T14:06:32+10:00",
   "mem_free_pct": 43,
   "load": [
-   4.35,
-   3.79,
-   4.02
+   3.91,
+   3.72,
+   3.99
   ],
   "godot_procs": 0
  },
@@ -7252,7 +7267,7 @@
   "dirty": [],
   "total_commits": 300
  },
- "updated": "2026-11-07T14:06:22+10:00",
+ "updated": "2026-11-07T14:06:33+10:00",
  "qa": [
   {
    "num": 1,
