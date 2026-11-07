@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixFirstHour: F10 starter snack sizes",
+  "activity": "FixFirstHour: F11 confirm expansion/licence buys",
   "cycle": "3",
-  "since": "2026-11-07T10:42:33+10:00"
+  "since": "2026-11-07T10:45:36+10:00"
  },
  "rounds": [
   {
@@ -4852,6 +4852,11 @@
    "t": "2026-11-07T10:45:33+10:00",
    "kind": "fix",
    "msg": "C3/F10 fixed aebd2db CHIPZ/CRUNCH model_scale 0.58 (12/slot, was 3), CANDY 0.6 (15, was 6), BREAD 0.65 (6, was 2), sizes scaled to match. stock_test capacity checks (fail before); full suite 1127/1 -> m1 label count updated, passes; soak 10 4 /tmp/cts_soak_f10 day1 $70.62 day3 $191.31 day7 $515.71 all ok"
+  },
+  {
+   "t": "2026-11-07T10:45:36+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixFirstHour: F11 confirm expansion/licence buys"
   }
  ],
  "tests": [
@@ -5014,12 +5019,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:45:33+10:00",
-  "mem_free_pct": 66,
+  "t": "2026-11-07T10:45:36+10:00",
+  "mem_free_pct": 67,
   "load": [
-   2.72,
-   2.35,
-   2.67
+   2.9,
+   2.4,
+   2.68
   ],
   "godot_procs": 0
  },
@@ -5449,7 +5454,7 @@
   "dirty": [],
   "total_commits": 234
  },
- "updated": "2026-11-07T10:45:34+10:00",
+ "updated": "2026-11-07T10:45:37+10:00",
  "qa": [
   {
    "num": 1,
