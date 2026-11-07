@@ -2615,10 +2615,11 @@
      "file": "tests/soak.gd:261,272",
      "detail": "`\",\".join(loans)` goes into an unquoted `%s`, so on days 15-24 (\"small,business\") every later column moves one place to the right: a plain CSV reader takes `restocked` as `staff_restocked`, `bills` as wrong values, and so on (I confirmed this by parsing). `lost_o` also adds `not_carried` to `out_of_stock` under the `lost_oos` header. Fix: join loans with \" \" (as expansions are) or quote the field; write separate `lost_oos` and `lost_not_carried` columns.",
      "by": "CritBalance",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:18:41+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "39abdf8",
+     "note": "loans joined with space; separate lost_oos/lost_not_carried columns",
+     "closed": "2026-11-07T12:20:06+10:00"
     },
     {
      "id": "V1",
@@ -5833,6 +5834,11 @@
    "t": "2026-11-07T12:19:34+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixBalance: B15"
+  },
+  {
+   "t": "2026-11-07T12:20:06+10:00",
+   "kind": "fix",
+   "msg": "C4/B15 fixed 39abdf8 loans joined with space; separate lost_oos/lost_not_carried columns"
   }
  ],
  "tests": [
@@ -6043,17 +6049,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:19:34+10:00",
-  "mem_free_pct": 65,
+  "t": "2026-11-07T12:20:06+10:00",
+  "mem_free_pct": 63,
   "load": [
-   2.02,
-   2.48,
-   2.75
+   1.74,
+   2.37,
+   2.7
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "39abdf8",
+    "date": "2026-11-07T12:20:02+10:00",
+    "subject": "Keep days.csv columns in place with two loans and split lost_oos from lost_not_carried (B15)",
+    "body": "",
+    "stat": "1 file changed, 10 insertions(+), 6 deletions(-)"
+   },
    {
     "sha": "dd9c33d",
     "date": "2026-11-07T12:07:04+10:00",
@@ -6466,19 +6479,15 @@
     "subject": "Keep a dropped box above the floor and out of your own capsule when crouching (Y7)",
     "body": "",
     "stat": "1 file changed, 6 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "b189cf7",
-    "date": "2026-11-07T09:49:38+10:00",
-    "subject": "Save boxes still flying from the van as deliveries, not mid-air loose boxes (Y14)",
-    "body": "",
-    "stat": "1 file changed, 6 insertions(+)"
    }
   ],
-  "dirty": [],
-  "total_commits": 251
+  "dirty": [
+   " M scripts/ui/prompt.gd",
+   " M scripts/ui/ui_kit.gd"
+  ],
+  "total_commits": 252
  },
- "updated": "2026-11-07T12:19:34+10:00",
+ "updated": "2026-11-07T12:20:07+10:00",
  "qa": [
   {
    "num": 1,
