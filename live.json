@@ -2329,10 +2329,11 @@
      "file": "scripts/build/build_mode.gd:401",
      "detail": "The B3 fix only caches `_plate`'s size. While carrying a till, `(_lane_plate.mesh as BoxMesh).size = …` runs every physics frame, and `PrimitiveMesh` regenerates on each set. **Fix:** set the lane plate's size once, when the carried fixture changes, like `_plate_size`.",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:09+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "261f54b",
+     "note": "build tests 157/157",
+     "closed": "2026-11-07T10:21:46+10:00"
     },
     {
      "id": "L15",
@@ -2341,10 +2342,11 @@
      "file": "scripts/build/build_mode.gd:381-388; scripts/build/build_rules.gd:195,318",
      "detail": "`_update_ghost` calls the full `BuildRules.refusal` each frame. In a 40-fixture store that is polygon clipping against every fixture, wall, cell and access strip. It also creates and frees a `DeliveryBay` node in `bay_zones()`, recomputes `offset_polygon(poly, 0.15)` once per loose box (the whole bay), and repaints every mesh of the ghost via recursive `find_children`. [INFERENCE] Several ms a frame. **Fix:** cache on the snapped (pos, yaw) and recompute only when it changes or `fixtures_changed` fires; build the offset polygons and bay zones once per call; repaint only when the material changes.",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:09+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "261f54b",
+     "note": "checks on pose change or 4 Hz",
+     "closed": "2026-11-07T10:21:46+10:00"
     },
     {
      "id": "L16",
@@ -4672,6 +4674,16 @@
    "t": "2026-11-07T10:21:10+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixFirstHour on F findings; L findings queued for the next fixer"
+  },
+  {
+   "t": "2026-11-07T10:21:46+10:00",
+   "kind": "fix",
+   "msg": "C3/L14 fixed 261f54b build tests 157/157"
+  },
+  {
+   "t": "2026-11-07T10:21:46+10:00",
+   "kind": "fix",
+   "msg": "C3/L15 fixed 261f54b checks on pose change or 4 Hz"
   }
  ],
  "tests": [
@@ -4834,17 +4846,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:21:10+10:00",
+  "t": "2026-11-07T10:21:46+10:00",
   "mem_free_pct": 62,
   "load": [
-   2.3,
-   2.81,
-   3.38
+   2.73,
+   2.85,
+   3.37
   ],
-  "godot_procs": 0
+  "godot_procs": 37
  },
  "game": {
   "commits": [
+   {
+    "sha": "261f54b",
+    "date": "2026-11-07T10:21:44+10:00",
+    "subject": "Re-run build placement checks only when the ghost moves (or every 0.25 s), and stop rebuilding the lane plate mesh",
+    "body": "Review round 2, L14 and L15.",
+    "stat": "1 file changed, 21 insertions(+), 3 deletions(-)"
+   },
    {
     "sha": "41a2e4a",
     "date": "2026-11-07T10:20:44+10:00",
@@ -5257,25 +5276,25 @@
     "subject": "Make walkers keep personal space and pass head-on to the right",
     "body": "Customers and staff walked straight through each other and through the player. A light\nseparation steer (0.7 m, plus keep-right for anyone just ahead) keeps them apart without\nchanging their paths. Review round 2, N5.",
     "stat": "2 files changed, 71 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "e9d5269",
-    "date": "2026-11-07T08:12:11+10:00",
-    "subject": "Make customers shop like people: walking order, complaints at the empty shelf, shared doors",
-    "body": "- They walk to an empty labelled slot before complaining, so you can see which shelf is bare (N7).\n- A long list is shopped nearest-first instead of zig-zagging the store (N13).\n- A customer leaving a cooler doesn't shut it on another still reaching in; the job passes on (N16).\n- The walk animation follows the actual movement (no striding on the spot against a wall) (N17).\n- Idle loops start at each person's own phase, so queues don't breathe in step (N19).\n- Customers go home the way they came instead of nearly all leaving east (N20).\n- GDD list length and picking rules brought up to date (N22).\nReview round 2.",
-    "stat": "7 files changed, 113 insertions(+), 8 deletions(-)"
    }
   ],
   "dirty": [
+   " M docs/ARCHITECTURE.md",
+   " M docs/ECONOMY.md",
+   " M docs/GDD.md",
    " M scripts/autoload/game.gd",
    " M scripts/core/day_report.gd",
    " M scripts/npc/shopper_brain.gd",
    " M scripts/ui/day_summary.gd",
-   " M scripts/ui/pc/app_stats.gd"
+   " M scripts/ui/pc/app_stats.gd",
+   " M tests/cases/additions_test.gd",
+   " M tests/cases/customer_test.gd",
+   " M tests/soak.gd",
+   " M tests/soak_player.gd"
   ],
-  "total_commits": 216
+  "total_commits": 217
  },
- "updated": "2026-11-07T10:21:10+10:00",
+ "updated": "2026-11-07T10:21:47+10:00",
  "qa": [
   {
    "num": 1,
