@@ -2074,10 +2074,11 @@
      "file": "scripts/ui/pc/app_expansions.gd:93,100; scripts/ui/pc/app_licences.gd:80,110",
      "detail": "\"Buy\" charges at once. E1 costs $500 at level 2 and raises rent and lights from $37 to about $76 a day for good. On day 2–3 with about $600 cash, one stray click while browsing can start an overdue spiral. Del-to-sell (B1) and Fire (Y4) were given confirmations, but these two irreversible buys were not. Fix: use the same press-again pattern (\"Buy\" → \"Confirm $500 · rent +$39/day\" for 3 s).",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:27+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "a6cbc03",
+     "note": "Buy arms a 3 s 'Confirm $500 · rent + lights +$39/day' (expansions) / 'Confirm $250' (licences), second press buys; progression_test (one press buys nothing, label Confirm, second buys; fails before) and m5 acceptance click-through pass",
+     "closed": "2026-11-07T10:46:59+10:00"
     },
     {
      "id": "F12",
@@ -4857,6 +4858,11 @@
    "t": "2026-11-07T10:45:36+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixFirstHour: F11 confirm expansion/licence buys"
+  },
+  {
+   "t": "2026-11-07T10:46:59+10:00",
+   "kind": "fix",
+   "msg": "C3/F11 fixed a6cbc03 Buy arms a 3 s 'Confirm $500 · rent + lights +$39/day' (expansions) / 'Confirm $250' (licences), second press buys; progression_test (one press buys nothing, label Confirm, second buys; fails before) and m5 acceptance click-through pass"
   }
  ],
  "tests": [
@@ -5019,17 +5025,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:45:36+10:00",
+  "t": "2026-11-07T10:46:59+10:00",
   "mem_free_pct": 67,
   "load": [
-   2.9,
-   2.4,
-   2.68
+   2.02,
+   2.22,
+   2.59
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "a6cbc03",
+    "date": "2026-11-07T10:46:57+10:00",
+    "subject": "Ask for a second press before buying an expansion or licence (F11)",
+    "body": "",
+    "stat": "6 files changed, 89 insertions(+), 6 deletions(-)"
+   },
    {
     "sha": "aebd2db",
     "date": "2026-11-07T10:45:31+10:00",
@@ -5442,19 +5455,12 @@
     "subject": "Hide Continue on the main menu when there is no save to continue",
     "body": "",
     "stat": "1 file changed, 4 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "0d5921d",
-    "date": "2026-11-07T08:55:14+10:00",
-    "subject": "Have customers say product names the way people do (no pack weights)",
-    "body": "",
-    "stat": "1 file changed, 2 insertions(+), 1 deletion(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 234
+  "total_commits": 235
  },
- "updated": "2026-11-07T10:45:37+10:00",
+ "updated": "2026-11-07T10:46:59+10:00",
  "qa": [
   {
    "num": 1,
