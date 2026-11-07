@@ -2460,10 +2460,11 @@
      "file": "scripts/npc/shopper_brain.gd:481,609-616; data/customers.json:86-88",
      "detail": "`queue_time` keeps counting while the till scans (`:481`), so +5 fast service needs joining the queue to paid in under 20 s. At day 30 that means 11.2 items × 1.2 s (T1 cashier) + 2.4 s card ≈ 16 s even with no queue, so the bonus is gone late. +8 found everything is all or nothing over a list of up to 20 items. Day 29 had 0 out-of-stock and 1.3% price refusals and still ended at only 3.98 stars. Days 1-5 (2-3 item baskets) sat at 4.29-4.34. Players see their rating fall as the store gets bigger and better. Fix: judge fast service on the wait before the first scan (store `queue_time` in `start_service`, `fast_service_s` 20 → 12). Give found everything when at least 90% of wanted units were bought (or scale it, +8×(1−3×misses/list)). Expected: a 0-out-of-stock day late ≈4.3 stars; typical late days 3.6 → about 4.0-4.1.",
      "by": "CritBalance",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:18:41+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "db47361",
+     "note": "fast service judged at first scan (12 s); found everything at >=90% units; test_big_baskets_can_still_earn_the_bonuses",
+     "closed": "2026-11-07T12:27:07+10:00"
     },
     {
      "id": "B3",
@@ -5939,6 +5940,11 @@
    "t": "2026-11-07T12:26:24+10:00",
    "kind": "fix",
    "msg": "C4/V1 fixed fe72f97 --graphics= override; preset written to perf.txt"
+  },
+  {
+   "t": "2026-11-07T12:27:07+10:00",
+   "kind": "fix",
+   "msg": "C4/B2 fixed db47361 fast service judged at first scan (12 s); found everything at >=90% units; test_big_baskets_can_still_earn_the_bonuses"
   }
  ],
  "tests": [
@@ -6149,17 +6155,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:26:24+10:00",
-  "mem_free_pct": 53,
+  "t": "2026-11-07T12:27:07+10:00",
+  "mem_free_pct": 52,
   "load": [
-   2.55,
-   2.36,
-   2.56
+   2.41,
+   2.35,
+   2.54
   ],
-  "godot_procs": 34
+  "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "db47361",
+    "date": "2026-11-07T12:27:03+10:00",
+    "subject": "Judge fast service on the wait before the first scan and allow one miss in ten for found everything (B2)",
+    "body": "",
+    "stat": "6 files changed, 72 insertions(+), 21 deletions(-)"
+   },
    {
     "sha": "fe72f97",
     "date": "2026-11-07T12:26:23+10:00",
@@ -6572,25 +6585,16 @@
     "subject": "Turn a full queue lane's overflow back up a second column in the lane, and count the joiner's trolley for room (X4)",
     "body": "",
     "stat": "6 files changed, 115 insertions(+), 40 deletions(-)"
-   },
-   {
-    "sha": "78b9606",
-    "date": "2026-11-07T09:57:56+10:00",
-    "subject": "Price the head office franchise to pay back in under two weeks at 3.5 stars (X11)",
-    "body": "",
-    "stat": "3 files changed, 13 insertions(+), 5 deletions(-)"
    }
   ],
   "dirty": [
-   " M data/customers.json",
-   " M scripts/fixtures/checkout.gd",
-   " M scripts/npc/shopper_brain.gd",
-   " M tests/cases/customer_test.gd",
-   " M tests/cases/m7_content_test.gd"
+   " M scripts/ui/pc/app_furniture.gd",
+   " M scripts/ui/pc/app_market.gd",
+   " M tests/cases/order_test.gd"
   ],
-  "total_commits": 263
+  "total_commits": 264
  },
- "updated": "2026-11-07T12:26:25+10:00",
+ "updated": "2026-11-07T12:27:08+10:00",
  "qa": [
   {
    "num": 1,
