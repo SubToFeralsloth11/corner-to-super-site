@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T12:38+10:00",
- "head": "22bd582",
+ "generated": "2026-11-07T12:41+10:00",
+ "head": "2d943a6",
  "stats": {
-  "commits": 276,
+  "commits": 278,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T12:38:32+10:00",
+  "last_commit": "2026-11-07T12:41:25+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 31550,
+  "gd_lines": 31591,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1688,6 +1688,16 @@
    "sha": "22bd582",
    "date": "2026-11-07T12:38:32+10:00",
    "subject": "Scale the in-store cap by the time of day and average the stars over yesterday's customers (B7, B8)"
+  },
+  {
+   "sha": "9ae49da",
+   "date": "2026-11-07T12:41:23+10:00",
+   "subject": "Light each cooler and freezer case with a small shadowless spot (V22)"
+  },
+  {
+   "sha": "2d943a6",
+   "date": "2026-11-07T12:41:25+10:00",
+   "subject": "Run the green feature wall corner to corner instead of stopping mid-wall (V23)"
   }
  ],
  "commits_per_hour": [
@@ -1869,7 +1879,7 @@
   },
   {
    "hour": "2026-11-07T12:00:00+10:00",
-   "commits": 29
+   "commits": 31
   }
  ],
  "sections": [
@@ -2063,21 +2073,21 @@
     "id": "E6",
     "name": "Back aisles",
     "level": 10,
-    "price": 4000.0,
+    "price": 6000.0,
     "rent_after": 165.0
    },
    {
     "id": "E7",
     "name": "Back corners",
     "level": 12,
-    "price": 5500.0,
+    "price": 9000.0,
     "rent_after": 190.0
    },
    {
     "id": "E8",
     "name": "Full depth",
     "level": 15,
-    "price": 7500.0,
+    "price": 14000.0,
     "rent_after": 230.0
    }
   ],

@@ -2906,10 +2906,11 @@
      "file": "No `SpotLight3D` anywhere in scripts/ or scenes (grep); lights exist only in building.gd:415 and stockroom.gd:176 · 10/17: cans in the cooler are lit flat like the room, with no case glow",
      "detail": "VISUALS.md: \"one small SpotLight3D per fixture pointing into the case (no shadow) so products inside glow.\" Fix: in Fixture setup for kinds cooler, upright freezer and multideck, add a shadowless SpotLight3D under the header (energy about 1.5, range 2.5, angle 55°, cool white). It fits the ≤40-lights budget.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "9ae49da",
+     "note": "case glows in 17_cooler_stocked; tour fps 145 before and after",
+     "closed": "2026-11-07T12:41:25+10:00"
     },
     {
      "id": "V23",
@@ -2918,10 +2919,11 @@
      "file": "building.gd:278-306 (green spans only `footprint/2 + 1` m either side of the till) · the storefront glazing header slot is teal · 04 and 06: the teal band over the windows meets the #2FA866 feature wall at the corner, and the green ends abruptly about 1/3 short of the wall's end",
      "detail": "Fix: run the feature wall corner to corner on its wall (or end it at a trim strip), and recolour the glazing header to STORE_GREEN with `StoreLook._paint` on its slot.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "wip",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "2d943a6",
+     "note": "wall now full length (04); teal glazing header still clashes",
+     "closed": "2026-11-07T12:41:26+10:00"
     },
     {
      "id": "V24",
@@ -6062,6 +6064,16 @@
    "t": "2026-11-07T12:38:45+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixBalance: B9"
+  },
+  {
+   "t": "2026-11-07T12:41:25+10:00",
+   "kind": "fix",
+   "msg": "C4/V22 fixed 9ae49da case glows in 17_cooler_stocked; tour fps 145 before and after"
+  },
+  {
+   "t": "2026-11-07T12:41:26+10:00",
+   "kind": "fix",
+   "msg": "C4/V23 wip 2d943a6 wall now full length (04); teal glazing header still clashes"
   }
  ],
  "tests": [
@@ -6272,17 +6284,31 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:38:45+10:00",
-  "mem_free_pct": 54,
+  "t": "2026-11-07T12:41:26+10:00",
+  "mem_free_pct": 53,
   "load": [
-   1.87,
-   2.27,
-   2.42
+   1.98,
+   2.22,
+   2.38
   ],
   "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "2d943a6",
+    "date": "2026-11-07T12:41:25+10:00",
+    "subject": "Run the green feature wall corner to corner instead of stopping mid-wall (V23)",
+    "body": "",
+    "stat": "3 files changed, 8 insertions(+), 9 deletions(-)"
+   },
+   {
+    "sha": "9ae49da",
+    "date": "2026-11-07T12:41:23+10:00",
+    "subject": "Light each cooler and freezer case with a small shadowless spot (V22)",
+    "body": "",
+    "stat": "1 file changed, 19 insertions(+)"
+   },
    {
     "sha": "22bd582",
     "date": "2026-11-07T12:38:32+10:00",
@@ -6688,30 +6714,22 @@
     "subject": "Point the tutorial's van arrow at the delivery bay, not the shop door (F2)",
     "body": "",
     "stat": "3 files changed, 17 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "244c1af",
-    "date": "2026-11-07T10:22:15+10:00",
-    "subject": "Book products the store never stocked as 'not carried', not out of stock (F8)",
-    "body": "",
-    "stat": "12 files changed, 42 insertions(+), 14 deletions(-)"
-   },
-   {
-    "sha": "261f54b",
-    "date": "2026-11-07T10:21:44+10:00",
-    "subject": "Re-run build placement checks only when the ghost moves (or every 0.25 s), and stop rebuilding the lane plate mesh",
-    "body": "Review round 2, L14 and L15.",
-    "stat": "1 file changed, 21 insertions(+), 3 deletions(-)"
    }
   ],
   "dirty": [
-   " M scripts/ui/menu_backdrop.gd",
-   " M scripts/world/building.gd",
-   " M scripts/world/world.gd"
+   " M data/expansions.json",
+   " M data/staff.json",
+   " M docs/ECONOMY.md",
+   " M docs/GDD.md",
+   " M scripts/autoload/catalog.gd",
+   " M scripts/autoload/game.gd",
+   " M scripts/core/bills.gd",
+   " M scripts/world/outside.gd",
+   " M tests/cases/staff_test.gd"
   ],
-  "total_commits": 276
+  "total_commits": 278
  },
- "updated": "2026-11-07T12:38:46+10:00",
+ "updated": "2026-11-07T12:41:27+10:00",
  "qa": [
   {
    "num": 1,
