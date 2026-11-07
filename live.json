@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C2",
   "area": "Second pass",
-  "activity": "FixRegress: X15 loan doc, X13 spawner, X16",
+  "activity": "FixRegress: Y3 cashier till identity, Y12 review save",
   "cycle": "2",
-  "since": "2026-11-07T10:03:02+10:00"
+  "since": "2026-11-07T10:04:40+10:00"
  },
  "rounds": [
   {
@@ -3908,6 +3908,11 @@
    "t": "2026-11-07T10:04:38+10:00",
    "kind": "fix",
    "msg": "C2/X16 fixed c2f28fa hint y 100->150 (sale chip ends at 142), Take a pack y 48->182. Layout check in test_seated_cashier_fetches_smokes_without_standing fails before (button over clock card, hint over RivalSale), passes after"
+  },
+  {
+   "t": "2026-11-07T10:04:40+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixRegress: Y3 cashier till identity, Y12 review save"
   }
  ],
  "tests": [
@@ -4049,14 +4054,14 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:04:38+10:00",
+  "t": "2026-11-07T10:04:40+10:00",
   "mem_free_pct": 44,
   "load": [
-   6.06,
-   4.58,
-   3.89
+   6.05,
+   4.6,
+   3.9
   ],
-  "godot_procs": 0
+  "godot_procs": 34
  },
  "game": {
   "commits": [
@@ -4484,7 +4489,7 @@
   "dirty": [],
   "total_commits": 212
  },
- "updated": "2026-11-07T10:04:39+10:00",
+ "updated": "2026-11-07T10:04:41+10:00",
  "qa": [
   {
    "num": 1,
