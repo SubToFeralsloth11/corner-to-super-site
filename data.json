@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T10:47+10:00",
- "head": "2ec20c1",
+ "generated": "2026-11-07T10:48+10:00",
+ "head": "8ffbe30",
  "stats": {
-  "commits": 236,
+  "commits": 237,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T10:47:29+10:00",
+  "last_commit": "2026-11-07T10:48:36+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 29592,
+  "gd_lines": 29630,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1481,6 +1481,11 @@
    "sha": "2ec20c1",
    "date": "2026-11-07T10:47:29+10:00",
    "subject": "Warn about range only against the kinds your licences let you sell (F12)"
+  },
+  {
+   "sha": "8ffbe30",
+   "date": "2026-11-07T10:48:36+10:00",
+   "subject": "Show what each Market product stands on, and warn when you have none (F19)"
   }
  ],
  "commits_per_hour": [
@@ -1654,7 +1659,7 @@
   },
   {
    "hour": "2026-11-07T10:00:00+10:00",
-   "commits": 32
+   "commits": 33
   }
  ],
  "sections": [

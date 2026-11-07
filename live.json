@@ -2178,10 +2178,11 @@
      "file": "scripts/ui/pc/app_market.gd:119-120",
      "detail": "A card shows units per box, cost and sell price, but not the fixture kind. After a licence is bought without its fridge or freezer (K3 only fixed the licence card), the Market still sells milk or peas you can't put anywhere, and you only find out with the box in hand (\"Needs a fridge\"). Fix: add \"Fridge · you have none\" in the warning colour on the card when no placed fixture of that kind exists, reusing `AppLicences._fixture_note`'s check.",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:27+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "8ffbe30",
+     "note": "Market cards show 'Stands on a <fixture>' and '· you have none' in WARN when no placed fixture of that kind (AppLicences.kind_placed shared with the licence note), refreshed when the app is shown. order_test: MILK with dairy licence and no fridge warns, CHIPZ doesn't (fails before: no line); order 92, m7 98 pass",
+     "closed": "2026-11-07T10:48:38+10:00"
     },
     {
      "id": "L1",
@@ -4879,6 +4880,11 @@
    "t": "2026-11-07T10:47:33+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixFirstHour: F19 Market fixture note"
+  },
+  {
+   "t": "2026-11-07T10:48:38+10:00",
+   "kind": "fix",
+   "msg": "C3/F19 fixed 8ffbe30 Market cards show 'Stands on a <fixture>' and '· you have none' in WARN when no placed fixture of that kind (AppLicences.kind_placed shared with the licence note), refreshed when the app is shown. order_test: MILK with dairy licence and no fridge warns, CHIPZ doesn't (fails before: no line); order 92, m7 98 pass"
   }
  ],
  "tests": [
@@ -5041,17 +5047,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:47:33+10:00",
-  "mem_free_pct": 67,
+  "t": "2026-11-07T10:48:38+10:00",
+  "mem_free_pct": 63,
   "load": [
-   1.92,
-   2.16,
-   2.55
+   2.11,
+   2.13,
+   2.51
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "8ffbe30",
+    "date": "2026-11-07T10:48:36+10:00",
+    "subject": "Show what each Market product stands on, and warn when you have none (F19)",
+    "body": "",
+    "stat": "3 files changed, 45 insertions(+), 7 deletions(-)"
+   },
    {
     "sha": "2ec20c1",
     "date": "2026-11-07T10:47:29+10:00",
@@ -5464,19 +5477,12 @@
     "subject": "Render the PC screen at full resolution without FXAA, hide the HUD there, and darken muted text",
     "body": "The presets render 3D below native and FXAA blurs, which smeared ShopOS's small text; the HUD\ncovered its top bar; muted grey on white was faint. Checked in the screenshot tour (shot 12).",
     "stat": "3 files changed, 17 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "a8027d1",
-    "date": "2026-11-07T08:57:39+10:00",
-    "subject": "Check for a window's tween meta before reading it (null default still errors)",
-    "body": "",
-    "stat": "1 file changed, 3 insertions(+), 1 deletion(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 236
+  "total_commits": 237
  },
- "updated": "2026-11-07T10:47:34+10:00",
+ "updated": "2026-11-07T10:48:39+10:00",
  "qa": [
   {
    "num": 1,
