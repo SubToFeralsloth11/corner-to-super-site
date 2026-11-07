@@ -2095,10 +2095,11 @@
      "file": "scripts/tutorial/tutorial_hint.gd:86-87",
      "detail": "`_process` checks `visible != (w != null and not current().is_empty())` but ignores `_hidden_for_pc`. At the PC, `visible` is false and the right side is true, so `refresh()` runs every frame: label text, `call_deferred(UiKit.refit)` and a layout pass. Fix: add `and not _hidden_for_pc` to the comparison.",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:27+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "dc6951a",
+     "note": "_process compares with 'and not _hidden_for_pc'; tutorial_test counts refreshes while seated: 20 in 20 frames before, <=1 after",
+     "closed": "2026-11-07T10:35:32+10:00"
     },
     {
      "id": "F14",
@@ -4758,6 +4759,11 @@
    "t": "2026-11-07T10:34:54+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixFirstHour: F13 hint refresh loop"
+  },
+  {
+   "t": "2026-11-07T10:35:32+10:00",
+   "kind": "fix",
+   "msg": "C3/F13 fixed dc6951a _process compares with 'and not _hidden_for_pc'; tutorial_test counts refreshes while seated: 20 in 20 frames before, <=1 after"
   }
  ],
  "tests": [
@@ -4920,17 +4926,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:34:54+10:00",
+  "t": "2026-11-07T10:35:32+10:00",
   "mem_free_pct": 66,
   "load": [
-   2.45,
-   3.04,
-   3.18
+   3.47,
+   3.21,
+   3.23
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "dc6951a",
+    "date": "2026-11-07T10:35:31+10:00",
+    "subject": "Stop rebuilding the hidden tutorial card every frame at the PC (F13)",
+    "body": "",
+    "stat": "2 files changed, 8 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "36b07c0",
     "date": "2026-11-07T10:34:39+10:00",
@@ -5343,19 +5356,12 @@
     "subject": "Give Dale a straight-line fallback and stuck recovery on his walk",
     "body": "With no navmesh route he 'arrived' at once and vanished in front of the player. Review round 2,\nN25.",
     "stat": "1 file changed, 17 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "712c877",
-    "date": "2026-11-07T08:40:22+10:00",
-    "subject": "Park the trolley beside a shopper at the shelf, and take baskets from the stand",
-    "body": "Trolleys poked into the fixture being shopped; baskets appeared in hand at the door and empty\nones walked off the plot. Basket shoppers step to the stand and lift one; an unused basket goes\nback. Review round 2, N6 and N14.",
-    "stat": "2 files changed, 37 insertions(+), 3 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 225
+  "total_commits": 226
  },
- "updated": "2026-11-07T10:34:55+10:00",
+ "updated": "2026-11-07T10:35:33+10:00",
  "qa": [
   {
    "num": 1,
