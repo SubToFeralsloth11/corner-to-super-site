@@ -1701,10 +1701,11 @@
      "file": "scripts/npc/shopper_brain.gd:530-534",
      "detail": "When `not checkout.in_lane(shopper)`, they stop() on the spot and stare at the till. That spot is usually in front of the last shelf they used, somewhere across the store, so they block other shoppers' stand points. The player can't see the real queue length, and patience burns down without any visible line. LANE_MAX (4.65 m) makes this common: 6 walkers or 2-3 trolleys fill a lane. has_room() also ignores the joiner's own trolley (_queue_depth uses null for k == size), so a trolley pusher is told there is room and then waits in place anyway. Fix: send overflow to a holding spot just past the lane end, or let the line bend along a free aisle. Count the joiner's trolley in has_room.",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:57+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "a384e85",
+     "note": "overflow snakes into a 2nd column inside the kept-clear lane (in sight, out of the aisles); only past both do they wait in place; has_room/shortest_queue take the joiner's trolley. test_a_full_lane_... updated (overflow spot in lane, unique, 2nd column holds more); checkout_test 77/0, customer 54/0",
+     "closed": "2026-11-07T10:01:07+10:00"
     },
     {
      "id": "X5",
@@ -3863,6 +3864,11 @@
    "t": "2026-11-07T09:58:00+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixRegress: X4 overflow holding spot"
+  },
+  {
+   "t": "2026-11-07T10:01:07+10:00",
+   "kind": "fix",
+   "msg": "C2/X4 fixed a384e85 overflow snakes into a 2nd column inside the kept-clear lane (in sight, out of the aisles); only past both do they wait in place; has_room/shortest_queue take the joiner's trolley. test_a_full_lane_... updated (overflow spot in lane, unique, 2nd column holds more); checkout_test 77/0, customer 54/0"
   }
  ],
  "tests": [
@@ -4004,17 +4010,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T09:58:00+10:00",
-  "mem_free_pct": 56,
+  "t": "2026-11-07T10:01:07+10:00",
+  "mem_free_pct": 46,
   "load": [
-   2.86,
-   3.09,
-   3.41
+   2.43,
+   2.69,
+   3.17
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "a384e85",
+    "date": "2026-11-07T10:01:06+10:00",
+    "subject": "Turn a full queue lane's overflow back up a second column in the lane, and count the joiner's trolley for room (X4)",
+    "body": "",
+    "stat": "6 files changed, 115 insertions(+), 40 deletions(-)"
+   },
    {
     "sha": "78b9606",
     "date": "2026-11-07T09:57:56+10:00",
@@ -4427,19 +4440,12 @@
     "subject": "Buy a product drawn several times as several units in one trip, with one price decision",
     "body": "Repeat picks were separate trips, separate refusal rolls (refuse then grab the same item) and\nstacked out-of-stock penalties. Unit counts are unchanged, so the economy tuning holds.\nReview round 2, N3.",
     "stat": "3 files changed, 76 insertions(+), 18 deletions(-)"
-   },
-   {
-    "sha": "e913982",
-    "date": "2026-11-07T07:48:37+10:00",
-    "subject": "Don't start serving at an unserved till while another till is served, and drop dead queue code",
-    "body": "The front customer unloaded onto the empty counter and waited out their patience there instead\nof moving to the served till. Also removes unreachable lines after cig_wall_till's return.\nReview round 2, N2 and N21.",
-    "stat": "3 files changed, 35 insertions(+), 11 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 204
+  "total_commits": 205
  },
- "updated": "2026-11-07T09:58:00+10:00",
+ "updated": "2026-11-07T10:01:08+10:00",
  "qa": [
   {
    "num": 1,

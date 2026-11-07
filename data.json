@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T09:58+10:00",
- "head": "78b9606",
+ "generated": "2026-11-07T10:01+10:00",
+ "head": "a384e85",
  "stats": {
-  "commits": 204,
+  "commits": 205,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T09:57:56+10:00",
+  "last_commit": "2026-11-07T10:01:06+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 28812,
+  "gd_lines": 28881,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1321,6 +1321,11 @@
    "sha": "78b9606",
    "date": "2026-11-07T09:57:56+10:00",
    "subject": "Price the head office franchise to pay back in under two weeks at 3.5 stars (X11)"
+  },
+  {
+   "sha": "a384e85",
+   "date": "2026-11-07T10:01:06+10:00",
+   "subject": "Turn a full queue lane's overflow back up a second column in the lane, and count the joiner's trolley for room (X4)"
   }
  ],
  "commits_per_hour": [
@@ -1491,6 +1496,10 @@
   {
    "hour": "2026-11-07T09:00:00+10:00",
    "commits": 27
+  },
+  {
+   "hour": "2026-11-07T10:00:00+10:00",
+   "commits": 1
   }
  ],
  "sections": [
