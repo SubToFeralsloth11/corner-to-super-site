@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T13:08+10:00",
- "head": "8c5a7c6",
+ "generated": "2026-11-07T13:09+10:00",
+ "head": "32ca3d2",
  "stats": {
-  "commits": 287,
+  "commits": 288,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T13:08:04+10:00",
+  "last_commit": "2026-11-07T13:09:11+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 31726,
+  "gd_lines": 31787,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1743,6 +1743,11 @@
    "sha": "8c5a7c6",
    "date": "2026-11-07T13:08:04+10:00",
    "subject": "Paint store-green slogans high on the long walls so the shop isn't four blank walls (V15)"
+  },
+  {
+   "sha": "32ca3d2",
+   "date": "2026-11-07T13:09:11+10:00",
+   "subject": "Hold the soak AI's delayed till, mop and rack actions by weak reference so a shopper giving up at the counter can't leave a freed capture"
   }
  ],
  "commits_per_hour": [
@@ -1928,7 +1933,7 @@
   },
   {
    "hour": "2026-11-07T13:00:00+10:00",
-   "commits": 1
+   "commits": 2
   }
  ],
  "sections": [
