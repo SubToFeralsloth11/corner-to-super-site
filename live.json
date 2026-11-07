@@ -2579,9 +2579,9 @@
      "by": "CritBalance",
      "status": "fixed",
      "found": "2026-11-07T12:18:41+10:00",
-     "commit": "4bde2d4",
-     "note": "loyalty effect list_bonus +1; test_loyalty_members_fill_bigger_baskets",
-     "closed": "2026-11-07T12:48:08+10:00"
+     "commit": "1899a62",
+     "note": "loyalty effect list_bonus +1; test_loyalty_members_fill_bigger_baskets (sha corrected)",
+     "closed": "2026-11-07T12:49:49+10:00"
     },
     {
      "id": "B12",
@@ -6125,6 +6125,11 @@
    "t": "2026-11-07T12:48:13+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixBalance: B13"
+  },
+  {
+   "t": "2026-11-07T12:49:49+10:00",
+   "kind": "fix",
+   "msg": "C4/B11 fixed 1899a62 loyalty effect list_bonus +1; test_loyalty_members_fill_bigger_baskets (sha corrected)"
   }
  ],
  "tests": [
@@ -6335,14 +6340,14 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:48:13+10:00",
-  "mem_free_pct": 54,
+  "t": "2026-11-07T12:49:50+10:00",
+  "mem_free_pct": 31,
   "load": [
-   3.56,
-   2.98,
-   2.64
+   3.93,
+   3.2,
+   2.75
   ],
-  "godot_procs": 0
+  "godot_procs": 4
  },
  "game": {
   "commits": [
@@ -6768,11 +6773,15 @@
    }
   ],
   "dirty": [
-   " M scripts/world/building.gd"
+   " M data/fixtures.json",
+   " M data/levels.json",
+   " M scripts/autoload/catalog.gd",
+   " M scripts/world/building.gd",
+   " M tests/cases/progression_test.gd"
   ],
   "total_commits": 285
  },
- "updated": "2026-11-07T12:48:14+10:00",
+ "updated": "2026-11-07T12:49:52+10:00",
  "qa": [
   {
    "num": 1,
