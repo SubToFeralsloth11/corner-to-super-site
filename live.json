@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixFirstHour: F6 free boxes carry over",
+  "activity": "FixFirstHour: F1 day-1 pacing (free order/tutorial)",
   "cycle": "3",
-  "since": "2026-11-07T10:28:00+10:00"
+  "since": "2026-11-07T10:28:46+10:00"
  },
  "rounds": [
   {
@@ -4724,6 +4724,11 @@
    "t": "2026-11-07T10:28:33+10:00",
    "kind": "fix",
    "msg": "C3/F6 fixed 4b99eca place_order subtracts only the free boxes used; quote returns free_by_id and cart lines show 'free'/'N free · $x'; order_test new case (1 COLA then rest still free, fails before: free_order_boxes was 0); order/day tests pass"
+  },
+  {
+   "t": "2026-11-07T10:28:46+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixFirstHour: F1 day-1 pacing (free order/tutorial)"
   }
  ],
  "tests": [
@@ -4886,12 +4891,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:28:33+10:00",
+  "t": "2026-11-07T10:28:46+10:00",
   "mem_free_pct": 60,
   "load": [
-   3.04,
-   3.03,
-   3.24
+   2.88,
+   2.99,
+   3.22
   ],
   "godot_procs": 3
  },
@@ -5323,7 +5328,7 @@
   ],
   "total_commits": 221
  },
- "updated": "2026-11-07T10:28:33+10:00",
+ "updated": "2026-11-07T10:28:47+10:00",
  "qa": [
   {
    "num": 1,
