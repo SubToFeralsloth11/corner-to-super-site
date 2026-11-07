@@ -6516,6 +6516,11 @@
    "t": "2026-11-07T14:06:00+10:00",
    "kind": "fix",
    "msg": "Confirmation soak: days 1/7/15/30 in band, day 3 $263 just over tolerance; +30% markup soak: stars 3.51 vs 3.85 but profit $53.5k vs $43.9k over 30 days (markup still pays)"
+  },
+  {
+   "t": "2026-11-07T14:06:04+10:00",
+   "kind": "test",
+   "msg": "Tests: 1271 passed, 0 failed after soak tuning"
   }
  ],
  "tests": [
@@ -6638,6 +6643,12 @@
    "passed": 1268,
    "failed": 0,
    "note": "after B fixes (FixBalance)"
+  },
+  {
+   "t": "2026-11-07T14:06:04+10:00",
+   "passed": 1271,
+   "failed": 0,
+   "note": "after soak tuning"
   }
  ],
  "agents": {
@@ -6748,8 +6759,8 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T14:06:00+10:00",
-  "mem_free_pct": 45,
+  "t": "2026-11-07T14:06:04+10:00",
+  "mem_free_pct": 46,
   "load": [
    5.22,
    3.9,
@@ -6759,6 +6770,13 @@
  },
  "game": {
   "commits": [
+   {
+    "sha": "d465e30",
+    "date": "2026-11-07T14:06:03+10:00",
+    "subject": "Leave the shed doorway unpainted by the feature wall, and drop green rubble from it (R5-02, R5-13)",
+    "body": "",
+    "stat": "4 files changed, 70 insertions(+), 17 deletions(-)"
+   },
    {
     "sha": "69eb1ee",
     "date": "2026-11-07T14:05:58+10:00",
@@ -7171,30 +7189,19 @@
     "subject": "Ask for a second press before buying an expansion or licence (F11)",
     "body": "",
     "stat": "6 files changed, 89 insertions(+), 6 deletions(-)"
-   },
-   {
-    "sha": "aebd2db",
-    "date": "2026-11-07T10:45:31+10:00",
-    "subject": "Draw the starter snacks and bread at real size so a box fits one or two slots (F10)",
-    "body": "",
-    "stat": "4 files changed, 36 insertions(+), 23 deletions(-)"
    }
   ],
   "dirty": [
-   " M scripts/build/expansion.gd",
    " M scripts/fixtures/fixture.gd",
    " M scripts/ui/level_banner.gd",
    " M scripts/ui/options.gd",
    " M scripts/ui/pc/app_market.gd",
    " M scripts/ui/prompt.gd",
-   " M scripts/world/building.gd",
-   " M scripts/world/world.gd",
-   " M tests/cases/building_test.gd",
    " M tests/test_runner.gd"
   ],
-  "total_commits": 293
+  "total_commits": 294
  },
- "updated": "2026-11-07T14:06:01+10:00",
+ "updated": "2026-11-07T14:06:05+10:00",
  "qa": [
   {
    "num": 1,
