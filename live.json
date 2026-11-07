@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C4",
   "area": "Visuals; balance",
-  "activity": "FixBalance: B15",
+  "activity": "FixBalance: B14",
   "cycle": "4",
-  "since": "2026-11-07T12:19:34+10:00"
+  "since": "2026-11-07T12:20:09+10:00"
  },
  "rounds": [
   {
@@ -5839,6 +5839,11 @@
    "t": "2026-11-07T12:20:06+10:00",
    "kind": "fix",
    "msg": "C4/B15 fixed 39abdf8 loans joined with space; separate lost_oos/lost_not_carried columns"
+  },
+  {
+   "t": "2026-11-07T12:20:09+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixBalance: B14"
   }
  ],
  "tests": [
@@ -6049,7 +6054,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:20:06+10:00",
+  "t": "2026-11-07T12:20:09+10:00",
   "mem_free_pct": 63,
   "load": [
    1.74,
@@ -6487,7 +6492,7 @@
   ],
   "total_commits": 252
  },
- "updated": "2026-11-07T12:20:07+10:00",
+ "updated": "2026-11-07T12:20:10+10:00",
  "qa": [
   {
    "num": 1,
