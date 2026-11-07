@@ -2283,10 +2283,11 @@
      "file": "scripts/ui/pc/app_market.gd:41-43,52-58,87-97",
      "detail": "The cards are in products.json order with no licence headers, search, \"low/out only\" filter or sorting, about 12 rows of ~250 px to scroll through. Nothing marks products that are low or empty, even though `stock_on_hand` already has `room`. \"On shelves / In boxes\" only updates when the window is shown, so it stays wrong while sales and van drops happen with the app open. The \"Ordered N boxes, K trips\" note is wiped by the next sale's `_refresh`. **Fix:** add a licence/fixture tab row and a \"Needs stock\" toggle that sorts by room, colour each card's stock line by how full its shelves are, refresh stock on `sale_completed`/delivery landings while visible, and keep the order note for a few seconds.",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:09+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "4d42de3",
+     "note": "Market: licence tabs + Needs stock (room>0, most room first), red stock line <25%, counts refresh on sale/order/box landing while open (deferred), order note held 6 s. order_test: filter/sort/tab checks, card follows shelf after a sale, note survives next sale.",
+     "closed": "2026-11-07T11:26:17+10:00"
     },
     {
      "id": "L9",
@@ -5010,6 +5011,11 @@
    "t": "2026-11-07T11:26:15+10:00",
    "kind": "fix",
    "msg": "C3/L1 fixed 4d42de3 stock_on_hand adds on_way (DeliveryService.undelivered) and restockers' carried boxes; restock_to_full subtracts them; cards show On the way. order_test: order CHIPZ then Restock to full again -> no CHIPZ re-added (before: script error, no on_way)."
+  },
+  {
+   "t": "2026-11-07T11:26:17+10:00",
+   "kind": "fix",
+   "msg": "C3/L8 fixed 4d42de3 Market: licence tabs + Needs stock (room>0, most room first), red stock line <25%, counts refresh on sale/order/box landing while open (deferred), order note held 6 s. order_test: filter/sort/tab checks, card follows shelf after a sale, note survives next sale."
   }
  ],
  "tests": [
@@ -5188,10 +5194,10 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:26:15+10:00",
+  "t": "2026-11-07T11:26:17+10:00",
   "mem_free_pct": 45,
   "load": [
-   2.79,
+   2.73,
    2.12,
    2.2
   ],
@@ -5623,7 +5629,7 @@
   "dirty": [],
   "total_commits": 247
  },
- "updated": "2026-11-07T11:26:15+10:00",
+ "updated": "2026-11-07T11:26:18+10:00",
  "qa": [
   {
    "num": 1,
