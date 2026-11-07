@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T11:21+10:00",
- "head": "2c4a4cd",
+ "generated": "2026-11-07T11:26+10:00",
+ "head": "4d42de3",
  "stats": {
-  "commits": 246,
+  "commits": 247,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T11:21:40+10:00",
+  "last_commit": "2026-11-07T11:26:13+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 30140,
+  "gd_lines": 30340,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1538,6 +1538,11 @@
    "sha": "2c4a4cd",
    "date": "2026-11-07T11:21:40+10:00",
    "subject": "Rebake the navmesh after each placement or sale while people are about (L16)"
+  },
+  {
+   "sha": "4d42de3",
+   "date": "2026-11-07T11:26:13+10:00",
+   "subject": "Count stock on the way in Restock to full and give the Market tabs, a Needs stock filter and live counts (L1, L8)"
   }
  ],
  "commits_per_hour": [
@@ -1715,7 +1720,7 @@
   },
   {
    "hour": "2026-11-07T11:00:00+10:00",
-   "commits": 7
+   "commits": 8
   }
  ],
  "sections": [

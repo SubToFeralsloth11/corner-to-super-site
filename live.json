@@ -2192,10 +2192,11 @@
      "file": "scripts/ui/pc/app_market.gd:62-76; scripts/world/world.gd:174-189",
      "detail": "`restock_to_full` works out what is short from `World.stock_on_hand()`. That count only includes shelves, racks, loose boxes and the box in the player's hands. It leaves out boxes already paid for but not yet delivered (`DeliveryService.undelivered()`, meaning the van's cannon queue plus `pending` trips) and boxes a restocker is carrying (`StaffCrew.carried_boxes()`). A late-game cart of 60+ boxes takes several back-to-back 30-box trips. Pressing Restock to full again in that time, on the PC or the phone, puts the whole shortfall in the cart again, so the player pays twice and the bay floods. The \"In boxes\" line on each card also leaves out stock on the way. **Fix:** add an \"on the way\" count per product from `delivery.undelivered()` (count × BoxSpec units) and from `crew.carried_boxes()`. Subtract it in `restock_to_full`, and show it on each card (\"On the way N\").",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:09+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "4d42de3",
+     "note": "stock_on_hand adds on_way (DeliveryService.undelivered) and restockers' carried boxes; restock_to_full subtracts them; cards show On the way. order_test: order CHIPZ then Restock to full again -> no CHIPZ re-added (before: script error, no on_way).",
+     "closed": "2026-11-07T11:26:15+10:00"
     },
     {
      "id": "L2",
@@ -5004,6 +5005,11 @@
    "t": "2026-11-07T11:21:45+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixLate: L1 restock-to-full counts stock on the way"
+  },
+  {
+   "t": "2026-11-07T11:26:15+10:00",
+   "kind": "fix",
+   "msg": "C3/L1 fixed 4d42de3 stock_on_hand adds on_way (DeliveryService.undelivered) and restockers' carried boxes; restock_to_full subtracts them; cards show On the way. order_test: order CHIPZ then Restock to full again -> no CHIPZ re-added (before: script error, no on_way)."
   }
  ],
  "tests": [
@@ -5182,17 +5188,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:21:45+10:00",
-  "mem_free_pct": 52,
+  "t": "2026-11-07T11:26:15+10:00",
+  "mem_free_pct": 45,
   "load": [
-   2.11,
-   2.13,
-   2.28
+   2.79,
+   2.12,
+   2.2
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "4d42de3",
+    "date": "2026-11-07T11:26:13+10:00",
+    "subject": "Count stock on the way in Restock to full and give the Market tabs, a Needs stock filter and live counts (L1, L8)",
+    "body": "stock_on_hand() adds what the van hasn't fired yet (on_way) and boxes in restockers' arms;\nRestock to full subtracts both, so pressing it again while the van is out orders nothing twice.\nThe Market gets a licence tab row and a Needs stock toggle (room only, most room first), red\nstock lines under a quarter full, counts that follow sales, orders and landing boxes while\nopen, and an order note that the next sale no longer wipes.",
+    "stat": "5 files changed, 227 insertions(+), 27 deletions(-)"
+   },
    {
     "sha": "2c4a4cd",
     "date": "2026-11-07T11:21:40+10:00",
@@ -5605,19 +5618,12 @@
     "subject": "Ask before pause-menu Load or Quit throws away a day that can't be saved yet",
     "body": "Mid-day either button discarded everything since the morning on one click. Review round 2, Y5.",
     "stat": "1 file changed, 20 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "22aae8b",
-    "date": "2026-11-07T09:44:35+10:00",
-    "subject": "Shut the previous cooler when stocking the next, open the case when taking stock back, and shut it when you sit down",
-    "body": "Review round 2, Y8.",
-    "stat": "1 file changed, 14 insertions(+), 4 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 246
+  "total_commits": 247
  },
- "updated": "2026-11-07T11:21:45+10:00",
+ "updated": "2026-11-07T11:26:15+10:00",
  "qa": [
   {
    "num": 1,
