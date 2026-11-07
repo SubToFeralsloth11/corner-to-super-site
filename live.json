@@ -2316,10 +2316,11 @@
      "file": "scripts/npc/restocker_job.gd:130-132,148-158",
      "detail": "`_box_on_rack` checks that the box is still parented to `_rack`, but not `_usable(_rack)`. If the player picks the rack up while a restocker is in TO_RACK, the restocker walks to the old spot and reparents a box out of the floating ghost rack. **Fix:** add `and _usable(_rack)` to `_box_on_rack()`.",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:09+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "d5640f3",
+     "note": "_box_on_rack checks _usable(_rack). staff_jobs_test: build.carried=rack during TO_RACK -> restocker gives up, box stays racked (failed before).",
+     "closed": "2026-11-07T11:14:47+10:00"
     },
     {
      "id": "L12",
@@ -4943,6 +4944,11 @@
    "t": "2026-11-07T11:14:45+10:00",
    "kind": "fix",
    "msg": "C3/L3 fixed d5640f3 Part-used box chains to nearest unfull slot of its product (6 m or <50% anywhere) before returning; _find tops up slots under 100% when none <50%. staff_jobs_test: two CHIPZ slots at 10/12 -> both full with one rack return (before: never touched, 10/12)."
+  },
+  {
+   "t": "2026-11-07T11:14:47+10:00",
+   "kind": "fix",
+   "msg": "C3/L11 fixed d5640f3 _box_on_rack checks _usable(_rack). staff_jobs_test: build.carried=rack during TO_RACK -> restocker gives up, box stays racked (failed before)."
   }
  ],
  "tests": [
@@ -5121,10 +5127,10 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:14:45+10:00",
+  "t": "2026-11-07T11:14:47+10:00",
   "mem_free_pct": 59,
   "load": [
-   1.66,
+   1.68,
    2.07,
    2.38
   ],
@@ -5556,7 +5562,7 @@
   "dirty": [],
   "total_commits": 242
  },
- "updated": "2026-11-07T11:14:45+10:00",
+ "updated": "2026-11-07T11:14:48+10:00",
  "qa": [
   {
    "num": 1,
