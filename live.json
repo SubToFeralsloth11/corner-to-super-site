@@ -1611,10 +1611,11 @@
      "file": "scripts/main.gd:180-186, scripts/autoload/game.gd:1148-1153,1249",
      "detail": "The autosave runs before `newspaper.open(...)`. `pending_review` is not in `save_state()`, and `load_state()` clears it. The head-office bonus is already in `money`, but the review and its bonus line are gone after a quit or crash on the paper. Fix: save `pending_review` and re-open the paper after loading while it is not empty, or save again after the paper closes.",
      "by": "CritPlayer",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:40:31+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "da7cfff",
+     "note": "game.gd half: pending_review in save_state/load_state (+ARCHITECTURE save format). Reopen-after-load and clear-on-close in main.gd handed to lead. test_an_unread_weekly_review_survives_a_save; save_test 33/0",
+     "closed": "2026-11-07T10:05:27+10:00"
     },
     {
      "id": "Y13",
@@ -3913,6 +3914,11 @@
    "t": "2026-11-07T10:04:40+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixRegress: Y3 cashier till identity, Y12 review save"
+  },
+  {
+   "t": "2026-11-07T10:05:27+10:00",
+   "kind": "fix",
+   "msg": "C2/Y12 fixed da7cfff game.gd half: pending_review in save_state/load_state (+ARCHITECTURE save format). Reopen-after-load and clear-on-close in main.gd handed to lead. test_an_unread_weekly_review_survives_a_save; save_test 33/0"
   }
  ],
  "tests": [
@@ -4054,17 +4060,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:04:40+10:00",
-  "mem_free_pct": 44,
+  "t": "2026-11-07T10:05:27+10:00",
+  "mem_free_pct": 43,
   "load": [
-   6.05,
-   4.6,
-   3.9
+   6.03,
+   4.77,
+   3.99
   ],
-  "godot_procs": 34
+  "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "da7cfff",
+    "date": "2026-11-07T10:05:25+10:00",
+    "subject": "Keep an unread Sunday review in saves (Y12)",
+    "body": "",
+    "stat": "3 files changed, 19 insertions(+), 3 deletions(-)"
+   },
    {
     "sha": "c2f28fa",
     "date": "2026-11-07T10:04:29+10:00",
@@ -4477,19 +4490,14 @@
     "subject": "Stretch loan terms to 20/30/40 days so borrowing is a real choice",
     "body": "At 10-14 days every instalment was at least the day's whole profit when the loan unlocked, so a\nloan led straight to overdue bills and repossession. Same interest, smaller instalments. Loan\nand bills tests now read the numbers from loans.json. Review round 2, E6.",
     "stat": "5 files changed, 51 insertions(+), 28 deletions(-)"
-   },
-   {
-    "sha": "9bc60ec",
-    "date": "2026-11-07T08:05:34+10:00",
-    "subject": "Itemise the day's other money on the receipt so it adds up to the cash",
-    "body": "Orders, furniture, licences, expansions, staff, upgrades and loans never showed, so a '+$150'\nnight could end with less cash than the morning. The receipt now lists them and the cash at\nopen (saved with the day). Review round 2, E11.",
-    "stat": "4 files changed, 63 insertions(+), 1 deletion(-)"
    }
   ],
-  "dirty": [],
-  "total_commits": 212
+  "dirty": [
+   " M scripts/main.gd"
+  ],
+  "total_commits": 213
  },
- "updated": "2026-11-07T10:04:41+10:00",
+ "updated": "2026-11-07T10:05:28+10:00",
  "qa": [
   {
    "num": 1,
