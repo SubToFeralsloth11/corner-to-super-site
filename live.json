@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixFirstHour: F2 tutorial bay arrow",
+  "activity": "FixFirstHour: F6 free boxes carry over",
   "cycle": "3",
-  "since": "2026-11-07T10:22:23+10:00"
+  "since": "2026-11-07T10:28:00+10:00"
  },
  "rounds": [
   {
@@ -4701,6 +4701,11 @@
    "t": "2026-11-07T10:27:57+10:00",
    "kind": "fix",
    "msg": "C3/F2 fixed 6325dfc Arrow aims at TutorialHint.bay_point (bay.centre, y 1.2); screenshot tour looks there too; tutorial_test asserts bay.contains(point) (origin failed it); tutorial 21 passed"
+  },
+  {
+   "t": "2026-11-07T10:28:00+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixFirstHour: F6 free boxes carry over"
   }
  ],
  "tests": [
@@ -4863,14 +4868,14 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:27:57+10:00",
-  "mem_free_pct": 61,
+  "t": "2026-11-07T10:28:00+10:00",
+  "mem_free_pct": 60,
   "load": [
-   3.54,
-   3.12,
-   3.28
+   3.33,
+   3.08,
+   3.27
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
@@ -5305,7 +5310,7 @@
   ],
   "total_commits": 219
  },
- "updated": "2026-11-07T10:27:58+10:00",
+ "updated": "2026-11-07T10:28:00+10:00",
  "qa": [
   {
    "num": 1,
