@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C4",
   "area": "Visuals; balance",
-  "activity": "FixBalance2: confirmation soak",
+  "activity": "FixBalance2: stopped (done)",
   "cycle": "5",
-  "since": "2026-11-07T13:59:06+10:00"
+  "since": "2026-11-07T14:06:07+10:00"
  },
  "rounds": [
   {
@@ -2987,10 +2987,11 @@
      "file": "scripts/world/building.gd:337-347 (with :76-77, stockroom.gd INNER_DOOR_Z)",
      "detail": "`add_feature_wall` paints the whole merged run nearest the first till, corner to corner (2d943a6), with no gap for the doorway (58a68a9). With the default till at (-3.6,-2.6) from settings.json, the nearest non-front run once E5 is owned is x=-14, z 0..-12, about 10.4 m away. The back runs are at least 11.4 m away. That x=-14 run is the one `_wall_round_shed_door` splits for the doorway (z -2.9..-1.5, 2.4 m high). So on the normal progression (S1 at L2, E5 at L8, till never moved), a green plaster panel covers the opening from 1.23 m to 2.4 m while staff walk through it. Fix: when `Stockroom.has_inner_door(...)` and `_holds_shed_door(best)`, build the skin in two pieces either side of `inner_door_span()` plus a lintel piece from INNER_DOOR_H up to WALL_H, the same way `_wall_round_shed_door` does.",
      "by": "CritRegress5",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T13:47:55+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "d465e30",
+     "note": "new building test: no green piece across the doorway",
+     "closed": "2026-11-07T14:06:07+10:00"
     },
     {
      "id": "R5-03",
@@ -6521,6 +6522,16 @@
    "t": "2026-11-07T14:06:04+10:00",
    "kind": "test",
    "msg": "Tests: 1271 passed, 0 failed after soak tuning"
+  },
+  {
+   "t": "2026-11-07T14:06:07+10:00",
+   "kind": "fix",
+   "msg": "C5/R5-02 fixed d465e30 new building test: no green piece across the doorway"
+  },
+  {
+   "t": "2026-11-07T14:06:07+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixBalance2: stopped (done)"
   }
  ],
  "tests": [
@@ -6759,12 +6770,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T14:06:04+10:00",
+  "t": "2026-11-07T14:06:07+10:00",
   "mem_free_pct": 46,
   "load": [
-   5.22,
-   3.9,
-   4.07
+   5.04,
+   3.89,
+   4.06
   ],
   "godot_procs": 0
  },
@@ -7201,7 +7212,7 @@
   ],
   "total_commits": 294
  },
- "updated": "2026-11-07T14:06:05+10:00",
+ "updated": "2026-11-07T14:06:08+10:00",
  "qa": [
   {
    "num": 1,
