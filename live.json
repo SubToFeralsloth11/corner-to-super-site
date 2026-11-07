@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixLate: L2 shed doorway",
+  "activity": "FixLate: L3 restocker top-ups",
   "cycle": "3",
-  "since": "2026-11-07T11:01:35+10:00"
+  "since": "2026-11-07T11:12:36+10:00"
  },
  "rounds": [
   {
@@ -4932,6 +4932,11 @@
    "t": "2026-11-07T11:12:33+10:00",
    "kind": "fix",
    "msg": "C3/L2 fixed 58a68a9 Staff doorway shed->shop (x=-14, z -2.9..-1.5) once E5+shed; nav-only blocker + STAFF-layer NavigationLink3D so customers never route through the shed. staff_jobs_test: rack->col0 shelf staff route 12.6 m vs 38.1 m before, first item 15.8 s vs 34.8 s; restocker never leaves by roller door (before: z 1.29). build/building/nav/m5/save tests pass."
+  },
+  {
+   "t": "2026-11-07T11:12:36+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixLate: L3 restocker top-ups"
   }
  ],
  "tests": [
@@ -5110,12 +5115,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:12:33+10:00",
+  "t": "2026-11-07T11:12:36+10:00",
   "mem_free_pct": 59,
   "load": [
-   2.16,
-   2.45,
-   2.55
+   1.98,
+   2.41,
+   2.54
   ],
   "godot_procs": 0
  },
@@ -5545,7 +5550,7 @@
   "dirty": [],
   "total_commits": 240
  },
- "updated": "2026-11-07T11:12:34+10:00",
+ "updated": "2026-11-07T11:12:37+10:00",
  "qa": [
   {
    "num": 1,
