@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixLate: L7 restocker twin at PREP",
+  "activity": "FixLate: L10 cleaner priorities",
   "cycle": "3",
-  "since": "2026-11-07T11:17:18+10:00"
+  "since": "2026-11-07T11:19:36+10:00"
  },
  "rounds": [
   {
@@ -4977,6 +4977,11 @@
    "t": "2026-11-07T11:19:33+10:00",
    "kind": "fix",
    "msg": "C3/L7 fixed 9803a6d StaffCrew.sync calls Staff.back_to_work on a leaving member instead of spawning a second body. staff_jobs_test: restocker winding down with a box, sync -> 1 body back at work, box in carried_boxes (before: 2 bodies, box missing)."
+  },
+  {
+   "t": "2026-11-07T11:19:36+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixLate: L10 cleaner priorities"
   }
  ],
  "tests": [
@@ -5155,12 +5160,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:19:33+10:00",
+  "t": "2026-11-07T11:19:36+10:00",
   "mem_free_pct": 52,
   "load": [
-   2.74,
-   2.26,
-   2.35
+   2.6,
+   2.24,
+   2.34
   ],
   "godot_procs": 0
  },
@@ -5590,7 +5595,7 @@
   "dirty": [],
   "total_commits": 244
  },
- "updated": "2026-11-07T11:19:34+10:00",
+ "updated": "2026-11-07T11:19:37+10:00",
  "qa": [
   {
    "num": 1,
