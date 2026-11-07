@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T12:21+10:00",
- "head": "88581d2",
+ "generated": "2026-11-07T12:23+10:00",
+ "head": "c4d28ab",
  "stats": {
-  "commits": 253,
+  "commits": 257,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T12:21:13+10:00",
+  "last_commit": "2026-11-07T12:23:52+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 30598,
+  "gd_lines": 30788,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1573,6 +1573,26 @@
    "sha": "88581d2",
    "date": "2026-11-07T12:21:13+10:00",
    "subject": "Make disabled buttons, glass-card captions, the aim prompt and the till hint readable"
+  },
+  {
+   "sha": "2ecab4e",
+   "date": "2026-11-07T12:23:47+10:00",
+   "subject": "Keep amounts off the receipt's scrollbar and run its rules full width (V17)"
+  },
+  {
+   "sha": "3955272",
+   "date": "2026-11-07T12:23:49+10:00",
+   "subject": "Fold done tutorial steps into one line so the clipboard fits a 720p screen (V13)"
+  },
+  {
+   "sha": "34c4ec2",
+   "date": "2026-11-07T12:23:50+10:00",
+   "subject": "Light the main-menu button of the open page (V25)"
+  },
+  {
+   "sha": "c4d28ab",
+   "date": "2026-11-07T12:23:52+10:00",
+   "subject": "Light the open app's dock button in ShopOS (V24, open-app state)"
   }
  ],
  "commits_per_hour": [
@@ -1754,7 +1774,7 @@
   },
   {
    "hour": "2026-11-07T12:00:00+10:00",
-   "commits": 6
+   "commits": 10
   }
  ],
  "sections": [

@@ -2776,10 +2776,11 @@
      "file": "clipboard.gd:24-30 (centred, no scroll or maximum height), 77-79 (re-centre only) · 87_clipboard_tutorial.png: the sheet starts at y≈130 and \"Bills tonight / Total\" is cut at y≈715. Running low and the sheet's bottom edge are off-screen",
      "detail": "On day 1, the screen where the clipboard matters most, the sheet doesn't fit. Fix: wrap `_body` in a ScrollContainer capped at `viewport_h - 80`, or show done tutorial steps as one \"✓ n done\" line and only the current and next steps in full.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "3955272",
+     "note": "current + next step only; tutorial 44/0",
+     "closed": "2026-11-07T12:23:50+10:00"
     },
     {
      "id": "V14",
@@ -2824,10 +2825,11 @@
      "file": "day_summary.gd:50-56 (ScrollContainer straight inside the paper) · 33 crop: \"$186.40\", \"14\", \"Level 2\" butt against the scrollbar; the dashed rules end about 50 px before the numbers",
      "detail": "It looks broken on the end-of-day screen. Fix: put `_rows` in a MarginContainer with `margin_right = 14`, give the scrollbar a thin custom style, and make `_rule()` full-width.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "2ecab4e",
+     "note": "16 px gutter; day/additions tests pass",
+     "closed": "2026-11-07T12:23:49+10:00"
     },
     {
      "id": "V18",
@@ -2908,10 +2910,11 @@
      "file": "shop_os.gd:146-153 · 12, 35, 40: you can't tell which app is open at a glance; the logo wallpaper is always hidden because Market opens on sit-down",
      "detail": "VISUALS.md asks for a \"dock of app icons\". Fix: an icon above a 14 px label (generated glyphs or pictograms in assets/ui), a white-filled style for the open app set in `open_app`/`close_app`, and show the desktop wallpaper for 0.3 s before Market opens.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "wip",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "c4d28ab",
+     "note": "open-app state done; icons not yet",
+     "closed": "2026-11-07T12:23:53+10:00"
     },
     {
      "id": "V25",
@@ -2920,10 +2923,11 @@
      "file": "main_menu.gd:196-200 (`_menu_button` has no selected state) · 82_menu_controls / 82_menu_options / 82_menu_credits: all seven buttons stay identical while a panel is open",
      "detail": "Fix: in `show_page`, give the matching button a GREEN accent stylebox and reset it in `close_page`.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "34c4ec2",
+     "note": "menu 81/0",
+     "closed": "2026-11-07T12:23:52+10:00"
     }
    ]
   }
@@ -5868,6 +5872,26 @@
    "t": "2026-11-07T12:21:15+10:00",
    "kind": "fix",
    "msg": "C4/V7 fixed 88581d2 player/checkout tests pass; windowed look pending tour"
+  },
+  {
+   "t": "2026-11-07T12:23:49+10:00",
+   "kind": "fix",
+   "msg": "C4/V17 fixed 2ecab4e 16 px gutter; day/additions tests pass"
+  },
+  {
+   "t": "2026-11-07T12:23:50+10:00",
+   "kind": "fix",
+   "msg": "C4/V13 fixed 3955272 current + next step only; tutorial 44/0"
+  },
+  {
+   "t": "2026-11-07T12:23:52+10:00",
+   "kind": "fix",
+   "msg": "C4/V25 fixed 34c4ec2 menu 81/0"
+  },
+  {
+   "t": "2026-11-07T12:23:53+10:00",
+   "kind": "fix",
+   "msg": "C4/V24 wip c4d28ab open-app state done; icons not yet"
   }
  ],
  "tests": [
@@ -6078,17 +6102,45 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:21:15+10:00",
-  "mem_free_pct": 63,
+  "t": "2026-11-07T12:23:54+10:00",
+  "mem_free_pct": 54,
   "load": [
-   1.99,
-   2.33,
-   2.66
+   2.74,
+   2.38,
+   2.61
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "c4d28ab",
+    "date": "2026-11-07T12:23:52+10:00",
+    "subject": "Light the open app's dock button in ShopOS (V24, open-app state)",
+    "body": "",
+    "stat": "1 file changed, 13 insertions(+)"
+   },
+   {
+    "sha": "34c4ec2",
+    "date": "2026-11-07T12:23:50+10:00",
+    "subject": "Light the main-menu button of the open page (V25)",
+    "body": "",
+    "stat": "1 file changed, 24 insertions(+), 6 deletions(-)"
+   },
+   {
+    "sha": "3955272",
+    "date": "2026-11-07T12:23:49+10:00",
+    "subject": "Fold done tutorial steps into one line so the clipboard fits a 720p screen (V13)",
+    "body": "",
+    "stat": "1 file changed, 7 insertions(+), 4 deletions(-)"
+   },
+   {
+    "sha": "2ecab4e",
+    "date": "2026-11-07T12:23:47+10:00",
+    "subject": "Keep amounts off the receipt's scrollbar and run its rules full width (V17)",
+    "body": "",
+    "stat": "1 file changed, 7 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "88581d2",
     "date": "2026-11-07T12:21:13+10:00",
@@ -6480,40 +6532,16 @@
     "subject": "Remove Player.box_caught, a signal only a test listened to (Y15)",
     "body": "",
     "stat": "2 files changed, 6 deletions(-)"
-   },
-   {
-    "sha": "e65fe0e",
-    "date": "2026-11-07T09:51:18+10:00",
-    "subject": "Don't tell players a cashier raises the in-store cap (only tills do) (X13)",
-    "body": "",
-    "stat": "1 file changed, 1 insertion(+), 1 deletion(-)"
-   },
-   {
-    "sha": "3dd9256",
-    "date": "2026-11-07T09:51:11+10:00",
-    "subject": "Hold the front customer only when their own queue switch would move them, to a till someone works (X3, X20)",
-    "body": "",
-    "stat": "3 files changed, 38 insertions(+), 11 deletions(-)"
-   },
-   {
-    "sha": "bf35689",
-    "date": "2026-11-07T09:50:55+10:00",
-    "subject": "Write settings once a slider settles, and only re-apply graphics when the preset changes",
-    "body": "Every slider tick rewrote settings.cfg and re-ran the graphics preset, which also undid the PC's\nfull-resolution view. Review round 2, Y10.",
-    "stat": "3 files changed, 58 insertions(+), 5 deletions(-)"
-   },
-   {
-    "sha": "da10481",
-    "date": "2026-11-07T09:50:47+10:00",
-    "subject": "Leave exact cash waiting when sitting at the till, so taking it standing opens no card keypad (X1)",
-    "body": "",
-    "stat": "2 files changed, 27 insertions(+), 1 deletion(-)"
    }
   ],
-  "dirty": [],
-  "total_commits": 253
+  "dirty": [
+   " M tests/soak.gd",
+   " M tests/soak.sh",
+   " M tests/soak_player.gd"
+  ],
+  "total_commits": 257
  },
- "updated": "2026-11-07T12:21:16+10:00",
+ "updated": "2026-11-07T12:23:54+10:00",
  "qa": [
   {
    "num": 1,
