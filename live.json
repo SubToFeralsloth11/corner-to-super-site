@@ -1844,10 +1844,11 @@
      "file": "docs/ECONOMY.md:174",
      "detail": "loan_refusal now allows loans in SUMMARY before Pay all (game.gd:461). end_day has already built today.bills and run _advance_loans, so a loan taken on the receipt is first charged the following night. Fix: update the doc (\"taken after End day: first charged the next night\"), or add its instalment to today.bills when taken in SUMMARY.",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:58+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "07fac90",
+     "note": "doc: loan taken on the receipt (SUMMARY, before Pay all) is first charged the next night; matches end_day building today.bills before",
+     "closed": "2026-11-07T10:03:09+10:00"
     },
     {
      "id": "X16",
@@ -3891,6 +3892,11 @@
    "t": "2026-11-07T10:03:02+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixRegress: X15 loan doc, X13 spawner, X16"
+  },
+  {
+   "t": "2026-11-07T10:03:09+10:00",
+   "kind": "fix",
+   "msg": "C2/X15 fixed 07fac90 doc: loan taken on the receipt (SUMMARY, before Pay all) is first charged the next night; matches end_day building today.bills before"
   }
  ],
  "tests": [
@@ -4032,17 +4038,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:03:02+10:00",
+  "t": "2026-11-07T10:03:09+10:00",
   "mem_free_pct": 45,
   "load": [
-   6.89,
-   4.22,
-   3.7
+   6.52,
+   4.23,
+   3.71
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "07fac90",
+    "date": "2026-11-07T10:03:07+10:00",
+    "subject": "Say when a loan taken on the receipt is first charged (X15)",
+    "body": "",
+    "stat": "1 file changed, 3 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "aa08c81",
     "date": "2026-11-07T10:02:58+10:00",
@@ -4455,19 +4468,12 @@
     "subject": "Name the product that actually ran out in the Sunday review",
     "body": "'Kept running out' used the top of all lost sales, so an overpriced product that never ran out\nwas blamed. Out-of-stock misses are now counted (and saved) on their own. Review round 2, E13.",
     "stat": "4 files changed, 15 insertions(+), 5 deletions(-)"
-   },
-   {
-    "sha": "66de3c5",
-    "date": "2026-11-07T08:02:36+10:00",
-    "subject": "Reward visits that go right, free the cap from people walking home, and fix four customer slips",
-    "body": "- +8 when everything on the list was found at a fair price, +4 in a 90%-clean store: good play\n  now ends visits around 4.35 stars instead of topping out near 3.85 (N10, E7).\n- Customers already out of the door on the way home no longer hold places under the in-store\n  cap; a separate hard limit keeps the plot under 26 people (N9).\n- With no till, the basket is left behind instead of walked off unpaid (N12).\n- A customer isn't put off by their own spill (N15); the head no longer stays turned back at the\n  shelf after a bark (N8); grumpy customers say a grumpy goodbye and storming out has its own\n  lines, both in the Sunday review's complaints (N11).\nReview round 2.",
-    "stat": "7 files changed, 124 insertions(+), 9 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 209
+  "total_commits": 210
  },
- "updated": "2026-11-07T10:03:03+10:00",
+ "updated": "2026-11-07T10:03:10+10:00",
  "qa": [
   {
    "num": 1,

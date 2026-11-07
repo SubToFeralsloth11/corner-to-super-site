@@ -1,10 +1,10 @@
 {
  "generated": "2026-11-07T10:03+10:00",
- "head": "aa08c81",
+ "head": "07fac90",
  "stats": {
-  "commits": 209,
+  "commits": 210,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T10:02:58+10:00",
+  "last_commit": "2026-11-07T10:03:07+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
@@ -1346,6 +1346,11 @@
    "sha": "aa08c81",
    "date": "2026-11-07T10:02:58+10:00",
    "subject": "Write off a box's units from the cost basis when it is binned with stock in it (X10)"
+  },
+  {
+   "sha": "07fac90",
+   "date": "2026-11-07T10:03:07+10:00",
+   "subject": "Say when a loan taken on the receipt is first charged (X15)"
   }
  ],
  "commits_per_hour": [
@@ -1519,7 +1524,7 @@
   },
   {
    "hour": "2026-11-07T10:00:00+10:00",
-   "commits": 5
+   "commits": 6
   }
  ],
  "sections": [
