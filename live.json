@@ -2110,10 +2110,11 @@
      "file": "data/tutorial.json:4; data/settings.json \"pc_desk\" pos (-4.2, -7.5) vs \"checkout\" (-3.6, -2.6)",
      "detail": "The PC is 5 m behind the till on its own desk, and Dale says \"behind the counter\". New players search the counter for a PC. Fix: \"Use the PC on the desk in the back-left corner, behind the till\".",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:27+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "6764d3a",
+     "note": "tutorial step 1 and Dale's goodbye name the desk in the back-left corner behind the till (pc_desk -4.2,-7.5 vs till -3.6,-2.6); text only, check.sh clean",
+     "closed": "2026-11-07T10:38:57+10:00"
     },
     {
      "id": "F15",
@@ -4802,6 +4803,11 @@
    "t": "2026-11-07T10:38:40+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixFirstHour: F14 PC location text"
+  },
+  {
+   "t": "2026-11-07T10:38:57+10:00",
+   "kind": "fix",
+   "msg": "C3/F14 fixed 6764d3a tutorial step 1 and Dale's goodbye name the desk in the back-left corner behind the till (pc_desk -4.2,-7.5 vs till -3.6,-2.6); text only, check.sh clean"
   }
  ],
  "tests": [
@@ -4964,17 +4970,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:38:40+10:00",
+  "t": "2026-11-07T10:38:57+10:00",
   "mem_free_pct": 60,
   "load": [
-   2.39,
-   2.79,
-   3.04
+   2.3,
+   2.75,
+   3.03
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "6764d3a",
+    "date": "2026-11-07T10:38:54+10:00",
+    "subject": "Say where the PC really is: the desk in the back-left corner, behind the till (F14)",
+    "body": "",
+    "stat": "2 files changed, 2 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "7739933",
     "date": "2026-11-07T10:38:35+10:00",
@@ -5387,19 +5400,12 @@
     "subject": "Record review round 2 in PROGRESS",
     "body": "",
     "stat": "1 file changed, 30 insertions(+)"
-   },
-   {
-    "sha": "b0c668d",
-    "date": "2026-11-07T08:40:22+10:00",
-    "subject": "Add invert Y, head bob and fullscreen to Options",
-    "body": "Review round 2, U6.",
-    "stat": "4 files changed, 64 insertions(+), 4 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 229
+  "total_commits": 230
  },
- "updated": "2026-11-07T10:38:41+10:00",
+ "updated": "2026-11-07T10:38:57+10:00",
  "qa": [
   {
    "num": 1,

@@ -1,10 +1,10 @@
 {
  "generated": "2026-11-07T10:38+10:00",
- "head": "7739933",
+ "head": "6764d3a",
  "stats": {
-  "commits": 229,
+  "commits": 230,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T10:38:35+10:00",
+  "last_commit": "2026-11-07T10:38:54+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
@@ -1446,6 +1446,11 @@
    "sha": "7739933",
    "date": "2026-11-07T10:38:35+10:00",
    "subject": "Don't count a furniture order as the tutorial's stock order (F18)"
+  },
+  {
+   "sha": "6764d3a",
+   "date": "2026-11-07T10:38:54+10:00",
+   "subject": "Say where the PC really is: the desk in the back-left corner, behind the till (F14)"
   }
  ],
  "commits_per_hour": [
@@ -1619,7 +1624,7 @@
   },
   {
    "hour": "2026-11-07T10:00:00+10:00",
-   "commits": 25
+   "commits": 26
   }
  ],
  "sections": [
