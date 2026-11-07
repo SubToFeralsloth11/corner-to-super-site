@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C4",
   "area": "Visuals; balance",
-  "activity": "FixBalance2: full test suite",
+  "activity": "FixBalance2: confirmation soak",
   "cycle": "5",
-  "since": "2026-11-07T13:57:58+10:00"
+  "since": "2026-11-07T13:59:06+10:00"
  },
  "rounds": [
   {
@@ -6506,6 +6506,11 @@
    "t": "2026-11-07T13:57:58+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixBalance2: full test suite"
+  },
+  {
+   "t": "2026-11-07T13:59:06+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixBalance2: confirmation soak"
   }
  ],
  "tests": [
@@ -6738,14 +6743,14 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T13:57:58+10:00",
-  "mem_free_pct": 50,
+  "t": "2026-11-07T13:59:06+10:00",
+  "mem_free_pct": 49,
   "load": [
-   3.17,
-   3.78,
-   4.26
+   3.53,
+   3.77,
+   4.22
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
@@ -7179,11 +7184,12 @@
    " M scripts/ui/prompt.gd",
    " M scripts/world/building.gd",
    " M scripts/world/world.gd",
-   " M tests/cases/building_test.gd"
+   " M tests/cases/building_test.gd",
+   " M tests/test_runner.gd"
   ],
   "total_commits": 292
  },
- "updated": "2026-11-07T13:57:59+10:00",
+ "updated": "2026-11-07T13:59:08+10:00",
  "qa": [
   {
    "num": 1,
