@@ -1,11 +1,11 @@
 {
  "status": {
-  "state": "reviewing",
+  "state": "fixing",
   "round": "C4",
   "area": "Visuals; balance",
-  "activity": "Visual critic reviewing 57 screenshots; balance critic reading soak data",
+  "activity": "FixBalance on B1-B15 (stars matter, restockers carry more, produce, expansions); visual V1-V25 queued next",
   "cycle": "4",
-  "since": "2026-11-07T12:08:35+10:00"
+  "since": "2026-11-07T12:19:26+10:00"
  },
  "rounds": [
   {
@@ -5818,6 +5818,16 @@
    "t": "2026-11-07T12:19:12+10:00",
    "kind": "agent",
    "msg": "Agent CritVisual: done visual findings recorded"
+  },
+  {
+   "t": "2026-11-07T12:19:26+10:00",
+   "kind": "agent",
+   "msg": "Agent FixBalance: running Balance B1-B15 with soak verification"
+  },
+  {
+   "t": "2026-11-07T12:19:26+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixBalance on B1-B15 (stars matter, restockers carry more, produce, expansions); visual V1-V25 queued next"
   }
  ],
  "tests": [
@@ -6020,15 +6030,20 @@
    "state": "done",
    "task": "visual findings recorded",
    "t": "2026-11-07T12:19:12+10:00"
+  },
+  "FixBalance": {
+   "state": "running",
+   "task": "Balance B1-B15 with soak verification",
+   "t": "2026-11-07T12:19:26+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T12:19:12+10:00",
+  "t": "2026-11-07T12:19:26+10:00",
   "mem_free_pct": 65,
   "load": [
-   2.44,
-   2.59,
-   2.79
+   2.11,
+   2.51,
+   2.76
   ],
   "godot_procs": 0
  },
@@ -6458,7 +6473,7 @@
   "dirty": [],
   "total_commits": 251
  },
- "updated": "2026-11-07T12:19:12+10:00",
+ "updated": "2026-11-07T12:19:27+10:00",
  "qa": [
   {
    "num": 1,
