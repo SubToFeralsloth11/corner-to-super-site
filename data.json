@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T12:35+10:00",
- "head": "e374bf3",
+ "generated": "2026-11-07T12:38+10:00",
+ "head": "9c4eab8",
  "stats": {
-  "commits": 271,
+  "commits": 275,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T12:35:05+10:00",
+  "last_commit": "2026-11-07T12:38:09+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 31464,
+  "gd_lines": 31551,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1663,6 +1663,26 @@
    "sha": "e374bf3",
    "date": "2026-11-07T12:35:05+10:00",
    "subject": "Sell produce by the handful (pick_qty 3-6) and give each expansion from E3 its own basket item (B4, B5)"
+  },
+  {
+   "sha": "4660163",
+   "date": "2026-11-07T12:35:59+10:00",
+   "subject": "Only suggest another till on the receipt when it would let more shoppers in (B6)"
+  },
+  {
+   "sha": "855c900",
+   "date": "2026-11-07T12:38:05+10:00",
+   "subject": "Draw the UI 1.2x larger in windows up to 900 px tall, and fit the receipt and tutorial card to that layout (V2)"
+  },
+  {
+   "sha": "06f470d",
+   "date": "2026-11-07T12:38:07+10:00",
+   "subject": "Give gondola frames a satin finish so their ends stop mirroring blurred stock (V14, finish)"
+  },
+  {
+   "sha": "9c4eab8",
+   "date": "2026-11-07T12:38:09+10:00",
+   "subject": "Let the receipt finish printing before the tour photographs it"
   }
  ],
  "commits_per_hour": [
@@ -1844,7 +1864,7 @@
   },
   {
    "hour": "2026-11-07T12:00:00+10:00",
-   "commits": 24
+   "commits": 28
   }
  ],
  "sections": [

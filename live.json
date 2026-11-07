@@ -2647,10 +2647,11 @@
      "file": "project.godot:24-28 (viewport 1920x1080, window 1280x720, canvas_items) · hud.gd:85,98,171,188 · change_panel.gd:48,58,68 · clipboard.gd:156 (`_note` 15) · app_market.gd:255-257 (13 px)",
      "detail": "Seen in 01 (\"Clean 100%\" / \"Level 1\" about 9 px), 23 (\"CASH\", \"Drawer: click to take one\"), 87 (tutorial list and range note) and 12 (Market card details). The default window is 1280x720 (VISUALS.md), so this is what most players see. Fix: either set viewport_width/height to 1280x720 and rescale the hard-coded offsets, or keep 1080p and make the smallest UI size 20 at 1080 (13 px at 720). Simplest broad fix: in main.gd, when the window is 900 px tall or less, set `get_window().content_scale_factor = 1.2`.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "855c900",
+     "note": "content_scale 1.2 under 900 px; receipt, till, options, clipboard checked in tour c4c",
+     "closed": "2026-11-07T12:38:07+10:00"
     },
     {
      "id": "V3",
@@ -2802,10 +2803,11 @@
      "file": "shelf_gondola_2m.glb `GondolaFrame` (textured, low roughness) + lighting.gd:126-134 (box-projected probes) · 80_main_menu crop: a red smear across the right end panel · 05: grey-black smudges · 85: a featureless grey wall fills the view",
      "detail": "This is the most-seen surface in the store, and it looks dirty and cheap. Supermarket Simulator dresses the ends of its shelves. Fix: give `GondolaFrame` roughness 0.65 and metallic 0 (in Fixture setup, or in the glb), and put a printed end-cap panel on each end (a QuadMesh with a store-green header and category art, using the generated aisle-sign texture).",
      "by": "CritVisual",
-     "status": "open",
+     "status": "wip",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "06f470d",
+     "note": "roughness 0.7, no smears in 05_aisle; end-cap graphics still missing",
+     "closed": "2026-11-07T12:38:09+10:00"
     },
     {
      "id": "V15",
@@ -6022,6 +6024,21 @@
    "t": "2026-11-07T12:35:17+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixBalance: B6"
+  },
+  {
+   "t": "2026-11-07T12:38:07+10:00",
+   "kind": "fix",
+   "msg": "C4/V2 fixed 855c900 content_scale 1.2 under 900 px; receipt, till, options, clipboard checked in tour c4c"
+  },
+  {
+   "t": "2026-11-07T12:38:09+10:00",
+   "kind": "fix",
+   "msg": "C4/V14 wip 06f470d roughness 0.7, no smears in 05_aisle; end-cap graphics still missing"
+  },
+  {
+   "t": "2026-11-07T12:38:12+10:00",
+   "kind": "shots",
+   "msg": "Screenshots refreshed: 56 images Cycle 4: 1.2x UI at 720p, satin gondolas"
   }
  ],
  "tests": [
@@ -6232,17 +6249,45 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:35:17+10:00",
-  "mem_free_pct": 55,
+  "t": "2026-11-07T12:38:12+10:00",
+  "mem_free_pct": 54,
   "load": [
-   2.55,
-   2.37,
+   2.47,
+   2.42,
    2.48
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "9c4eab8",
+    "date": "2026-11-07T12:38:09+10:00",
+    "subject": "Let the receipt finish printing before the tour photographs it",
+    "body": "",
+    "stat": "1 file changed, 1 insertion(+), 1 deletion(-)"
+   },
+   {
+    "sha": "06f470d",
+    "date": "2026-11-07T12:38:07+10:00",
+    "subject": "Give gondola frames a satin finish so their ends stop mirroring blurred stock (V14, finish)",
+    "body": "",
+    "stat": "1 file changed, 15 insertions(+)"
+   },
+   {
+    "sha": "855c900",
+    "date": "2026-11-07T12:38:05+10:00",
+    "subject": "Draw the UI 1.2x larger in windows up to 900 px tall, and fit the receipt and tutorial card to that layout (V2)",
+    "body": "At the default 1280x720 the 1080p layout shrank to 0.667 and captions were 9-11 px. The receipt\nnow spans the screen height less a margin, and the tutorial card is narrower so it clears the\ntoasts in the 1600-px-wide layout.",
+    "stat": "2 files changed, 18 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "4660163",
+    "date": "2026-11-07T12:35:59+10:00",
+    "subject": "Only suggest another till on the receipt when it would let more shoppers in (B6)",
+    "body": "",
+    "stat": "4 files changed, 36 insertions(+), 4 deletions(-)"
+   },
    {
     "sha": "e374bf3",
     "date": "2026-11-07T12:35:05+10:00",
@@ -6634,45 +6679,21 @@
     "subject": "Show cleanliness under the stars on the HUD, in warning colour once it costs customers (F9)",
     "body": "",
     "stat": "1 file changed, 11 insertions(+)"
-   },
-   {
-    "sha": "18e915f",
-    "date": "2026-11-07T10:06:44+10:00",
-    "subject": "Keep every other cashier on their own till when a till is sold (Y3)",
-    "body": "",
-    "stat": "4 files changed, 44 insertions(+)"
-   },
-   {
-    "sha": "c7d8f7a",
-    "date": "2026-11-07T10:05:40+10:00",
-    "subject": "Reopen Sunday's paper after loading a save made before it was read, and clear it once read (Y12)",
-    "body": "The paper is cleared and the game saved again when it closes, so a reload doesn't show it twice.",
-    "stat": "1 file changed, 13 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "da7cfff",
-    "date": "2026-11-07T10:05:25+10:00",
-    "subject": "Keep an unread Sunday review in saves (Y12)",
-    "body": "",
-    "stat": "3 files changed, 19 insertions(+), 3 deletions(-)"
-   },
-   {
-    "sha": "c2f28fa",
-    "date": "2026-11-07T10:04:29+10:00",
-    "subject": "Move the till hint below the rival-sale chip and Take a pack below the hint, off the HUD clock (X16)",
-    "body": "",
-    "stat": "2 files changed, 15 insertions(+), 3 deletions(-)"
    }
   ],
   "dirty": [
-   " M scripts/autoload/settings.gd",
-   " M scripts/tutorial/tutorial_hint.gd",
-   " M scripts/ui/day_summary.gd",
-   " M scripts/world/store_look.gd"
+   " M data/customers.json",
+   " M docs/ECONOMY.md",
+   " M docs/GDD.md",
+   " M scripts/autoload/game.gd",
+   " M scripts/npc/customer_rules.gd",
+   " M scripts/npc/customer_spawner.gd",
+   " M tests/cases/customer_test.gd",
+   " M tests/cases/game_test.gd"
   ],
-  "total_commits": 271
+  "total_commits": 275
  },
- "updated": "2026-11-07T12:35:17+10:00",
+ "updated": "2026-11-07T12:38:12+10:00",
  "qa": [
   {
    "num": 1,
@@ -6732,8 +6753,8 @@
   }
  ],
  "shots": {
-  "t": "2026-11-07T12:31:59+10:00",
-  "note": "Cycle 4: medium preset, readable prompts, switches, fitted ShopOS",
+  "t": "2026-11-07T12:38:12+10:00",
+  "note": "Cycle 4: 1.2x UI at 720p, satin gondolas",
   "files": [
    "01_exterior_from_road.jpg",
    "02_entrance_looking_in.jpg",
