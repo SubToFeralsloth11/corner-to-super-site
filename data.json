@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T12:25+10:00",
- "head": "95638e4",
+ "generated": "2026-11-07T12:26+10:00",
+ "head": "fe72f97",
  "stats": {
-  "commits": 261,
+  "commits": 263,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T12:25:28+10:00",
+  "last_commit": "2026-11-07T12:26:23+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 30896,
+  "gd_lines": 30943,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1613,6 +1613,16 @@
    "sha": "95638e4",
    "date": "2026-11-07T12:25:28+10:00",
    "subject": "Let stars fill baskets: list length scales 15% per star around 3.5 (B1)"
+  },
+  {
+   "sha": "be1326c",
+   "date": "2026-11-07T12:26:20+10:00",
+   "subject": "At the PC, show the screen untonemapped, lift toasts above the dock and hold the level banner until you stand (V3, V9)"
+  },
+  {
+   "sha": "fe72f97",
+   "date": "2026-11-07T12:26:23+10:00",
+   "subject": "Shoot the screenshot tour at the shipped graphics preset and FOV, not this machine's settings (V1)"
   }
  ],
  "commits_per_hour": [
@@ -1794,7 +1804,7 @@
   },
   {
    "hour": "2026-11-07T12:00:00+10:00",
-   "commits": 14
+   "commits": 16
   }
  ],
  "sections": [

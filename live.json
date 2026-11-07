@@ -2630,10 +2630,11 @@
      "file": "tests/screenshot_tour.gd (does not set the preset) + ~/Library/Application Support/Godot/app_userdata/Corner to Super/settings.cfg (`graphics=\"low\"`, `fov=79.0`); 89_f3_overlay.png shows \"Graphics Low\"; 82_menu_options.png has Low selected",
      "detail": "Every c3 picture was rendered with SSAO, SSIL, SSR, glow and fog off and the 0.7 bilinear+FXAA scale. That is why the interior looks flat, blurry and has no floor reflections (03, 05, 16, 21, 32). VISUALS.md says the tour checks the look at Medium (default) or High. Fix: at the start of the tour, set `Settings.graphics = Settings.DEFAULT_GRAPHICS` (or \"high\" for the VISUALS shots) and `fov = 75` in memory without calling `_store`, re-apply `Lighting.apply_quality`, and write the preset into perf.txt. Each lighting finding below says whether it depends on the preset.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "fe72f97",
+     "note": "--graphics= override; preset written to perf.txt",
+     "closed": "2026-11-07T12:26:24+10:00"
     },
     {
      "id": "V2",
@@ -2654,10 +2655,11 @@
      "file": "pc_desk.gd:41-46 (unshaded `albedo_texture = os.get_texture()`) + lighting.gd:44-46 (AgX, white 6) · 12_pc_market.png: PAPER window sampled (204,204,205); dock \"Market\" button (159,184,167) where #2FA866 is (47,168,102) · same in 35, 40, 41",
      "detail": "The PC, where the player spends minutes at a time, looks like a dim, washed-out screen. Fix: in `PcDesk.focus()`, switch `Lighting.env.tonemap_mode` to `TONE_MAPPER_LINEAR` and `adjustment_enabled` to false, and restore both in `unfocus()`. Better: once the camera ease finishes, draw `os.get_texture()` in a full-screen-mapped TextureRect on a CanvasLayer and hide the 3D quad, which skips tonemapping and blur completely.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "be1326c",
+     "note": "linear tonemap while focused; new progression test fails before",
+     "closed": "2026-11-07T12:26:23+10:00"
     },
     {
      "id": "V4",
@@ -2730,10 +2732,11 @@
      "file": "toast.gd:19-31 (layer 6, not in the `hud` group) · level_banner.gd:20 (layer 7) · pc_desk.gd:107 (hides only `hud`) · 40/41: the toast covers the \"My Store\" dock button and the banner covers the app header",
      "detail": "The PC hides the HUD so ShopOS is clear, but toasts still pile onto the dock. Fix: while the PC is focused, move the toast box above the dock (`offset_bottom -= dock height`) or route toasts to a ShopOS notification line. Delay the level banner until `unfocus`, or shrink it to a ShopOS top-bar flash.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "be1326c",
+     "note": "toasts +120 px, banner deferred; test fails before",
+     "closed": "2026-11-07T12:26:23+10:00"
     },
     {
      "id": "V10",
@@ -5921,6 +5924,21 @@
    "t": "2026-11-07T12:25:39+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixBalance: B2"
+  },
+  {
+   "t": "2026-11-07T12:26:23+10:00",
+   "kind": "fix",
+   "msg": "C4/V3 fixed be1326c linear tonemap while focused; new progression test fails before"
+  },
+  {
+   "t": "2026-11-07T12:26:23+10:00",
+   "kind": "fix",
+   "msg": "C4/V9 fixed be1326c toasts +120 px, banner deferred; test fails before"
+  },
+  {
+   "t": "2026-11-07T12:26:24+10:00",
+   "kind": "fix",
+   "msg": "C4/V1 fixed fe72f97 --graphics= override; preset written to perf.txt"
   }
  ],
  "tests": [
@@ -6131,17 +6149,31 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:25:39+10:00",
-  "mem_free_pct": 54,
+  "t": "2026-11-07T12:26:24+10:00",
+  "mem_free_pct": 53,
   "load": [
-   1.91,
-   2.23,
-   2.52
+   2.55,
+   2.36,
+   2.56
   ],
-  "godot_procs": 0
+  "godot_procs": 34
  },
  "game": {
   "commits": [
+   {
+    "sha": "fe72f97",
+    "date": "2026-11-07T12:26:23+10:00",
+    "subject": "Shoot the screenshot tour at the shipped graphics preset and FOV, not this machine's settings (V1)",
+    "body": "",
+    "stat": "1 file changed, 11 insertions(+)"
+   },
+   {
+    "sha": "be1326c",
+    "date": "2026-11-07T12:26:20+10:00",
+    "subject": "At the PC, show the screen untonemapped, lift toasts above the dock and hold the level banner until you stand (V3, V9)",
+    "body": "",
+    "stat": "4 files changed, 62 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "95638e4",
     "date": "2026-11-07T12:25:28+10:00",
@@ -6547,32 +6579,18 @@
     "subject": "Price the head office franchise to pay back in under two weeks at 3.5 stars (X11)",
     "body": "",
     "stat": "3 files changed, 13 insertions(+), 5 deletions(-)"
-   },
-   {
-    "sha": "a0aedee",
-    "date": "2026-11-07T09:56:44+10:00",
-    "subject": "One complaint and one price decision per wall product, and no found-everything bonus after a wall letdown (X8, X12)",
-    "body": "",
-    "stat": "3 files changed, 95 insertions(+), 12 deletions(-)"
-   },
-   {
-    "sha": "9e96aa2",
-    "date": "2026-11-07T09:56:44+10:00",
-    "subject": "Re-check for restocked stock every 0.5 s on an out-of-stock walk, not every frame (X7)",
-    "body": "",
-    "stat": "1 file changed, 10 insertions(+), 1 deletion(-)"
    }
   ],
   "dirty": [
-   " M scripts/fixtures/pc_desk.gd",
-   " M scripts/ui/level_banner.gd",
-   " M scripts/ui/toast.gd",
-   " M tests/cases/progression_test.gd",
-   " M tests/screenshot_tour.gd"
+   " M data/customers.json",
+   " M scripts/fixtures/checkout.gd",
+   " M scripts/npc/shopper_brain.gd",
+   " M tests/cases/customer_test.gd",
+   " M tests/cases/m7_content_test.gd"
   ],
-  "total_commits": 261
+  "total_commits": 263
  },
- "updated": "2026-11-07T12:25:39+10:00",
+ "updated": "2026-11-07T12:26:25+10:00",
  "qa": [
   {
    "num": 1,
