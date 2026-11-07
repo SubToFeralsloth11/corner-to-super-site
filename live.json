@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C4",
   "area": "Visuals; balance",
-  "activity": "FixBalance: B3",
+  "activity": "Lead: 17 of 25 visual findings fixed; FixBalance on B2-B13",
   "cycle": "4",
-  "since": "2026-11-07T12:27:10+10:00"
+  "since": "2026-11-07T12:31:59+10:00"
  },
  "rounds": [
   {
@@ -2747,10 +2747,11 @@
      "file": "bark.gd:9-16 (pastel tones), 41-47 (unshaded quad, which AgX dulls), 74-77 (world-size quad) · 22: the \"Bargain!\" card sampled (190,202,192), so the praise tone can't be told from neutral · 84: Dale's bubble is 380 px wide over the sky and floats well above his head",
      "detail": "VISUALS.md wants red for complaints and green for praise. Here the colour signal is gone and it's unclear who is speaking. Fix: use saturated fills (praise #2FA866 and complaint #E8654A with white text, neutral white), a rounded 9-patch texture with a tail pointing down, and a bubble anchored about 0.25 m above the head. Clamp the on-screen size by scaling with distance, or draw bubbles in 2D with `camera.unproject_position`.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "820308e",
+     "note": "red/green cards, white text; customer 125/0",
+     "closed": "2026-11-07T12:31:58+10:00"
     },
     {
      "id": "V11",
@@ -2772,10 +2773,11 @@
      "file": "options.gd:140-144 · change_panel.gd:74-77 (default-theme CheckButton) · app_market.gd:192 · 82_menu_options.png crop: \"Invert mouse Y\" and \"Fullscreen\" show only a 6 px grey dot, \"Head bob\" a grey pill",
      "detail": "Players can't tell these are switches, or what state they're in. Fix: add a `UiKit.toggle()` that sets `checked`/`unchecked`/`checked_disabled` icons to drawn switch textures (green track for on, grey track with a light border for off) and use it in all three places.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "01bfa7f",
+     "note": "drawn switch icons; seen in 82_menu_options c4",
+     "closed": "2026-11-07T12:31:58+10:00"
     },
     {
      "id": "V13",
@@ -2821,10 +2823,11 @@
      "file": "day_summary.gd:75-82 (`show_report` → `_fill()` builds every row instantly, plays only `chime`) · grep: `receipt_print` is played only in checkout.gd:847 · 33_day_summary.png",
      "detail": "VISUALS.md says the summary \"prints line by line (with `receipt_print` sound), then bills section, then the Next day button\". Fix: in `_fill()`, add the rows hidden, then reveal one every 0.05–0.08 s with a short slide-down, play `receipt_print` once at the start, and enable Pay all / Next day when the last row is in. Skip to the end on any click or Enter.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "da1299e",
+     "note": "rows fade in 35 ms apart + receipt_print; day 85/0",
+     "closed": "2026-11-07T12:31:58+10:00"
     },
     {
      "id": "V17",
@@ -2921,9 +2924,9 @@
      "by": "CritVisual",
      "status": "wip",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "c4d28ab",
-     "note": "open-app state done; icons not yet",
-     "closed": "2026-11-07T12:23:53+10:00"
+     "commit": "a9c78d3",
+     "note": "open-app state now a white button; icons still missing",
+     "closed": "2026-11-07T12:31:58+10:00"
     },
     {
      "id": "V25",
@@ -2934,9 +2937,9 @@
      "by": "CritVisual",
      "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "34c4ec2",
-     "note": "menu 81/0",
-     "closed": "2026-11-07T12:23:52+10:00"
+     "commit": "a9c78d3",
+     "note": "open page button filled green; seen in tour",
+     "closed": "2026-11-07T12:31:58+10:00"
     }
    ]
   }
@@ -5956,6 +5959,41 @@
    "t": "2026-11-07T12:27:27+10:00",
    "kind": "fix",
    "msg": "C4/V8 fixed 9e7f729 new test: Market 1254 px and Furniture 1265 px before, all apps fit after"
+  },
+  {
+   "t": "2026-11-07T12:31:58+10:00",
+   "kind": "fix",
+   "msg": "C4/V12 fixed 01bfa7f drawn switch icons; seen in 82_menu_options c4"
+  },
+  {
+   "t": "2026-11-07T12:31:58+10:00",
+   "kind": "fix",
+   "msg": "C4/V24 wip a9c78d3 open-app state now a white button; icons still missing"
+  },
+  {
+   "t": "2026-11-07T12:31:58+10:00",
+   "kind": "fix",
+   "msg": "C4/V25 fixed a9c78d3 open page button filled green; seen in tour"
+  },
+  {
+   "t": "2026-11-07T12:31:58+10:00",
+   "kind": "fix",
+   "msg": "C4/V10 fixed 820308e red/green cards, white text; customer 125/0"
+  },
+  {
+   "t": "2026-11-07T12:31:58+10:00",
+   "kind": "fix",
+   "msg": "C4/V16 fixed da1299e rows fade in 35 ms apart + receipt_print; day 85/0"
+  },
+  {
+   "t": "2026-11-07T12:31:59+10:00",
+   "kind": "shots",
+   "msg": "Screenshots refreshed: 56 images Cycle 4: medium preset, readable prompts, switches, fitted ShopOS"
+  },
+  {
+   "t": "2026-11-07T12:31:59+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - Lead: 17 of 25 visual findings fixed; FixBalance on B2-B13"
   }
  ],
  "tests": [
@@ -6166,17 +6204,45 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:27:27+10:00",
-  "mem_free_pct": 52,
+  "t": "2026-11-07T12:31:59+10:00",
+  "mem_free_pct": 61,
   "load": [
+   2.89,
    2.61,
-   2.4,
-   2.56
+   2.6
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "da1299e",
+    "date": "2026-11-07T12:31:50+10:00",
+    "subject": "Print the end-of-day receipt row by row with the printer sound (V16)",
+    "body": "",
+    "stat": "1 file changed, 20 insertions(+)"
+   },
+   {
+    "sha": "820308e",
+    "date": "2026-11-07T12:31:50+10:00",
+    "subject": "Colour complaint and praise bubbles red and green with white text (V10)",
+    "body": "",
+    "stat": "1 file changed, 6 insertions(+), 3 deletions(-)"
+   },
+   {
+    "sha": "a9c78d3",
+    "date": "2026-11-07T12:31:50+10:00",
+    "subject": "Mark the open menu page and ShopOS app with a refilled button, not a tint that washed out the label",
+    "body": "The first pass tinted the button, which left light text on a pale fill.",
+    "stat": "3 files changed, 65 insertions(+), 6 deletions(-)"
+   },
+   {
+    "sha": "01bfa7f",
+    "date": "2026-11-07T12:31:50+10:00",
+    "subject": "Draw on/off switches for every toggle: green track on, grey rimmed track off (V12)",
+    "body": "",
+    "stat": "3 files changed, 3 insertions(+)"
+   },
    {
     "sha": "9e7f729",
     "date": "2026-11-07T12:27:25+10:00",
@@ -6568,40 +6634,19 @@
     "subject": "Say when a loan taken on the receipt is first charged (X15)",
     "body": "",
     "stat": "1 file changed, 3 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "aa08c81",
-    "date": "2026-11-07T10:02:58+10:00",
-    "subject": "Write off a box's units from the cost basis when it is binned with stock in it (X10)",
-    "body": "",
-    "stat": "1 file changed, 3 insertions(+)"
-   },
-   {
-    "sha": "354656d",
-    "date": "2026-11-07T10:02:51+10:00",
-    "subject": "Book the free first order's stock at no cost and let binned stock leave the cost basis (X10)",
-    "body": "",
-    "stat": "2 files changed, 28 insertions(+), 6 deletions(-)"
-   },
-   {
-    "sha": "56b723a",
-    "date": "2026-11-07T10:02:51+10:00",
-    "subject": "Book overdue bills paid at the Bank under their own reason so the receipt's cash adds up (X9)",
-    "body": "",
-    "stat": "2 files changed, 6 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "a16f738",
-    "date": "2026-11-07T10:01:33+10:00",
-    "subject": "Name overdue bills paid at the Bank on the receipt's other-money lines (X9)",
-    "body": "",
-    "stat": "1 file changed, 2 insertions(+), 1 deletion(-)"
    }
   ],
-  "dirty": [],
-  "total_commits": 265
+  "dirty": [
+   " M data/staff.json",
+   " M scripts/autoload/save.gd",
+   " M scripts/npc/restocker_job.gd",
+   " M scripts/npc/staff_crew.gd",
+   " M tests/cases/staff_jobs_test.gd",
+   " M tests/cases/staff_test.gd"
+  ],
+  "total_commits": 269
  },
- "updated": "2026-11-07T12:27:27+10:00",
+ "updated": "2026-11-07T12:32:00+10:00",
  "qa": [
   {
    "num": 1,
@@ -6661,8 +6706,8 @@
   }
  ],
  "shots": {
-  "t": "2026-11-07T12:10:37+10:00",
-  "note": "After cycle 3 (shed doorway, Market tabs, real-size snacks)",
+  "t": "2026-11-07T12:31:59+10:00",
+  "note": "Cycle 4: medium preset, readable prompts, switches, fitted ShopOS",
   "files": [
    "01_exterior_from_road.jpg",
    "02_entrance_looking_in.jpg",

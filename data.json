@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T12:27+10:00",
- "head": "9e7f729",
+ "generated": "2026-11-07T12:32+10:00",
+ "head": "da1299e",
  "stats": {
-  "commits": 265,
+  "commits": 269,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T12:27:25+10:00",
+  "last_commit": "2026-11-07T12:31:50+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 30962,
+  "gd_lines": 31376,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1633,6 +1633,26 @@
    "sha": "9e7f729",
    "date": "2026-11-07T12:27:25+10:00",
    "subject": "Fit the Market and Furniture windows on the ShopOS screen (V8)"
+  },
+  {
+   "sha": "01bfa7f",
+   "date": "2026-11-07T12:31:50+10:00",
+   "subject": "Draw on/off switches for every toggle: green track on, grey rimmed track off (V12)"
+  },
+  {
+   "sha": "a9c78d3",
+   "date": "2026-11-07T12:31:50+10:00",
+   "subject": "Mark the open menu page and ShopOS app with a refilled button, not a tint that washed out the label"
+  },
+  {
+   "sha": "820308e",
+   "date": "2026-11-07T12:31:50+10:00",
+   "subject": "Colour complaint and praise bubbles red and green with white text (V10)"
+  },
+  {
+   "sha": "da1299e",
+   "date": "2026-11-07T12:31:50+10:00",
+   "subject": "Print the end-of-day receipt row by row with the printer sound (V16)"
   }
  ],
  "commits_per_hour": [
@@ -1814,7 +1834,7 @@
   },
   {
    "hour": "2026-11-07T12:00:00+10:00",
-   "commits": 18
+   "commits": 22
   }
  ],
  "sections": [
