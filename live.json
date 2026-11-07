@@ -2225,10 +2225,11 @@
      "file": "scripts/world/aisle_signs.gd:49-79,90-96",
      "detail": "Each category's sign hangs over whichever fixture holds the most units right now, checked every 2 s. In a large store with several gondolas of the same licence at similar fill, each sale or restock changes which one is ahead. The sign is then freed and spawned over a different aisle, so ceiling signs teleport around the store all day. **Fix:** add hysteresis, so the sign stays where it is unless another fixture beats the current one by a clear margin (e.g. 25%) for a while. Or rank fixtures by labelled capacity (sum of `slot.capacity` for slots labelled with that category) instead of live counts.",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:09+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "8bc7068",
+     "note": "m7 tests pass",
+     "closed": "2026-11-07T10:28:55+10:00"
     },
     {
      "id": "L6",
@@ -4729,6 +4730,11 @@
    "t": "2026-11-07T10:28:46+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixFirstHour: F1 day-1 pacing (free order/tutorial)"
+  },
+  {
+   "t": "2026-11-07T10:28:55+10:00",
+   "kind": "fix",
+   "msg": "C3/L5 fixed 8bc7068 m7 tests pass"
   }
  ],
  "tests": [
@@ -4891,17 +4897,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:28:46+10:00",
+  "t": "2026-11-07T10:28:55+10:00",
   "mem_free_pct": 60,
   "load": [
-   2.88,
-   2.99,
-   3.22
+   3.03,
+   3.03,
+   3.23
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "8bc7068",
+    "date": "2026-11-07T10:28:53+10:00",
+    "subject": "Keep an aisle sign over its fixture unless another holds clearly more (25%) of the category",
+    "body": "Signs hopped between gondolas with every sale. Review round 2, L5.",
+    "stat": "1 file changed, 8 insertions(+)"
+   },
    {
     "sha": "4b99eca",
     "date": "2026-11-07T10:28:31+10:00",
@@ -5314,21 +5327,12 @@
     "subject": "Widen the UI font's word spacing so HUD text doesn't run together",
     "body": "Archivo's space is 0.2 em, about 3 px at HUD sizes: 'Profit today' read as 'Profittoday'. A\nFontVariation adds 2 px per space (checked in the screenshot tour). Review round 2, U4.",
     "stat": "2 files changed, 10 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "f495311",
-    "date": "2026-11-07T08:24:36+10:00",
-    "subject": "Box up saved shelf stock that no longer fits a slot instead of dropping it on load",
-    "body": "The chest-freezer change (and any later capacity change) clamped old saves' slot counts, losing\nthe rest. Loading now puts the excess in an open box in front of the fixture. Also keeps test\nand tour cash out of the receipt's other-money lines. Review round 2, R10.",
-    "stat": "3 files changed, 35 insertions(+), 2 deletions(-)"
    }
   ],
-  "dirty": [
-   " M scripts/world/aisle_signs.gd"
-  ],
-  "total_commits": 221
+  "dirty": [],
+  "total_commits": 222
  },
- "updated": "2026-11-07T10:28:47+10:00",
+ "updated": "2026-11-07T10:28:56+10:00",
  "qa": [
   {
    "num": 1,

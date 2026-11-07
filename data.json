@@ -1,10 +1,10 @@
 {
  "generated": "2026-11-07T10:28+10:00",
- "head": "4b99eca",
+ "head": "8bc7068",
  "stats": {
-  "commits": 221,
+  "commits": 222,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T10:28:31+10:00",
+  "last_commit": "2026-11-07T10:28:53+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
@@ -1406,6 +1406,11 @@
    "sha": "4b99eca",
    "date": "2026-11-07T10:28:31+10:00",
    "subject": "Keep unused free boxes for the next order and mark free cart lines (F6)"
+  },
+  {
+   "sha": "8bc7068",
+   "date": "2026-11-07T10:28:53+10:00",
+   "subject": "Keep an aisle sign over its fixture unless another holds clearly more (25%) of the category"
   }
  ],
  "commits_per_hour": [
@@ -1579,7 +1584,7 @@
   },
   {
    "hour": "2026-11-07T10:00:00+10:00",
-   "commits": 17
+   "commits": 18
   }
  ],
  "sections": [
