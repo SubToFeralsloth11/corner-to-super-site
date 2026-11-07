@@ -2005,10 +2005,11 @@
      "file": "scripts/autoload/game.gd:595; scripts/ui/pc/app_market.gd:212,221",
      "detail": "`place_order` sets `free_order_boxes = 0` as soon as any free box is used. Ordering just the Cola first makes it free and silently cancels the other 3 free boxes. Before Order nothing warns about this, and the cart lines show full price for free boxes, so they don't add up to the $0.00 total. Fix: subtract only the boxes used (`free_order_boxes -= q.free_boxes`), and show \"free\" on the covered cart lines.",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:26+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "4b99eca",
+     "note": "place_order subtracts only the free boxes used; quote returns free_by_id and cart lines show 'free'/'N free · $x'; order_test new case (1 COLA then rest still free, fails before: free_order_boxes was 0); order/day tests pass",
+     "closed": "2026-11-07T10:28:33+10:00"
     },
     {
      "id": "F7",
@@ -4718,6 +4719,11 @@
    "t": "2026-11-07T10:28:04+10:00",
    "kind": "fix",
    "msg": "C3/L13 fixed f0ad1e2 status filled next frame"
+  },
+  {
+   "t": "2026-11-07T10:28:33+10:00",
+   "kind": "fix",
+   "msg": "C3/F6 fixed 4b99eca place_order subtracts only the free boxes used; quote returns free_by_id and cart lines show 'free'/'N free · $x'; order_test new case (1 COLA then rest still free, fails before: free_order_boxes was 0); order/day tests pass"
   }
  ],
  "tests": [
@@ -4880,17 +4886,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:28:04+10:00",
-  "mem_free_pct": 61,
+  "t": "2026-11-07T10:28:33+10:00",
+  "mem_free_pct": 60,
   "load": [
-   3.15,
-   3.05,
-   3.25
+   3.04,
+   3.03,
+   3.24
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "4b99eca",
+    "date": "2026-11-07T10:28:31+10:00",
+    "subject": "Keep unused free boxes for the next order and mark free cart lines (F6)",
+    "body": "",
+    "stat": "4 files changed, 51 insertions(+), 23 deletions(-)"
+   },
    {
     "sha": "f0ad1e2",
     "date": "2026-11-07T10:28:02+10:00",
@@ -5303,23 +5316,14 @@
     "subject": "Box up saved shelf stock that no longer fits a slot instead of dropping it on load",
     "body": "The chest-freezer change (and any later capacity change) clamped old saves' slot counts, losing\nthe rest. Loading now puts the excess in an open box in front of the fixture. Also keeps test\nand tour cash out of the receipt's other-money lines. Review round 2, R10.",
     "stat": "3 files changed, 35 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "8a8888c",
-    "date": "2026-11-07T08:21:22+10:00",
-    "subject": "Draw cans at real size, one layer deep: 30 to a cooler shelf instead of 6",
-    "body": "The can models were built twice real size, so a 24-can box needed four cooler shelves and\ncans emptied in minutes. products.json model_scale scales them wherever they are drawn (keeping\nthe import LODs); COLA, FIZZ, BEER and SOUP sizes now match real cans. Checked in the screenshot\ntour. Review round 2, S3.",
-    "stat": "9 files changed, 40 insertions(+), 25 deletions(-)"
    }
   ],
   "dirty": [
-   " M scripts/autoload/game.gd",
-   " M scripts/ui/pc/app_market.gd",
-   " M tests/cases/order_test.gd"
+   " M scripts/world/aisle_signs.gd"
   ],
-  "total_commits": 220
+  "total_commits": 221
  },
- "updated": "2026-11-07T10:28:05+10:00",
+ "updated": "2026-11-07T10:28:33+10:00",
  "qa": [
   {
    "num": 1,

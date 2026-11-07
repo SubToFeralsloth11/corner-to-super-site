@@ -1,17 +1,17 @@
 {
  "generated": "2026-11-07T10:28+10:00",
- "head": "f0ad1e2",
+ "head": "4b99eca",
  "stats": {
-  "commits": 220,
+  "commits": 221,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T10:28:02+10:00",
+  "last_commit": "2026-11-07T10:28:31+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 29130,
+  "gd_lines": 29138,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1401,6 +1401,11 @@
    "sha": "f0ad1e2",
    "date": "2026-11-07T10:28:02+10:00",
    "subject": "Don't rebuild hidden ShopOS apps on every sale; catch up when shown, and fill staff status at once"
+  },
+  {
+   "sha": "4b99eca",
+   "date": "2026-11-07T10:28:31+10:00",
+   "subject": "Keep unused free boxes for the next order and mark free cart lines (F6)"
   }
  ],
  "commits_per_hour": [
@@ -1574,7 +1579,7 @@
   },
   {
    "hour": "2026-11-07T10:00:00+10:00",
-   "commits": 16
+   "commits": 17
   }
  ],
  "sections": [
