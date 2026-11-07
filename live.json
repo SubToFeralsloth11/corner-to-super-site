@@ -6486,6 +6486,11 @@
    "t": "2026-11-07T13:47:56+10:00",
    "kind": "agent",
    "msg": "Agent CritRegress5: done 15 regression findings (4 P2)"
+  },
+  {
+   "t": "2026-11-07T13:51:12+10:00",
+   "kind": "fix",
+   "msg": "Week one gets quiet hours (cap floor 6 -> 3) and customers are worth 7 XP: soak day 3 $232, day 7 $511, day 15 $1,213, day 30 $2,955"
   }
  ],
  "tests": [
@@ -6718,17 +6723,31 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T13:47:56+10:00",
-  "mem_free_pct": 35,
+  "t": "2026-11-07T13:51:12+10:00",
+  "mem_free_pct": 45,
   "load": [
-   5.42,
-   5.64,
-   5.09
+   2.84,
+   4.23,
+   4.6
   ],
   "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "b27c844",
+    "date": "2026-11-07T13:51:05+10:00",
+    "subject": "Give week one quiet hours (curve_min 3) and make each customer worth 7 XP so days 3 and 7 land on the pacing table",
+    "body": "",
+    "stat": "6 files changed, 43 insertions(+), 14 deletions(-)"
+   },
+   {
+    "sha": "6330afc",
+    "date": "2026-11-07T13:51:05+10:00",
+    "subject": "Type the soak AI's weak references and hold back a new till's cashier fee so the till isn't left unstaffed",
+    "body": "",
+    "stat": "1 file changed, 27 insertions(+), 10 deletions(-)"
+   },
    {
     "sha": "279afc5",
     "date": "2026-11-07T13:19:42+10:00",
@@ -7134,33 +7153,23 @@
     "subject": "Post Dale's lines as toasts and skip the key flight through walls or to a seated player (F17)",
     "body": "",
     "stat": "2 files changed, 51 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "2918be9",
-    "date": "2026-11-07T10:41:27+10:00",
-    "subject": "Make opening with empty shelves a hold with a warning (F16)",
-    "body": "",
-    "stat": "3 files changed, 23 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "9925562",
-    "date": "2026-11-07T10:40:27+10:00",
-    "subject": "Move the tutorial card to the top centre while seated at a till, clear of the cash panel and keypad (F15)",
-    "body": "",
-    "stat": "2 files changed, 64 insertions(+), 8 deletions(-)"
    }
   ],
   "dirty": [
-   " M data/customers.json",
-   " M data/levels.json",
-   " M scripts/npc/customer_rules.gd",
-   " M tests/cases/progression_test.gd",
-   " M tests/soak_player.gd",
+   " M scripts/build/expansion.gd",
+   " M scripts/fixtures/fixture.gd",
+   " M scripts/ui/level_banner.gd",
+   " M scripts/ui/options.gd",
+   " M scripts/ui/pc/app_market.gd",
+   " M scripts/ui/prompt.gd",
+   " M scripts/world/building.gd",
+   " M scripts/world/world.gd",
+   " M tests/cases/building_test.gd",
    "?? tests/_dbg_slogan.gd.uid"
   ],
-  "total_commits": 290
+  "total_commits": 292
  },
- "updated": "2026-11-07T13:47:58+10:00",
+ "updated": "2026-11-07T13:51:13+10:00",
  "qa": [
   {
    "num": 1,

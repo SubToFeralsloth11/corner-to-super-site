@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T13:47+10:00",
- "head": "279afc5",
+ "generated": "2026-11-07T13:51+10:00",
+ "head": "b27c844",
  "stats": {
-  "commits": 290,
+  "commits": 292,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T13:19:42+10:00",
+  "last_commit": "2026-11-07T13:51:05+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 31809,
+  "gd_lines": 31869,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1758,6 +1758,16 @@
    "sha": "279afc5",
    "date": "2026-11-07T13:19:42+10:00",
    "subject": "Run the next street's houses the full width behind the plot (V19)"
+  },
+  {
+   "sha": "6330afc",
+   "date": "2026-11-07T13:51:05+10:00",
+   "subject": "Type the soak AI's weak references and hold back a new till's cashier fee so the till isn't left unstaffed"
+  },
+  {
+   "sha": "b27c844",
+   "date": "2026-11-07T13:51:05+10:00",
+   "subject": "Give week one quiet hours (curve_min 3) and make each customer worth 7 XP so days 3 and 7 land on the pacing table"
   }
  ],
  "commits_per_hour": [
@@ -1943,7 +1953,7 @@
   },
   {
    "hour": "2026-11-07T13:00:00+10:00",
-   "commits": 4
+   "commits": 6
   }
  ],
  "sections": [
