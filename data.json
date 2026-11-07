@@ -1,10 +1,10 @@
 {
  "generated": "2026-11-07T10:28+10:00",
- "head": "6325dfc",
+ "head": "f0ad1e2",
  "stats": {
-  "commits": 219,
+  "commits": 220,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T10:27:55+10:00",
+  "last_commit": "2026-11-07T10:28:02+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
@@ -1396,6 +1396,11 @@
    "sha": "6325dfc",
    "date": "2026-11-07T10:27:55+10:00",
    "subject": "Point the tutorial's van arrow at the delivery bay, not the shop door (F2)"
+  },
+  {
+   "sha": "f0ad1e2",
+   "date": "2026-11-07T10:28:02+10:00",
+   "subject": "Don't rebuild hidden ShopOS apps on every sale; catch up when shown, and fill staff status at once"
   }
  ],
  "commits_per_hour": [
@@ -1569,7 +1574,7 @@
   },
   {
    "hour": "2026-11-07T10:00:00+10:00",
-   "commits": 15
+   "commits": 16
   }
  ],
  "sections": [

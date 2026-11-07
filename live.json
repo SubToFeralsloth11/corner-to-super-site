@@ -2211,10 +2211,11 @@
      "file": "scripts/ui/pc/app_staff.gd:35-38; app_my_store.gd:16-17; app_licences.gd:20-21; app_bank.gd:23-27; app_expansions.gd:46; app_stats.gd:35; shop_os.gd:47-74",
      "detail": "Every app is built once at start and lives on hidden. On each `money_changed`/`xp_changed`/`stats_changed` (every sale, roughly every 2–3 s late game), Staff, My Store (4 categories, 19 colour buttons each with copied styleboxes), Licences, Bank and Stats free and rebuild every control, and Expansions rebuilds its cards. With the app open, a sale landing between mouse-down and mouse-up frees the pressed button, so Hire, Upgrade, Fire, Buy, Repay or Take silently does nothing on maybe ~4% of clicks. Frame cost [INFERENCE, unmeasured]: a few ms spike per sale. **Fix:** skip the rebuild while `not is_visible_in_tree()` and set a dirty flag, then refresh on `visibility_changed` (Pricing already does this). While visible, update button `disabled` and label text in place instead of freeing them.",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:09+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "f0ad1e2",
+     "note": "4 apps gated on visibility; staff/progression/loan/menu/additions pass",
+     "closed": "2026-11-07T10:28:04+10:00"
     },
     {
      "id": "L5",
@@ -2319,10 +2320,11 @@
      "file": "scripts/ui/pc/app_staff.gd:77-87,120-136,179-192",
      "detail": "`refresh()` recreates the status labels empty and leaves `_status_t` alone, so they stay blank for up to 0.5 s. With a rebuild on every sale, the status lines flicker constantly late game. **Fix:** fill the label in `_member_card` straight away (`crew.members[id].status()`), or set `_status_t = 0.0` in `refresh()`.",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:09+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "f0ad1e2",
+     "note": "status filled next frame",
+     "closed": "2026-11-07T10:28:04+10:00"
     },
     {
      "id": "L14",
@@ -4706,6 +4708,16 @@
    "t": "2026-11-07T10:28:00+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixFirstHour: F6 free boxes carry over"
+  },
+  {
+   "t": "2026-11-07T10:28:04+10:00",
+   "kind": "fix",
+   "msg": "C3/L4 fixed f0ad1e2 4 apps gated on visibility; staff/progression/loan/menu/additions pass"
+  },
+  {
+   "t": "2026-11-07T10:28:04+10:00",
+   "kind": "fix",
+   "msg": "C3/L13 fixed f0ad1e2 status filled next frame"
   }
  ],
  "tests": [
@@ -4868,17 +4880,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:28:00+10:00",
-  "mem_free_pct": 60,
+  "t": "2026-11-07T10:28:04+10:00",
+  "mem_free_pct": 61,
   "load": [
-   3.33,
-   3.08,
-   3.27
+   3.15,
+   3.05,
+   3.25
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "f0ad1e2",
+    "date": "2026-11-07T10:28:02+10:00",
+    "subject": "Don't rebuild hidden ShopOS apps on every sale; catch up when shown, and fill staff status at once",
+    "body": "Staff, Bank, Stats and My Store freed and rebuilt every control on each money/XP change even\nwhile hidden, a stutter source late game. Review round 2, L4 and L13.",
+    "stat": "3 files changed, 32 insertions(+)"
+   },
    {
     "sha": "6325dfc",
     "date": "2026-11-07T10:27:55+10:00",
@@ -5291,26 +5310,16 @@
     "subject": "Draw cans at real size, one layer deep: 30 to a cooler shelf instead of 6",
     "body": "The can models were built twice real size, so a 24-can box needed four cooler shelves and\ncans emptied in minutes. products.json model_scale scales them wherever they are drawn (keeping\nthe import LODs); COLA, FIZZ, BEER and SOUP sizes now match real cans. Checked in the screenshot\ntour. Review round 2, S3.",
     "stat": "9 files changed, 40 insertions(+), 25 deletions(-)"
-   },
-   {
-    "sha": "cfa35ef",
-    "date": "2026-11-07T08:19:56+10:00",
-    "subject": "Say why Order is greyed out, and let Shift add or remove five boxes in the Market",
-    "body": "",
-    "stat": "1 file changed, 14 insertions(+), 3 deletions(-)"
    }
   ],
   "dirty": [
    " M scripts/autoload/game.gd",
-   " M scripts/ui/pc/app_bank.gd",
    " M scripts/ui/pc/app_market.gd",
-   " M scripts/ui/pc/app_my_store.gd",
-   " M scripts/ui/pc/app_staff.gd",
    " M tests/cases/order_test.gd"
   ],
-  "total_commits": 219
+  "total_commits": 220
  },
- "updated": "2026-11-07T10:28:00+10:00",
+ "updated": "2026-11-07T10:28:05+10:00",
  "qa": [
   {
    "num": 1,
