@@ -2486,10 +2486,11 @@
      "file": "data/licences.json:51; data/products.json:451+",
      "detail": "Customer numbers are fixed by the cap (B1), so income ≈ picks × profit per pick. Produce items earn $0.54-$0.96 each, average $0.69 per pick at +10%, and carry 40 popularity weight. Buying Produce drops the store's average from $2.90 to $2.42 per pick; with every other licence owned it is $3.38 against $4.17 without Produce (−19%). Day 15, when Produce was bought, revenue per item fell from $4.04 to $3.84. Every SS player buys every licence, so this is a trap. Fix: add a per-product `pick_qty` [3,6] for produce (people buy several apples; the code already handles quantities), or raise produce market/cost about 2.5×. Expected: Produce's profit per pick ≈$2.4-$3.0, so the licence is neutral to positive.",
      "by": "CritBalance",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:18:41+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e374bf3",
+     "note": "produce pick_qty [3,6]; test_produce_is_bought_by_the_handful",
+     "closed": "2026-11-07T12:35:11+10:00"
     },
     {
      "id": "B5",
@@ -6005,6 +6006,11 @@
    "t": "2026-11-07T12:32:26+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixBalance: B4"
+  },
+  {
+   "t": "2026-11-07T12:35:11+10:00",
+   "kind": "fix",
+   "msg": "C4/B4 fixed e374bf3 produce pick_qty [3,6]; test_produce_is_bought_by_the_handful"
   }
  ],
  "tests": [
@@ -6215,17 +6221,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:32:26+10:00",
-  "mem_free_pct": 61,
+  "t": "2026-11-07T12:35:11+10:00",
+  "mem_free_pct": 55,
   "load": [
+   2.6,
    2.38,
-   2.52,
-   2.56
+   2.48
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "e374bf3",
+    "date": "2026-11-07T12:35:05+10:00",
+    "subject": "Sell produce by the handful (pick_qty 3-6) and give each expansion from E3 its own basket item (B4, B5)",
+    "body": "",
+    "stat": "9 files changed, 116 insertions(+), 32 deletions(-)"
+   },
    {
     "sha": "7e64f7d",
     "date": "2026-11-07T12:32:20+10:00",
@@ -6638,19 +6651,17 @@
     "subject": "Move the till hint below the rival-sale chip and Take a pack below the hint, off the HUD clock (X16)",
     "body": "",
     "stat": "2 files changed, 15 insertions(+), 3 deletions(-)"
-   },
-   {
-    "sha": "109cdad",
-    "date": "2026-11-07T10:04:29+10:00",
-    "subject": "Count only customers still waiting at 22:00 as turned away, not those sent home by closing early (X13)",
-    "body": "",
-    "stat": "2 files changed, 11 insertions(+), 2 deletions(-)"
    }
   ],
-  "dirty": [],
-  "total_commits": 270
+  "dirty": [
+   " M scripts/autoload/settings.gd",
+   " M scripts/tutorial/tutorial_hint.gd",
+   " M scripts/ui/day_summary.gd",
+   " M scripts/world/store_look.gd"
+  ],
+  "total_commits": 271
  },
- "updated": "2026-11-07T12:32:27+10:00",
+ "updated": "2026-11-07T12:35:12+10:00",
  "qa": [
   {
    "num": 1,
