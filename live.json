@@ -1857,10 +1857,11 @@
      "file": "scripts/fixtures/checkout.gd:152",
      "detail": "smokes_button sits on layer 5 at centre-top, offset 48. The HUD clock card (layer 4) is also centre-top from y 20, with its badges below, so the button is drawn over the clock and waiting chip. U1 moved the hint to 100 to clear that card for this reason. The hint at offset 100 now overlaps the HUD RivalSale card at offset 104 (hud.gd:249) during sale weeks. Fix: put the button under the hint (around 140) or bottom-centre, and push the hint below the sale chip when it's visible.",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:58+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "c2f28fa",
+     "note": "hint y 100->150 (sale chip ends at 142), Take a pack y 48->182. Layout check in test_seated_cashier_fetches_smokes_without_standing fails before (button over clock card, hint over RivalSale), passes after",
+     "closed": "2026-11-07T10:04:38+10:00"
     },
     {
      "id": "X17",
@@ -3902,6 +3903,11 @@
    "t": "2026-11-07T10:04:35+10:00",
    "kind": "fix",
    "msg": "C2/X13 fixed 109cdad spawner half (lead fixed the wording): pending counted as turned away only once the clock reached 22:00; close_early sends them home uncounted. test_concurrency_cap_holds_back_arrivals covers both; 6/0"
+  },
+  {
+   "t": "2026-11-07T10:04:38+10:00",
+   "kind": "fix",
+   "msg": "C2/X16 fixed c2f28fa hint y 100->150 (sale chip ends at 142), Take a pack y 48->182. Layout check in test_seated_cashier_fetches_smokes_without_standing fails before (button over clock card, hint over RivalSale), passes after"
   }
  ],
  "tests": [
@@ -4043,7 +4049,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:04:35+10:00",
+  "t": "2026-11-07T10:04:38+10:00",
   "mem_free_pct": 44,
   "load": [
    6.06,
@@ -4478,7 +4484,7 @@
   "dirty": [],
   "total_commits": 212
  },
- "updated": "2026-11-07T10:04:36+10:00",
+ "updated": "2026-11-07T10:04:39+10:00",
  "qa": [
   {
    "num": 1,
