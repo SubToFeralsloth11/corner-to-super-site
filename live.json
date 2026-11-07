@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixLate2: L9",
+  "activity": "FixLate2: full suite",
   "cycle": "3",
-  "since": "2026-11-07T11:44:19+10:00"
+  "since": "2026-11-07T12:07:24+10:00"
  },
  "rounds": [
   {
@@ -5085,6 +5085,11 @@
    "t": "2026-11-07T12:07:22+10:00",
    "kind": "fix",
    "msg": "C3/L19 fixed dd9c33d Paper prints 'Takings $X (▲/▼ Y% on last week)' from previous 7 stats_days; additions_test:test_sunday_paper_compares_takings_with_last_week passes"
+  },
+  {
+   "t": "2026-11-07T12:07:24+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixLate2: full suite"
   }
  ],
  "tests": [
@@ -5274,7 +5279,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:07:22+10:00",
+  "t": "2026-11-07T12:07:24+10:00",
   "mem_free_pct": 46,
   "load": [
    3.81,
@@ -5709,7 +5714,7 @@
   "dirty": [],
   "total_commits": 251
  },
- "updated": "2026-11-07T12:07:22+10:00",
+ "updated": "2026-11-07T12:07:25+10:00",
  "qa": [
   {
    "num": 1,
