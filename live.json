@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixLate: L6 shared cooler doors",
+  "activity": "FixLate: L7 restocker twin at PREP",
   "cycle": "3",
-  "since": "2026-11-07T11:14:53+10:00"
+  "since": "2026-11-07T11:17:18+10:00"
  },
  "rounds": [
   {
@@ -4966,6 +4966,11 @@
    "t": "2026-11-07T11:17:15+10:00",
    "kind": "fix",
    "msg": "C3/L6 fixed 64e284c Fixture.open_door/close_door take a user; door shuts when the last user is done, chest freezer keeps the needed half. staff_jobs_test: restocker finishing a cooler leaves it open for a customer still reaching in; customer leaving keeps it open for a restocker; chest lid not slid off the restocker's half. staff_jobs/progression/player/stock pass."
+  },
+  {
+   "t": "2026-11-07T11:17:18+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixLate: L7 restocker twin at PREP"
   }
  ],
  "tests": [
@@ -5144,7 +5149,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:17:15+10:00",
+  "t": "2026-11-07T11:17:18+10:00",
   "mem_free_pct": 60,
   "load": [
    2.27,
@@ -5579,7 +5584,7 @@
   "dirty": [],
   "total_commits": 243
  },
- "updated": "2026-11-07T11:17:15+10:00",
+ "updated": "2026-11-07T11:17:18+10:00",
  "qa": [
   {
    "num": 1,
