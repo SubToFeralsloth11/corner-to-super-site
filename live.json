@@ -2413,10 +2413,11 @@
      "file": "scripts/ui/pc/app_expansions.gd:92-96; app_my_store.gd:76-77; app_licences.gd:77-78",
      "detail": "Expansions ($1,800–$4,000+, rent goes up permanently and the knock-through can't be undone), Head office ($6,000) and licences buy on one press. Selling a fixture (Del twice) and firing (Fire twice) already need a second press. **Fix:** arm the button on the first press (\"Buy for $X? Press again\") within 3 s, the same way as `AppStaff.fire`.",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:10+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "88dc87b",
+     "note": "My Store upgrades (head office $6,000) need Buy then Confirm within 3 s; progression_test:test_upgrade_buy_needs_a_confirm passes",
+     "closed": "2026-11-07T12:07:19+10:00"
     },
     {
      "id": "L19",
@@ -5073,6 +5074,11 @@
    "t": "2026-11-07T12:07:16+10:00",
    "kind": "fix",
    "msg": "C3/L17 fixed 6854dec Furniture card -/qty/+ (Shift x5), one fee, clamped to max-owned; build_test:test_furniture_app_orders_a_quantity_for_one_fee passes"
+  },
+  {
+   "t": "2026-11-07T12:07:19+10:00",
+   "kind": "fix",
+   "msg": "C3/L18 fixed 88dc87b My Store upgrades (head office $6,000) need Buy then Confirm within 3 s; progression_test:test_upgrade_buy_needs_a_confirm passes"
   }
  ],
  "tests": [
@@ -5262,7 +5268,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:07:16+10:00",
+  "t": "2026-11-07T12:07:19+10:00",
   "mem_free_pct": 46,
   "load": [
    3.89,
@@ -5697,7 +5703,7 @@
   "dirty": [],
   "total_commits": 251
  },
- "updated": "2026-11-07T12:07:17+10:00",
+ "updated": "2026-11-07T12:07:20+10:00",
  "qa": [
   {
    "num": 1,
