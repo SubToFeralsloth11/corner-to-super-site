@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixLate: L3 restocker top-ups",
+  "activity": "FixLate: L6 shared cooler doors",
   "cycle": "3",
-  "since": "2026-11-07T11:12:36+10:00"
+  "since": "2026-11-07T11:14:53+10:00"
  },
  "rounds": [
   {
@@ -4955,6 +4955,11 @@
    "t": "2026-11-07T11:14:50+10:00",
    "kind": "fix",
    "msg": "C3/L12 fixed d5640f3 Idle status lists low shelves' products with no racked boxes (up to 3). staff_jobs_test: status names CANDY (before: 'Looking for empty shelves')."
+  },
+  {
+   "t": "2026-11-07T11:14:53+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixLate: L6 shared cooler doors"
   }
  ],
  "tests": [
@@ -5133,12 +5138,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:14:50+10:00",
+  "t": "2026-11-07T11:14:53+10:00",
   "mem_free_pct": 59,
   "load": [
-   1.68,
+   1.71,
    2.07,
-   2.38
+   2.37
   ],
   "godot_procs": 0
  },
@@ -5568,7 +5573,7 @@
   "dirty": [],
   "total_commits": 242
  },
- "updated": "2026-11-07T11:14:51+10:00",
+ "updated": "2026-11-07T11:14:53+10:00",
  "qa": [
   {
    "num": 1,
