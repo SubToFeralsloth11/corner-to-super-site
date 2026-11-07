@@ -3995,6 +3995,11 @@
    "t": "2026-11-07T10:14:12+10:00",
    "kind": "finding",
    "msg": "C3/S1 [P3] Soak AI's layout plan puts E4/E5/E6 shelves and coolers on wall bands, so the late build-out is never tested"
+  },
+  {
+   "t": "2026-11-07T10:16:39+10:00",
+   "kind": "shots",
+   "msg": "Screenshots refreshed: 56 images After cycle 2 (till hint/smokes button moved, PC readable)"
   }
  ],
  "tests": [
@@ -4157,12 +4162,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:14:12+10:00",
-  "mem_free_pct": 60,
+  "t": "2026-11-07T10:16:39+10:00",
+  "mem_free_pct": 66,
   "load": [
-   4.14,
-   4.18,
-   3.97
+   3.13,
+   3.91,
+   3.9
   ],
   "godot_procs": 0
  },
@@ -4592,7 +4597,7 @@
   "dirty": [],
   "total_commits": 215
  },
- "updated": "2026-11-07T10:14:13+10:00",
+ "updated": "2026-11-07T10:16:40+10:00",
  "qa": [
   {
    "num": 1,
@@ -4652,8 +4657,8 @@
   }
  ],
  "shots": {
-  "t": "2026-11-07T09:03:19+10:00",
-  "note": "PC Market now readable; real cans; receipt itemised",
+  "t": "2026-11-07T10:16:39+10:00",
+  "note": "After cycle 2 (till hint/smokes button moved, PC readable)",
   "files": [
    "01_exterior_from_road.jpg",
    "02_entrance_looking_in.jpg",
