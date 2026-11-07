@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C4",
   "area": "Visuals; balance",
-  "activity": "FixBalance: B13",
+  "activity": "FixBalance: full tests + soak",
   "cycle": "4",
-  "since": "2026-11-07T12:48:13+10:00"
+  "since": "2026-11-07T12:50:49+10:00"
  },
  "rounds": [
   {
@@ -6136,6 +6136,11 @@
    "t": "2026-11-07T12:50:46+10:00",
    "kind": "fix",
    "msg": "C4/B13 fixed 7660bde xp_first_step 350 (L2 at 350), dairy_multideck $300"
+  },
+  {
+   "t": "2026-11-07T12:50:49+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixBalance: full tests + soak"
   }
  ],
  "tests": [
@@ -6346,12 +6351,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:50:46+10:00",
+  "t": "2026-11-07T12:50:49+10:00",
   "mem_free_pct": 47,
   "load": [
-   3.3,
-   3.13,
-   2.75
+   3.51,
+   3.17,
+   2.77
   ],
   "godot_procs": 1
  },
@@ -6785,7 +6790,7 @@
   ],
   "total_commits": 286
  },
- "updated": "2026-11-07T12:50:47+10:00",
+ "updated": "2026-11-07T12:50:50+10:00",
  "qa": [
   {
    "num": 1,
