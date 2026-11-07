@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixFirstHour: F12 clipboard range warning",
+  "activity": "FixFirstHour: F19 Market fixture note",
   "cycle": "3",
-  "since": "2026-11-07T10:47:01+10:00"
+  "since": "2026-11-07T10:47:33+10:00"
  },
  "rounds": [
   {
@@ -4874,6 +4874,11 @@
    "t": "2026-11-07T10:47:31+10:00",
    "kind": "fix",
    "msg": "C3/F12 fixed 2ec20c1 Clipboard.range_note(n, sellable): warns only when kinds you're licensed for are missing; 9 of 9 reads '9 of 9 you can sell · a licence adds more' in ink. progression_test covers 9/9, 5/9, 14/30; passes"
+  },
+  {
+   "t": "2026-11-07T10:47:33+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixFirstHour: F19 Market fixture note"
   }
  ],
  "tests": [
@@ -5036,10 +5041,10 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:47:31+10:00",
+  "t": "2026-11-07T10:47:33+10:00",
   "mem_free_pct": 67,
   "load": [
-   1.91,
+   1.92,
    2.16,
    2.55
   ],
@@ -5471,7 +5476,7 @@
   "dirty": [],
   "total_commits": 236
  },
- "updated": "2026-11-07T10:47:31+10:00",
+ "updated": "2026-11-07T10:47:34+10:00",
  "qa": [
   {
    "num": 1,
