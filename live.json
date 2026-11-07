@@ -2824,10 +2824,11 @@
      "file": "building.gd:203-224 (`_wall` adds only plaster, wainscot, rail and skirting) · settings.json start fixtures (gondola end facing the entrance; seen in 02/03) · 03, 05, 17, 21: empty white walls above the wainscot",
      "detail": "VISUALS.md wants colourful packaging against clean surfaces, but a level-1 store is about 80% blank wall. Fix: add generated wall graphics above the wainscot, one every 4 m span (category banners, \"Fresh every day\" or the store logo), plus a welcome banner over the inside of the entrance. Turn the starting gondola 90° so a long stocked side faces the door.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "8c5a7c6",
+     "note": "lettering visible in 03/05 (tour c4h); building 19/0",
+     "closed": "2026-11-07T13:08:05+10:00"
     },
     {
      "id": "V16",
@@ -6161,6 +6162,16 @@
    "t": "2026-11-07T13:06:59+10:00",
    "kind": "test",
    "msg": "Tests: 1268 passed, 0 failed after B fixes (FixBalance)"
+  },
+  {
+   "t": "2026-11-07T13:08:05+10:00",
+   "kind": "fix",
+   "msg": "C4/V15 fixed 8c5a7c6 lettering visible in 03/05 (tour c4h); building 19/0"
+  },
+  {
+   "t": "2026-11-07T13:08:07+10:00",
+   "kind": "shots",
+   "msg": "Screenshots refreshed: 56 images Cycle 4: wall lettering"
   }
  ],
  "tests": [
@@ -6388,17 +6399,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T13:06:59+10:00",
-  "mem_free_pct": 28,
+  "t": "2026-11-07T13:08:07+10:00",
+  "mem_free_pct": 46,
   "load": [
-   3.01,
-   3.67,
-   3.27
+   3.15,
+   3.51,
+   3.24
   ],
-  "godot_procs": 3
+  "godot_procs": 34
  },
  "game": {
   "commits": [
+   {
+    "sha": "8c5a7c6",
+    "date": "2026-11-07T13:08:04+10:00",
+    "subject": "Paint store-green slogans high on the long walls so the shop isn't four blank walls (V15)",
+    "body": "Test: every slogan faces into the shop, sits above the fixtures and stands in front of the\nwall's painted face (the first try sat inside the brick).",
+    "stat": "3 files changed, 67 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "7660bde",
     "date": "2026-11-07T12:50:40+10:00",
@@ -6811,23 +6829,14 @@
     "subject": "Let the tutorial pass the price check on opening, follow the payment method and end with day 1 (F7)",
     "body": "",
     "stat": "5 files changed, 93 insertions(+), 14 deletions(-)"
-   },
-   {
-    "sha": "922bfe3",
-    "date": "2026-11-07T10:36:36+10:00",
-    "subject": "Finish the tutorial's van step when the player reaches the boxes, not on the first landing (F3)",
-    "body": "",
-    "stat": "4 files changed, 62 insertions(+), 5 deletions(-)"
    }
   ],
   "dirty": [
-   " M scripts/world/building.gd",
-   " M tests/cases/building_test.gd",
    "?? tests/_dbg_slogan.gd.uid"
   ],
-  "total_commits": 286
+  "total_commits": 287
  },
- "updated": "2026-11-07T13:07:00+10:00",
+ "updated": "2026-11-07T13:08:08+10:00",
  "qa": [
   {
    "num": 1,
@@ -6887,8 +6896,8 @@
   }
  ],
  "shots": {
-  "t": "2026-11-07T12:47:29+10:00",
-  "note": "Cycle 4: green header, cooler glow, rubble",
+  "t": "2026-11-07T13:08:07+10:00",
+  "note": "Cycle 4: wall lettering",
   "files": [
    "01_exterior_from_road.jpg",
    "02_entrance_looking_in.jpg",
