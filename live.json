@@ -1766,10 +1766,11 @@
      "file": "scripts/autoload/game.gd:637",
      "detail": "_tally_other drops reason &\"overdue\", which covers both tonight's overdue lines and pay_overdue (494-499) at the Bank in PREP or OPEN. A daytime Bank payment lowers cash, but it isn't in \"Other money today\" and isn't among tonight's overdue_before (snapshot taken after the payment). So \"Cash at open + revenue + other − bills paid\" no longer equals Cash, which E11 says it should. Fix: give pay_overdue its own reason (&\"overdue_bank\") and add \"Overdue paid at the Bank\" to MONEY_NAMES.",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:57+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "56b723a",
+     "note": "pay_overdue spends with &overdue_bank (tallied in other money; label in lead's a16f738). bills_test asserts other_money[overdue_bank] == -paid; 22/0",
+     "closed": "2026-11-07T10:02:57+10:00"
     },
     {
      "id": "X10",
@@ -3874,6 +3875,11 @@
    "t": "2026-11-07T10:01:10+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixRegress: X9/X10 game.gd money"
+  },
+  {
+   "t": "2026-11-07T10:02:57+10:00",
+   "kind": "fix",
+   "msg": "C2/X9 fixed 56b723a pay_overdue spends with &overdue_bank (tallied in other money; label in lead's a16f738). bills_test asserts other_money[overdue_bank] == -paid; 22/0"
   }
  ],
  "tests": [
@@ -4015,17 +4021,38 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:01:10+10:00",
-  "mem_free_pct": 45,
+  "t": "2026-11-07T10:02:57+10:00",
+  "mem_free_pct": 44,
   "load": [
-   2.23,
-   2.65,
-   3.15
+   7.23,
+   4.25,
+   3.71
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "354656d",
+    "date": "2026-11-07T10:02:51+10:00",
+    "subject": "Book the free first order's stock at no cost and let binned stock leave the cost basis (X10)",
+    "body": "",
+    "stat": "2 files changed, 28 insertions(+), 6 deletions(-)"
+   },
+   {
+    "sha": "56b723a",
+    "date": "2026-11-07T10:02:51+10:00",
+    "subject": "Book overdue bills paid at the Bank under their own reason so the receipt's cash adds up (X9)",
+    "body": "",
+    "stat": "2 files changed, 6 insertions(+), 2 deletions(-)"
+   },
+   {
+    "sha": "a16f738",
+    "date": "2026-11-07T10:01:33+10:00",
+    "subject": "Name overdue bills paid at the Bank on the receipt's other-money lines (X9)",
+    "body": "",
+    "stat": "1 file changed, 2 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "a384e85",
     "date": "2026-11-07T10:01:06+10:00",
@@ -4424,33 +4451,14 @@
     "subject": "Keep one reachable side on every shelf, and ask for a second Del before selling",
     "body": "Shelves could be boxed in so customers had no face to reach (they now skip such slots, which\nsilently lost sales). Placement is refused when a fixture, or a neighbour, would have no face\nwith 0.6 m of floor in front. One stray Del sold a fixture at half price; it now takes two\npresses within 2.5 s. The footprint plate's mesh is no longer rebuilt every frame.\nReview round 2, R6 B1-B3.",
     "stat": "5 files changed, 139 insertions(+), 11 deletions(-)"
-   },
-   {
-    "sha": "20de20c",
-    "date": "2026-11-07T07:54:30+10:00",
-    "subject": "Let a bigger shop fill bigger baskets, so late expansions earn their rent",
-    "body": "The in-store cap (20) binds from about level 4, so E4-E8 added rent and power but no sales.\nLists now gain one item per 9 unlocked cells beyond the start shop (+4 in the full store).\nAlso corrects the stale formula comments. Review round 2, E3.",
-    "stat": "5 files changed, 40 insertions(+), 10 deletions(-)"
-   },
-   {
-    "sha": "9061b62",
-    "date": "2026-11-07T07:53:40+10:00",
-    "subject": "Skip shelves nobody can stand in front of, instead of shopping them through a fixture",
-    "body": "A slot whose front is blocked (the navmesh ends over 0.6 m from the reach spot) isn't chosen,\nand a customer who can't get in front of a slot drops it for the visit. Review round 2, N4.",
-    "stat": "2 files changed, 46 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "c98c03f",
-    "date": "2026-11-07T07:50:26+10:00",
-    "subject": "Buy a product drawn several times as several units in one trip, with one price decision",
-    "body": "Repeat picks were separate trips, separate refusal rolls (refuse then grab the same item) and\nstacked out-of-stock penalties. Unit counts are unchanged, so the economy tuning holds.\nReview round 2, N3.",
-    "stat": "3 files changed, 76 insertions(+), 18 deletions(-)"
    }
   ],
-  "dirty": [],
-  "total_commits": 205
+  "dirty": [
+   " M scripts/entities/player.gd"
+  ],
+  "total_commits": 208
  },
- "updated": "2026-11-07T10:01:10+10:00",
+ "updated": "2026-11-07T10:02:57+10:00",
  "qa": [
   {
    "num": 1,
