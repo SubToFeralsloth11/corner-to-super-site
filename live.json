@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixLate2 on L9/L17/L18/L19; soak #5 checking late-game restocking",
+  "activity": "FixLate2: L9",
   "cycle": "3",
-  "since": "2026-11-07T11:44:15+10:00"
+  "since": "2026-11-07T11:44:19+10:00"
  },
  "rounds": [
   {
@@ -5046,6 +5046,11 @@
    "t": "2026-11-07T11:44:15+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixLate2 on L9/L17/L18/L19; soak #5 checking late-game restocking"
+  },
+  {
+   "t": "2026-11-07T11:44:19+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixLate2: L9"
   }
  ],
  "tests": [
@@ -5235,12 +5240,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:44:15+10:00",
-  "mem_free_pct": 54,
+  "t": "2026-11-07T11:44:19+10:00",
+  "mem_free_pct": 46,
   "load": [
-   3.31,
-   3.11,
-   3.0
+   3.61,
+   3.18,
+   3.03
   ],
   "godot_procs": 3
  },
@@ -5670,7 +5675,7 @@
   "dirty": [],
   "total_commits": 247
  },
- "updated": "2026-11-07T11:44:16+10:00",
+ "updated": "2026-11-07T11:44:20+10:00",
  "qa": [
   {
    "num": 1,
