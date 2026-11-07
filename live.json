@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C2",
   "area": "Second pass",
-  "activity": "FixRegress: X4 overflow holding spot",
+  "activity": "FixRegress: X9/X10 game.gd money",
   "cycle": "2",
-  "since": "2026-11-07T09:58:00+10:00"
+  "since": "2026-11-07T10:01:10+10:00"
  },
  "rounds": [
   {
@@ -3869,6 +3869,11 @@
    "t": "2026-11-07T10:01:07+10:00",
    "kind": "fix",
    "msg": "C2/X4 fixed a384e85 overflow snakes into a 2nd column inside the kept-clear lane (in sight, out of the aisles); only past both do they wait in place; has_room/shortest_queue take the joiner's trolley. test_a_full_lane_... updated (overflow spot in lane, unique, 2nd column holds more); checkout_test 77/0, customer 54/0"
+  },
+  {
+   "t": "2026-11-07T10:01:10+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixRegress: X9/X10 game.gd money"
   }
  ],
  "tests": [
@@ -4010,12 +4015,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:01:07+10:00",
-  "mem_free_pct": 46,
+  "t": "2026-11-07T10:01:10+10:00",
+  "mem_free_pct": 45,
   "load": [
-   2.43,
-   2.69,
-   3.17
+   2.23,
+   2.65,
+   3.15
   ],
   "godot_procs": 0
  },
@@ -4445,7 +4450,7 @@
   "dirty": [],
   "total_commits": 205
  },
- "updated": "2026-11-07T10:01:08+10:00",
+ "updated": "2026-11-07T10:01:10+10:00",
  "qa": [
   {
    "num": 1,
