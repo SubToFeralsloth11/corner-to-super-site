@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T12:23+10:00",
- "head": "c4d28ab",
+ "generated": "2026-11-07T12:24+10:00",
+ "head": "8aba018",
  "stats": {
-  "commits": 257,
+  "commits": 260,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T12:23:52+10:00",
+  "last_commit": "2026-11-07T12:24:47+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 30788,
+  "gd_lines": 30804,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1593,6 +1593,21 @@
    "sha": "c4d28ab",
    "date": "2026-11-07T12:23:52+10:00",
    "subject": "Light the open app's dock button in ShopOS (V24, open-app state)"
+  },
+  {
+   "sha": "af0afe3",
+   "date": "2026-11-07T12:24:06+10:00",
+   "subject": "Make the soak AI play like a mid-game player: more restockers, full racks, upgrades, staff tiers and a --markup variant (B14)"
+  },
+  {
+   "sha": "e1fe003",
+   "date": "2026-11-07T12:24:45+10:00",
+   "subject": "Draw shelf price tags bigger with an unshaded price so they read at 2-3 m (V18)"
+  },
+  {
+   "sha": "8aba018",
+   "date": "2026-11-07T12:24:47+10:00",
+   "subject": "Mix the slot glow instead of adding it, so red shows on white coolers (V11)"
   }
  ],
  "commits_per_hour": [
@@ -1774,7 +1789,7 @@
   },
   {
    "hour": "2026-11-07T12:00:00+10:00",
-   "commits": 10
+   "commits": 13
   }
  ],
  "sections": [

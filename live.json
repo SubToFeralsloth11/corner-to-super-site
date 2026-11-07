@@ -2752,10 +2752,11 @@
      "file": "player.gd:117-122 (`BLEND_MODE_ADD`), 640 (alpha 0.16 / 0.18) · 19_box_at_cooler_red.png: only a faint pink smear on the cooler shelf with no edges, while green in 18 shows edges on the darker pegboard",
      "detail": "Adding red to near-white stays near-white, so the main stocking feedback fails on coolers and freezers. Fix: switch to `BLEND_MODE_MIX` at alpha 0.3, and add an edge outline (a second box mesh in wireframe, or a ShaderMaterial that draws only the edges at alpha 0.9).",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "8aba018",
+     "note": "player 56/0",
+     "closed": "2026-11-07T12:24:48+10:00"
     },
     {
      "id": "V12",
@@ -2838,10 +2839,11 @@
      "file": "price_label.gd:9 (card 0.11×0.05 m), 34-35 (price 64 × 0.0005 = 32 mm tall) · 16 crop: the labels are 6–8 px white smudges at about 2.5 m · 17 and 49: the cooler and freezer prices are scribbles",
      "detail": "At 720p and FOV 75–79, 32 mm digits are about 5 px tall at 2.5 m. Supermarket Simulator's tags read at a glance. [Shots are at Low/0.7 scale; Medium is unverified but only about 15% sharper.] Fix: SIZE 0.15×0.07, price font 88, name 26 (TEXT_RANGE as now), and `shaded = false` on the price Label3D so it isn't darkened under the shelf above.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e1fe003",
+     "note": "0.14x0.064 m, price 84; stock/m1 pass; look checked in next tour",
+     "closed": "2026-11-07T12:24:47+10:00"
     },
     {
      "id": "V19",
@@ -5892,6 +5894,16 @@
    "t": "2026-11-07T12:23:53+10:00",
    "kind": "fix",
    "msg": "C4/V24 wip c4d28ab open-app state done; icons not yet"
+  },
+  {
+   "t": "2026-11-07T12:24:47+10:00",
+   "kind": "fix",
+   "msg": "C4/V18 fixed e1fe003 0.14x0.064 m, price 84; stock/m1 pass; look checked in next tour"
+  },
+  {
+   "t": "2026-11-07T12:24:48+10:00",
+   "kind": "fix",
+   "msg": "C4/V11 fixed 8aba018 player 56/0"
   }
  ],
  "tests": [
@@ -6102,17 +6114,38 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:23:54+10:00",
-  "mem_free_pct": 54,
+  "t": "2026-11-07T12:24:48+10:00",
+  "mem_free_pct": 53,
   "load": [
-   2.74,
-   2.38,
-   2.61
+   2.48,
+   2.36,
+   2.59
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "8aba018",
+    "date": "2026-11-07T12:24:47+10:00",
+    "subject": "Mix the slot glow instead of adding it, so red shows on white coolers (V11)",
+    "body": "",
+    "stat": "1 file changed, 2 insertions(+), 2 deletions(-)"
+   },
+   {
+    "sha": "e1fe003",
+    "date": "2026-11-07T12:24:45+10:00",
+    "subject": "Draw shelf price tags bigger with an unshaded price so they read at 2-3 m (V18)",
+    "body": "",
+    "stat": "1 file changed, 6 insertions(+), 3 deletions(-)"
+   },
+   {
+    "sha": "af0afe3",
+    "date": "2026-11-07T12:24:06+10:00",
+    "subject": "Make the soak AI play like a mid-game player: more restockers, full racks, upgrades, staff tiers and a --markup variant (B14)",
+    "body": "",
+    "stat": "3 files changed, 212 insertions(+), 60 deletions(-)"
+   },
    {
     "sha": "c4d28ab",
     "date": "2026-11-07T12:23:52+10:00",
@@ -6511,37 +6544,16 @@
     "subject": "Fix the stale concurrency comment and fallbacks in CustomerRules (X18)",
     "body": "",
     "stat": "1 file changed, 2 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "46fa054",
-    "date": "2026-11-07T09:56:37+10:00",
-    "subject": "Keep 0.9 m in front of a shelf face so customers can reach every slot, and drop the overlap wrapper (X6, X19)",
-    "body": "",
-    "stat": "3 files changed, 44 insertions(+), 13 deletions(-)"
-   },
-   {
-    "sha": "de254e4",
-    "date": "2026-11-07T09:56:37+10:00",
-    "subject": "Let a till with its cashier on be moved in build mode; the cashier steps off and walks back (X5)",
-    "body": "",
-    "stat": "2 files changed, 32 insertions(+), 6 deletions(-)"
-   },
-   {
-    "sha": "75c335b",
-    "date": "2026-11-07T09:51:46+10:00",
-    "subject": "Remove Player.box_caught, a signal only a test listened to (Y15)",
-    "body": "",
-    "stat": "2 files changed, 6 deletions(-)"
    }
   ],
   "dirty": [
-   " M tests/soak.gd",
-   " M tests/soak.sh",
-   " M tests/soak_player.gd"
+   " M data/customers.json",
+   " M scripts/npc/customer_rules.gd",
+   " M scripts/npc/customer_spawner.gd"
   ],
-  "total_commits": 257
+  "total_commits": 260
  },
- "updated": "2026-11-07T12:23:54+10:00",
+ "updated": "2026-11-07T12:24:49+10:00",
  "qa": [
   {
    "num": 1,
