@@ -1,10 +1,10 @@
 {
- "generated": "2026-11-07T10:02+10:00",
- "head": "354656d",
+ "generated": "2026-11-07T10:03+10:00",
+ "head": "aa08c81",
  "stats": {
-  "commits": 208,
+  "commits": 209,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T10:02:51+10:00",
+  "last_commit": "2026-11-07T10:02:58+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
@@ -1341,6 +1341,11 @@
    "sha": "354656d",
    "date": "2026-11-07T10:02:51+10:00",
    "subject": "Book the free first order's stock at no cost and let binned stock leave the cost basis (X10)"
+  },
+  {
+   "sha": "aa08c81",
+   "date": "2026-11-07T10:02:58+10:00",
+   "subject": "Write off a box's units from the cost basis when it is binned with stock in it (X10)"
   }
  ],
  "commits_per_hour": [
@@ -1514,7 +1519,7 @@
   },
   {
    "hour": "2026-11-07T10:00:00+10:00",
-   "commits": 4
+   "commits": 5
   }
  ],
  "sections": [

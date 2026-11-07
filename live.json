@@ -1779,10 +1779,11 @@
      "file": "scripts/autoload/game.gd:584",
      "detail": "place_order books every ordered unit at cost_of(id), including the q[\"free_boxes\"] that cost nothing, so day-1 COGS and profit show money never spent. _use_basis (611) only runs on sales. Units that leave any other way, such as a box binned with stock in it, stay in the held count and skew the average on later orders. Start stock is never booked at all. Fix: book free units at 0 (or cut the average by the free share). Decrement the basis wherever stock is destroyed (bin_held with count > 0, misfire losses).",
      "by": "CritRegress",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:46:57+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "354656d",
+     "note": "free first-order boxes (dearest first, as quote prices them) booked at 0; Game.write_off_stock(id, units) removes binned units (player.bin_held hook requested from lead); no start stock exists to book. test_free_boxes_cost_nothing_and_binned_stock_leaves_the_average; day_test 46/0",
+     "closed": "2026-11-07T10:03:00+10:00"
     },
     {
      "id": "X11",
@@ -3880,6 +3881,11 @@
    "t": "2026-11-07T10:02:57+10:00",
    "kind": "fix",
    "msg": "C2/X9 fixed 56b723a pay_overdue spends with &overdue_bank (tallied in other money; label in lead's a16f738). bills_test asserts other_money[overdue_bank] == -paid; 22/0"
+  },
+  {
+   "t": "2026-11-07T10:03:00+10:00",
+   "kind": "fix",
+   "msg": "C2/X10 fixed 354656d free first-order boxes (dearest first, as quote prices them) booked at 0; Game.write_off_stock(id, units) removes binned units (player.bin_held hook requested from lead); no start stock exists to book. test_free_boxes_cost_nothing_and_binned_stock_leaves_the_average; day_test 46/0"
   }
  ],
  "tests": [
@@ -4021,17 +4027,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:02:57+10:00",
-  "mem_free_pct": 44,
+  "t": "2026-11-07T10:03:00+10:00",
+  "mem_free_pct": 45,
   "load": [
-   7.23,
-   4.25,
-   3.71
+   6.89,
+   4.22,
+   3.7
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "aa08c81",
+    "date": "2026-11-07T10:02:58+10:00",
+    "subject": "Write off a box's units from the cost basis when it is binned with stock in it (X10)",
+    "body": "",
+    "stat": "1 file changed, 3 insertions(+)"
+   },
    {
     "sha": "354656d",
     "date": "2026-11-07T10:02:51+10:00",
@@ -4444,21 +4457,12 @@
     "subject": "Reward visits that go right, free the cap from people walking home, and fix four customer slips",
     "body": "- +8 when everything on the list was found at a fair price, +4 in a 90%-clean store: good play\n  now ends visits around 4.35 stars instead of topping out near 3.85 (N10, E7).\n- Customers already out of the door on the way home no longer hold places under the in-store\n  cap; a separate hard limit keeps the plot under 26 people (N9).\n- With no till, the basket is left behind instead of walked off unpaid (N12).\n- A customer isn't put off by their own spill (N15); the head no longer stays turned back at the\n  shelf after a bark (N8); grumpy customers say a grumpy goodbye and storming out has its own\n  lines, both in the Sunday review's complaints (N11).\nReview round 2.",
     "stat": "7 files changed, 124 insertions(+), 9 deletions(-)"
-   },
-   {
-    "sha": "017be96",
-    "date": "2026-11-07T07:59:38+10:00",
-    "subject": "Keep one reachable side on every shelf, and ask for a second Del before selling",
-    "body": "Shelves could be boxed in so customers had no face to reach (they now skip such slots, which\nsilently lost sales). Placement is refused when a fixture, or a neighbour, would have no face\nwith 0.6 m of floor in front. One stray Del sold a fixture at half price; it now takes two\npresses within 2.5 s. The footprint plate's mesh is no longer rebuilt every frame.\nReview round 2, R6 B1-B3.",
-    "stat": "5 files changed, 139 insertions(+), 11 deletions(-)"
    }
   ],
-  "dirty": [
-   " M scripts/entities/player.gd"
-  ],
-  "total_commits": 208
+  "dirty": [],
+  "total_commits": 209
  },
- "updated": "2026-11-07T10:02:57+10:00",
+ "updated": "2026-11-07T10:03:00+10:00",
  "qa": [
   {
    "num": 1,
