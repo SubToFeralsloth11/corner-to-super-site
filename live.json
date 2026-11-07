@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixFirstHour: F19 Market fixture note",
+  "activity": "FixFirstHour: S1 soak plan spots off wall bands",
   "cycle": "3",
-  "since": "2026-11-07T10:47:33+10:00"
+  "since": "2026-11-07T10:48:41+10:00"
  },
  "rounds": [
   {
@@ -4885,6 +4885,11 @@
    "t": "2026-11-07T10:48:38+10:00",
    "kind": "fix",
    "msg": "C3/F19 fixed 8ffbe30 Market cards show 'Stands on a <fixture>' and '· you have none' in WARN when no placed fixture of that kind (AppLicences.kind_placed shared with the licence note), refreshed when the app is shown. order_test: MILK with dairy licence and no fridge warns, CHIPZ doesn't (fails before: no line); order 92, m7 98 pass"
+  },
+  {
+   "t": "2026-11-07T10:48:41+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixFirstHour: S1 soak plan spots off wall bands"
   }
  ],
  "tests": [
@@ -5047,7 +5052,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:48:38+10:00",
+  "t": "2026-11-07T10:48:41+10:00",
   "mem_free_pct": 63,
   "load": [
    2.11,
@@ -5482,7 +5487,7 @@
   "dirty": [],
   "total_commits": 237
  },
- "updated": "2026-11-07T10:48:39+10:00",
+ "updated": "2026-11-07T10:48:41+10:00",
  "qa": [
   {
    "num": 1,
