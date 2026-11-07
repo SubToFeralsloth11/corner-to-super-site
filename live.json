@@ -2499,10 +2499,11 @@
      "file": "scripts/npc/customer_rules.gd:52-54; data/customers.json:65",
      "detail": "`(cells - 6) / 9` uses integer division: after E1 = 0, E3 = 1, E4 = 1, E5 = 2, E6 = 2, E7 = 3, E8 = 4. E6 ($4,000, +$30 rent/day) was bought on day 29: revenue went $7,271 → $7,206 → $7,313, i.e. flat. Fix: give each expansion its own `list_bonus` in expansions.json (e3 to e8 +1 each) and add those up in `size_bonus`. Show \"+1 item per basket\" on the Expansions card. Expected: each of E4 and E6 adds ≈+9% revenue (≈+$350/day at day 30).",
      "by": "CritBalance",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:18:41+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "e374bf3",
+     "note": "expansions.json list_bonus e3-e8 +1, Expansions card shows it; test_a_bigger_shop_fills_bigger_baskets",
+     "closed": "2026-11-07T12:35:14+10:00"
     },
     {
      "id": "B6",
@@ -6011,6 +6012,11 @@
    "t": "2026-11-07T12:35:11+10:00",
    "kind": "fix",
    "msg": "C4/B4 fixed e374bf3 produce pick_qty [3,6]; test_produce_is_bought_by_the_handful"
+  },
+  {
+   "t": "2026-11-07T12:35:14+10:00",
+   "kind": "fix",
+   "msg": "C4/B5 fixed e374bf3 expansions.json list_bonus e3-e8 +1, Expansions card shows it; test_a_bigger_shop_fills_bigger_baskets"
   }
  ],
  "tests": [
@@ -6221,7 +6227,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:35:11+10:00",
+  "t": "2026-11-07T12:35:14+10:00",
   "mem_free_pct": 55,
   "load": [
    2.6,
@@ -6661,7 +6667,7 @@
   ],
   "total_commits": 271
  },
- "updated": "2026-11-07T12:35:12+10:00",
+ "updated": "2026-11-07T12:35:14+10:00",
  "qa": [
   {
    "num": 1,
