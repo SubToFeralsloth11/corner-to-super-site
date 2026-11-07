@@ -2040,10 +2040,11 @@
      "file": "scripts/world/hygiene.gd:64-65; scripts/ui/hud.gd:59-66; scripts/ui/clipboard.gd:59-95",
      "detail": "No HUD card, clipboard line, PC app or receipt row shows `Game.cleanliness`. Full boxes left on the shop floor while open count −4 each. Three boxes parked by the shelves (a normal Supermarket Simulator habit) bring it to 88 and lose every customer's +4 clean-store bonus, with no feedback at all. Fix: add a \"Clean 88%\" line to the clipboard and a chip on the HUD under 90, with a toast the first time a box on the floor counts against it.",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:27+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "41a2e4a",
+     "note": "HUD 'Clean N%' line; warns below 60",
+     "closed": "2026-11-07T10:20:46+10:00"
     },
     {
      "id": "F10",
@@ -4328,6 +4329,11 @@
    "t": "2026-11-07T10:19:27+10:00",
    "kind": "agent",
    "msg": "Agent CritFirstHour: done findings recorded"
+  },
+  {
+   "t": "2026-11-07T10:20:46+10:00",
+   "kind": "fix",
+   "msg": "C3/F9 fixed 41a2e4a HUD 'Clean N%' line; warns below 60"
   }
  ],
  "tests": [
@@ -4490,17 +4496,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:19:27+10:00",
-  "mem_free_pct": 67,
+  "t": "2026-11-07T10:20:46+10:00",
+  "mem_free_pct": 62,
   "load": [
-   1.85,
-   2.99,
-   3.52
+   2.38,
+   2.87,
+   3.42
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "41a2e4a",
+    "date": "2026-11-07T10:20:44+10:00",
+    "subject": "Show cleanliness under the stars on the HUD, in warning colour once it costs customers (F9)",
+    "body": "",
+    "stat": "1 file changed, 11 insertions(+)"
+   },
    {
     "sha": "18e915f",
     "date": "2026-11-07T10:06:44+10:00",
@@ -4913,19 +4926,12 @@
     "subject": "Make customers shop like people: walking order, complaints at the empty shelf, shared doors",
     "body": "- They walk to an empty labelled slot before complaining, so you can see which shelf is bare (N7).\n- A long list is shopped nearest-first instead of zig-zagging the store (N13).\n- A customer leaving a cooler doesn't shut it on another still reaching in; the job passes on (N16).\n- The walk animation follows the actual movement (no striding on the spot against a wall) (N17).\n- Idle loops start at each person's own phase, so queues don't breathe in step (N19).\n- Customers go home the way they came instead of nearly all leaving east (N20).\n- GDD list length and picking rules brought up to date (N22).\nReview round 2.",
     "stat": "7 files changed, 113 insertions(+), 8 deletions(-)"
-   },
-   {
-    "sha": "d00c8ae",
-    "date": "2026-11-07T08:09:47+10:00",
-    "subject": "Read the start state and level cap from data, show an expansion's full running cost, and warn about short days",
-    "body": "- new_game reads start level, XP and cleanliness from settings.json; the sandbox picker, dev\n  flag and main menu read the level cap from levels.json and the money range from one place;\n  unused customers.json keys removed (E19, N23).\n- The Expansions card shows rent plus lights before and after, not rent alone (E18).\n- Options says shorter days fit fewer customers while bills stay the same (E9).\nReview round 2.",
-    "stat": "5 files changed, 20 insertions(+), 14 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 215
+  "total_commits": 216
  },
- "updated": "2026-11-07T10:19:27+10:00",
+ "updated": "2026-11-07T10:20:46+10:00",
  "qa": [
   {
    "num": 1,
