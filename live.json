@@ -2439,7 +2439,188 @@
    "area": "Cycle 4: visuals and balance",
    "started": "2026-11-07T12:08:35+10:00",
    "finished": null,
-   "findings": []
+   "findings": [
+    {
+     "id": "B1",
+     "sev": "P1",
+     "title": "Stars stop affecting income from about day 6, so every choice that only buys stars is dead",
+     "file": "data/customers.json:5-9,53-55; scripts/npc/customer_spawner.gd:41-50",
+     "detail": "Stars only change the arrival rate (`Game.reputation` is used only in `customer_spawner.gd:50`, the HUD, the paper and head office). Arrivals soon far exceed what the 20-shopper cap lets in. At L16, 3.59 stars: 18.5×0.83×1.5×14.5 ≈ 334 arrivals a day against 127 served on day 30. Even at 1 star it would be 18.5×0.52×1.5×14.5 ≈ 209, still over the cap. Day 7 at 1 star works out to ≈85 against 63 served [INFERENCE: formula]. hours.csv shows the store at 20-26 shoppers from 09:00 to 21:00 on every day from day 14. Effect: price markups, the cleaner, bargains, the promo stand and the \"found everything\" bonus cost nothing and earn nothing. The profit-best markups (+25% to +79%; refusal 11-22% per item, which I computed from products.json) beat +10% by 8-56% profit per unit, and their only cost is stars that do nothing. An SS player soon learns stars are cosmetic. Fix: tie stars to basket size, e.g. a new `list.star_items` = 2 with pivot 3.5, added to `size_bonus` at `customer_spawner.gd:86` and clamped to -2..+3. Optionally scale `refuse_chance` by lerp(1.3, 0.7, (stars-1)/4). Expected: 4.5 stars ≈ +2 items per basket (≈+18% revenue, ≈+$700/day at day 30), 2.5 stars ≈ -2. Gouging then pays for itself in lost stars.",
+     "by": "CritBalance",
+     "status": "open",
+     "found": "2026-11-07T12:18:41+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "B2",
+     "sev": "P1",
+     "title": "Late-game stars are capped near 4.0 because the satisfaction bonuses ignore basket size (what's left of R5 E7)",
+     "file": "scripts/npc/shopper_brain.gd:481,609-616; data/customers.json:86-88",
+     "detail": "`queue_time` keeps counting while the till scans (`:481`), so +5 fast service needs joining the queue to paid in under 20 s. At day 30 that means 11.2 items × 1.2 s (T1 cashier) + 2.4 s card ≈ 16 s even with no queue, so the bonus is gone late. +8 found everything is all or nothing over a list of up to 20 items. Day 29 had 0 out-of-stock and 1.3% price refusals and still ended at only 3.98 stars. Days 1-5 (2-3 item baskets) sat at 4.29-4.34. Players see their rating fall as the store gets bigger and better. Fix: judge fast service on the wait before the first scan (store `queue_time` in `start_service`, `fast_service_s` 20 → 12). Give found everything when at least 90% of wanted units were bought (or scale it, +8×(1−3×misses/list)). Expected: a 0-out-of-stock day late ≈4.3 stars; typical late days 3.6 → about 4.0-4.1.",
+     "by": "CritBalance",
+     "status": "open",
+     "found": "2026-11-07T12:18:41+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "B3",
+     "sev": "P1",
+     "title": "Restockers can't keep up with late-game sales, so the player spends the whole day carrying boxes",
+     "file": "data/staff.json:26-47; scripts/npc/restocker_job.gd:1-8,149-175",
+     "detail": "A restocker takes one box per trip, from racks only, and at most 4 can be hired. At day 30 the store sells 1,424 items ≈ 115 boxes/day (12.4 units per box, pop-weighted from products.json). Rack, inner door (x −14, z −2.2) and back to the shelf is about 46 m. That works out to ≈245 items per open day for a T1 restocker and ≈360 for T3, so 4×T1 ≈ 980 and 4×T3 ≈ 1,450 [INFERENCE: geometry + tier data]. Observed: ≤178 a day from staff. On days 27, 28 and 30 the AI spent 862-912 s on chores and was idle 0 s, and still lost 30-44 items to empty shelves. The player also has to carry every one of the ~115 boxes from the bay to racks that hold 64 boxes in total (8 racks × 8). SS players expect staff to take over stocking by mid-game. Fix: add `carry_boxes` [2,3,4] by tier, same product first. Raise `max` 4 → 6. From T2, idle restockers move bay boxes to free rack spots (this changes GDD §10 line 314). Expected: about 3× items per trip; 4 restockers cover ≈100% of sales by L12, and the player goes back to pricing and building.",
+     "by": "CritBalance",
+     "status": "open",
+     "found": "2026-11-07T12:18:41+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "B4",
+     "sev": "P1",
+     "title": "The Produce licence makes the store poorer: profit per customer pick falls 17%",
+     "file": "data/licences.json:51; data/products.json:451+",
+     "detail": "Customer numbers are fixed by the cap (B1), so income ≈ picks × profit per pick. Produce items earn $0.54-$0.96 each, average $0.69 per pick at +10%, and carry 40 popularity weight. Buying Produce drops the store's average from $2.90 to $2.42 per pick; with every other licence owned it is $3.38 against $4.17 without Produce (−19%). Day 15, when Produce was bought, revenue per item fell from $4.04 to $3.84. Every SS player buys every licence, so this is a trap. Fix: add a per-product `pick_qty` [3,6] for produce (people buy several apples; the code already handles quantities), or raise produce market/cost about 2.5×. Expected: Produce's profit per pick ≈$2.4-$3.0, so the licence is neutral to positive.",
+     "by": "CritBalance",
+     "status": "open",
+     "found": "2026-11-07T12:18:41+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "B5",
+     "sev": "P2",
+     "title": "Expansions E1, E4 and E6 add no extra basket items, so E6 buys nothing",
+     "file": "scripts/npc/customer_rules.gd:52-54; data/customers.json:65",
+     "detail": "`(cells - 6) / 9` uses integer division: after E1 = 0, E3 = 1, E4 = 1, E5 = 2, E6 = 2, E7 = 3, E8 = 4. E6 ($4,000, +$30 rent/day) was bought on day 29: revenue went $7,271 → $7,206 → $7,313, i.e. flat. Fix: give each expansion its own `list_bonus` in expansions.json (e3 to e8 +1 each) and add those up in `size_bonus`. Show \"+1 item per basket\" on the Expansions card. Expected: each of E4 and E6 adds ≈+9% revenue (≈+$350/day at day 30).",
+     "by": "CritBalance",
+     "status": "open",
+     "found": "2026-11-07T12:18:41+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "B6",
+     "sev": "P2",
+     "title": "The receipt's \"Another till lets more people in\" advice is false once the cap is 20",
+     "file": "scripts/ui/day_summary.gd:133-135",
+     "detail": "The hint shows whenever anyone was turned away. `min(20, 4·tills + L/2)` is already 20 at L8 with 4 tills and at L16 with 3, so tills 5-6 (or 4 at L16) let nobody extra in. Late days turn away ≈200 people (B1), so the warning shows every night and points players at $800 tills plus $90/day cashiers that add no customers. Fix: show the hint only when `max_concurrent(tills+1, level) > max_concurrent(tills, level)` and tills < 6. Otherwise say the store is at its 20-shopper limit and that faster tills and full shelves move people through quicker.",
+     "by": "CritBalance",
+     "status": "open",
+     "found": "2026-11-07T12:18:41+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "B7",
+     "sev": "P2",
+     "title": "No lunch or evening rush late: the cap flattens the time-of-day curve",
+     "file": "data/customers.json:10-41; /tmp/cts_soak_late/hours.csv",
+     "detail": "Days 14-30 hold 20-26 shoppers from 09:00 to 21:00 even though the curve runs 0.6 to 1.6×. There are no quiet hours to restock in and no rushes to prepare for, both of which drive SS's day rhythm. Fix: scale the cap by the curve, e.g. `cap_now = max(6, round(cap × min(1, curve × 0.75)))` (morning ≈9, midday 15, rushes 20). Expected: visible rushes, quiet windows that ease B3, fewer NPCs off-peak; ≈−10-12% customers, made up by B1/B5 basket gains.",
+     "by": "CritBalance",
+     "status": "open",
+     "found": "2026-11-07T12:18:41+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "B8",
+     "sev": "P2",
+     "title": "The 40-customer star window makes the rating swing from day to day",
+     "file": "data/customers.json:113; scripts/autoload/game.gd:918-925",
+     "detail": "Late days serve 122-134 customers, so the stars reflect the last ~3 game hours. End-of-day stars went 3.47 → 3.98 → 3.59 on days 28-30. The head-office payment (reputation at Sunday close × $1,000) is a lottery worth about ±$400 a week. Fix: window = clamp(yesterday's customers, 40, 150), or a moving average with weight 1/100. Expected: day-to-day swing ≈±0.1 and steady weekly payouts.",
+     "by": "CritBalance",
+     "status": "open",
+     "found": "2026-11-07T12:18:41+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "B9",
+     "sev": "P2",
+     "title": "Too much cash late with nothing to spend it on, and bills are trivial",
+     "file": "data/expansions.json:149+; data/upgrades.json",
+     "detail": "Day 30: $10,094 cash, $3,883/day net; bills are $1,076, 15% of revenue. Everything left to buy (E7 $5.5k, E8 $7.5k, deli $1.5k, loyalty $3k, head office $6k, staff tiers ≈$7k, extra fixtures and tills) ≈$35k, all affordable by about day 37 [INFERENCE]. After that money has no use. Fix: with B5's basket bonus, raise E6, E7 and E8 to $6k/$9k/$14k (still paying back in ~3-4 weeks at +$350-450/day), and add one recurring sink with a real effect, e.g. a staff T4 tier or self-checkout kiosks. Expected: cash at day 30 around $2-5k and E8 still a goal.",
+     "by": "CritBalance",
+     "status": "open",
+     "found": "2026-11-07T12:18:41+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "B10",
+     "sev": "P2",
+     "title": "The Expansion loan is never worth taking",
+     "file": "data/loans.json:23-30",
+     "detail": "$20,000 at L10 for $575/day, 41% of the day-16 profit ($1,406). The most expensive single purchase in the game is E8 at $7,500, so there is nothing to borrow it for; the AI never took it and the Business loan covers every pinch. Fix: move it to L13, make it $10,000 over 30 days, and pair it with B9's E7/E8 repricing. Expected: borrowing becomes the natural way to bring E8 forward to about day 28.",
+     "by": "CritBalance",
+     "status": "open",
+     "found": "2026-11-07T12:18:41+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "B11",
+     "sev": "P2",
+     "title": "Loyalty cards ($3,000) earn nothing",
+     "file": "data/upgrades.json:11-16",
+     "detail": "+3 satisfaction ≈ +0.15 stars. Stars don't move customers (B1), so the only return is head office's $1,000/star/week ≈ $150 a week, which takes 20 weeks to pay back and $0 without head office. It is the only unlock at L13. Fix: give it a basket effect (`list_bonus` +1 for members, i.e. +1 item per basket), or make it +3 satisfaction plus +1 item. Expected: about +$430/day at day 30 and roughly a 7-day payback.",
+     "by": "CritBalance",
+     "status": "open",
+     "found": "2026-11-07T12:18:41+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "B12",
+     "sev": "P2",
+     "title": "Levels 7 and 11 only unlock stockroom stages, and restockers arrive later than the stocking work",
+     "file": "data/expansions.json:252,261; data/staff.json:26",
+     "detail": "L7 = S2 + a colour; L11 = S3 + a colour. Racks only matter once restockers exist (L9), yet the AI was already hand-stocking 318-453 items/day at L7-8 (days 11-14) and 1,510 on the first L9 day. Fix: restocker L9 → L7 (paired with S2), Loyalty L13 → L11, Expansion loan L10 → L13 (B10). Expected: every level from 2 to 16 has a gameplay unlock, and help with stocking comes when the workload rises.",
+     "by": "CritBalance",
+     "status": "open",
+     "found": "2026-11-07T12:18:41+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "B13",
+     "sev": "P2",
+     "title": "The first week drags: nothing new is affordable until day 6",
+     "file": "data/levels.json:5-7; data/fixtures.json (dairy_multideck price 50000)",
+     "detail": "Day 2 is the worst day of the run ($49.92 against day 1's $75.42) and still no level 2 (472/500 XP). Dairy unlocks at L2 on day 3, but licence plus multideck cost $750 against $337 cash; the AI could only buy it on day 6 with a loan. The AI was idle 172-447 s a day on days 1-5. SS players expect a first purchase within the first two days. Fix: `total_xp[1]` 500 → 350 (L2 on day 2) and dairy_multideck $500 → $300 (licence + fridge $550, affordable on day 4 without a loan). Expected: a goal and a new product line during days 2-4.",
+     "by": "CritBalance",
+     "status": "open",
+     "found": "2026-11-07T12:18:41+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "B14",
+     "sev": "P2",
+     "title": "The soak AI's habits make the late-game numbers unreliable",
+     "file": "tests/soak_player.gd:5-8,680-743",
+     "detail": "It hires exactly one restocker, racks only one spare box per product (restockers sit idle and stocked 20-178 items/day), and shelves everything itself. It never buys an upgrade (no call to `Game.buy_upgrade`; phone, loyalty and head office are untested), never upgrades staff tiers, and prices at +10%. So the \"staff restock ~345 against AI 1,300\" split, the stars and late cash describe the AI, not the game. Fix: hire restockers up to `max` once chores exceed 50% of open time; rack every delivered box before shelving; buy upgrades and staff tiers by payback; add a +30% pricing variant. Expected: the soak measures B1-B3 directly.",
+     "by": "CritBalance",
+     "status": "open",
+     "found": "2026-11-07T12:18:41+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "B15",
+     "sev": "P3",
+     "title": "days.csv columns shift when two loans are active, and lost_oos includes not-stocked items",
+     "file": "tests/soak.gd:261,272",
+     "detail": "`\",\".join(loans)` goes into an unquoted `%s`, so on days 15-24 (\"small,business\") every later column moves one place to the right: a plain CSV reader takes `restocked` as `staff_restocked`, `bills` as wrong values, and so on (I confirmed this by parsing). `lost_o` also adds `not_carried` to `out_of_stock` under the `lost_oos` header. Fix: join loans with \" \" (as expansions are) or quote the field; write separate `lost_oos` and `lost_not_carried` columns.",
+     "by": "CritBalance",
+     "status": "open",
+     "found": "2026-11-07T12:18:41+10:00",
+     "commit": "",
+     "note": ""
+    }
+   ]
   }
  ],
  "log": [
@@ -5127,6 +5308,86 @@
    "t": "2026-11-07T12:10:37+10:00",
    "kind": "shots",
    "msg": "Screenshots refreshed: 56 images After cycle 3 (shed doorway, Market tabs, real-size snacks)"
+  },
+  {
+   "t": "2026-11-07T12:18:41+10:00",
+   "kind": "finding",
+   "msg": "C4/B1 [P1] Stars stop affecting income from about day 6, so every choice that only buys stars is dead"
+  },
+  {
+   "t": "2026-11-07T12:18:41+10:00",
+   "kind": "finding",
+   "msg": "C4/B2 [P1] Late-game stars are capped near 4.0 because the satisfaction bonuses ignore basket size (what's left of R5 E7)"
+  },
+  {
+   "t": "2026-11-07T12:18:41+10:00",
+   "kind": "finding",
+   "msg": "C4/B3 [P1] Restockers can't keep up with late-game sales, so the player spends the whole day carrying boxes"
+  },
+  {
+   "t": "2026-11-07T12:18:41+10:00",
+   "kind": "finding",
+   "msg": "C4/B4 [P1] The Produce licence makes the store poorer: profit per customer pick falls 17%"
+  },
+  {
+   "t": "2026-11-07T12:18:41+10:00",
+   "kind": "finding",
+   "msg": "C4/B5 [P2] Expansions E1, E4 and E6 add no extra basket items, so E6 buys nothing"
+  },
+  {
+   "t": "2026-11-07T12:18:41+10:00",
+   "kind": "finding",
+   "msg": "C4/B6 [P2] The receipt's \"Another till lets more people in\" advice is false once the cap is 20"
+  },
+  {
+   "t": "2026-11-07T12:18:41+10:00",
+   "kind": "finding",
+   "msg": "C4/B7 [P2] No lunch or evening rush late: the cap flattens the time-of-day curve"
+  },
+  {
+   "t": "2026-11-07T12:18:41+10:00",
+   "kind": "finding",
+   "msg": "C4/B8 [P2] The 40-customer star window makes the rating swing from day to day"
+  },
+  {
+   "t": "2026-11-07T12:18:41+10:00",
+   "kind": "finding",
+   "msg": "C4/B9 [P2] Too much cash late with nothing to spend it on, and bills are trivial"
+  },
+  {
+   "t": "2026-11-07T12:18:41+10:00",
+   "kind": "finding",
+   "msg": "C4/B10 [P2] The Expansion loan is never worth taking"
+  },
+  {
+   "t": "2026-11-07T12:18:41+10:00",
+   "kind": "finding",
+   "msg": "C4/B11 [P2] Loyalty cards ($3,000) earn nothing"
+  },
+  {
+   "t": "2026-11-07T12:18:41+10:00",
+   "kind": "finding",
+   "msg": "C4/B12 [P2] Levels 7 and 11 only unlock stockroom stages, and restockers arrive later than the stocking work"
+  },
+  {
+   "t": "2026-11-07T12:18:41+10:00",
+   "kind": "finding",
+   "msg": "C4/B13 [P2] The first week drags: nothing new is affordable until day 6"
+  },
+  {
+   "t": "2026-11-07T12:18:41+10:00",
+   "kind": "finding",
+   "msg": "C4/B14 [P2] The soak AI's habits make the late-game numbers unreliable"
+  },
+  {
+   "t": "2026-11-07T12:18:41+10:00",
+   "kind": "finding",
+   "msg": "C4/B15 [P3] days.csv columns shift when two loans are active, and lost_oos includes not-stocked items"
+  },
+  {
+   "t": "2026-11-07T12:18:41+10:00",
+   "kind": "agent",
+   "msg": "Agent CritBalance: done 15 balance findings (4 P1)"
   }
  ],
  "tests": [
@@ -5319,15 +5580,20 @@
    "state": "done",
    "task": "L9, L17, L18, L19 fixed; suite 1213/0",
    "t": "2026-11-07T12:08:35+10:00"
+  },
+  "CritBalance": {
+   "state": "done",
+   "task": "15 balance findings (4 P1)",
+   "t": "2026-11-07T12:18:41+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T12:10:37+10:00",
-  "mem_free_pct": 49,
+  "t": "2026-11-07T12:18:41+10:00",
+  "mem_free_pct": 65,
   "load": [
-   3.04,
-   3.29,
-   3.13
+   2.93,
+   2.69,
+   2.83
   ],
   "godot_procs": 0
  },
@@ -5757,7 +6023,7 @@
   "dirty": [],
   "total_commits": 251
  },
- "updated": "2026-11-07T12:10:38+10:00",
+ "updated": "2026-11-07T12:18:42+10:00",
  "qa": [
   {
    "num": 1,
