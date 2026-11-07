@@ -2619,6 +2619,306 @@
      "found": "2026-11-07T12:18:41+10:00",
      "commit": "",
      "note": ""
+    },
+    {
+     "id": "V1",
+     "sev": "P1",
+     "title": "The screenshot tour uses the developer's Low preset, so the c3 shots don't show the default look",
+     "file": "tests/screenshot_tour.gd (does not set the preset) + ~/Library/Application Support/Godot/app_userdata/Corner to Super/settings.cfg (`graphics=\"low\"`, `fov=79.0`); 89_f3_overlay.png shows \"Graphics Low\"; 82_menu_options.png has Low selected",
+     "detail": "Every c3 picture was rendered with SSAO, SSIL, SSR, glow and fog off and the 0.7 bilinear+FXAA scale. That is why the interior looks flat, blurry and has no floor reflections (03, 05, 16, 21, 32). VISUALS.md says the tour checks the look at Medium (default) or High. Fix: at the start of the tour, set `Settings.graphics = Settings.DEFAULT_GRAPHICS` (or \"high\" for the VISUALS shots) and `fov = 75` in memory without calling `_store`, re-apply `Lighting.apply_quality`, and write the preset into perf.txt. Each lighting finding below says whether it depends on the preset.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V2",
+     "sev": "P1",
+     "title": "The UI is designed at 1920x1080, so in the default 1280x720 window it shrinks to 0.667 and secondary text is 9–11 px",
+     "file": "project.godot:24-28 (viewport 1920x1080, window 1280x720, canvas_items) · hud.gd:85,98,171,188 · change_panel.gd:48,58,68 · clipboard.gd:156 (`_note` 15) · app_market.gd:255-257 (13 px)",
+     "detail": "Seen in 01 (\"Clean 100%\" / \"Level 1\" about 9 px), 23 (\"CASH\", \"Drawer: click to take one\"), 87 (tutorial list and range note) and 12 (Market card details). The default window is 1280x720 (VISUALS.md), so this is what most players see. Fix: either set viewport_width/height to 1280x720 and rescale the hard-coded offsets, or keep 1080p and make the smallest UI size 20 at 1080 (13 px at 720). Simplest broad fix: in main.gd, when the window is 900 px tall or less, set `get_window().content_scale_factor = 1.2`.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V3",
+     "sev": "P1",
+     "title": "ShopOS and other unshaded in-world UI are dulled by the AgX tonemapper (white shows as grey, store green as grey-green)",
+     "file": "pc_desk.gd:41-46 (unshaded `albedo_texture = os.get_texture()`) + lighting.gd:44-46 (AgX, white 6) · 12_pc_market.png: PAPER window sampled (204,204,205); dock \"Market\" button (159,184,167) where #2FA866 is (47,168,102) · same in 35, 40, 41",
+     "detail": "The PC, where the player spends minutes at a time, looks like a dim, washed-out screen. Fix: in `PcDesk.focus()`, switch `Lighting.env.tonemap_mode` to `TONE_MAPPER_LINEAR` and `adjustment_enabled` to false, and restore both in `unfocus()`. Better: once the camera ease finishes, draw `os.get_texture()` in a full-screen-mapped TextureRect on a CanvasLayer and hide the 3D quad, which skips tonemapping and blur completely.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V4",
+     "sev": "P2",
+     "title": "Disabled filled buttons show no label at all",
+     "file": "ui_kit.gd:64-79 (`disabled` background = `base.lerp(0.85 grey, 0.7)`, text = `white.lerp(grey, 0.5)`) · 35_bank_app.png (three blank loan buttons, sampled (164,183,174)) · 37_game_over.png (\"Load last save\" is an empty mint bar) · 40 (blank \"Needs level 3\" Order buttons)",
+     "detail": "The text is about 0.75 grey on a 0.65 grey fill, roughly 1.2:1 contrast. The player sees a blank pill and can't tell what it would do. Fix: for filled buttons set `font_disabled_color = Color(0.25,0.27,0.3,0.75)` (dark text on the washed fill), or keep the accent fill at 45% alpha with white text.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V5",
+     "sev": "P2",
+     "title": "The light-card grey (UiKit.MUTED) is used for captions on dark glass cards",
+     "file": "change_panel.gd:48,58,68 · card_keypad.gd:30 · 23_v5_checkout_change_panel.png: \"CASH\" sampled ~(78,85,97) on (20,22,26), about 2.4:1 · 24 (\"CARD · type the total\" barely visible)",
+     "detail": "MUTED is documented as \"secondary text on light cards\". Fix: add `UiKit.MUTED_ON_GLASS := Color(0.68,0.71,0.76)` and use it in both panels.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V6",
+     "sev": "P2",
+     "title": "The aim prompt has no background and uses Godot's default font",
+     "file": "prompt.gd:33-41 (bare Label with no font override; project.godot has no `gui/theme/custom_font`) · 10 (white text on the white cooler, background (194,199,205)) · 17 (three lines across the red and green cans) · 49",
+     "detail": "Prompts are the most-read text in the game and they get lost over stock and white fixtures. They are also in a different typeface from the rest of the UI. Fix: put the prompt label in a PanelContainer with `UiKit.glass_style(8)` (bg alpha about 0.6, margins 8/14) and give it `UiKit.SANS`. Also set `gui/theme/custom_font=\"res://assets/fonts/archivo_ui.tres\"` so CheckButtons and other theme-less controls use Archivo too.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V7",
+     "sev": "P2",
+     "title": "The seated-till hint is tiny white text with no outline over the bright blurred store",
+     "file": "checkout.gd:153-156 (16 px at 0.9 alpha, about 10.7 px at 720p) · 23/24: background behind the hint sampled (173,170,158)",
+     "detail": "The one line that explains how to serve at the till can't be read. Fix: same pill as V6 (glass background, 18–20 px), or at least add `outline_size 6` with the prompt's outline colour.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V8",
+     "sev": "P2",
+     "title": "The Market and Furniture windows are wider than the 1280 px ShopOS screen and run off its right edge",
+     "file": "app_furniture.gd:26-27,79 (4 columns × 268 px cards that grow to about 298) · app_market.gd:57-58,238,279 (4 × about 222 px cards + 330 px cart) · shop_os.gd:176-179 (windows set to 1200 px but grow to their minimum width)",
+     "detail": "In 40, \"Close\" is cut to \"Clos\" and the right-hand Order buttons touch the screen edge. In 12, the cart's \"free\" column sits against the edge. The Expansions window (41) fits, so window widths don't match from app to app. Fix: use 3 Furniture columns (or 240 px cards), set Market cards to a 180 px minimum and the cart to 300 px, and set `clip_contents` on the window.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V9",
+     "sev": "P2",
+     "title": "Toasts and the level-up banner draw over ShopOS while you sit at the PC",
+     "file": "toast.gd:19-31 (layer 6, not in the `hud` group) · level_banner.gd:20 (layer 7) · pc_desk.gd:107 (hides only `hud`) · 40/41: the toast covers the \"My Store\" dock button and the banner covers the app header",
+     "detail": "The PC hides the HUD so ShopOS is clear, but toasts still pile onto the dock. Fix: while the PC is focused, move the toast box above the dock (`offset_bottom -= dock height`) or route toasts to a ShopOS notification line. Delay the level banner until `unfocus`, or shrink it to a ShopOS top-bar flash.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V10",
+     "sev": "P2",
+     "title": "Speech bubbles are flat washed-out grey squares with no tail, and they get huge up close",
+     "file": "bark.gd:9-16 (pastel tones), 41-47 (unshaded quad, which AgX dulls), 74-77 (world-size quad) · 22: the \"Bargain!\" card sampled (190,202,192), so the praise tone can't be told from neutral · 84: Dale's bubble is 380 px wide over the sky and floats well above his head",
+     "detail": "VISUALS.md wants red for complaints and green for praise. Here the colour signal is gone and it's unclear who is speaking. Fix: use saturated fills (praise #2FA866 and complaint #E8654A with white text, neutral white), a rounded 9-patch texture with a tail pointing down, and a bubble anchored about 0.25 m above the head. Clamp the on-screen size by scaling with distance, or draw bubbles in 2D with `camera.unproject_position`.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V11",
+     "sev": "P2",
+     "title": "The red \"can't place here\" slot glow is nearly invisible on white fixtures",
+     "file": "player.gd:117-122 (`BLEND_MODE_ADD`), 640 (alpha 0.16 / 0.18) · 19_box_at_cooler_red.png: only a faint pink smear on the cooler shelf with no edges, while green in 18 shows edges on the darker pegboard",
+     "detail": "Adding red to near-white stays near-white, so the main stocking feedback fails on coolers and freezers. Fix: switch to `BLEND_MODE_MIX` at alpha 0.3, and add an edge outline (a second box mesh in wireframe, or a ShaderMaterial that draws only the edges at alpha 0.9).",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V12",
+     "sev": "P2",
+     "title": "On the Options and change-panel toggles, \"off\" is an invisible dot and \"on\" isn't store green",
+     "file": "options.gd:140-144 · change_panel.gd:74-77 (default-theme CheckButton) · app_market.gd:192 · 82_menu_options.png crop: \"Invert mouse Y\" and \"Fullscreen\" show only a 6 px grey dot, \"Head bob\" a grey pill",
+     "detail": "Players can't tell these are switches, or what state they're in. Fix: add a `UiKit.toggle()` that sets `checked`/`unchecked`/`checked_disabled` icons to drawn switch textures (green track for on, grey track with a light border for off) and use it in all three places.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V13",
+     "sev": "P2",
+     "title": "During the tutorial the clipboard runs off the bottom of the screen",
+     "file": "clipboard.gd:24-30 (centred, no scroll or maximum height), 77-79 (re-centre only) · 87_clipboard_tutorial.png: the sheet starts at y≈130 and \"Bills tonight / Total\" is cut at y≈715. Running low and the sheet's bottom edge are off-screen",
+     "detail": "On day 1, the screen where the clipboard matters most, the sheet doesn't fit. Fix: wrap `_body` in a ScrollContainer capped at `viewport_h - 80`, or show done tutorial steps as one \"✓ n done\" line and only the current and next steps in full.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V14",
+     "sev": "P2",
+     "title": "Gondola end panels are big blank glossy slabs that pick up blurry smears of nearby stock",
+     "file": "shelf_gondola_2m.glb `GondolaFrame` (textured, low roughness) + lighting.gd:126-134 (box-projected probes) · 80_main_menu crop: a red smear across the right end panel · 05: grey-black smudges · 85: a featureless grey wall fills the view",
+     "detail": "This is the most-seen surface in the store, and it looks dirty and cheap. Supermarket Simulator dresses the ends of its shelves. Fix: give `GondolaFrame` roughness 0.65 and metallic 0 (in Fixture setup, or in the glb), and put a printed end-cap panel on each end (a QuadMesh with a store-green header and category art, using the generated aisle-sign texture).",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V15",
+     "sev": "P2",
+     "title": "The interior is a bare white box with no décor, and the first thing you see inside the door is the end of a shelf",
+     "file": "building.gd:203-224 (`_wall` adds only plaster, wainscot, rail and skirting) · settings.json start fixtures (gondola end facing the entrance; seen in 02/03) · 03, 05, 17, 21: empty white walls above the wainscot",
+     "detail": "VISUALS.md wants colourful packaging against clean surfaces, but a level-1 store is about 80% blank wall. Fix: add generated wall graphics above the wainscot, one every 4 m span (category banners, \"Fresh every day\" or the store logo), plus a welcome banner over the inside of the entrance. Turn the starting gondola 90° so a long stocked side faces the door.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V16",
+     "sev": "P2",
+     "title": "The day summary appears all at once instead of printing line by line (missing VISUALS juice)",
+     "file": "day_summary.gd:75-82 (`show_report` → `_fill()` builds every row instantly, plays only `chime`) · grep: `receipt_print` is played only in checkout.gd:847 · 33_day_summary.png",
+     "detail": "VISUALS.md says the summary \"prints line by line (with `receipt_print` sound), then bills section, then the Next day button\". Fix: in `_fill()`, add the rows hidden, then reveal one every 0.05–0.08 s with a short slide-down, play `receipt_print` once at the start, and enable Pay all / Next day when the last row is in. Skip to the end on any click or Enter.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V17",
+     "sev": "P2",
+     "title": "Numbers on the receipt touch the scrollbar, and the dashed rules stop short of the column",
+     "file": "day_summary.gd:50-56 (ScrollContainer straight inside the paper) · 33 crop: \"$186.40\", \"14\", \"Level 2\" butt against the scrollbar; the dashed rules end about 50 px before the numbers",
+     "detail": "It looks broken on the end-of-day screen. Fix: put `_rows` in a MarginContainer with `margin_right = 14`, give the scrollbar a thin custom style, and make `_rule()` full-width.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V18",
+     "sev": "P2",
+     "title": "Shelf price labels can't be read from normal shopping distance",
+     "file": "price_label.gd:9 (card 0.11×0.05 m), 34-35 (price 64 × 0.0005 = 32 mm tall) · 16 crop: the labels are 6–8 px white smudges at about 2.5 m · 17 and 49: the cooler and freezer prices are scribbles",
+     "detail": "At 720p and FOV 75–79, 32 mm digits are about 5 px tall at 2.5 m. Supermarket Simulator's tags read at a glance. [Shots are at Low/0.7 scale; Medium is unverified but only about 15% sharper.] Fix: SIZE 0.15×0.07, price font 88, name 26 (TEXT_RANGE as now), and `shaded = false` on the price Label3D so it isn't darkened under the shelf above.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V19",
+     "sev": "P2",
+     "title": "Outside, the plot sits in an endless dead-brown field",
+     "file": "outside.gd:90-99 (700 m `sparse_grass` plane tinted (0.78,0.82,0.62)), 186-189 (only 3 house backs behind and 4 at the sides) · 01, 13, 14, 15, 46: brown plain and chain-link to the horizon behind and beside the store, with the store a small box in a huge empty car park",
+     "detail": "VISUALS.md says \"never a void\". This reads as a rural depot, not a suburban corner store. Fix: limit the green-tinted grass, around (0.55,0.72,0.42), to the verges and yards. Line the back and side fences with continuous house backs and gum-tree rows (repeat `_facade` and tree rows every 13 m to x ±80). Replace the far plane with a tree line or low hills so it doesn't run to the horizon.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V20",
+     "sev": "P3",
+     "title": "The verge trees are blocky cube clusters with stretched leaf texture",
+     "file": "outside.gd:37 (`tree_verge_a`/`_b`), 329-332 · 01 (the main tree in the hero exterior shot), 07, 30",
+     "detail": "They clash with the PBR cars, façades and eucalyptus shrubs. VISUALS.md aims to be more realistic than Supermarket Simulator. Fix: swap in an alpha-card foliage gum tree (Poly Haven, or a Blender `tools/` build in the style of the shrubs) and keep the trunk collider.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V21",
+     "sev": "P3",
+     "title": "The knock-through debris is plain white tiles that ignore the wall's real surfaces",
+     "file": "expansion.gd:47-58 (every chunk is a plaster `Mk.deco` box at 3 fixed heights), 71-78 · 42_knock_through.png crop: white sheets hanging over the back of the store; no grey wainscot band, no brick on the outer face, no visible dust",
+     "detail": "The expansion is a big moment, and it looks like a rendering glitch. Fix: make the bottom row (y < 1.2) wainscot grey and give the outward face of each chunk the `_brick` material (two-material boxes). Use random 0.4–0.9 m pieces that tumble with some sideways velocity, add a dust puff per piece column (not every 6th), and leave rubble decals that fade over 3 s.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V22",
+     "sev": "P3",
+     "title": "Coolers and freezers have no interior spot light (VISUALS lighting spec)",
+     "file": "No `SpotLight3D` anywhere in scripts/ or scenes (grep); lights exist only in building.gd:415 and stockroom.gd:176 · 10/17: cans in the cooler are lit flat like the room, with no case glow",
+     "detail": "VISUALS.md: \"one small SpotLight3D per fixture pointing into the case (no shadow) so products inside glow.\" Fix: in Fixture setup for kinds cooler, upright freezer and multideck, add a shadowless SpotLight3D under the header (energy about 1.5, range 2.5, angle 55°, cool white). It fits the ≤40-lights budget.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V23",
+     "sev": "P3",
+     "title": "Two different greens clash at the front, and the feature wall stops mid-wall with a hard edge",
+     "file": "building.gd:278-306 (green spans only `footprint/2 + 1` m either side of the till) · the storefront glazing header slot is teal · 04 and 06: the teal band over the windows meets the #2FA866 feature wall at the corner, and the green ends abruptly about 1/3 short of the wall's end",
+     "detail": "Fix: run the feature wall corner to corner on its wall (or end it at a trim strip), and recolour the glazing header to STORE_GREEN with `StoreLook._paint` on its slot.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V24",
+     "sev": "P3",
+     "title": "The ShopOS dock is nine identical green text buttons with no icons and no open-app state",
+     "file": "shop_os.gd:146-153 · 12, 35, 40: you can't tell which app is open at a glance; the logo wallpaper is always hidden because Market opens on sit-down",
+     "detail": "VISUALS.md asks for a \"dock of app icons\". Fix: an icon above a 14 px label (generated glyphs or pictograms in assets/ui), a white-filled style for the open app set in `open_app`/`close_app`, and show the desktop wallpaper for 0.3 s before Market opens.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "V25",
+     "sev": "P3",
+     "title": "The main menu doesn't highlight the button for the page that's open",
+     "file": "main_menu.gd:196-200 (`_menu_button` has no selected state) · 82_menu_controls / 82_menu_options / 82_menu_credits: all seven buttons stay identical while a panel is open",
+     "detail": "Fix: in `show_page`, give the matching button a GREEN accent stylebox and reset it in `close_page`.",
+     "by": "CritVisual",
+     "status": "open",
+     "found": "2026-11-07T12:19:11+10:00",
+     "commit": "",
+     "note": ""
     }
    ]
   }
@@ -5388,6 +5688,136 @@
    "t": "2026-11-07T12:18:41+10:00",
    "kind": "agent",
    "msg": "Agent CritBalance: done 15 balance findings (4 P1)"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V1 [P1] The screenshot tour uses the developer's Low preset, so the c3 shots don't show the default look"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V2 [P1] The UI is designed at 1920x1080, so in the default 1280x720 window it shrinks to 0.667 and secondary text is 9–11 px"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V3 [P1] ShopOS and other unshaded in-world UI are dulled by the AgX tonemapper (white shows as grey, store green as grey-green)"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V4 [P2] Disabled filled buttons show no label at all"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V5 [P2] The light-card grey (UiKit.MUTED) is used for captions on dark glass cards"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V6 [P2] The aim prompt has no background and uses Godot's default font"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V7 [P2] The seated-till hint is tiny white text with no outline over the bright blurred store"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V8 [P2] The Market and Furniture windows are wider than the 1280 px ShopOS screen and run off its right edge"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V9 [P2] Toasts and the level-up banner draw over ShopOS while you sit at the PC"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V10 [P2] Speech bubbles are flat washed-out grey squares with no tail, and they get huge up close"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V11 [P2] The red \"can't place here\" slot glow is nearly invisible on white fixtures"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V12 [P2] On the Options and change-panel toggles, \"off\" is an invisible dot and \"on\" isn't store green"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V13 [P2] During the tutorial the clipboard runs off the bottom of the screen"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V14 [P2] Gondola end panels are big blank glossy slabs that pick up blurry smears of nearby stock"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V15 [P2] The interior is a bare white box with no décor, and the first thing you see inside the door is the end of a shelf"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V16 [P2] The day summary appears all at once instead of printing line by line (missing VISUALS juice)"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V17 [P2] Numbers on the receipt touch the scrollbar, and the dashed rules stop short of the column"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V18 [P2] Shelf price labels can't be read from normal shopping distance"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V19 [P2] Outside, the plot sits in an endless dead-brown field"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V20 [P3] The verge trees are blocky cube clusters with stretched leaf texture"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V21 [P3] The knock-through debris is plain white tiles that ignore the wall's real surfaces"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V22 [P3] Coolers and freezers have no interior spot light (VISUALS lighting spec)"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V23 [P3] Two different greens clash at the front, and the feature wall stops mid-wall with a hard edge"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V24 [P3] The ShopOS dock is nine identical green text buttons with no icons and no open-app state"
+  },
+  {
+   "t": "2026-11-07T12:19:11+10:00",
+   "kind": "finding",
+   "msg": "C4/V25 [P3] The main menu doesn't highlight the button for the page that's open"
+  },
+  {
+   "t": "2026-11-07T12:19:12+10:00",
+   "kind": "agent",
+   "msg": "Agent CritVisual: done visual findings recorded"
   }
  ],
  "tests": [
@@ -5585,15 +6015,20 @@
    "state": "done",
    "task": "15 balance findings (4 P1)",
    "t": "2026-11-07T12:18:41+10:00"
+  },
+  "CritVisual": {
+   "state": "done",
+   "task": "visual findings recorded",
+   "t": "2026-11-07T12:19:12+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T12:18:41+10:00",
+  "t": "2026-11-07T12:19:12+10:00",
   "mem_free_pct": 65,
   "load": [
-   2.93,
-   2.69,
-   2.83
+   2.44,
+   2.59,
+   2.79
   ],
   "godot_procs": 0
  },
@@ -6023,7 +6458,7 @@
   "dirty": [],
   "total_commits": 251
  },
- "updated": "2026-11-07T12:18:42+10:00",
+ "updated": "2026-11-07T12:19:12+10:00",
  "qa": [
   {
    "num": 1,
