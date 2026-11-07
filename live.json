@@ -2590,10 +2590,11 @@
      "file": "data/expansions.json:252,261; data/staff.json:26",
      "detail": "L7 = S2 + a colour; L11 = S3 + a colour. Racks only matter once restockers exist (L9), yet the AI was already hand-stocking 318-453 items/day at L7-8 (days 11-14) and 1,510 on the first L9 day. Fix: restocker L9 → L7 (paired with S2), Loyalty L13 → L11, Expansion loan L10 → L13 (B10). Expected: every level from 2 to 16 has a gameplay unlock, and help with stocking comes when the workload rises.",
      "by": "CritBalance",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:18:41+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "3a01935",
+     "note": "restocker L7, loyalty L11 (loan L13 in B10); test_every_level_unlocks_something_to_play_with",
+     "closed": "2026-11-07T12:48:11+10:00"
     },
     {
      "id": "B13",
@@ -6114,6 +6115,11 @@
    "t": "2026-11-07T12:48:08+10:00",
    "kind": "fix",
    "msg": "C4/B11 fixed 4bde2d4 loyalty effect list_bonus +1; test_loyalty_members_fill_bigger_baskets"
+  },
+  {
+   "t": "2026-11-07T12:48:11+10:00",
+   "kind": "fix",
+   "msg": "C4/B12 fixed 3a01935 restocker L7, loyalty L11 (loan L13 in B10); test_every_level_unlocks_something_to_play_with"
   }
  ],
  "tests": [
@@ -6324,14 +6330,14 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:48:08+10:00",
+  "t": "2026-11-07T12:48:11+10:00",
   "mem_free_pct": 54,
   "load": [
    3.69,
    3.0,
    2.64
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
@@ -6761,7 +6767,7 @@
   ],
   "total_commits": 285
  },
- "updated": "2026-11-07T12:48:09+10:00",
+ "updated": "2026-11-07T12:48:11+10:00",
  "qa": [
   {
    "num": 1,
