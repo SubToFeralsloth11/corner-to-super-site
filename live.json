@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixLate: L16 rebake during OPEN builds",
+  "activity": "FixLate: L1 restock-to-full counts stock on the way",
   "cycle": "3",
-  "since": "2026-11-07T11:20:41+10:00"
+  "since": "2026-11-07T11:21:45+10:00"
  },
  "rounds": [
   {
@@ -4999,6 +4999,11 @@
    "t": "2026-11-07T11:21:42+10:00",
    "kind": "fix",
    "msg": "C3/L16 fixed 2c4a4cd BuildMode.place/sell call world.layout_changed() when StaffCrew.shift_on() (PREP-CLOSING). build_test: shelf moved during OPEN, still in build mode -> navmesh clear of its footprint (before: walkable point at its centre)."
+  },
+  {
+   "t": "2026-11-07T11:21:45+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixLate: L1 restock-to-full counts stock on the way"
   }
  ],
  "tests": [
@@ -5177,12 +5182,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:21:42+10:00",
+  "t": "2026-11-07T11:21:45+10:00",
   "mem_free_pct": 52,
   "load": [
-   2.21,
-   2.15,
-   2.29
+   2.11,
+   2.13,
+   2.28
   ],
   "godot_procs": 0
  },
@@ -5612,7 +5617,7 @@
   "dirty": [],
   "total_commits": 246
  },
- "updated": "2026-11-07T11:21:43+10:00",
+ "updated": "2026-11-07T11:21:45+10:00",
  "qa": [
   {
    "num": 1,
