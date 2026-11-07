@@ -1995,10 +1995,11 @@
      "file": "scripts/fixtures/pc_desk.gd:91; scripts/ui/pc/app_market.gd:221",
      "detail": "Since Y6, the tutorial card is hidden at the PC, which is exactly when step 1 (\"order one box each of Cola, Chipz, Candy and Noodles\") is needed. The Market note only says \"up to 4 boxes free\", and Tab does nothing because the player is locked. New players order from memory or guess. Fix: while the tutorial step is \"order\", put the step text in the Market's `_note`, or highlight the four product cards.",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:26+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "36b07c0",
+     "note": "tutorial.json order step market_note shown in Market _note while that step is current (refreshed on show); tutorial_test checks note == step list then drops after order",
+     "closed": "2026-11-07T10:34:46+10:00"
     },
     {
      "id": "F6",
@@ -4747,6 +4748,11 @@
    "t": "2026-11-07T10:34:43+10:00",
    "kind": "fix",
    "msg": "C3/F4 fixed e04cd9d ShopOS top-bar 'Stand up (Esc)' button -> PcDesk.unfocus; prompt '[E] Use the PC · Esc to stand up'; player_test clicks it and checks unlocked (fails before: no button)"
+  },
+  {
+   "t": "2026-11-07T10:34:46+10:00",
+   "kind": "fix",
+   "msg": "C3/F5 fixed 36b07c0 tutorial.json order step market_note shown in Market _note while that step is current (refreshed on show); tutorial_test checks note == step list then drops after order"
   }
  ],
  "tests": [
@@ -4909,12 +4915,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:34:43+10:00",
+  "t": "2026-11-07T10:34:46+10:00",
   "mem_free_pct": 66,
   "load": [
-   2.63,
-   3.09,
-   3.2
+   2.58,
+   3.08,
+   3.19
   ],
   "godot_procs": 0
  },
@@ -5344,7 +5350,7 @@
   "dirty": [],
   "total_commits": 225
  },
- "updated": "2026-11-07T10:34:44+10:00",
+ "updated": "2026-11-07T10:34:46+10:00",
  "qa": [
   {
    "num": 1,
