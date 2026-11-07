@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T11:19+10:00",
- "head": "9803a6d",
+ "generated": "2026-11-07T11:20+10:00",
+ "head": "a02bea2",
  "stats": {
-  "commits": 244,
+  "commits": 245,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T11:19:32+10:00",
+  "last_commit": "2026-11-07T11:20:37+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 30088,
+  "gd_lines": 30109,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1528,6 +1528,11 @@
    "sha": "9803a6d",
    "date": "2026-11-07T11:19:32+10:00",
    "subject": "Send a worker still leaving back to work at the next shift instead of spawning a twin (L7)"
+  },
+  {
+   "sha": "a02bea2",
+   "date": "2026-11-07T11:20:37+10:00",
+   "subject": "Have the cleaner do shop-floor messes first and wait by the mop bucket (L10)"
   }
  ],
  "commits_per_hour": [
@@ -1705,7 +1710,7 @@
   },
   {
    "hour": "2026-11-07T11:00:00+10:00",
-   "commits": 5
+   "commits": 6
   }
  ],
  "sections": [

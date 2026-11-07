@@ -2306,10 +2306,11 @@
      "file": "scripts/npc/cleaner_job.gd:63-82,105-111",
      "detail": "`_find` takes any `mess` inside `Nav.BAKE_BOX` (car park and shed included) by straight distance. Waiting in the shed, the cleaner clears empty boxes in the stockroom or car park before a spill in the shop, even though only in-shop messes cost cleanliness and satisfaction (`Hygiene.messes()` filters with `in_shop`). Each shop mess also starts with a ~16 m outdoor walk. **Fix:** rank in-shop messes (`Hygiene.in_shop`) ahead of the rest, and wait inside the shop (beside the mop bucket) rather than at `Stockroom.door_outside()`.",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:09+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "a02bea2",
+     "note": "CleanerJob._find ranks Hygiene.in_shop messes before others; waits beside the mop bucket. staff_jobs_test: litter 3 m away on the apron vs spill 12 m away in shop -> shop spill first (before: litter first); idle cleaner by the bucket (before: shed at -15.8,-1.0).",
+     "closed": "2026-11-07T11:20:39+10:00"
     },
     {
      "id": "L11",
@@ -4982,6 +4983,11 @@
    "t": "2026-11-07T11:19:36+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixLate: L10 cleaner priorities"
+  },
+  {
+   "t": "2026-11-07T11:20:39+10:00",
+   "kind": "fix",
+   "msg": "C3/L10 fixed a02bea2 CleanerJob._find ranks Hygiene.in_shop messes before others; waits beside the mop bucket. staff_jobs_test: litter 3 m away on the apron vs spill 12 m away in shop -> shop spill first (before: litter first); idle cleaner by the bucket (before: shed at -15.8,-1.0)."
   }
  ],
  "tests": [
@@ -5160,17 +5166,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:19:36+10:00",
-  "mem_free_pct": 52,
+  "t": "2026-11-07T11:20:39+10:00",
+  "mem_free_pct": 55,
   "load": [
-   2.6,
-   2.24,
-   2.34
+   2.16,
+   2.15,
+   2.3
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "a02bea2",
+    "date": "2026-11-07T11:20:37+10:00",
+    "subject": "Have the cleaner do shop-floor messes first and wait by the mop bucket (L10)",
+    "body": "",
+    "stat": "3 files changed, 40 insertions(+), 19 deletions(-)"
+   },
    {
     "sha": "9803a6d",
     "date": "2026-11-07T11:19:32+10:00",
@@ -5583,19 +5596,12 @@
     "subject": "List the store phone, selling fixtures and closing early on the Controls page (Y9)",
     "body": "",
     "stat": "1 file changed, 3 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "c7a046f",
-    "date": "2026-11-07T09:43:33+10:00",
-    "subject": "Hide the crosshair, prompt and tutorial card while using the PC",
-    "body": "The crosshair dot sat on the Market's text and the tutorial card covered ShopOS's dock. Review\nround 2, Y6.",
-    "stat": "3 files changed, 17 insertions(+), 1 deletion(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 244
+  "total_commits": 245
  },
- "updated": "2026-11-07T11:19:37+10:00",
+ "updated": "2026-11-07T11:20:39+10:00",
  "qa": [
   {
    "num": 1,
