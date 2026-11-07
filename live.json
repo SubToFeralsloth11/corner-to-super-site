@@ -1495,10 +1495,11 @@
      "file": "scripts/autoload/game.gd:1020-1033, scripts/world/world.gd:433-437, scripts/npc/cashier_job.gd:44-52",
      "detail": "Cashier tills are indexes into `world.checkouts()`, which is just the order of the fixtures' children. `fit_tills` only resets cashiers whose index is now too high. Example: tills A, B, C with cashiers X, Y, Z; sell A. X (index 0) now works B, Y works C, and Z gets −1 and has no till. In `CashierJob.tick`, `_resolve()` returns a new checkout, so it calls `_leave_post()` (cashier = null, `_serving` = null) on B and C mid-scan or mid-payment and walks to the other till. GDD §10 says \"its cashier moves to a free till or has none\". Players see staff swap tills, customers left half-served, and the wrong worker standing idle on full pay. The HUD till numbers change too. Fix: key assignments to a stable till id kept on the Checkout (for example a saved `till_no`), not to the child index. In `fit_tills`, unassign only the cashier whose till went.",
      "by": "CritPlayer",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T09:40:30+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "18e915f",
+     "note": "build sell calls Game.till_removed(index) after removal: sold till's cashier -> none (fit_tills gives a free one), later cashiers' indexes drop by one so they keep the same Checkout; CashierJob.set_till keeps its post when the index changes but the till doesn't. test_selling_a_till_leaves_the_other_cashiers_where_they_are; staff_test 61/0",
+     "closed": "2026-11-07T10:06:46+10:00"
     },
     {
      "id": "Y4",
@@ -3924,6 +3925,11 @@
    "t": "2026-11-07T10:05:34+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixRegress: Y3 stable till ids"
+  },
+  {
+   "t": "2026-11-07T10:06:46+10:00",
+   "kind": "fix",
+   "msg": "C2/Y3 fixed 18e915f build sell calls Game.till_removed(index) after removal: sold till's cashier -> none (fit_tills gives a free one), later cashiers' indexes drop by one so they keep the same Checkout; CashierJob.set_till keeps its post when the index changes but the till doesn't. test_selling_a_till_leaves_the_other_cashiers_where_they_are; staff_test 61/0"
   }
  ],
  "tests": [
@@ -4065,17 +4071,31 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:05:34+10:00",
-  "mem_free_pct": 43,
+  "t": "2026-11-07T10:06:46+10:00",
+  "mem_free_pct": 47,
   "load": [
-   5.8,
-   4.76,
-   4.0
+   4.24,
+   4.58,
+   3.99
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "18e915f",
+    "date": "2026-11-07T10:06:44+10:00",
+    "subject": "Keep every other cashier on their own till when a till is sold (Y3)",
+    "body": "",
+    "stat": "4 files changed, 44 insertions(+)"
+   },
+   {
+    "sha": "c7d8f7a",
+    "date": "2026-11-07T10:05:40+10:00",
+    "subject": "Reopen Sunday's paper after loading a save made before it was read, and clear it once read (Y12)",
+    "body": "The paper is cleared and the game saved again when it closes, so a reload doesn't show it twice.",
+    "stat": "1 file changed, 13 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "da7cfff",
     "date": "2026-11-07T10:05:25+10:00",
@@ -4481,28 +4501,12 @@
     "subject": "Read the start state and level cap from data, show an expansion's full running cost, and warn about short days",
     "body": "- new_game reads start level, XP and cleanliness from settings.json; the sandbox picker, dev\n  flag and main menu read the level cap from levels.json and the money range from one place;\n  unused customers.json keys removed (E19, N23).\n- The Expansions card shows rent plus lights before and after, not rent alone (E18).\n- Options says shorter days fit fewer customers while bills stay the same (E9).\nReview round 2.",
     "stat": "5 files changed, 20 insertions(+), 14 deletions(-)"
-   },
-   {
-    "sha": "a9ed98a",
-    "date": "2026-11-07T08:08:28+10:00",
-    "subject": "Give levels 13 and 16 real unlocks: loyalty cards and a head office franchise",
-    "body": "Both only unlocked a colour, and nothing paid off after the level cap. Loyalty cards (L13,\n$3,000) add 3 satisfaction per paying customer; the franchise (L16, $10,000) pays $100 a star\nevery Sunday night, shown on the receipt and in the paper. Upgrade effects live in\nupgrades.json. Review round 2, E8.",
-    "stat": "7 files changed, 61 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "aad6ecc",
-    "date": "2026-11-07T08:07:06+10:00",
-    "subject": "Stretch loan terms to 20/30/40 days so borrowing is a real choice",
-    "body": "At 10-14 days every instalment was at least the day's whole profit when the loan unlocked, so a\nloan led straight to overdue bills and repossession. Same interest, smaller instalments. Loan\nand bills tests now read the numbers from loans.json. Review round 2, E6.",
-    "stat": "5 files changed, 51 insertions(+), 28 deletions(-)"
    }
   ],
-  "dirty": [
-   " M scripts/main.gd"
-  ],
-  "total_commits": 213
+  "dirty": [],
+  "total_commits": 215
  },
- "updated": "2026-11-07T10:05:35+10:00",
+ "updated": "2026-11-07T10:06:47+10:00",
  "qa": [
   {
    "num": 1,

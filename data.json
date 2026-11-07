@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T10:05+10:00",
- "head": "da7cfff",
+ "generated": "2026-11-07T10:06+10:00",
+ "head": "18e915f",
  "stats": {
-  "commits": 213,
+  "commits": 215,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T10:05:25+10:00",
+  "last_commit": "2026-11-07T10:06:44+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 28956,
+  "gd_lines": 29000,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1366,6 +1366,16 @@
    "sha": "da7cfff",
    "date": "2026-11-07T10:05:25+10:00",
    "subject": "Keep an unread Sunday review in saves (Y12)"
+  },
+  {
+   "sha": "c7d8f7a",
+   "date": "2026-11-07T10:05:40+10:00",
+   "subject": "Reopen Sunday's paper after loading a save made before it was read, and clear it once read (Y12)"
+  },
+  {
+   "sha": "18e915f",
+   "date": "2026-11-07T10:06:44+10:00",
+   "subject": "Keep every other cashier on their own till when a till is sold (Y3)"
   }
  ],
  "commits_per_hour": [
@@ -1539,7 +1549,7 @@
   },
   {
    "hour": "2026-11-07T10:00:00+10:00",
-   "commits": 9
+   "commits": 11
   }
  ],
  "sections": [
