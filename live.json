@@ -3000,10 +3000,11 @@
      "file": "scripts/ui/pc/app_market.gd:180-198 (show_tab and show_needs → _rebuild → _build_tabs `c.free()`)",
      "detail": "`UiKit.button` connects `pressed` directly (ui_kit.gd:84). `show_tab` and `show_needs` call `_rebuild()` synchronously, and `_build_tabs()` immediately `free()`s every child of `_tabs`, including the Button or CheckButton that is emitting `pressed` or `toggled`. In Godot 4 that logs \"freed … while a signal is being emitted from it\", and BaseButton then keeps running on a deleted object. Tests and the soak call `show_tab()` directly, so the click path is never exercised. Other apps defer their rebuilds (my_store `_queue_refresh`). [UNVERIFIED at runtime] Fix: connect with `CONNECT_DEFERRED` or call `_rebuild.call_deferred()` from `show_tab` and `show_needs`, or `queue_free()` plus `remove_child` in `_build_tabs`.",
      "by": "CritRegress5",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T13:47:55+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "ffb384b",
+     "note": "remove_child + queue_free; order 117/0",
+     "closed": "2026-11-07T14:06:11+10:00"
     },
     {
      "id": "R5-04",
@@ -3072,10 +3073,11 @@
      "file": "scripts/ui/level_banner.gd:99-125",
      "detail": "`_held` is only checked in `show_level` and `set_pc_focused`. A banner that is already up when you sit down keeps showing. When it ends, `tw.chain().tween_callback(_next)` pops the next queued level without checking `_held`, so a second queued banner plays over ShopOS. Fix: start `_next()` with `if _held: _busy = false; _band.visible = false; return`, and hide or pause the current banner in `set_pc_focused(true)`.",
      "by": "CritRegress5",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T13:47:56+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "ebe5238",
+     "note": "progression 87/0",
+     "closed": "2026-11-07T14:06:13+10:00"
     },
     {
      "id": "R5-10",
@@ -3084,10 +3086,11 @@
      "file": "scripts/ui/prompt.gd:71-78",
      "detail": "The pill is only positioned when the prompt text changes. If the window crosses the 900 px line that `Settings._apply_ui_scale` uses (fullscreen toggle, resize), the layout goes from 1600x900 to about 1920x1080, but the pill keeps its old place until you aim at something else. Fix: reposition every frame, or on the parent's `resized` and the window's `size_changed`.",
      "by": "CritRegress5",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T13:47:56+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "f2f03b7",
+     "note": "",
+     "closed": "2026-11-07T14:06:15+10:00"
     },
     {
      "id": "R5-11",
@@ -3096,10 +3099,11 @@
      "file": "scripts/ui/options.gd:73-80",
      "detail": "V12 (01bfa7f) styled `_toggle()` (options.gd:147), the change panel and the Market, but the Change-helper CheckButton built directly at :73 never calls `UiKit.style_switch`. It still shows the default near-invisible \"off\" dot the commit was meant to fix. Fix: call `UiKit.style_switch(_helper)` after creating it.",
      "by": "CritRegress5",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T13:47:56+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "80c4fdc",
+     "note": "",
+     "closed": "2026-11-07T14:06:17+10:00"
     },
     {
      "id": "R5-12",
@@ -3108,10 +3112,11 @@
      "file": "scripts/fixtures/fixture.gd:138",
      "detail": "`l.text = \"CORNER TO SUPER\"`, while every other name surface reads `Catalog.settings()[\"store_name\"]` (pos.gd:67, day_summary.gd:155, shop_os.gd:108, main_menu.gd:66). Changing the name in settings.json leaves every gondola end showing the old one. Fix: use `str(Catalog.settings().get(\"store_name\", \"\")).to_upper()`.",
      "by": "CritRegress5",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T13:47:56+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "6d44f89",
+     "note": "",
+     "closed": "2026-11-07T14:06:19+10:00"
     },
     {
      "id": "R5-13",
@@ -3120,10 +3125,11 @@
      "file": "scripts/build/expansion.gd:43-59",
      "detail": "V21 says the pieces take \"the wall's own finish\", but the material is always the fixed plaster or wainscot colour. The start shop's feature wall is the x=-6 wall, nearest the default till, and E3 knocks it out, so the first big knock-through drops white pieces out of a green wall. Fix: if a removed piece lies on the feature-wall run (`world.building` can return that run), use `Building.STORE_GREEN` for the rows above WAINSCOT_H.",
      "by": "CritRegress5",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T13:47:56+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "d465e30",
+     "note": "old feature run passed to Expansion.play",
+     "closed": "2026-11-07T14:06:10+10:00"
     },
     {
      "id": "R5-14",
@@ -3144,10 +3150,11 @@
      "file": "tests/cases/building_test.gd:79",
      "detail": "`w.building.get(\"_slogans\")` ties the test to an internal array of [segment, Label3D]. Renaming it or storing it differently fails the test (or `get` returns null) even when the lettering is fine. Fix: find the `WallSlogan` Label3D nodes under `w.building` (`find_children(\"WallSlogan\", \"Label3D\")`) and check their pose against `w.building.segments`.",
      "by": "CritRegress5",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T13:47:56+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "d465e30",
+     "note": "slogan test finds WallSlogan* nodes; 10 checks",
+     "closed": "2026-11-07T14:06:10+10:00"
     }
    ]
   }
@@ -6532,6 +6539,46 @@
    "t": "2026-11-07T14:06:07+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixBalance2: stopped (done)"
+  },
+  {
+   "t": "2026-11-07T14:06:10+10:00",
+   "kind": "fix",
+   "msg": "C5/R5-13 fixed d465e30 old feature run passed to Expansion.play"
+  },
+  {
+   "t": "2026-11-07T14:06:10+10:00",
+   "kind": "fix",
+   "msg": "C5/R5-15 fixed d465e30 slogan test finds WallSlogan* nodes; 10 checks"
+  },
+  {
+   "t": "2026-11-07T14:06:11+10:00",
+   "kind": "fix",
+   "msg": "C5/R5-03 fixed ffb384b remove_child + queue_free; order 117/0"
+  },
+  {
+   "t": "2026-11-07T14:06:13+10:00",
+   "kind": "fix",
+   "msg": "C5/R5-09 fixed ebe5238 progression 87/0"
+  },
+  {
+   "t": "2026-11-07T14:06:15+10:00",
+   "kind": "fix",
+   "msg": "C5/R5-10 fixed f2f03b7"
+  },
+  {
+   "t": "2026-11-07T14:06:17+10:00",
+   "kind": "fix",
+   "msg": "C5/R5-11 fixed 80c4fdc"
+  },
+  {
+   "t": "2026-11-07T14:06:19+10:00",
+   "kind": "fix",
+   "msg": "C5/R5-12 fixed 6d44f89"
+  },
+  {
+   "t": "2026-11-07T14:06:21+10:00",
+   "kind": "fix",
+   "msg": "Test runner: a test aborted by a script error used to count as passed; it now fails ('ran no checks')"
   }
  ],
  "tests": [
@@ -6770,17 +6817,59 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T14:06:07+10:00",
-  "mem_free_pct": 46,
+  "t": "2026-11-07T14:06:21+10:00",
+  "mem_free_pct": 43,
   "load": [
-   5.04,
-   3.89,
-   4.06
+   4.35,
+   3.79,
+   4.02
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "5ea61e0",
+    "date": "2026-11-07T14:06:19+10:00",
+    "subject": "Fail any test that runs no checks, so a script error can't pass silently",
+    "body": "",
+    "stat": "1 file changed, 9 insertions(+)"
+   },
+   {
+    "sha": "6d44f89",
+    "date": "2026-11-07T14:06:17+10:00",
+    "subject": "Read the gondola end-cap name from settings (R5-12)",
+    "body": "",
+    "stat": "1 file changed, 1 insertion(+), 1 deletion(-)"
+   },
+   {
+    "sha": "80c4fdc",
+    "date": "2026-11-07T14:06:15+10:00",
+    "subject": "Use the switch style on the Options change-helper toggle (R5-11)",
+    "body": "",
+    "stat": "1 file changed, 1 insertion(+)"
+   },
+   {
+    "sha": "f2f03b7",
+    "date": "2026-11-07T14:06:13+10:00",
+    "subject": "Re-centre the aim prompt every frame so a UI-scale change can't leave it off-centre (R5-10)",
+    "body": "",
+    "stat": "1 file changed, 4 insertions(+), 3 deletions(-)"
+   },
+   {
+    "sha": "ebe5238",
+    "date": "2026-11-07T14:06:11+10:00",
+    "subject": "Hold the level banner for the whole PC visit, including queued ones (R5-09)",
+    "body": "",
+    "stat": "1 file changed, 4 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "ffb384b",
+    "date": "2026-11-07T14:06:10+10:00",
+    "subject": "Don't free a Market tab while its click is still being handled (R5-03)",
+    "body": "",
+    "stat": "1 file changed, 3 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "d465e30",
     "date": "2026-11-07T14:06:03+10:00",
@@ -7158,61 +7247,12 @@
     "subject": "Let restockers top up part-full shelves and carry a box on to the next slot (L3, L11, L12)",
     "body": "A part-used box now goes on to the nearest slot of its product that isn't full (6 m, or any\nunder half full) before it returns to the rack; with nothing under half full, the emptiest\nslot under full is topped up. A rack picked up in build mode is abandoned. The idle status\nnames the low shelves' products the racks lack.",
     "stat": "2 files changed, 147 insertions(+), 14 deletions(-)"
-   },
-   {
-    "sha": "58a68a9",
-    "date": "2026-11-07T11:12:27+10:00",
-    "subject": "Open a staff doorway from the shed into the shop once col 0 stands beside it (L2)",
-    "body": "Racks only stand in the shed, whose only way out was the roller door, so every rack-to-shelf\ntrip went round the car park and in at the front. With E5 and a shed, the shared wall at\nx = -14 gets a 1.4 x 2.4 m doorway; a nav-only blocker plus a staff-layer NavigationLink3D\nkeep customers routing by the front while staff take the short way. Build mode keeps 1.2 m\nclear either side. The soak logs staff restocks per day.",
-    "stat": "16 files changed, 247 insertions(+), 39 deletions(-)"
-   },
-   {
-    "sha": "b7eee56",
-    "date": "2026-11-07T10:59:12+10:00",
-    "subject": "Record review cycles 2 and 3 in PROGRESS",
-    "body": "",
-    "stat": "1 file changed, 23 insertions(+)"
-   },
-   {
-    "sha": "17cff23",
-    "date": "2026-11-07T10:55:01+10:00",
-    "subject": "Move the soak AI's E4-E6 plan spots off the wall bands (S1)",
-    "body": "",
-    "stat": "1 file changed, 9 insertions(+), 6 deletions(-)"
-   },
-   {
-    "sha": "8ffbe30",
-    "date": "2026-11-07T10:48:36+10:00",
-    "subject": "Show what each Market product stands on, and warn when you have none (F19)",
-    "body": "",
-    "stat": "3 files changed, 45 insertions(+), 7 deletions(-)"
-   },
-   {
-    "sha": "2ec20c1",
-    "date": "2026-11-07T10:47:29+10:00",
-    "subject": "Warn about range only against the kinds your licences let you sell (F12)",
-    "body": "",
-    "stat": "2 files changed, 31 insertions(+), 6 deletions(-)"
-   },
-   {
-    "sha": "a6cbc03",
-    "date": "2026-11-07T10:46:57+10:00",
-    "subject": "Ask for a second press before buying an expansion or licence (F11)",
-    "body": "",
-    "stat": "6 files changed, 89 insertions(+), 6 deletions(-)"
    }
   ],
-  "dirty": [
-   " M scripts/fixtures/fixture.gd",
-   " M scripts/ui/level_banner.gd",
-   " M scripts/ui/options.gd",
-   " M scripts/ui/pc/app_market.gd",
-   " M scripts/ui/prompt.gd",
-   " M tests/test_runner.gd"
-  ],
-  "total_commits": 294
+  "dirty": [],
+  "total_commits": 300
  },
- "updated": "2026-11-07T14:06:08+10:00",
+ "updated": "2026-11-07T14:06:22+10:00",
  "qa": [
   {
    "num": 1,

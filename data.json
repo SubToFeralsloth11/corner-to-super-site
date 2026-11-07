@@ -1,10 +1,10 @@
 {
  "generated": "2026-11-07T14:06+10:00",
- "head": "d465e30",
+ "head": "5ea61e0",
  "stats": {
-  "commits": 294,
+  "commits": 300,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T14:06:03+10:00",
+  "last_commit": "2026-11-07T14:06:19+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
@@ -1778,6 +1778,36 @@
    "sha": "d465e30",
    "date": "2026-11-07T14:06:03+10:00",
    "subject": "Leave the shed doorway unpainted by the feature wall, and drop green rubble from it (R5-02, R5-13)"
+  },
+  {
+   "sha": "ffb384b",
+   "date": "2026-11-07T14:06:10+10:00",
+   "subject": "Don't free a Market tab while its click is still being handled (R5-03)"
+  },
+  {
+   "sha": "ebe5238",
+   "date": "2026-11-07T14:06:11+10:00",
+   "subject": "Hold the level banner for the whole PC visit, including queued ones (R5-09)"
+  },
+  {
+   "sha": "f2f03b7",
+   "date": "2026-11-07T14:06:13+10:00",
+   "subject": "Re-centre the aim prompt every frame so a UI-scale change can't leave it off-centre (R5-10)"
+  },
+  {
+   "sha": "80c4fdc",
+   "date": "2026-11-07T14:06:15+10:00",
+   "subject": "Use the switch style on the Options change-helper toggle (R5-11)"
+  },
+  {
+   "sha": "6d44f89",
+   "date": "2026-11-07T14:06:17+10:00",
+   "subject": "Read the gondola end-cap name from settings (R5-12)"
+  },
+  {
+   "sha": "5ea61e0",
+   "date": "2026-11-07T14:06:19+10:00",
+   "subject": "Fail any test that runs no checks, so a script error can't pass silently"
   }
  ],
  "commits_per_hour": [
@@ -1967,7 +1997,7 @@
   },
   {
    "hour": "2026-11-07T14:00:00+10:00",
-   "commits": 2
+   "commits": 8
   }
  ],
  "sections": [
