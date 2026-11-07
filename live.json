@@ -2473,10 +2473,11 @@
      "file": "data/staff.json:26-47; scripts/npc/restocker_job.gd:1-8,149-175",
      "detail": "A restocker takes one box per trip, from racks only, and at most 4 can be hired. At day 30 the store sells 1,424 items ≈ 115 boxes/day (12.4 units per box, pop-weighted from products.json). Rack, inner door (x −14, z −2.2) and back to the shelf is about 46 m. That works out to ≈245 items per open day for a T1 restocker and ≈360 for T3, so 4×T1 ≈ 980 and 4×T3 ≈ 1,450 [INFERENCE: geometry + tier data]. Observed: ≤178 a day from staff. On days 27, 28 and 30 the AI spent 862-912 s on chores and was idle 0 s, and still lost 30-44 items to empty shelves. The player also has to carry every one of the ~115 boxes from the bay to racks that hold 64 boxes in total (8 racks × 8). SS players expect staff to take over stocking by mid-game. Fix: add `carry_boxes` [2,3,4] by tier, same product first. Raise `max` 4 → 6. From T2, idle restockers move bay boxes to free rack spots (this changes GDD §10 line 314). Expected: about 3× items per trip; 4 restockers cover ≈100% of sales by L12, and the player goes back to pricing and building.",
      "by": "CritBalance",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:18:41+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "7e64f7d",
+     "note": "carry_boxes 2/3/4, max 6, T2+ haul bay->racks; tests carries_several_boxes + tier_two_racks_the_bay_boxes",
+     "closed": "2026-11-07T12:32:24+10:00"
     },
     {
      "id": "B4",
@@ -5994,6 +5995,11 @@
    "t": "2026-11-07T12:31:59+10:00",
    "kind": "status",
    "msg": "Status: fixing - Lead: 17 of 25 visual findings fixed; FixBalance on B2-B13"
+  },
+  {
+   "t": "2026-11-07T12:32:24+10:00",
+   "kind": "fix",
+   "msg": "C4/B3 fixed 7e64f7d carry_boxes 2/3/4, max 6, T2+ haul bay->racks; tests carries_several_boxes + tier_two_racks_the_bay_boxes"
   }
  ],
  "tests": [
@@ -6204,17 +6210,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:31:59+10:00",
-  "mem_free_pct": 61,
+  "t": "2026-11-07T12:32:24+10:00",
+  "mem_free_pct": 62,
   "load": [
-   2.89,
-   2.61,
-   2.6
+   2.38,
+   2.52,
+   2.56
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "7e64f7d",
+    "date": "2026-11-07T12:32:20+10:00",
+    "subject": "Let restockers carry 2-4 boxes a trip, rack bay boxes from tier 2, and hire up to 6 (B3)",
+    "body": "",
+    "stat": "9 files changed, 419 insertions(+), 77 deletions(-)"
+   },
    {
     "sha": "da1299e",
     "date": "2026-11-07T12:31:50+10:00",
@@ -6627,26 +6640,12 @@
     "subject": "Count only customers still waiting at 22:00 as turned away, not those sent home by closing early (X13)",
     "body": "",
     "stat": "2 files changed, 11 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "07fac90",
-    "date": "2026-11-07T10:03:07+10:00",
-    "subject": "Say when a loan taken on the receipt is first charged (X15)",
-    "body": "",
-    "stat": "1 file changed, 3 insertions(+), 1 deletion(-)"
    }
   ],
-  "dirty": [
-   " M data/staff.json",
-   " M scripts/autoload/save.gd",
-   " M scripts/npc/restocker_job.gd",
-   " M scripts/npc/staff_crew.gd",
-   " M tests/cases/staff_jobs_test.gd",
-   " M tests/cases/staff_test.gd"
-  ],
-  "total_commits": 269
+  "dirty": [],
+  "total_commits": 270
  },
- "updated": "2026-11-07T12:32:00+10:00",
+ "updated": "2026-11-07T12:32:24+10:00",
  "qa": [
   {
    "num": 1,

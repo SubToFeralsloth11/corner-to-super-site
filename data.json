@@ -1,17 +1,17 @@
 {
  "generated": "2026-11-07T12:32+10:00",
- "head": "da1299e",
+ "head": "7e64f7d",
  "stats": {
-  "commits": 269,
+  "commits": 270,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T12:31:50+10:00",
+  "last_commit": "2026-11-07T12:32:20+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 31376,
+  "gd_lines": 31381,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1653,6 +1653,11 @@
    "sha": "da1299e",
    "date": "2026-11-07T12:31:50+10:00",
    "subject": "Print the end-of-day receipt row by row with the printer sound (V16)"
+  },
+  {
+   "sha": "7e64f7d",
+   "date": "2026-11-07T12:32:20+10:00",
+   "subject": "Let restockers carry 2-4 boxes a trip, rack bay boxes from tier 2, and hire up to 6 (B3)"
   }
  ],
  "commits_per_hour": [
@@ -1834,7 +1839,7 @@
   },
   {
    "hour": "2026-11-07T12:00:00+10:00",
-   "commits": 22
+   "commits": 23
   }
  ],
  "sections": [
