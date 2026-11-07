@@ -2811,11 +2811,11 @@
      "file": "shelf_gondola_2m.glb `GondolaFrame` (textured, low roughness) + lighting.gd:126-134 (box-projected probes) · 80_main_menu crop: a red smear across the right end panel · 05: grey-black smudges · 85: a featureless grey wall fills the view",
      "detail": "This is the most-seen surface in the store, and it looks dirty and cheap. Supermarket Simulator dresses the ends of its shelves. Fix: give `GondolaFrame` roughness 0.65 and metallic 0 (in Fixture setup, or in the glb), and put a printed end-cap panel on each end (a QuadMesh with a store-green header and category art, using the generated aisle-sign texture).",
      "by": "CritVisual",
-     "status": "wip",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "06f470d",
-     "note": "roughness 0.7, no smears in 05_aisle; end-cap graphics still missing",
-     "closed": "2026-11-07T12:38:09+10:00"
+     "commit": "d739802",
+     "note": "bands seen in 03/05 (tour c4i); build/stock/m1 pass",
+     "closed": "2026-11-07T13:12:59+10:00"
     },
     {
      "id": "V15",
@@ -2889,10 +2889,11 @@
      "file": "outside.gd:37 (`tree_verge_a`/`_b`), 329-332 · 01 (the main tree in the hero exterior shot), 07, 30",
      "detail": "They clash with the PBR cars, façades and eucalyptus shrubs. VISUALS.md aims to be more realistic than Supermarket Simulator. Fix: swap in an alpha-card foliage gum tree (Poly Haven, or a Blender `tools/` build in the style of the shrubs) and keep the trunk collider.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "wontfix",
      "found": "2026-11-07T12:19:11+10:00",
      "commit": "",
-     "note": ""
+     "note": "needs new tree models (only tree_verge_a/b exist); revisit with an art pass",
+     "closed": "2026-11-07T13:13:00+10:00"
     },
     {
      "id": "V21",
@@ -6182,6 +6183,21 @@
    "t": "2026-11-07T13:09:16+10:00",
    "kind": "fix",
    "msg": "Soak AI: delayed actions no longer capture nodes that a give-up can free (day-11 lambda error)"
+  },
+  {
+   "t": "2026-11-07T13:12:59+10:00",
+   "kind": "fix",
+   "msg": "C4/V14 fixed d739802 bands seen in 03/05 (tour c4i); build/stock/m1 pass"
+  },
+  {
+   "t": "2026-11-07T13:13:00+10:00",
+   "kind": "fix",
+   "msg": "C4/V20 wontfix  needs new tree models (only tree_verge_a/b exist); revisit with an art pass"
+  },
+  {
+   "t": "2026-11-07T13:13:03+10:00",
+   "kind": "shots",
+   "msg": "Screenshots refreshed: 56 images Cycle 4: gondola end caps, wall lettering"
   }
  ],
  "tests": [
@@ -6409,17 +6425,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T13:09:16+10:00",
-  "mem_free_pct": 39,
+  "t": "2026-11-07T13:13:03+10:00",
+  "mem_free_pct": 46,
   "load": [
-   2.97,
-   3.33,
-   3.19
+   3.6,
+   3.54,
+   3.33
   ],
   "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "d739802",
+    "date": "2026-11-07T13:12:58+10:00",
+    "subject": "Dress island gondola ends with a store-green name band (V14)",
+    "body": "",
+    "stat": "4 files changed, 50 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "32ca3d2",
     "date": "2026-11-07T13:09:11+10:00",
@@ -6832,23 +6855,17 @@
     "subject": "Say where the PC really is: the desk in the back-left corner, behind the till (F14)",
     "body": "",
     "stat": "2 files changed, 2 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "7739933",
-    "date": "2026-11-07T10:38:35+10:00",
-    "subject": "Don't count a furniture order as the tutorial's stock order (F18)",
-    "body": "",
-    "stat": "2 files changed, 10 insertions(+), 2 deletions(-)"
    }
   ],
   "dirty": [
-   " M data/fixtures.json",
-   " M scripts/fixtures/fixture.gd",
+   " M data/customers.json",
+   " M scripts/npc/customer_rules.gd",
+   " M tests/soak_player.gd",
    "?? tests/_dbg_slogan.gd.uid"
   ],
-  "total_commits": 288
+  "total_commits": 289
  },
- "updated": "2026-11-07T13:09:17+10:00",
+ "updated": "2026-11-07T13:13:04+10:00",
  "qa": [
   {
    "num": 1,
@@ -6908,8 +6925,8 @@
   }
  ],
  "shots": {
-  "t": "2026-11-07T13:08:07+10:00",
-  "note": "Cycle 4: wall lettering",
+  "t": "2026-11-07T13:13:03+10:00",
+  "note": "Cycle 4: gondola end caps, wall lettering",
   "files": [
    "01_exterior_from_road.jpg",
    "02_entrance_looking_in.jpg",
