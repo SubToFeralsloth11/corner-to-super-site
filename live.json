@@ -1,11 +1,11 @@
 {
  "status": {
-  "state": "reviewing",
+  "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixFirstHour: F8 not-carried lost-sale reason",
+  "activity": "FixFirstHour on F findings; L findings queued for the next fixer",
   "cycle": "3",
-  "since": "2026-11-07T10:20:58+10:00"
+  "since": "2026-11-07T10:21:10+10:00"
  },
  "rounds": [
   {
@@ -2163,6 +2163,234 @@
      "by": "CritFirstHour",
      "status": "open",
      "found": "2026-11-07T10:19:27+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L1",
+     "sev": "P1",
+     "title": "\"Restock to full\" orders the same boxes again while a delivery is still on its way",
+     "file": "scripts/ui/pc/app_market.gd:62-76; scripts/world/world.gd:174-189",
+     "detail": "`restock_to_full` works out what is short from `World.stock_on_hand()`. That count only includes shelves, racks, loose boxes and the box in the player's hands. It leaves out boxes already paid for but not yet delivered (`DeliveryService.undelivered()`, meaning the van's cannon queue plus `pending` trips) and boxes a restocker is carrying (`StaffCrew.carried_boxes()`). A late-game cart of 60+ boxes takes several back-to-back 30-box trips. Pressing Restock to full again in that time, on the PC or the phone, puts the whole shortfall in the cart again, so the player pays twice and the bay floods. The \"In boxes\" line on each card also leaves out stock on the way. **Fix:** add an \"on the way\" count per product from `delivery.undelivered()` (count × BoxSpec units) and from `crew.carried_boxes()`. Subtract it in `restock_to_full`, and show it on each card (\"On the way N\").",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:09+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L2",
+     "sev": "P1",
+     "title": "Racks can only go in the shed, which has no door into the shop, so every box goes the long way round outside and restockers can't keep up",
+     "file": "data/fixtures.json:1106; scripts/world/stockroom.gd:15,81-82,113-121; scripts/npc/restocker_job.gd:181-197",
+     "detail": "`storage_rack` has `placement: \"stockroom\"`. The shed stands at x −22…−14, and its only opening is the roller door facing the car park (door point (−16, 0, 1.2)). After E5 the store's column 0 sits right against the shed, but `_module` just lines that wall and adds no doorway. Every rack-to-shelf trip, for the player and for restockers, goes out of the roller door, about 16 m along the apron, in through the front door, then up to 24 m into the store, and back again. [INFERENCE from coordinates] One tier-1 restocker (1.2 m/s) takes roughly 50–85 s per slot refill, about 10 refills in a 12-minute day. Four of them move about 1,000 units a day, while a level-16 store sells several thousand ((2.5+16)×0.88×1.5 ≈ 24 customers an hour × ~14-item lists). Hiring restockers barely helps. **Fix:** cut a doorway in the shared wall once column 0 row 0 or 1 is unlocked (build it in `Stockroom._module` when `store_side`, gap it in `Building`, and keep a clear strip in `BuildRules`). Or let racks stand in the shop (`placement: \"any\"`).",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:09+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L3",
+     "sev": "P2",
+     "title": "Restockers walk a part-used box back to the rack after every slot, and never top up shelves that are half full",
+     "file": "scripts/npc/restocker_job.gd:172-197,66-90",
+     "detail": "`_after_slot` always calls `_head_for_rack()` while the box still has stock, even when the next slot of the same product is 1 m away. One product usually spans several adjacent slots, so each slot costs a full round trip. `_find` also only looks at slots under `LOW_FILL` 0.5, so restockers stand idle beside racked boxes while shelves sit at 55%. **Fix:** in `_after_slot`, if `box.count > 0`, claim the nearest unclaimed slot of `box.product_id` below 100% (within ~6 m, or anywhere below LOW_FILL) and go to `TO_SLOT` before returning the box. In `_find`, when nothing is below LOW_FILL, pick the lowest slot under 100% that has a racked box.",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:09+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L4",
+     "sev": "P2",
+     "title": "ShopOS apps rebuild their whole UI on every sale even when hidden, causing stutter and lost clicks",
+     "file": "scripts/ui/pc/app_staff.gd:35-38; app_my_store.gd:16-17; app_licences.gd:20-21; app_bank.gd:23-27; app_expansions.gd:46; app_stats.gd:35; shop_os.gd:47-74",
+     "detail": "Every app is built once at start and lives on hidden. On each `money_changed`/`xp_changed`/`stats_changed` (every sale, roughly every 2–3 s late game), Staff, My Store (4 categories, 19 colour buttons each with copied styleboxes), Licences, Bank and Stats free and rebuild every control, and Expansions rebuilds its cards. With the app open, a sale landing between mouse-down and mouse-up frees the pressed button, so Hire, Upgrade, Fire, Buy, Repay or Take silently does nothing on maybe ~4% of clicks. Frame cost [INFERENCE, unmeasured]: a few ms spike per sale. **Fix:** skip the rebuild while `not is_visible_in_tree()` and set a dirty flag, then refresh on `visibility_changed` (Pricing already does this). While visible, update button `disabled` and label text in place instead of freeing them.",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:09+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L5",
+     "sev": "P2",
+     "title": "Aisle signs jump between fixtures as stock sells",
+     "file": "scripts/world/aisle_signs.gd:49-79,90-96",
+     "detail": "Each category's sign hangs over whichever fixture holds the most units right now, checked every 2 s. In a large store with several gondolas of the same licence at similar fill, each sale or restock changes which one is ahead. The sign is then freed and spawned over a different aisle, so ceiling signs teleport around the store all day. **Fix:** add hysteresis, so the sign stays where it is unless another fixture beats the current one by a clear margin (e.g. 25%) for a while. Or rank fixtures by labelled capacity (sum of `slot.capacity` for slots labelled with that category) instead of live counts.",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:09+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L6",
+     "sev": "P2",
+     "title": "Restockers and customers shut cooler doors and freezer lids on each other",
+     "file": "scripts/npc/restocker_job.gd:52,176-177; scripts/npc/shopper_brain.gd:378-395",
+     "detail": "A customer's `_close_door` only checks other shoppers in PICK. If a customer opened the cooler and a restocker starts stocking it, the customer leaves and shuts the door, and the restocker carries on stocking through glass (the S14/Y8 bug again). The other way round, `_after_slot` always calls `close_door()` and shuts it on a customer who is still reaching in (the N16 bug again). On a chest freezer, a customer reaching into the other half slides the lids and closes the restocker's half. **Fix:** count who is using each fixture's door (`open_door(who)`/`close_door(who)`, close only when nobody is left), or make `_other_at` and `_after_slot` also check for staff stocking and shoppers picking at that fixture.",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:09+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L7",
+     "sev": "P2",
+     "title": "A restocker still putting a box away when the next day starts is replaced by a twin, and their box is left out of the autosave",
+     "file": "scripts/npc/staff_crew.gd:43-61,101-107",
+     "detail": "At PREP, `sync()` spawns a new Staff for any member whose old body `is_leaving()` and overwrites `members[id]`. The old restocker, still in WIND_DOWN carrying a box back to the shed (20–40 s at 1.2 m/s), is no longer in `members`, so `carried_boxes()` (and therefore `Save`) misses its box. End day → Pay → Next day is quick enough to trigger this, and its autosave loses up to 40 units if the player quits there. Two identical copies of the same worker (same rig seed) are also visible on the plot. **Fix:** let a leaving member go back to WORK instead of spawning a second body (reset `state` and keep the job), or have `carried_boxes()` walk the `staff` group rather than `members`.",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:09+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L8",
+     "sev": "P2",
+     "title": "The Market is a flat wall of 48 cards with no grouping, filter or low-stock flag, and its counts go stale while you look at it",
+     "file": "scripts/ui/pc/app_market.gd:41-43,52-58,87-97",
+     "detail": "The cards are in products.json order with no licence headers, search, \"low/out only\" filter or sorting, about 12 rows of ~250 px to scroll through. Nothing marks products that are low or empty, even though `stock_on_hand` already has `room`. \"On shelves / In boxes\" only updates when the window is shown, so it stays wrong while sales and van drops happen with the app open. The \"Ordered N boxes, K trips\" note is wiped by the next sale's `_refresh`. **Fix:** add a licence/fixture tab row and a \"Needs stock\" toggle that sorts by room, colour each card's stock line by how full its shelves are, refresh stock on `sale_completed`/delivery landings while visible, and keep the order note for a few seconds.",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:09+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L9",
+     "sev": "P2",
+     "title": "Very large orders spill past the 64-spot bay and keep dropping on the same 16 points",
+     "file": "scripts/delivery/delivery_bay.gd:66-71; scripts/delivery/delivery_service.gd:95-110",
+     "detail": "The bay plus overflow holds 2×16×2 = 64 boxes. Further trips start as soon as the van leaves. Once full, `_find` aims every extra box at `all[_next_stack % 16] + LAYER_H*2` whatever is already there, so the third layer piles up and topples into the car park. A late-game restock (several thousand units a day, ~15.5 units a box) easily goes over 64 boxes [INFERENCE: volumes]. **Fix:** hold the next trip while `bay.peek()` returns a stacking point, with a toast (\"Bay full: the van waits\"). Or add a third grid, or stack onto the lowest pile.",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:09+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L10",
+     "sev": "P3",
+     "title": "The cleaner goes for the nearest mess anywhere on the plot first, and waits outside in the shed",
+     "file": "scripts/npc/cleaner_job.gd:63-82,105-111",
+     "detail": "`_find` takes any `mess` inside `Nav.BAKE_BOX` (car park and shed included) by straight distance. Waiting in the shed, the cleaner clears empty boxes in the stockroom or car park before a spill in the shop, even though only in-shop messes cost cleanliness and satisfaction (`Hygiene.messes()` filters with `in_shop`). Each shop mess also starts with a ~16 m outdoor walk. **Fix:** rank in-shop messes (`Hygiene.in_shop`) ahead of the rest, and wait inside the shop (beside the mop bucket) rather than at `Stockroom.door_outside()`.",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:09+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L11",
+     "sev": "P3",
+     "title": "A restocker can take a box from a rack you are moving in build mode",
+     "file": "scripts/npc/restocker_job.gd:130-132,148-158",
+     "detail": "`_box_on_rack` checks that the box is still parented to `_rack`, but not `_usable(_rack)`. If the player picks the rack up while a restocker is in TO_RACK, the restocker walks to the old spot and reparents a box out of the floating ghost rack. **Fix:** add `and _usable(_rack)` to `_box_on_rack()`.",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:09+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L12",
+     "sev": "P3",
+     "title": "The restocker's idle status is misleading when the racks hold the wrong products",
+     "file": "scripts/npc/restocker_job.gd:330-343",
+     "detail": "When the racks have boxes but none match a slot below 50%, status says \"Looking for empty shelves\" while the player can see empty shelves. Those products simply have no racked boxes (they are still in the bay or on the floor). **Fix:** report \"Idle: no racked boxes for the low shelves (MILK, EGGS…)\" by listing the low slots' products that are missing from `_racked_boxes()`.",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:09+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L13",
+     "sev": "P3",
+     "title": "Staff app \"Now:\" lines go blank after every rebuild",
+     "file": "scripts/ui/pc/app_staff.gd:77-87,120-136,179-192",
+     "detail": "`refresh()` recreates the status labels empty and leaves `_status_t` alone, so they stay blank for up to 0.5 s. With a rebuild on every sale, the status lines flicker constantly late game. **Fix:** fill the label in `_member_card` straight away (`crew.members[id].status()`), or set `_status_t = 0.0` in `refresh()`.",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:09+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L14",
+     "sev": "P3",
+     "title": "The queue-lane plate's BoxMesh is still rebuilt every physics frame",
+     "file": "scripts/build/build_mode.gd:401",
+     "detail": "The B3 fix only caches `_plate`'s size. While carrying a till, `(_lane_plate.mesh as BoxMesh).size = …` runs every physics frame, and `PrimitiveMesh` regenerates on each set. **Fix:** set the lane plate's size once, when the carried fixture changes, like `_plate_size`.",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:09+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L15",
+     "sev": "P3",
+     "title": "Build mode re-runs every placement check every physics frame even when the ghost hasn't moved",
+     "file": "scripts/build/build_mode.gd:381-388; scripts/build/build_rules.gd:195,318",
+     "detail": "`_update_ghost` calls the full `BuildRules.refusal` each frame. In a 40-fixture store that is polygon clipping against every fixture, wall, cell and access strip. It also creates and frees a `DeliveryBay` node in `bay_zones()`, recomputes `offset_polygon(poly, 0.15)` once per loose box (the whole bay), and repaints every mesh of the ghost via recursive `find_children`. [INFERENCE] Several ms a frame. **Fix:** cache on the snapped (pos, yaw) and recompute only when it changes or `fixtures_changed` fires; build the offset polygons and bay zones once per call; repaint only when the material changes.",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:09+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L16",
+     "sev": "P3",
+     "title": "Customers walk into fixtures placed during OPEN until you leave build mode",
+     "file": "scripts/build/build_mode.gd:104,234",
+     "detail": "The navmesh only rebakes in `exit()`. Each `place()`/`sell()` just emits `fixtures_changed`, so walkers replan on the old mesh. They walk into the new shelf, get stuck for 3 s, then hop to the next path point through it. **Fix:** call `world.layout_changed()` after each `place()`/`sell()` during OPEN; `Nav.rebake` already merges back-to-back requests.",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:09+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L17",
+     "sev": "P3",
+     "title": "The Furniture app orders one flat-pack per click, with a delivery fee each time",
+     "file": "scripts/ui/pc/app_furniture.gd:117-121; scripts/autoload/game.gd:755",
+     "detail": "Kitting out a big store means dozens of clicks and dozens of $5 fees. `Game.order_furniture(id, n)` already supports a quantity with one fee, but the UI always sends 1. **Fix:** add a −/qty/+ control (Shift for 5, as in the Market) and pass `n`. Check the fixture's `max` against `owned_count + n`.",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:09+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L18",
+     "sev": "P3",
+     "title": "Biggest purchases are a single click with no confirmation",
+     "file": "scripts/ui/pc/app_expansions.gd:92-96; app_my_store.gd:76-77; app_licences.gd:77-78",
+     "detail": "Expansions ($1,800–$4,000+, rent goes up permanently and the knock-through can't be undone), Head office ($6,000) and licences buy on one press. Selling a fixture (Del twice) and firing (Fire twice) already need a second press. **Fix:** arm the button on the first press (\"Buy for $X? Press again\") within 3 s, the same way as `AppStaff.fire`.",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:10+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "L19",
+     "sev": "P3",
+     "title": "The Sunday paper works out the week's takings but never shows them or compares weeks",
+     "file": "scripts/core/weekly_review.gd:47-49; scripts/ui/newspaper_card.gd:96-110",
+     "detail": "`write()` returns `revenue` and `customers`, but `_fill` prints neither number. There is no week-on-week line, so the weekly payoff moment says nothing about whether the store grew. **Fix:** print \"Takings $X (▲/▼ Y% on last week)\", using the previous 7 entries of `stats_days`.",
+     "by": "CritLate",
+     "status": "open",
+     "found": "2026-11-07T10:21:10+10:00",
      "commit": "",
      "note": ""
     }
@@ -4339,6 +4567,111 @@
    "t": "2026-11-07T10:20:58+10:00",
    "kind": "status",
    "msg": "Status: reviewing - FixFirstHour: F8 not-carried lost-sale reason"
+  },
+  {
+   "t": "2026-11-07T10:21:09+10:00",
+   "kind": "finding",
+   "msg": "C3/L1 [P1] \"Restock to full\" orders the same boxes again while a delivery is still on its way"
+  },
+  {
+   "t": "2026-11-07T10:21:09+10:00",
+   "kind": "finding",
+   "msg": "C3/L2 [P1] Racks can only go in the shed, which has no door into the shop, so every box goes the long way round outside and restockers can't keep up"
+  },
+  {
+   "t": "2026-11-07T10:21:09+10:00",
+   "kind": "finding",
+   "msg": "C3/L3 [P2] Restockers walk a part-used box back to the rack after every slot, and never top up shelves that are half full"
+  },
+  {
+   "t": "2026-11-07T10:21:09+10:00",
+   "kind": "finding",
+   "msg": "C3/L4 [P2] ShopOS apps rebuild their whole UI on every sale even when hidden, causing stutter and lost clicks"
+  },
+  {
+   "t": "2026-11-07T10:21:09+10:00",
+   "kind": "finding",
+   "msg": "C3/L5 [P2] Aisle signs jump between fixtures as stock sells"
+  },
+  {
+   "t": "2026-11-07T10:21:09+10:00",
+   "kind": "finding",
+   "msg": "C3/L6 [P2] Restockers and customers shut cooler doors and freezer lids on each other"
+  },
+  {
+   "t": "2026-11-07T10:21:09+10:00",
+   "kind": "finding",
+   "msg": "C3/L7 [P2] A restocker still putting a box away when the next day starts is replaced by a twin, and their box is left out of the autosave"
+  },
+  {
+   "t": "2026-11-07T10:21:09+10:00",
+   "kind": "finding",
+   "msg": "C3/L8 [P2] The Market is a flat wall of 48 cards with no grouping, filter or low-stock flag, and its counts go stale while you look at it"
+  },
+  {
+   "t": "2026-11-07T10:21:09+10:00",
+   "kind": "finding",
+   "msg": "C3/L9 [P2] Very large orders spill past the 64-spot bay and keep dropping on the same 16 points"
+  },
+  {
+   "t": "2026-11-07T10:21:09+10:00",
+   "kind": "finding",
+   "msg": "C3/L10 [P3] The cleaner goes for the nearest mess anywhere on the plot first, and waits outside in the shed"
+  },
+  {
+   "t": "2026-11-07T10:21:09+10:00",
+   "kind": "finding",
+   "msg": "C3/L11 [P3] A restocker can take a box from a rack you are moving in build mode"
+  },
+  {
+   "t": "2026-11-07T10:21:09+10:00",
+   "kind": "finding",
+   "msg": "C3/L12 [P3] The restocker's idle status is misleading when the racks hold the wrong products"
+  },
+  {
+   "t": "2026-11-07T10:21:09+10:00",
+   "kind": "finding",
+   "msg": "C3/L13 [P3] Staff app \"Now:\" lines go blank after every rebuild"
+  },
+  {
+   "t": "2026-11-07T10:21:09+10:00",
+   "kind": "finding",
+   "msg": "C3/L14 [P3] The queue-lane plate's BoxMesh is still rebuilt every physics frame"
+  },
+  {
+   "t": "2026-11-07T10:21:09+10:00",
+   "kind": "finding",
+   "msg": "C3/L15 [P3] Build mode re-runs every placement check every physics frame even when the ghost hasn't moved"
+  },
+  {
+   "t": "2026-11-07T10:21:09+10:00",
+   "kind": "finding",
+   "msg": "C3/L16 [P3] Customers walk into fixtures placed during OPEN until you leave build mode"
+  },
+  {
+   "t": "2026-11-07T10:21:09+10:00",
+   "kind": "finding",
+   "msg": "C3/L17 [P3] The Furniture app orders one flat-pack per click, with a delivery fee each time"
+  },
+  {
+   "t": "2026-11-07T10:21:10+10:00",
+   "kind": "finding",
+   "msg": "C3/L18 [P3] Biggest purchases are a single click with no confirmation"
+  },
+  {
+   "t": "2026-11-07T10:21:10+10:00",
+   "kind": "finding",
+   "msg": "C3/L19 [P3] The Sunday paper works out the week's takings but never shows them or compares weeks"
+  },
+  {
+   "t": "2026-11-07T10:21:10+10:00",
+   "kind": "agent",
+   "msg": "Agent CritLate: done findings recorded"
+  },
+  {
+   "t": "2026-11-07T10:21:10+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixFirstHour on F findings; L findings queued for the next fixer"
   }
  ],
  "tests": [
@@ -4495,18 +4828,18 @@
    "t": "2026-11-07T10:19:27+10:00"
   },
   "CritLate": {
-   "state": "running",
-   "task": "Reviewer: mid/late game",
-   "t": "2026-11-07T10:08:24+10:00"
+   "state": "done",
+   "task": "findings recorded",
+   "t": "2026-11-07T10:21:10+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T10:20:58+10:00",
+  "t": "2026-11-07T10:21:10+10:00",
   "mem_free_pct": 62,
   "load": [
-   2.62,
-   2.89,
-   3.41
+   2.3,
+   2.81,
+   3.38
   ],
   "godot_procs": 0
  },
@@ -4933,10 +5266,16 @@
     "stat": "7 files changed, 113 insertions(+), 8 deletions(-)"
    }
   ],
-  "dirty": [],
+  "dirty": [
+   " M scripts/autoload/game.gd",
+   " M scripts/core/day_report.gd",
+   " M scripts/npc/shopper_brain.gd",
+   " M scripts/ui/day_summary.gd",
+   " M scripts/ui/pc/app_stats.gd"
+  ],
   "total_commits": 216
  },
- "updated": "2026-11-07T10:20:59+10:00",
+ "updated": "2026-11-07T10:21:10+10:00",
  "qa": [
   {
    "num": 1,
