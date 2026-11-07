@@ -2603,10 +2603,11 @@
      "file": "tests/soak_player.gd:5-8,680-743",
      "detail": "It hires exactly one restocker, racks only one spare box per product (restockers sit idle and stocked 20-178 items/day), and shelves everything itself. It never buys an upgrade (no call to `Game.buy_upgrade`; phone, loyalty and head office are untested), never upgrades staff tiers, and prices at +10%. So the \"staff restock ~345 against AI 1,300\" split, the stars and late cash describe the AI, not the game. Fix: hire restockers up to `max` once chores exceed 50% of open time; rack every delivered box before shelving; buy upgrades and staff tiers by payback; add a +30% pricing variant. Expected: the soak measures B1-B3 directly.",
      "by": "CritBalance",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:18:41+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "af0afe3",
+     "note": "AI hires restockers while chores >50%, racks every box + fills free rack spots, buys upgrades by payback + staff tiers, --markup flag",
+     "closed": "2026-11-07T12:25:33+10:00"
     },
     {
      "id": "B15",
@@ -5904,6 +5905,11 @@
    "t": "2026-11-07T12:24:48+10:00",
    "kind": "fix",
    "msg": "C4/V11 fixed 8aba018 player 56/0"
+  },
+  {
+   "t": "2026-11-07T12:25:33+10:00",
+   "kind": "fix",
+   "msg": "C4/B14 fixed af0afe3 AI hires restockers while chores >50%, racks every box + fills free rack spots, buys upgrades by payback + staff tiers, --markup flag"
   }
  ],
  "tests": [
@@ -6114,17 +6120,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:24:48+10:00",
-  "mem_free_pct": 53,
+  "t": "2026-11-07T12:25:33+10:00",
+  "mem_free_pct": 54,
   "load": [
-   2.48,
-   2.36,
-   2.59
+   1.99,
+   2.25,
+   2.53
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "95638e4",
+    "date": "2026-11-07T12:25:28+10:00",
+    "subject": "Let stars fill baskets: list length scales 15% per star around 3.5 (B1)",
+    "body": "",
+    "stat": "6 files changed, 51 insertions(+), 8 deletions(-)"
+   },
    {
     "sha": "8aba018",
     "date": "2026-11-07T12:24:47+10:00",
@@ -6537,23 +6550,17 @@
     "subject": "Re-check for restocked stock every 0.5 s on an out-of-stock walk, not every frame (X7)",
     "body": "",
     "stat": "1 file changed, 10 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "4fadc8d",
-    "date": "2026-11-07T09:56:37+10:00",
-    "subject": "Fix the stale concurrency comment and fallbacks in CustomerRules (X18)",
-    "body": "",
-    "stat": "1 file changed, 2 insertions(+), 2 deletions(-)"
    }
   ],
   "dirty": [
-   " M data/customers.json",
-   " M scripts/npc/customer_rules.gd",
-   " M scripts/npc/customer_spawner.gd"
+   " M scripts/fixtures/pc_desk.gd",
+   " M scripts/ui/level_banner.gd",
+   " M scripts/ui/toast.gd",
+   " M tests/screenshot_tour.gd"
   ],
-  "total_commits": 260
+  "total_commits": 261
  },
- "updated": "2026-11-07T12:24:49+10:00",
+ "updated": "2026-11-07T12:25:34+10:00",
  "qa": [
   {
    "num": 1,
