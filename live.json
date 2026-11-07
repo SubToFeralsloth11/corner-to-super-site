@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixLate: L1 restock-to-full counts stock on the way",
+  "activity": "FixLate: L9 bay overflow",
   "cycle": "3",
-  "since": "2026-11-07T11:21:45+10:00"
+  "since": "2026-11-07T11:26:20+10:00"
  },
  "rounds": [
   {
@@ -5016,6 +5016,11 @@
    "t": "2026-11-07T11:26:17+10:00",
    "kind": "fix",
    "msg": "C3/L8 fixed 4d42de3 Market: licence tabs + Needs stock (room>0, most room first), red stock line <25%, counts refresh on sale/order/box landing while open (deferred), order note held 6 s. order_test: filter/sort/tab checks, card follows shelf after a sale, note survives next sale."
+  },
+  {
+   "t": "2026-11-07T11:26:20+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixLate: L9 bay overflow"
   }
  ],
  "tests": [
@@ -5194,7 +5199,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:26:17+10:00",
+  "t": "2026-11-07T11:26:20+10:00",
   "mem_free_pct": 45,
   "load": [
    2.73,
@@ -5629,7 +5634,7 @@
   "dirty": [],
   "total_commits": 247
  },
- "updated": "2026-11-07T11:26:18+10:00",
+ "updated": "2026-11-07T11:26:20+10:00",
  "qa": [
   {
    "num": 1,
