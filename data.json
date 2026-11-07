@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T10:03+10:00",
- "head": "07fac90",
+ "generated": "2026-11-07T10:04+10:00",
+ "head": "c2f28fa",
  "stats": {
-  "commits": 210,
+  "commits": 212,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T10:03:07+10:00",
+  "last_commit": "2026-11-07T10:04:29+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 28911,
+  "gd_lines": 28932,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1351,6 +1351,16 @@
    "sha": "07fac90",
    "date": "2026-11-07T10:03:07+10:00",
    "subject": "Say when a loan taken on the receipt is first charged (X15)"
+  },
+  {
+   "sha": "109cdad",
+   "date": "2026-11-07T10:04:29+10:00",
+   "subject": "Count only customers still waiting at 22:00 as turned away, not those sent home by closing early (X13)"
+  },
+  {
+   "sha": "c2f28fa",
+   "date": "2026-11-07T10:04:29+10:00",
+   "subject": "Move the till hint below the rival-sale chip and Take a pack below the hint, off the HUD clock (X16)"
   }
  ],
  "commits_per_hour": [
@@ -1524,7 +1534,7 @@
   },
   {
    "hour": "2026-11-07T10:00:00+10:00",
-   "commits": 6
+   "commits": 8
   }
  ],
  "sections": [

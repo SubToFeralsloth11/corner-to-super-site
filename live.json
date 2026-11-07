@@ -1820,9 +1820,9 @@
      "by": "CritRegress",
      "status": "fixed",
      "found": "2026-11-07T09:46:58+10:00",
-     "commit": "e65fe0e",
-     "note": "text fixed; close-early count part left to FixRegress (spawner)",
-     "closed": "2026-11-07T09:51:21+10:00"
+     "commit": "109cdad",
+     "note": "spawner half (lead fixed the wording): pending counted as turned away only once the clock reached 22:00; close_early sends them home uncounted. test_concurrency_cap_holds_back_arrivals covers both; 6/0",
+     "closed": "2026-11-07T10:04:35+10:00"
     },
     {
      "id": "X14",
@@ -3897,6 +3897,11 @@
    "t": "2026-11-07T10:03:09+10:00",
    "kind": "fix",
    "msg": "C2/X15 fixed 07fac90 doc: loan taken on the receipt (SUMMARY, before Pay all) is first charged the next night; matches end_day building today.bills before"
+  },
+  {
+   "t": "2026-11-07T10:04:35+10:00",
+   "kind": "fix",
+   "msg": "C2/X13 fixed 109cdad spawner half (lead fixed the wording): pending counted as turned away only once the clock reached 22:00; close_early sends them home uncounted. test_concurrency_cap_holds_back_arrivals covers both; 6/0"
   }
  ],
  "tests": [
@@ -4038,17 +4043,31 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:03:09+10:00",
-  "mem_free_pct": 45,
+  "t": "2026-11-07T10:04:35+10:00",
+  "mem_free_pct": 44,
   "load": [
-   6.52,
-   4.23,
-   3.71
+   6.06,
+   4.58,
+   3.89
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "c2f28fa",
+    "date": "2026-11-07T10:04:29+10:00",
+    "subject": "Move the till hint below the rival-sale chip and Take a pack below the hint, off the HUD clock (X16)",
+    "body": "",
+    "stat": "2 files changed, 15 insertions(+), 3 deletions(-)"
+   },
+   {
+    "sha": "109cdad",
+    "date": "2026-11-07T10:04:29+10:00",
+    "subject": "Count only customers still waiting at 22:00 as turned away, not those sent home by closing early (X13)",
+    "body": "",
+    "stat": "2 files changed, 11 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "07fac90",
     "date": "2026-11-07T10:03:07+10:00",
@@ -4454,26 +4473,12 @@
     "subject": "Itemise the day's other money on the receipt so it adds up to the cash",
     "body": "Orders, furniture, licences, expansions, staff, upgrades and loans never showed, so a '+$150'\nnight could end with less cash than the morning. The receipt now lists them and the cash at\nopen (saved with the day). Review round 2, E11.",
     "stat": "4 files changed, 63 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "7914cd7",
-    "date": "2026-11-07T08:04:27+10:00",
-    "subject": "Show on the receipt how many customers a full store turned away",
-    "body": "Arrivals held back by the in-store cap were dropped silently at closing, so the player never\nlearned that another till or cashier would have earned more. Review round 2, E10.",
-    "stat": "5 files changed, 20 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "58eaa5e",
-    "date": "2026-11-07T08:03:56+10:00",
-    "subject": "Name the product that actually ran out in the Sunday review",
-    "body": "'Kept running out' used the top of all lost sales, so an overpriced product that never ran out\nwas blamed. Out-of-stock misses are now counted (and saved) on their own. Review round 2, E13.",
-    "stat": "4 files changed, 15 insertions(+), 5 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 210
+  "total_commits": 212
  },
- "updated": "2026-11-07T10:03:10+10:00",
+ "updated": "2026-11-07T10:04:36+10:00",
  "qa": [
   {
    "num": 1,
