@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixFirstHour: F15 hint under cash panel",
+  "activity": "FixFirstHour: F16 open sign with empty shelves",
   "cycle": "3",
-  "since": "2026-11-07T10:38:59+10:00"
+  "since": "2026-11-07T10:40:31+10:00"
  },
  "rounds": [
   {
@@ -4819,6 +4819,11 @@
    "t": "2026-11-07T10:40:28+10:00",
    "kind": "fix",
    "msg": "C3/F15 fixed 9925562 Seated at a till the card anchors top-centre at y 232 (under till hint + Smokes button), 520 px text with the step number inline; back to bottom on standing. tutorial_test checks card rect vs change panel, keypad and till hint (bottom card intersected the cash panel before); tutorial 42 passed"
+  },
+  {
+   "t": "2026-11-07T10:40:31+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixFirstHour: F16 open sign with empty shelves"
   }
  ],
  "tests": [
@@ -4981,7 +4986,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:40:28+10:00",
+  "t": "2026-11-07T10:40:31+10:00",
   "mem_free_pct": 59,
   "load": [
    1.97,
@@ -5416,7 +5421,7 @@
   "dirty": [],
   "total_commits": 231
  },
- "updated": "2026-11-07T10:40:29+10:00",
+ "updated": "2026-11-07T10:40:32+10:00",
  "qa": [
   {
    "num": 1,
