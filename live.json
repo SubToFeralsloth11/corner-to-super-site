@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C4",
   "area": "Visuals; balance",
-  "activity": "FixBalance: B4",
+  "activity": "FixBalance: B6",
   "cycle": "4",
-  "since": "2026-11-07T12:32:26+10:00"
+  "since": "2026-11-07T12:35:17+10:00"
  },
  "rounds": [
   {
@@ -6017,6 +6017,11 @@
    "t": "2026-11-07T12:35:14+10:00",
    "kind": "fix",
    "msg": "C4/B5 fixed e374bf3 expansions.json list_bonus e3-e8 +1, Expansions card shows it; test_a_bigger_shop_fills_bigger_baskets"
+  },
+  {
+   "t": "2026-11-07T12:35:17+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixBalance: B6"
   }
  ],
  "tests": [
@@ -6227,11 +6232,11 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:35:14+10:00",
+  "t": "2026-11-07T12:35:17+10:00",
   "mem_free_pct": 55,
   "load": [
-   2.6,
-   2.38,
+   2.55,
+   2.37,
    2.48
   ],
   "godot_procs": 3
@@ -6667,7 +6672,7 @@
   ],
   "total_commits": 271
  },
- "updated": "2026-11-07T12:35:14+10:00",
+ "updated": "2026-11-07T12:35:17+10:00",
  "qa": [
   {
    "num": 1,
