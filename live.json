@@ -6177,6 +6177,11 @@
    "t": "2026-11-07T13:09:12+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixBalance2: fixing soak day-11 error and week-one pacing"
+  },
+  {
+   "t": "2026-11-07T13:09:16+10:00",
+   "kind": "fix",
+   "msg": "Soak AI: delayed actions no longer capture nodes that a give-up can free (day-11 lambda error)"
   }
  ],
  "tests": [
@@ -6404,12 +6409,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T13:09:12+10:00",
-  "mem_free_pct": 41,
+  "t": "2026-11-07T13:09:16+10:00",
+  "mem_free_pct": 39,
   "load": [
-   2.7,
-   3.29,
-   3.17
+   2.97,
+   3.33,
+   3.19
   ],
   "godot_procs": 3
  },
@@ -6843,7 +6848,7 @@
   ],
   "total_commits": 288
  },
- "updated": "2026-11-07T13:09:14+10:00",
+ "updated": "2026-11-07T13:09:17+10:00",
  "qa": [
   {
    "num": 1,
