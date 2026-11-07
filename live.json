@@ -2426,10 +2426,11 @@
      "file": "scripts/core/weekly_review.gd:47-49; scripts/ui/newspaper_card.gd:96-110",
      "detail": "`write()` returns `revenue` and `customers`, but `_fill` prints neither number. There is no week-on-week line, so the weekly payoff moment says nothing about whether the store grew. **Fix:** print \"Takings $X (▲/▼ Y% on last week)\", using the previous 7 entries of `stats_days`.",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:10+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "dd9c33d",
+     "note": "Paper prints 'Takings $X (▲/▼ Y% on last week)' from previous 7 stats_days; additions_test:test_sunday_paper_compares_takings_with_last_week passes",
+     "closed": "2026-11-07T12:07:22+10:00"
     }
    ]
   }
@@ -5079,6 +5080,11 @@
    "t": "2026-11-07T12:07:19+10:00",
    "kind": "fix",
    "msg": "C3/L18 fixed 88dc87b My Store upgrades (head office $6,000) need Buy then Confirm within 3 s; progression_test:test_upgrade_buy_needs_a_confirm passes"
+  },
+  {
+   "t": "2026-11-07T12:07:22+10:00",
+   "kind": "fix",
+   "msg": "C3/L19 fixed dd9c33d Paper prints 'Takings $X (▲/▼ Y% on last week)' from previous 7 stats_days; additions_test:test_sunday_paper_compares_takings_with_last_week passes"
   }
  ],
  "tests": [
@@ -5268,11 +5274,11 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:07:19+10:00",
+  "t": "2026-11-07T12:07:22+10:00",
   "mem_free_pct": 46,
   "load": [
-   3.89,
-   3.53,
+   3.81,
+   3.52,
    3.15
   ],
   "godot_procs": 3
@@ -5703,7 +5709,7 @@
   "dirty": [],
   "total_commits": 251
  },
- "updated": "2026-11-07T12:07:20+10:00",
+ "updated": "2026-11-07T12:07:22+10:00",
  "qa": [
   {
    "num": 1,
