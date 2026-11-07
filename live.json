@@ -1924,7 +1924,20 @@
    "area": "Cycle 3: first hour and late game",
    "started": "2026-11-07T10:08:24+10:00",
    "finished": null,
-   "findings": []
+   "findings": [
+    {
+     "id": "S1",
+     "sev": "P3",
+     "title": "Soak AI's layout plan puts E4/E5/E6 shelves and coolers on wall bands, so the late build-out is never tested",
+     "file": "tests/soak_player.gd PLAN",
+     "detail": "Soak #3 logs 'plan spot ... refused: Too close to the wall' for 14 spots",
+     "by": "soak",
+     "status": "open",
+     "found": "2026-11-07T10:14:12+10:00",
+     "commit": "",
+     "note": ""
+    }
+   ]
   }
  ],
  "log": [
@@ -3972,6 +3985,16 @@
    "t": "2026-11-07T10:08:24+10:00",
    "kind": "status",
    "msg": "Status: reviewing - Two critics on cycle 3; 30-day soak verifying cycle 2"
+  },
+  {
+   "t": "2026-11-07T10:14:12+10:00",
+   "kind": "agent",
+   "msg": "Agent soak: done Soak #3 passed pacing: d1 $44, d3 $213, d7 $531, d15 $1,019, d30 $3,327; stars 3.2-4.3"
+  },
+  {
+   "t": "2026-11-07T10:14:12+10:00",
+   "kind": "finding",
+   "msg": "C3/S1 [P3] Soak AI's layout plan puts E4/E5/E6 shelves and coolers on wall bands, so the late build-out is never tested"
   }
  ],
  "tests": [
@@ -4103,9 +4126,9 @@
    "t": "2026-11-07T09:27:56+10:00"
   },
   "soak": {
-   "state": "running",
-   "task": "Soak #3 after cycle 2 (access strip now 0.9 m)",
-   "t": "2026-11-07T10:08:24+10:00"
+   "state": "done",
+   "task": "Soak #3 passed pacing: d1 $44, d3 $213, d7 $531, d15 $1,019, d30 $3,327; stars 3.2-4.3",
+   "t": "2026-11-07T10:14:12+10:00"
   },
   "CritRegress": {
    "state": "done",
@@ -4134,14 +4157,14 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:08:24+10:00",
-  "mem_free_pct": 47,
+  "t": "2026-11-07T10:14:12+10:00",
+  "mem_free_pct": 60,
   "load": [
-   2.32,
-   3.93,
-   3.81
+   4.14,
+   4.18,
+   3.97
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
@@ -4569,7 +4592,7 @@
   "dirty": [],
   "total_commits": 215
  },
- "updated": "2026-11-07T10:08:25+10:00",
+ "updated": "2026-11-07T10:14:13+10:00",
  "qa": [
   {
    "num": 1,
