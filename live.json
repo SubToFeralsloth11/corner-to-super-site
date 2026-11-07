@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixFirstHour: F13 hint refresh loop",
+  "activity": "FixFirstHour: F3 van step finishes at the boxes",
   "cycle": "3",
-  "since": "2026-11-07T10:34:54+10:00"
+  "since": "2026-11-07T10:35:35+10:00"
  },
  "rounds": [
   {
@@ -4764,6 +4764,11 @@
    "t": "2026-11-07T10:35:32+10:00",
    "kind": "fix",
    "msg": "C3/F13 fixed dc6951a _process compares with 'and not _hidden_for_pc'; tutorial_test counts refreshes while seated: 20 in 20 frames before, <=1 after"
+  },
+  {
+   "t": "2026-11-07T10:35:35+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixFirstHour: F3 van step finishes at the boxes"
   }
  ],
  "tests": [
@@ -4926,7 +4931,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:35:32+10:00",
+  "t": "2026-11-07T10:35:35+10:00",
   "mem_free_pct": 66,
   "load": [
    3.47,
@@ -5361,7 +5366,7 @@
   "dirty": [],
   "total_commits": 226
  },
- "updated": "2026-11-07T10:35:33+10:00",
+ "updated": "2026-11-07T10:35:35+10:00",
  "qa": [
   {
    "num": 1,
