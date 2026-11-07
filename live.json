@@ -2022,10 +2022,11 @@
      "file": "scripts/tutorial/tutorial.gd:65-71; scripts/main.gd:129-135; data/tutorial.json:22-30",
      "detail": "A step only advances when its own event fires. Skip the optional F price check and the card is stuck on \"Aim at a price label and press F\" while customers queue, so the serving instructions (sit with E, click items, the reader) are never shown. If the first customer pays cash, the card tells you to click the card reader, which does nothing for cash. Nothing stops the tutorial after day 1 (GDD §13 says day 1 only), so a missed step stays on screen for days. Fix: advance past \"prices\" once the store opens, show the cash or card step to match the current `Checkout.method` while a payment is waiting, and stop the tutorial on the day-1 `day_ended`.",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:26+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "92f6853",
+     "note": "prices step skip_when store_opened; hint shows the serve step matching the seated till's PAYING method; day_ended completes the tutorial whatever is left. New tutorial_test case covers all three (fails before: stuck on prices / card text for cash / still active); tutorial 36 passed, menu passes",
+     "closed": "2026-11-07T10:37:56+10:00"
     },
     {
      "id": "F8",
@@ -4780,6 +4781,11 @@
    "t": "2026-11-07T10:36:40+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixFirstHour: F7 tutorial order/stop"
+  },
+  {
+   "t": "2026-11-07T10:37:56+10:00",
+   "kind": "fix",
+   "msg": "C3/F7 fixed 92f6853 prices step skip_when store_opened; hint shows the serve step matching the seated till's PAYING method; day_ended completes the tutorial whatever is left. New tutorial_test case covers all three (fails before: stuck on prices / card text for cash / still active); tutorial 36 passed, menu passes"
   }
  ],
  "tests": [
@@ -4942,17 +4948,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:36:40+10:00",
+  "t": "2026-11-07T10:37:56+10:00",
   "mem_free_pct": 67,
   "load": [
-   2.66,
-   3.01,
-   3.15
+   2.82,
+   2.94,
+   3.11
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "92f6853",
+    "date": "2026-11-07T10:37:54+10:00",
+    "subject": "Let the tutorial pass the price check on opening, follow the payment method and end with day 1 (F7)",
+    "body": "",
+    "stat": "5 files changed, 93 insertions(+), 14 deletions(-)"
+   },
    {
     "sha": "922bfe3",
     "date": "2026-11-07T10:36:36+10:00",
@@ -5365,19 +5378,12 @@
     "subject": "Move the Sunday review's sentences into events.json as the class doc promised",
     "body": "Review round 2, E20.",
     "stat": "2 files changed, 20 insertions(+), 8 deletions(-)"
-   },
-   {
-    "sha": "f67737d",
-    "date": "2026-11-07T08:40:22+10:00",
-    "subject": "Book cost of goods at what the stock cost, not today's drifted cost",
-    "body": "Buying on a cheap day never showed as profit. Game.stock_basis keeps a running average per\nproduct (saved). Review round 2, E15.",
-    "stat": "2 files changed, 52 insertions(+)"
    }
   ],
   "dirty": [],
-  "total_commits": 227
+  "total_commits": 228
  },
- "updated": "2026-11-07T10:36:41+10:00",
+ "updated": "2026-11-07T10:37:57+10:00",
  "qa": [
   {
    "num": 1,
