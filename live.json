@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C4",
   "area": "Visuals; balance",
-  "activity": "C4 visual fixes in (22 of 25); FixBalance2 tuning soak; CritRegress5 reviewing",
+  "activity": "FixBalance2: soak with --markup=1.3",
   "cycle": "5",
-  "since": "2026-11-07T13:20:01+10:00"
+  "since": "2026-11-07T13:51:19+10:00"
  },
  "rounds": [
   {
@@ -6496,6 +6496,11 @@
    "t": "2026-11-07T13:51:16+10:00",
    "kind": "fix",
    "msg": "Soak AI holds back a new till's cashier fee so the till isn't left unstaffed"
+  },
+  {
+   "t": "2026-11-07T13:51:19+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixBalance2: soak with --markup=1.3"
   }
  ],
  "tests": [
@@ -6728,7 +6733,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T13:51:16+10:00",
+  "t": "2026-11-07T13:51:19+10:00",
   "mem_free_pct": 45,
   "load": [
    3.25,
@@ -7174,7 +7179,7 @@
   ],
   "total_commits": 292
  },
- "updated": "2026-11-07T13:51:17+10:00",
+ "updated": "2026-11-07T13:51:20+10:00",
  "qa": [
   {
    "num": 1,
