@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixFirstHour: F18 furniture orders vs tutorial",
+  "activity": "FixFirstHour: F14 PC location text",
   "cycle": "3",
-  "since": "2026-11-07T10:37:59+10:00"
+  "since": "2026-11-07T10:38:40+10:00"
  },
  "rounds": [
   {
@@ -4797,6 +4797,11 @@
    "t": "2026-11-07T10:38:37+10:00",
    "kind": "fix",
    "msg": "C3/F18 fixed 7739933 Tutorial only notifies order_placed when the order has a non-flat-pack box; flat-packs never finish the van step. tutorial_test emits a bin-only order and checks the step stays 'order' (fails before); tutorial passes"
+  },
+  {
+   "t": "2026-11-07T10:38:40+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixFirstHour: F14 PC location text"
   }
  ],
  "tests": [
@@ -4959,7 +4964,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:38:37+10:00",
+  "t": "2026-11-07T10:38:40+10:00",
   "mem_free_pct": 60,
   "load": [
    2.39,
@@ -5394,7 +5399,7 @@
   "dirty": [],
   "total_commits": 229
  },
- "updated": "2026-11-07T10:38:38+10:00",
+ "updated": "2026-11-07T10:38:41+10:00",
  "qa": [
   {
    "num": 1,
