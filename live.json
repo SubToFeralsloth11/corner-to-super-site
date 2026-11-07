@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C4",
   "area": "Visuals; balance",
-  "activity": "FixBalance: B14",
+  "activity": "FixBalance: B2",
   "cycle": "4",
-  "since": "2026-11-07T12:20:09+10:00"
+  "since": "2026-11-07T12:25:39+10:00"
  },
  "rounds": [
   {
@@ -5916,6 +5916,11 @@
    "t": "2026-11-07T12:25:36+10:00",
    "kind": "fix",
    "msg": "C4/B1 fixed 95638e4 list length x(1+0.15(stars-3.5)); test_stars_fill_baskets"
+  },
+  {
+   "t": "2026-11-07T12:25:39+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixBalance: B2"
   }
  ],
  "tests": [
@@ -6126,12 +6131,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:25:36+10:00",
+  "t": "2026-11-07T12:25:39+10:00",
   "mem_free_pct": 54,
   "load": [
-   1.99,
-   2.25,
-   2.53
+   1.91,
+   2.23,
+   2.52
   ],
   "godot_procs": 0
  },
@@ -6562,11 +6567,12 @@
    " M scripts/fixtures/pc_desk.gd",
    " M scripts/ui/level_banner.gd",
    " M scripts/ui/toast.gd",
+   " M tests/cases/progression_test.gd",
    " M tests/screenshot_tour.gd"
   ],
   "total_commits": 261
  },
- "updated": "2026-11-07T12:25:36+10:00",
+ "updated": "2026-11-07T12:25:39+10:00",
  "qa": [
   {
    "num": 1,
