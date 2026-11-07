@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixFirstHour: S1 soak plan spots off wall bands",
+  "activity": "FixFirstHour: visual check + full suite",
   "cycle": "3",
-  "since": "2026-11-07T10:48:41+10:00"
+  "since": "2026-11-07T10:55:06+10:00"
  },
  "rounds": [
   {
@@ -4896,6 +4896,11 @@
    "t": "2026-11-07T10:55:04+10:00",
    "kind": "fix",
    "msg": "C3/S1 fixed 17cff23 E4 gondolas z -15 -> -14.75, E5 gondola/wall shelf z -11 -> -10.75 (wall shelf x -13.63, its snap), E5 coolers x 13.65 -> 13.55, E6 chest freezers z -19.5 -> -19.35. soak 30 4 (/tmp/cts_soak_s1): no 'refused' notes; all 6 E4 gondolas, E5 gondola+wall shelf, 3 coolers, 2 E6 freezers bought; pacing all ok (d1 $52, d3 $190, d7 $490, d15 $1,075, d30 $4,019)"
+  },
+  {
+   "t": "2026-11-07T10:55:06+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixFirstHour: visual check + full suite"
   }
  ],
  "tests": [
@@ -5058,7 +5063,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:55:04+10:00",
+  "t": "2026-11-07T10:55:06+10:00",
   "mem_free_pct": 59,
   "load": [
    4.35,
@@ -5493,7 +5498,7 @@
   "dirty": [],
   "total_commits": 238
  },
- "updated": "2026-11-07T10:55:04+10:00",
+ "updated": "2026-11-07T10:55:07+10:00",
  "qa": [
   {
    "num": 1,
