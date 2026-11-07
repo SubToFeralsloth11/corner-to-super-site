@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C4",
   "area": "Visuals; balance",
-  "activity": "FixBalance: B6",
+  "activity": "FixBalance: B9",
   "cycle": "4",
-  "since": "2026-11-07T12:35:17+10:00"
+  "since": "2026-11-07T12:38:45+10:00"
  },
  "rounds": [
   {
@@ -6057,6 +6057,11 @@
    "t": "2026-11-07T12:38:43+10:00",
    "kind": "fix",
    "msg": "C4/B8 fixed 22bd582 reputation window = clamp(yesterday customers,40,150); test_busy_stores_average_their_stars_over_the_day"
+  },
+  {
+   "t": "2026-11-07T12:38:45+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixBalance: B9"
   }
  ],
  "tests": [
@@ -6267,14 +6272,14 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:38:43+10:00",
+  "t": "2026-11-07T12:38:45+10:00",
   "mem_free_pct": 54,
   "load": [
-   1.95,
-   2.29,
-   2.43
+   1.87,
+   2.27,
+   2.42
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
@@ -6706,7 +6711,7 @@
   ],
   "total_commits": 276
  },
- "updated": "2026-11-07T12:38:43+10:00",
+ "updated": "2026-11-07T12:38:46+10:00",
  "qa": [
   {
    "num": 1,
