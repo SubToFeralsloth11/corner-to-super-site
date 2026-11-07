@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixLate on L1-L19; first-hour fixes landed (suite 1137/0)",
+  "activity": "FixLate: L2 shed doorway",
   "cycle": "3",
-  "since": "2026-11-07T10:58:41+10:00"
+  "since": "2026-11-07T11:01:35+10:00"
  },
  "rounds": [
   {
@@ -4921,6 +4921,11 @@
    "t": "2026-11-07T10:58:41+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixLate on L1-L19; first-hour fixes landed (suite 1137/0)"
+  },
+  {
+   "t": "2026-11-07T11:01:35+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixLate: L2 shed doorway"
   }
  ],
  "tests": [
@@ -5099,17 +5104,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:58:41+10:00",
-  "mem_free_pct": 59,
+  "t": "2026-11-07T11:01:35+10:00",
+  "mem_free_pct": 64,
   "load": [
-   2.91,
-   3.03,
-   2.9
+   2.69,
+   2.7,
+   2.77
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "b7eee56",
+    "date": "2026-11-07T10:59:12+10:00",
+    "subject": "Record review cycles 2 and 3 in PROGRESS",
+    "body": "",
+    "stat": "1 file changed, 23 insertions(+)"
+   },
    {
     "sha": "17cff23",
     "date": "2026-11-07T10:55:01+10:00",
@@ -5522,19 +5534,12 @@
     "subject": "Make not carrying a product a milder letdown than an empty shelf",
     "body": "Customers took the full -12 out-of-stock hit for products the store never sold, so a new store\nwas punished for its range rather than its stocking. An empty labelled slot is still -12; a\nproduct with no slot at all is -4 with its own lines. Still a lost sale (the demand signal).\nReview round 2, cycle 2.",
     "stat": "5 files changed, 34 insertions(+), 4 deletions(-)"
-   },
-   {
-    "sha": "ff5b859",
-    "date": "2026-11-07T09:03:09+10:00",
-    "subject": "Wait for the navmesh rebake to start before waiting for it to finish in nav tests",
-    "body": "The off-navmesh test failed once under load when the threaded rebake hadn't started yet.",
-    "stat": "1 file changed, 8 insertions(+), 2 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 238
+  "total_commits": 239
  },
- "updated": "2026-11-07T10:58:42+10:00",
+ "updated": "2026-11-07T11:01:36+10:00",
  "qa": [
   {
    "num": 1,

@@ -1,10 +1,10 @@
 {
- "generated": "2026-11-07T10:58+10:00",
- "head": "17cff23",
+ "generated": "2026-11-07T11:01+10:00",
+ "head": "b7eee56",
  "stats": {
-  "commits": 238,
+  "commits": 239,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T10:55:01+10:00",
+  "last_commit": "2026-11-07T10:59:12+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
@@ -299,6 +299,13 @@
    "title": "Review round 2: everything else (2026-11-06/07, lead)",
    "text": "New section in PROGRESS.md (cbbc78e).",
    "progress": "Review round 2: everything else (2026-11-06/07, lead)"
+  },
+  {
+   "date": "2026-11-07T10:59:12+10:00",
+   "kind": "milestone",
+   "title": "Review cycles 2 and 3 (2026-11-07)",
+   "text": "New section in PROGRESS.md (b7eee56).",
+   "progress": "Review cycles 2 and 3 (2026-11-07)"
   }
  ],
  "commits": [
@@ -1491,6 +1498,11 @@
    "sha": "17cff23",
    "date": "2026-11-07T10:55:01+10:00",
    "subject": "Move the soak AI's E4-E6 plan spots off the wall bands (S1)"
+  },
+  {
+   "sha": "b7eee56",
+   "date": "2026-11-07T10:59:12+10:00",
+   "subject": "Record review cycles 2 and 3 in PROGRESS"
   }
  ],
  "commits_per_hour": [
@@ -1664,7 +1676,7 @@
   },
   {
    "hour": "2026-11-07T10:00:00+10:00",
-   "commits": 34
+   "commits": 35
   }
  ],
  "sections": [
@@ -1759,6 +1771,10 @@
   },
   {
    "title": "Review round 2: everything else (2026-11-06/07, lead)",
+   "deferred": []
+  },
+  {
+   "title": "Review cycles 2 and 3 (2026-11-07)",
    "deferred": []
   }
  ],
