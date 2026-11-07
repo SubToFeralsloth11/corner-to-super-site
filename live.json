@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C4",
   "area": "Visuals; balance",
-  "activity": "Lead: 17 of 25 visual findings fixed; FixBalance on B2-B13",
+  "activity": "FixBalance: B4",
   "cycle": "4",
-  "since": "2026-11-07T12:31:59+10:00"
+  "since": "2026-11-07T12:32:26+10:00"
  },
  "rounds": [
   {
@@ -6000,6 +6000,11 @@
    "t": "2026-11-07T12:32:24+10:00",
    "kind": "fix",
    "msg": "C4/B3 fixed 7e64f7d carry_boxes 2/3/4, max 6, T2+ haul bay->racks; tests carries_several_boxes + tier_two_racks_the_bay_boxes"
+  },
+  {
+   "t": "2026-11-07T12:32:26+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixBalance: B4"
   }
  ],
  "tests": [
@@ -6210,8 +6215,8 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:32:24+10:00",
-  "mem_free_pct": 62,
+  "t": "2026-11-07T12:32:26+10:00",
+  "mem_free_pct": 61,
   "load": [
    2.38,
    2.52,
@@ -6645,7 +6650,7 @@
   "dirty": [],
   "total_commits": 270
  },
- "updated": "2026-11-07T12:32:24+10:00",
+ "updated": "2026-11-07T12:32:27+10:00",
  "qa": [
   {
    "num": 1,
