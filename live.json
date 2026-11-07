@@ -3,9 +3,9 @@
   "state": "reviewing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "Two critics on cycle 3; 30-day soak verifying cycle 2",
+  "activity": "FixFirstHour: F8 not-carried lost-sale reason",
   "cycle": "3",
-  "since": "2026-11-07T10:08:24+10:00"
+  "since": "2026-11-07T10:20:58+10:00"
  },
  "rounds": [
   {
@@ -4334,6 +4334,11 @@
    "t": "2026-11-07T10:20:46+10:00",
    "kind": "fix",
    "msg": "C3/F9 fixed 41a2e4a HUD 'Clean N%' line; warns below 60"
+  },
+  {
+   "t": "2026-11-07T10:20:58+10:00",
+   "kind": "status",
+   "msg": "Status: reviewing - FixFirstHour: F8 not-carried lost-sale reason"
   }
  ],
  "tests": [
@@ -4496,12 +4501,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:20:46+10:00",
+  "t": "2026-11-07T10:20:58+10:00",
   "mem_free_pct": 62,
   "load": [
-   2.38,
-   2.87,
-   3.42
+   2.62,
+   2.89,
+   3.41
   ],
   "godot_procs": 0
  },
@@ -4931,7 +4936,7 @@
   "dirty": [],
   "total_commits": 216
  },
- "updated": "2026-11-07T10:20:46+10:00",
+ "updated": "2026-11-07T10:20:59+10:00",
  "qa": [
   {
    "num": 1,
