@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixLate: L10 cleaner priorities",
+  "activity": "FixLate: L16 rebake during OPEN builds",
   "cycle": "3",
-  "since": "2026-11-07T11:19:36+10:00"
+  "since": "2026-11-07T11:20:41+10:00"
  },
  "rounds": [
   {
@@ -4988,6 +4988,11 @@
    "t": "2026-11-07T11:20:39+10:00",
    "kind": "fix",
    "msg": "C3/L10 fixed a02bea2 CleanerJob._find ranks Hygiene.in_shop messes before others; waits beside the mop bucket. staff_jobs_test: litter 3 m away on the apron vs spill 12 m away in shop -> shop spill first (before: litter first); idle cleaner by the bucket (before: shed at -15.8,-1.0)."
+  },
+  {
+   "t": "2026-11-07T11:20:41+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixLate: L16 rebake during OPEN builds"
   }
  ],
  "tests": [
@@ -5166,11 +5171,11 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:20:39+10:00",
+  "t": "2026-11-07T11:20:41+10:00",
   "mem_free_pct": 55,
   "load": [
+   2.23,
    2.16,
-   2.15,
    2.3
   ],
   "godot_procs": 0
@@ -5601,7 +5606,7 @@
   "dirty": [],
   "total_commits": 245
  },
- "updated": "2026-11-07T11:20:39+10:00",
+ "updated": "2026-11-07T11:20:42+10:00",
  "qa": [
   {
    "num": 1,
