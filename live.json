@@ -6491,6 +6491,11 @@
    "t": "2026-11-07T13:51:12+10:00",
    "kind": "fix",
    "msg": "Week one gets quiet hours (cap floor 6 -> 3) and customers are worth 7 XP: soak day 3 $232, day 7 $511, day 15 $1,213, day 30 $2,955"
+  },
+  {
+   "t": "2026-11-07T13:51:16+10:00",
+   "kind": "fix",
+   "msg": "Soak AI holds back a new till's cashier fee so the till isn't left unstaffed"
   }
  ],
  "tests": [
@@ -6723,14 +6728,14 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T13:51:12+10:00",
+  "t": "2026-11-07T13:51:16+10:00",
   "mem_free_pct": 45,
   "load": [
-   2.84,
-   4.23,
-   4.6
+   3.25,
+   4.29,
+   4.62
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
@@ -7169,7 +7174,7 @@
   ],
   "total_commits": 292
  },
- "updated": "2026-11-07T13:51:13+10:00",
+ "updated": "2026-11-07T13:51:17+10:00",
  "qa": [
   {
    "num": 1,
