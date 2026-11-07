@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C2",
   "area": "Second pass",
-  "activity": "FixRegress: X9/X10 game.gd money",
+  "activity": "FixRegress: X15 loan doc, X13 spawner, X16",
   "cycle": "2",
-  "since": "2026-11-07T10:01:10+10:00"
+  "since": "2026-11-07T10:03:02+10:00"
  },
  "rounds": [
   {
@@ -3886,6 +3886,11 @@
    "t": "2026-11-07T10:03:00+10:00",
    "kind": "fix",
    "msg": "C2/X10 fixed 354656d free first-order boxes (dearest first, as quote prices them) booked at 0; Game.write_off_stock(id, units) removes binned units (player.bin_held hook requested from lead); no start stock exists to book. test_free_boxes_cost_nothing_and_binned_stock_leaves_the_average; day_test 46/0"
+  },
+  {
+   "t": "2026-11-07T10:03:02+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixRegress: X15 loan doc, X13 spawner, X16"
   }
  ],
  "tests": [
@@ -4027,7 +4032,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:03:00+10:00",
+  "t": "2026-11-07T10:03:02+10:00",
   "mem_free_pct": 45,
   "load": [
    6.89,
@@ -4462,7 +4467,7 @@
   "dirty": [],
   "total_commits": 209
  },
- "updated": "2026-11-07T10:03:00+10:00",
+ "updated": "2026-11-07T10:03:03+10:00",
  "qa": [
   {
    "num": 1,
