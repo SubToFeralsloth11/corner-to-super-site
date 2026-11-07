@@ -2149,10 +2149,11 @@
      "file": "scripts/npc/dale.gd:76-79,117-127",
      "detail": "His lines are 2.5-second 3D bubbles with no voice. If the player heads straight for the PC (the obvious move), Dale follows at 1.25 m/s. When he reaches the seated player or gives up after 25 s, he talks behind them or from 20 m away, and the keys tween in a straight line through the shop wall. The pointer to the PC is lost. Fix: also post each Dale line as a toast, and skip the key-flight tween when there's no line of sight or the player is locked.",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:27+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "7a42b85",
+     "note": "Dale._say also posts 'Dale: <line>' toast; hand_over_keys frees the ring instead of tweening when the player is locked or a world ray from hand to camera is blocked. tutorial_test: player at PC gets the goodbye toast naming the PC and no flying keys (fails before); tutorial 44, menu 81 pass",
+     "closed": "2026-11-07T10:42:30+10:00"
     },
     {
      "id": "F18",
@@ -4835,6 +4836,11 @@
    "t": "2026-11-07T10:41:31+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixFirstHour: F17 Dale handover"
+  },
+  {
+   "t": "2026-11-07T10:42:30+10:00",
+   "kind": "fix",
+   "msg": "C3/F17 fixed 7a42b85 Dale._say also posts 'Dale: <line>' toast; hand_over_keys frees the ring instead of tweening when the player is locked or a world ray from hand to camera is blocked. tutorial_test: player at PC gets the goodbye toast naming the PC and no flying keys (fails before); tutorial 44, menu 81 pass"
   }
  ],
  "tests": [
@@ -4997,17 +5003,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:41:31+10:00",
+  "t": "2026-11-07T10:42:30+10:00",
   "mem_free_pct": 59,
   "load": [
-   1.49,
-   2.28,
-   2.79
+   1.86,
+   2.27,
+   2.74
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "7a42b85",
+    "date": "2026-11-07T10:42:28+10:00",
+    "subject": "Post Dale's lines as toasts and skip the key flight through walls or to a seated player (F17)",
+    "body": "",
+    "stat": "2 files changed, 51 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "2918be9",
     "date": "2026-11-07T10:41:27+10:00",
@@ -5420,19 +5433,12 @@
     "subject": "Sit closer to the PC so the Market's text is readable, and keep the price popup's figure clear of its edge",
     "body": "At 0.5 m the 1280-px desktop filled about 60% of the view (13-px card text came out near 7 px).\n'(market)' beside the big price ran off the card; it is a small caption now.",
     "stat": "2 files changed, 6 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "26924f8",
-    "date": "2026-11-07T08:55:14+10:00",
-    "subject": "Let a ShopOS app reopen while its close animation is still running",
-    "body": "",
-    "stat": "1 file changed, 23 insertions(+), 4 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 232
+  "total_commits": 233
  },
- "updated": "2026-11-07T10:41:32+10:00",
+ "updated": "2026-11-07T10:42:31+10:00",
  "qa": [
   {
    "num": 1,
