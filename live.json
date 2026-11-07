@@ -2217,10 +2217,11 @@
      "file": "scripts/npc/restocker_job.gd:172-197,66-90",
      "detail": "`_after_slot` always calls `_head_for_rack()` while the box still has stock, even when the next slot of the same product is 1 m away. One product usually spans several adjacent slots, so each slot costs a full round trip. `_find` also only looks at slots under `LOW_FILL` 0.5, so restockers stand idle beside racked boxes while shelves sit at 55%. **Fix:** in `_after_slot`, if `box.count > 0`, claim the nearest unclaimed slot of `box.product_id` below 100% (within ~6 m, or anywhere below LOW_FILL) and go to `TO_SLOT` before returning the box. In `_find`, when nothing is below LOW_FILL, pick the lowest slot under 100% that has a racked box.",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:09+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "d5640f3",
+     "note": "Part-used box chains to nearest unfull slot of its product (6 m or <50% anywhere) before returning; _find tops up slots under 100% when none <50%. staff_jobs_test: two CHIPZ slots at 10/12 -> both full with one rack return (before: never touched, 10/12).",
+     "closed": "2026-11-07T11:14:45+10:00"
     },
     {
      "id": "L4",
@@ -4937,6 +4938,11 @@
    "t": "2026-11-07T11:12:36+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixLate: L3 restocker top-ups"
+  },
+  {
+   "t": "2026-11-07T11:14:45+10:00",
+   "kind": "fix",
+   "msg": "C3/L3 fixed d5640f3 Part-used box chains to nearest unfull slot of its product (6 m or <50% anywhere) before returning; _find tops up slots under 100% when none <50%. staff_jobs_test: two CHIPZ slots at 10/12 -> both full with one rack return (before: never touched, 10/12)."
   }
  ],
  "tests": [
@@ -5115,17 +5121,31 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:12:36+10:00",
+  "t": "2026-11-07T11:14:45+10:00",
   "mem_free_pct": 59,
   "load": [
-   1.98,
-   2.41,
-   2.54
+   1.66,
+   2.07,
+   2.38
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "31f514c",
+    "date": "2026-11-07T11:14:43+10:00",
+    "subject": "Describe the restocker's top-ups, box chaining and idle status in the GDD (L3, L12)",
+    "body": "",
+    "stat": "1 file changed, 4 insertions(+), 2 deletions(-)"
+   },
+   {
+    "sha": "d5640f3",
+    "date": "2026-11-07T11:14:33+10:00",
+    "subject": "Let restockers top up part-full shelves and carry a box on to the next slot (L3, L11, L12)",
+    "body": "A part-used box now goes on to the nearest slot of its product that isn't full (6 m, or any\nunder half full) before it returns to the rack; with nothing under half full, the emptiest\nslot under full is topped up. A rack picked up in build mode is abandoned. The idle status\nnames the low shelves' products the racks lack.",
+    "stat": "2 files changed, 147 insertions(+), 14 deletions(-)"
+   },
    {
     "sha": "58a68a9",
     "date": "2026-11-07T11:12:27+10:00",
@@ -5531,26 +5551,12 @@
     "subject": "Stop one held E from opening the store and then closing it early",
     "body": "An instant interact (or a catch) left the hold timer free, so holding E on the CLOSED sign\nopened the store and 0.6 s later closed it for the day. The press is now spent. Review round 2,\nY1.",
     "stat": "2 files changed, 27 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "e1fd948",
-    "date": "2026-11-07T09:34:25+10:00",
-    "subject": "Warn on a licence card when the store has no fixture its products stand on",
-    "body": "A dairy licence alone sells nothing without a fridge, and the card didn't say so.",
-    "stat": "1 file changed, 28 insertions(+)"
-   },
-   {
-    "sha": "f97bf2c",
-    "date": "2026-11-07T09:34:25+10:00",
-    "subject": "Reshelve an abandoned basket's items instead of throwing them away, and keep them in saves",
-    "body": "Putting away a dropped basket destroyed the stock customers had taken off the shelves, and a\nsave dropped it too. Items go back on a slot of their product with room; the rest, and anything\nsaved, comes back as open boxes. Review round 2, cycle 2.",
-    "stat": "4 files changed, 69 insertions(+), 4 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 240
+  "total_commits": 242
  },
- "updated": "2026-11-07T11:12:37+10:00",
+ "updated": "2026-11-07T11:14:45+10:00",
  "qa": [
   {
    "num": 1,
