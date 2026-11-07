@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C4",
   "area": "Visuals; balance",
-  "activity": "FixBalance2: fixing soak day-11 error and week-one pacing",
-  "cycle": "4",
-  "since": "2026-11-07T13:09:12+10:00"
+  "activity": "C4 visual fixes in (22 of 25); FixBalance2 tuning soak; CritRegress5 reviewing",
+  "cycle": "5",
+  "since": "2026-11-07T13:20:01+10:00"
  },
  "rounds": [
   {
@@ -2961,6 +2961,13 @@
      "closed": "2026-11-07T12:31:58+10:00"
     }
    ]
+  },
+  {
+   "id": "C5",
+   "area": "Cycle 5: regressions from cycle 4",
+   "started": "2026-11-07T13:20:01+10:00",
+   "finished": null,
+   "findings": []
   }
  ],
  "log": [
@@ -6203,6 +6210,21 @@
    "t": "2026-11-07T13:19:44+10:00",
    "kind": "fix",
    "msg": "C4/V19 fixed 279afc5 13 houses behind (07_car_park c4j), greener ground; tour fps unchanged (137 uncapped)"
+  },
+  {
+   "t": "2026-11-07T13:20:01+10:00",
+   "kind": "round",
+   "msg": "Round C5 started: Cycle 5: regressions from cycle 4"
+  },
+  {
+   "t": "2026-11-07T13:20:01+10:00",
+   "kind": "agent",
+   "msg": "Agent CritRegress5: running Reviewing ~60 recent commits for regressions"
+  },
+  {
+   "t": "2026-11-07T13:20:01+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - C4 visual fixes in (22 of 25); FixBalance2 tuning soak; CritRegress5 reviewing"
   }
  ],
  "tests": [
@@ -6427,15 +6449,20 @@
    "state": "running",
    "task": "Tuning early pacing back into band; day-11 soak error",
    "t": "2026-11-07T13:06:59+10:00"
+  },
+  "CritRegress5": {
+   "state": "running",
+   "task": "Reviewing ~60 recent commits for regressions",
+   "t": "2026-11-07T13:20:01+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T13:19:44+10:00",
-  "mem_free_pct": 51,
+  "t": "2026-11-07T13:20:01+10:00",
+  "mem_free_pct": 52,
   "load": [
-   3.91,
-   3.94,
-   3.62
+   4.16,
+   4.0,
+   3.64
   ],
   "godot_procs": 3
  },
@@ -6870,7 +6897,7 @@
   ],
   "total_commits": 290
  },
- "updated": "2026-11-07T13:19:45+10:00",
+ "updated": "2026-11-07T13:20:02+10:00",
  "qa": [
   {
    "num": 1,
