@@ -1,17 +1,17 @@
 {
  "generated": "2026-11-07T12:38+10:00",
- "head": "9c4eab8",
+ "head": "22bd582",
  "stats": {
-  "commits": 275,
+  "commits": 276,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T12:38:09+10:00",
+  "last_commit": "2026-11-07T12:38:32+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 31551,
+  "gd_lines": 31550,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1683,6 +1683,11 @@
    "sha": "9c4eab8",
    "date": "2026-11-07T12:38:09+10:00",
    "subject": "Let the receipt finish printing before the tour photographs it"
+  },
+  {
+   "sha": "22bd582",
+   "date": "2026-11-07T12:38:32+10:00",
+   "subject": "Scale the in-store cap by the time of day and average the stars over yesterday's customers (B7, B8)"
   }
  ],
  "commits_per_hour": [
@@ -1864,7 +1869,7 @@
   },
   {
    "hour": "2026-11-07T12:00:00+10:00",
-   "commits": 28
+   "commits": 29
   }
  ],
  "sections": [

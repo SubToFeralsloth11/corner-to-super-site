@@ -2512,10 +2512,11 @@
      "file": "scripts/ui/day_summary.gd:133-135",
      "detail": "The hint shows whenever anyone was turned away. `min(20, 4·tills + L/2)` is already 20 at L8 with 4 tills and at L16 with 3, so tills 5-6 (or 4 at L16) let nobody extra in. Late days turn away ≈200 people (B1), so the warning shows every night and points players at $800 tills plus $90/day cashiers that add no customers. Fix: show the hint only when `max_concurrent(tills+1, level) > max_concurrent(tills, level)` and tills < 6. Otherwise say the store is at its 20-shopper limit and that faster tills and full shelves move people through quicker.",
      "by": "CritBalance",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:18:41+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "4660163",
+     "note": "CustomerRules.full_store_hint; till advice only when max_concurrent(t+1)>max_concurrent(t) and t<6; test_the_turned_away_advice_only_offers_a_till_that_helps",
+     "closed": "2026-11-07T12:38:37+10:00"
     },
     {
      "id": "B7",
@@ -6039,6 +6040,11 @@
    "t": "2026-11-07T12:38:12+10:00",
    "kind": "shots",
    "msg": "Screenshots refreshed: 56 images Cycle 4: 1.2x UI at 720p, satin gondolas"
+  },
+  {
+   "t": "2026-11-07T12:38:37+10:00",
+   "kind": "fix",
+   "msg": "C4/B6 fixed 4660163 CustomerRules.full_store_hint; till advice only when max_concurrent(t+1)>max_concurrent(t) and t<6; test_the_turned_away_advice_only_offers_a_till_that_helps"
   }
  ],
  "tests": [
@@ -6249,17 +6255,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:38:12+10:00",
+  "t": "2026-11-07T12:38:37+10:00",
   "mem_free_pct": 54,
   "load": [
-   2.47,
-   2.42,
-   2.48
+   2.03,
+   2.32,
+   2.44
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "22bd582",
+    "date": "2026-11-07T12:38:32+10:00",
+    "subject": "Scale the in-store cap by the time of day and average the stars over yesterday's customers (B7, B8)",
+    "body": "",
+    "stat": "8 files changed, 80 insertions(+), 7 deletions(-)"
+   },
    {
     "sha": "9c4eab8",
     "date": "2026-11-07T12:38:09+10:00",
@@ -6672,28 +6685,16 @@
     "subject": "Re-run build placement checks only when the ghost moves (or every 0.25 s), and stop rebuilding the lane plate mesh",
     "body": "Review round 2, L14 and L15.",
     "stat": "1 file changed, 21 insertions(+), 3 deletions(-)"
-   },
-   {
-    "sha": "41a2e4a",
-    "date": "2026-11-07T10:20:44+10:00",
-    "subject": "Show cleanliness under the stars on the HUD, in warning colour once it costs customers (F9)",
-    "body": "",
-    "stat": "1 file changed, 11 insertions(+)"
    }
   ],
   "dirty": [
-   " M data/customers.json",
-   " M docs/ECONOMY.md",
-   " M docs/GDD.md",
-   " M scripts/autoload/game.gd",
-   " M scripts/npc/customer_rules.gd",
-   " M scripts/npc/customer_spawner.gd",
-   " M tests/cases/customer_test.gd",
-   " M tests/cases/game_test.gd"
+   " M scripts/ui/menu_backdrop.gd",
+   " M scripts/world/building.gd",
+   " M scripts/world/world.gd"
   ],
-  "total_commits": 275
+  "total_commits": 276
  },
- "updated": "2026-11-07T12:38:12+10:00",
+ "updated": "2026-11-07T12:38:38+10:00",
  "qa": [
   {
    "num": 1,
