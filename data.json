@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T10:21+10:00",
- "head": "261f54b",
+ "generated": "2026-11-07T10:22+10:00",
+ "head": "244c1af",
  "stats": {
-  "commits": 217,
+  "commits": 218,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T10:21:44+10:00",
+  "last_commit": "2026-11-07T10:22:15+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 29045,
+  "gd_lines": 29087,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1386,6 +1386,11 @@
    "sha": "261f54b",
    "date": "2026-11-07T10:21:44+10:00",
    "subject": "Re-run build placement checks only when the ghost moves (or every 0.25 s), and stop rebuilding the lane plate mesh"
+  },
+  {
+   "sha": "244c1af",
+   "date": "2026-11-07T10:22:15+10:00",
+   "subject": "Book products the store never stocked as 'not carried', not out of stock (F8)"
   }
  ],
  "commits_per_hour": [
@@ -1559,7 +1564,7 @@
   },
   {
    "hour": "2026-11-07T10:00:00+10:00",
-   "commits": 13
+   "commits": 14
   }
  ],
  "sections": [

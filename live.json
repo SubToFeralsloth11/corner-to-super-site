@@ -2028,10 +2028,11 @@
      "file": "scripts/npc/shopper_brain.gd:253-256; scripts/ui/day_summary.gd:21; scripts/core/weekly_review.gd:38-40",
      "detail": "About 15% of list picks are any licensed product. When a product isn't carried, `_find_slot_or_lose` books it as `&\"out_of_stock\"`, the same reason as an emptied shelf. The receipt then shows \"out of stock N\" on a day nothing ran out, Sunday's paper says \"Bread kept running out\" for bread you never sold, and the critic's stars are docked for it. Fix: book `&\"not_carried\"` when `ran_out` is false, show it on the receipt as \"not stocked (demand)\", and keep it out of `oos_products` and the out-of-stock penalty.",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:27+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "244c1af",
+     "note": "Never-stocked picks book &\"not_carried\" (receipt 'not stocked (demand)', Stats line), kept out of oos_products and review dock/ran-out line; customer_test asserts not_carried vs out_of_stock + oos_products (fails before), additions_test asserts no stars docked; customer/additions/m7 pass",
+     "closed": "2026-11-07T10:22:20+10:00"
     },
     {
      "id": "F9",
@@ -4684,6 +4685,11 @@
    "t": "2026-11-07T10:21:46+10:00",
    "kind": "fix",
    "msg": "C3/L15 fixed 261f54b checks on pose change or 4 Hz"
+  },
+  {
+   "t": "2026-11-07T10:22:20+10:00",
+   "kind": "fix",
+   "msg": "C3/F8 fixed 244c1af Never-stocked picks book &\"not_carried\" (receipt 'not stocked (demand)', Stats line), kept out of oos_products and review dock/ran-out line; customer_test asserts not_carried vs out_of_stock + oos_products (fails before), additions_test asserts no stars docked; customer/additions/m7 pass"
   }
  ],
  "tests": [
@@ -4846,17 +4852,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:21:46+10:00",
-  "mem_free_pct": 62,
+  "t": "2026-11-07T10:22:20+10:00",
+  "mem_free_pct": 60,
   "load": [
-   2.73,
-   2.85,
-   3.37
+   2.29,
+   2.72,
+   3.3
   ],
-  "godot_procs": 37
+  "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "244c1af",
+    "date": "2026-11-07T10:22:15+10:00",
+    "subject": "Book products the store never stocked as 'not carried', not out of stock (F8)",
+    "body": "",
+    "stat": "12 files changed, 42 insertions(+), 14 deletions(-)"
+   },
    {
     "sha": "261f54b",
     "date": "2026-11-07T10:21:44+10:00",
@@ -5269,32 +5282,16 @@
     "subject": "Say why a restocker stands idle: no boxes on the stockroom racks",
     "body": "",
     "stat": "1 file changed, 3 insertions(+)"
-   },
-   {
-    "sha": "5eefcd6",
-    "date": "2026-11-07T08:19:56+10:00",
-    "subject": "Make walkers keep personal space and pass head-on to the right",
-    "body": "Customers and staff walked straight through each other and through the player. A light\nseparation steer (0.7 m, plus keep-right for anyone just ahead) keeps them apart without\nchanging their paths. Review round 2, N5.",
-    "stat": "2 files changed, 71 insertions(+), 2 deletions(-)"
    }
   ],
   "dirty": [
-   " M docs/ARCHITECTURE.md",
-   " M docs/ECONOMY.md",
-   " M docs/GDD.md",
-   " M scripts/autoload/game.gd",
-   " M scripts/core/day_report.gd",
-   " M scripts/npc/shopper_brain.gd",
-   " M scripts/ui/day_summary.gd",
-   " M scripts/ui/pc/app_stats.gd",
-   " M tests/cases/additions_test.gd",
-   " M tests/cases/customer_test.gd",
-   " M tests/soak.gd",
-   " M tests/soak_player.gd"
+   " M scripts/ui/pc/app_bank.gd",
+   " M scripts/ui/pc/app_my_store.gd",
+   " M scripts/ui/pc/app_staff.gd"
   ],
-  "total_commits": 217
+  "total_commits": 218
  },
- "updated": "2026-11-07T10:21:47+10:00",
+ "updated": "2026-11-07T10:22:21+10:00",
  "qa": [
   {
    "num": 1,
