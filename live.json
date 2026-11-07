@@ -2525,10 +2525,11 @@
      "file": "data/customers.json:10-41; /tmp/cts_soak_late/hours.csv",
      "detail": "Days 14-30 hold 20-26 shoppers from 09:00 to 21:00 even though the curve runs 0.6 to 1.6×. There are no quiet hours to restock in and no rushes to prepare for, both of which drive SS's day rhythm. Fix: scale the cap by the curve, e.g. `cap_now = max(6, round(cap × min(1, curve × 0.75)))` (morning ≈9, midday 15, rushes 20). Expected: visible rushes, quiet windows that ease B3, fewer NPCs off-peak; ≈−10-12% customers, made up by B1/B5 basket gains.",
      "by": "CritBalance",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:18:41+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "22bd582",
+     "note": "cap_at = min(cap,max(6,round(cap*min(1,curve*0.75)))); test_the_store_fills_up_at_the_rushes",
+     "closed": "2026-11-07T12:38:40+10:00"
     },
     {
      "id": "B8",
@@ -6045,6 +6046,11 @@
    "t": "2026-11-07T12:38:37+10:00",
    "kind": "fix",
    "msg": "C4/B6 fixed 4660163 CustomerRules.full_store_hint; till advice only when max_concurrent(t+1)>max_concurrent(t) and t<6; test_the_turned_away_advice_only_offers_a_till_that_helps"
+  },
+  {
+   "t": "2026-11-07T12:38:40+10:00",
+   "kind": "fix",
+   "msg": "C4/B7 fixed 22bd582 cap_at = min(cap,max(6,round(cap*min(1,curve*0.75)))); test_the_store_fills_up_at_the_rushes"
   }
  ],
  "tests": [
@@ -6255,14 +6261,14 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:38:37+10:00",
+  "t": "2026-11-07T12:38:40+10:00",
   "mem_free_pct": 54,
   "load": [
-   2.03,
-   2.32,
-   2.44
+   1.95,
+   2.29,
+   2.43
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
@@ -6694,7 +6700,7 @@
   ],
   "total_commits": 276
  },
- "updated": "2026-11-07T12:38:38+10:00",
+ "updated": "2026-11-07T12:38:41+10:00",
  "qa": [
   {
    "num": 1,
