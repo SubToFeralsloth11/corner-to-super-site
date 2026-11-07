@@ -5051,6 +5051,16 @@
    "t": "2026-11-07T11:44:19+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixLate2: L9"
+  },
+  {
+   "t": "2026-11-07T11:50:02+10:00",
+   "kind": "agent",
+   "msg": "Agent soak: done Soak #5 PASSED: d1 $75, d3 $167, d7 $515, d15 $1,297, d30 $3,883; 0 errors. Days 23-30: staff restocked 2,760 items (shed doorway), lost OOS 143 vs 131 before"
+  },
+  {
+   "t": "2026-11-07T11:50:02+10:00",
+   "kind": "finding",
+   "msg": "Late game restocking: staff now move ~345 items/day via the shed doorway, but the AI player still restocks ~1,300/day itself; restockers remain the bottleneck (candidate for cycle 4)"
   }
  ],
  "tests": [
@@ -5194,9 +5204,9 @@
    "t": "2026-11-07T09:27:56+10:00"
   },
   "soak": {
-   "state": "running",
-   "task": "Soak #5 after late-game fixes (shed doorway, restocker chaining)",
-   "t": "2026-11-07T11:44:15+10:00"
+   "state": "done",
+   "task": "Soak #5 PASSED: d1 $75, d3 $167, d7 $515, d15 $1,297, d30 $3,883; 0 errors. Days 23-30: staff restocked 2,760 items (shed doorway), lost OOS 143 vs 131 before",
+   "t": "2026-11-07T11:50:02+10:00"
   },
   "CritRegress": {
    "state": "done",
@@ -5240,12 +5250,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:44:19+10:00",
-  "mem_free_pct": 46,
+  "t": "2026-11-07T11:50:02+10:00",
+  "mem_free_pct": 43,
   "load": [
-   3.61,
-   3.18,
-   3.03
+   2.27,
+   2.77,
+   2.9
   ],
   "godot_procs": 3
  },
@@ -5672,10 +5682,24 @@
     "stat": "1 file changed, 20 insertions(+), 2 deletions(-)"
    }
   ],
-  "dirty": [],
+  "dirty": [
+   " M docs/DELIVERY_VAN.md",
+   " M docs/GDD.md",
+   " M scripts/autoload/game.gd",
+   " M scripts/core/weekly_review.gd",
+   " M scripts/delivery/delivery_bay.gd",
+   " M scripts/delivery/delivery_service.gd",
+   " M scripts/ui/newspaper_card.gd",
+   " M scripts/ui/pc/app_furniture.gd",
+   " M scripts/ui/pc/app_my_store.gd",
+   " M tests/cases/additions_test.gd",
+   " M tests/cases/build_test.gd",
+   " M tests/cases/delivery_test.gd",
+   " M tests/cases/progression_test.gd"
+  ],
   "total_commits": 247
  },
- "updated": "2026-11-07T11:44:20+10:00",
+ "updated": "2026-11-07T11:50:03+10:00",
  "qa": [
   {
    "num": 1,
