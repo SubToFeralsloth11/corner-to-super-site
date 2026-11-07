@@ -2876,11 +2876,11 @@
      "file": "outside.gd:90-99 (700 m `sparse_grass` plane tinted (0.78,0.82,0.62)), 186-189 (only 3 house backs behind and 4 at the sides) · 01, 13, 14, 15, 46: brown plain and chain-link to the horizon behind and beside the store, with the store a small box in a huge empty car park",
      "detail": "VISUALS.md says \"never a void\". This reads as a rural depot, not a suburban corner store. Fix: limit the green-tinted grass, around (0.55,0.72,0.42), to the verges and yards. Line the back and side fences with continuous house backs and gum-tree rows (repeat `_facade` and tree rows every 13 m to x ±80). Replace the far plane with a tree line or low hills so it doesn't run to the horizon.",
      "by": "CritVisual",
-     "status": "wip",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "ade3d4e",
-     "note": "greener ground; the empty field and sparse houses remain",
-     "closed": "2026-11-07T12:47:27+10:00"
+     "commit": "279afc5",
+     "note": "13 houses behind (07_car_park c4j), greener ground; tour fps unchanged (137 uncapped)",
+     "closed": "2026-11-07T13:19:44+10:00"
     },
     {
      "id": "V20",
@@ -6198,6 +6198,11 @@
    "t": "2026-11-07T13:13:03+10:00",
    "kind": "shots",
    "msg": "Screenshots refreshed: 56 images Cycle 4: gondola end caps, wall lettering"
+  },
+  {
+   "t": "2026-11-07T13:19:44+10:00",
+   "kind": "fix",
+   "msg": "C4/V19 fixed 279afc5 13 houses behind (07_car_park c4j), greener ground; tour fps unchanged (137 uncapped)"
   }
  ],
  "tests": [
@@ -6425,17 +6430,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T13:13:03+10:00",
-  "mem_free_pct": 46,
+  "t": "2026-11-07T13:19:44+10:00",
+  "mem_free_pct": 51,
   "load": [
-   3.6,
-   3.54,
-   3.33
+   3.91,
+   3.94,
+   3.62
   ],
   "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "279afc5",
+    "date": "2026-11-07T13:19:42+10:00",
+    "subject": "Run the next street's houses the full width behind the plot (V19)",
+    "body": "",
+    "stat": "1 file changed, 4 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "d739802",
     "date": "2026-11-07T13:12:58+10:00",
@@ -6848,13 +6860,6 @@
     "subject": "Move the tutorial card to the top centre while seated at a till, clear of the cash panel and keypad (F15)",
     "body": "",
     "stat": "2 files changed, 64 insertions(+), 8 deletions(-)"
-   },
-   {
-    "sha": "6764d3a",
-    "date": "2026-11-07T10:38:54+10:00",
-    "subject": "Say where the PC really is: the desk in the back-left corner, behind the till (F14)",
-    "body": "",
-    "stat": "2 files changed, 2 insertions(+), 2 deletions(-)"
    }
   ],
   "dirty": [
@@ -6863,9 +6868,9 @@
    " M tests/soak_player.gd",
    "?? tests/_dbg_slogan.gd.uid"
   ],
-  "total_commits": 289
+  "total_commits": 290
  },
- "updated": "2026-11-07T13:13:04+10:00",
+ "updated": "2026-11-07T13:19:45+10:00",
  "qa": [
   {
    "num": 1,
