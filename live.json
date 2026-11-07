@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixLate: L9 bay overflow",
+  "activity": "FixLate2 on L9/L17/L18/L19; soak #5 checking late-game restocking",
   "cycle": "3",
-  "since": "2026-11-07T11:26:20+10:00"
+  "since": "2026-11-07T11:44:15+10:00"
  },
  "rounds": [
   {
@@ -5026,6 +5026,26 @@
    "t": "2026-11-07T11:43:45+10:00",
    "kind": "test",
    "msg": "Tests: 1195 passed, 0 failed after L fixes (L1,L2,L3,L6,L7,L8,L10,L11,L12,L16); L9,L17,L18,L19 still open; soak not run"
+  },
+  {
+   "t": "2026-11-07T11:44:15+10:00",
+   "kind": "agent",
+   "msg": "Agent FixLate: done L1-L3, L6-L8, L10-L12, L16 fixed; suite 1195/0"
+  },
+  {
+   "t": "2026-11-07T11:44:15+10:00",
+   "kind": "agent",
+   "msg": "Agent FixLate2: running L9, L17, L18, L19"
+  },
+  {
+   "t": "2026-11-07T11:44:15+10:00",
+   "kind": "agent",
+   "msg": "Agent soak: running Soak #5 after late-game fixes (shed doorway, restocker chaining)"
+  },
+  {
+   "t": "2026-11-07T11:44:15+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixLate2 on L9/L17/L18/L19; soak #5 checking late-game restocking"
   }
  ],
  "tests": [
@@ -5169,9 +5189,9 @@
    "t": "2026-11-07T09:27:56+10:00"
   },
   "soak": {
-   "state": "done",
-   "task": "Soak #3 passed pacing: d1 $44, d3 $213, d7 $531, d15 $1,019, d30 $3,327; stars 3.2-4.3",
-   "t": "2026-11-07T10:14:12+10:00"
+   "state": "running",
+   "task": "Soak #5 after late-game fixes (shed doorway, restocker chaining)",
+   "t": "2026-11-07T11:44:15+10:00"
   },
   "CritRegress": {
    "state": "done",
@@ -5204,20 +5224,25 @@
    "t": "2026-11-07T10:58:41+10:00"
   },
   "FixLate": {
+   "state": "done",
+   "task": "L1-L3, L6-L8, L10-L12, L16 fixed; suite 1195/0",
+   "t": "2026-11-07T11:44:15+10:00"
+  },
+  "FixLate2": {
    "state": "running",
-   "task": "Fixing late-game L findings (incl. shed doorway L2)",
-   "t": "2026-11-07T10:58:41+10:00"
+   "task": "L9, L17, L18, L19",
+   "t": "2026-11-07T11:44:15+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T11:43:45+10:00",
-  "mem_free_pct": 57,
+  "t": "2026-11-07T11:44:15+10:00",
+  "mem_free_pct": 54,
   "load": [
-   3.37,
-   3.08,
-   2.99
+   3.31,
+   3.11,
+   3.0
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
@@ -5645,7 +5670,7 @@
   "dirty": [],
   "total_commits": 247
  },
- "updated": "2026-11-07T11:43:46+10:00",
+ "updated": "2026-11-07T11:44:16+10:00",
  "qa": [
   {
    "num": 1,
