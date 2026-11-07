@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixFirstHour: F1 day-1 pacing (free order/tutorial)",
+  "activity": "FixFirstHour: F13 hint refresh loop",
   "cycle": "3",
-  "since": "2026-11-07T10:28:46+10:00"
+  "since": "2026-11-07T10:34:54+10:00"
  },
  "rounds": [
   {
@@ -4753,6 +4753,11 @@
    "t": "2026-11-07T10:34:46+10:00",
    "kind": "fix",
    "msg": "C3/F5 fixed 36b07c0 tutorial.json order step market_note shown in Market _note while that step is current (refreshed on show); tutorial_test checks note == step list then drops after order"
+  },
+  {
+   "t": "2026-11-07T10:34:54+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixFirstHour: F13 hint refresh loop"
   }
  ],
  "tests": [
@@ -4915,12 +4920,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:34:46+10:00",
+  "t": "2026-11-07T10:34:54+10:00",
   "mem_free_pct": 66,
   "load": [
-   2.58,
-   3.08,
-   3.19
+   2.45,
+   3.04,
+   3.18
   ],
   "godot_procs": 0
  },
@@ -5350,7 +5355,7 @@
   "dirty": [],
   "total_commits": 225
  },
- "updated": "2026-11-07T10:34:46+10:00",
+ "updated": "2026-11-07T10:34:55+10:00",
  "qa": [
   {
    "num": 1,
