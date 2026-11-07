@@ -1936,6 +1936,234 @@
      "found": "2026-11-07T10:14:12+10:00",
      "commit": "",
      "note": ""
+    },
+    {
+     "id": "F1",
+     "sev": "P1",
+     "title": "Following the tutorial gives a nearly empty, nearly unprofitable day 1",
+     "file": "data/tutorial.json:4; data/settings.json:77; data/customers.json \"arrival\"",
+     "detail": "The tutorial (and its 4 free boxes) has the player stock 4 of the 9 starter products. Variety is 4/12 = 0.33, just above its 0.3 floor. Arrivals are (2.5+1)·(0.4+0.12·3)·0.33 ≈ 0.89 an hour × time curve, which works out to about 13 customers over the 12-minute day. The first one shows up about 1.6 real minutes after opening, plus about 25 s walking from the footpath. Revenue is about 13 × 1.85 items × $2.66 ≈ $64, and bills are rent $20 + lights $17 + cooler/till $8 = $45, so net is about +$20. That is below the $40–$120 day-1 pacing band, and the first minutes after opening have nothing happening. These numbers come from the formulas, not a playtest [INFERENCE]. Fix: make the free order 8 boxes and have the tutorial ask for 6–8 kinds (Chipz, Crunch, Cola, Fizz, Candy, Noodle, Soup, Bread), or raise `variety_min` to about 0.5 for day 1.",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:26+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F2",
+     "sev": "P2",
+     "title": "The tutorial's bay arrow points at the shop door, not the delivery bay",
+     "file": "scripts/tutorial/tutorial_hint.gd:97; scripts/delivery/delivery_service.gd:43-45",
+     "detail": "The arrow aims at `w.delivery.bay.global_position`. Neither DeliveryService nor DeliveryBay is ever positioned, and the bay works in raw world coordinates through `centre = (7.5, 4.5)`. So the arrow points at (0, 1.2, 0), the shop entrance, about 8.6 m from the bay marking. screenshot_tour.gd:171 looks at the same wrong point, so its \"arrow on bay\" shot couldn't catch this. Fix: `var bay := Vector3(w.delivery.bay.centre.x, 1.2, w.delivery.bay.centre.y)`.",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:26+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F3",
+     "sev": "P2",
+     "title": "The \"van\" step finishes unseen while the player is still at the PC, and its catch instruction can't be done",
+     "file": "data/tutorial.json:9-11; scripts/fixtures/pc_desk.gd:91; scripts/delivery/delivery_service.gd:140",
+     "detail": "The van stops about 4.5 s after Order, then 0.8 s settle, 0.5 s aim and about 1.4 s of flight. The first box lands about 7 s after ordering, which fires `delivery_landed`. The player is sitting at the PC 17 m from the bay with the hint hidden. Step 2 (\"Press E as a box flies past to catch it\") and its arrow are almost never shown, and from the PC a catch is impossible anyway. When they stand up, step 3 says \"Carry a box inside\" with no arrow to where the boxes are. Fix: finish the van step when the player first comes within about 6 m of a landed box (not on the landing), keep the arrow until then, and change the text to \"the van fires boxes into the bay; walk out and fetch them (press E on one still flying to catch it for XP)\".",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:26+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F4",
+     "sev": "P2",
+     "title": "Nothing at the PC tells you how to leave it",
+     "file": "scripts/fixtures/pc_desk.gd:59-60,90-93; scripts/ui/pc/shop_os.gd:165",
+     "detail": "Sitting down hides the HUD, the prompt overlay and the tutorial card. ShopOS has no exit button, and its only \"Close\" closes the app window, leaving you on an empty desktop. Only Esc stands you up, and nothing says so. The till view shows \"Esc to stand up\" and the phone shows \"P or Esc to put it away\", but the PC (the first thing every new player uses) shows nothing. Fix: add a \"Stand up (Esc)\" button to the ShopOS top bar that calls `PcDesk.unfocus()`, and change the PC prompt to \"[E] Use the PC  ·  Esc to stand up\".",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:26+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F5",
+     "sev": "P2",
+     "title": "The tutorial's shopping list disappears while you order",
+     "file": "scripts/fixtures/pc_desk.gd:91; scripts/ui/pc/app_market.gd:221",
+     "detail": "Since Y6, the tutorial card is hidden at the PC, which is exactly when step 1 (\"order one box each of Cola, Chipz, Candy and Noodles\") is needed. The Market note only says \"up to 4 boxes free\", and Tab does nothing because the player is locked. New players order from memory or guess. Fix: while the tutorial step is \"order\", put the step text in the Market's `_note`, or highlight the four product cards.",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:26+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F6",
+     "sev": "P2",
+     "title": "Ordering fewer than 4 boxes throws away the rest of the free order",
+     "file": "scripts/autoload/game.gd:595; scripts/ui/pc/app_market.gd:212,221",
+     "detail": "`place_order` sets `free_order_boxes = 0` as soon as any free box is used. Ordering just the Cola first makes it free and silently cancels the other 3 free boxes. Before Order nothing warns about this, and the cart lines show full price for free boxes, so they don't add up to the $0.00 total. Fix: subtract only the boxes used (`free_order_boxes -= q.free_boxes`), and show \"free\" on the covered cart lines.",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:26+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F7",
+     "sev": "P2",
+     "title": "The tutorial goes strictly in order and shows the wrong instructions at the till",
+     "file": "scripts/tutorial/tutorial.gd:65-71; scripts/main.gd:129-135; data/tutorial.json:22-30",
+     "detail": "A step only advances when its own event fires. Skip the optional F price check and the card is stuck on \"Aim at a price label and press F\" while customers queue, so the serving instructions (sit with E, click items, the reader) are never shown. If the first customer pays cash, the card tells you to click the card reader, which does nothing for cash. Nothing stops the tutorial after day 1 (GDD §13 says day 1 only), so a missed step stays on screen for days. Fix: advance past \"prices\" once the store opens, show the cash or card step to match the current `Checkout.method` while a payment is waiting, and stop the tutorial on the day-1 `day_ended`.",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:26+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F8",
+     "sev": "P2",
+     "title": "Products you never stocked are reported as \"out of stock\"",
+     "file": "scripts/npc/shopper_brain.gd:253-256; scripts/ui/day_summary.gd:21; scripts/core/weekly_review.gd:38-40",
+     "detail": "About 15% of list picks are any licensed product. When a product isn't carried, `_find_slot_or_lose` books it as `&\"out_of_stock\"`, the same reason as an emptied shelf. The receipt then shows \"out of stock N\" on a day nothing ran out, Sunday's paper says \"Bread kept running out\" for bread you never sold, and the critic's stars are docked for it. Fix: book `&\"not_carried\"` when `ran_out` is false, show it on the receipt as \"not stocked (demand)\", and keep it out of `oos_products` and the out-of-stock penalty.",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:27+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F9",
+     "sev": "P2",
+     "title": "Cleanliness is never shown, but it quietly costs reputation",
+     "file": "scripts/world/hygiene.gd:64-65; scripts/ui/hud.gd:59-66; scripts/ui/clipboard.gd:59-95",
+     "detail": "No HUD card, clipboard line, PC app or receipt row shows `Game.cleanliness`. Full boxes left on the shop floor while open count −4 each. Three boxes parked by the shelves (a normal Supermarket Simulator habit) bring it to 88 and lose every customer's +4 clean-store bonus, with no feedback at all. Fix: add a \"Clean 88%\" line to the clipboard and a chip on the HUD under 90, with a toast the first time a box on the floor counts against it.",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:27+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F10",
+     "sev": "P2",
+     "title": "Starter snacks fit only 2–6 to a shelf, so a box spans 4 slots and shelves look bare",
+     "file": "data/products.json:47,89,174; scripts/core/stock_math.gd:28-30",
+     "detail": "CHIPZ and CRUNCH are 0.30 × 0.36 × 0.12 m: two across in a 0.6 m slot needs 0.64 m, so they fit 1 across × 3 deep = 3 a slot. CANDY (a 120 g pack modelled 26 × 36 cm) fits 6, and BREAD (0.42 m long) fits 2. A box of 12, 20 or 8 takes 4 re-aims, and a 60 cm shelf with 3 bags looks empty. This is the same oversizing S3 fixed for cans, now on the products day 1 uses. Fix: real sizes with `model_scale` as for COLA (chips about 0.22 × 0.30 × 0.08, candy about 0.15 × 0.20 × 0.05, bread about 0.28 × 0.12 × 0.12), giving 8–16 a slot.",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:27+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F11",
+     "sev": "P2",
+     "title": "One click buys an expansion or licence, with no confirmation and no way back",
+     "file": "scripts/ui/pc/app_expansions.gd:93,100; scripts/ui/pc/app_licences.gd:80,110",
+     "detail": "\"Buy\" charges at once. E1 costs $500 at level 2 and raises rent and lights from $37 to about $76 a day for good. On day 2–3 with about $600 cash, one stray click while browsing can start an overdue spiral. Del-to-sell (B1) and Fire (Y4) were given confirmations, but these two irreversible buys were not. Fix: use the same press-again pattern (\"Buy\" → \"Confirm $500 · rent +$39/day\" for 3 s).",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:27+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F12",
+     "sev": "P3",
+     "title": "The clipboard's range warning can't be met at level 1",
+     "file": "scripts/ui/clipboard.gd:107-109",
+     "detail": "It compares the shelves with `variety_divisor` (12) and shows \"Range: 9 of 12 kinds for full traffic\" in the warning colour. The Starter licence only has 9 products, so a fully stocked level-1 store is warned all day with no way to act on it. Fix: compare with the products you're licensed for, e.g. \"9 of 9 you can sell · a licence adds more\".",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:27+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F13",
+     "sev": "P3",
+     "title": "The tutorial card rebuilds itself every frame while you sit at the PC",
+     "file": "scripts/tutorial/tutorial_hint.gd:86-87",
+     "detail": "`_process` checks `visible != (w != null and not current().is_empty())` but ignores `_hidden_for_pc`. At the PC, `visible` is false and the right side is true, so `refresh()` runs every frame: label text, `call_deferred(UiKit.refit)` and a layout pass. Fix: add `and not _hidden_for_pc` to the comparison.",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:27+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F14",
+     "sev": "P3",
+     "title": "The tutorial says \"the PC on the counter\", but it's a desk in the back corner",
+     "file": "data/tutorial.json:4; data/settings.json \"pc_desk\" pos (-4.2, -7.5) vs \"checkout\" (-3.6, -2.6)",
+     "detail": "The PC is 5 m behind the till on its own desk, and Dale says \"behind the counter\". New players search the counter for a PC. Fix: \"Use the PC on the desk in the back-left corner, behind the till\".",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:27+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F15",
+     "sev": "P3",
+     "title": "The cash panel covers the tutorial's cash instructions",
+     "file": "scripts/ui/change_panel.gd:39-43; scripts/tutorial/tutorial_hint.gd:35-36; scripts/ui/card_keypad.gd:26-29",
+     "detail": "The change panel (layer 9, bottom centre, −330 to −20) covers the hint card (layer 5, bottom −36) completely during \"Serve a cash customer…\". At 1280 px the keypad also covers the right end of the card step's text. Fix: move the hint to the top centre (below the till hint) while the player is seated, or show the step line inside the panels.",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:27+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F16",
+     "sev": "P3",
+     "title": "One curious tap on the sign before any stock starts the day, and it can't be undone",
+     "file": "scripts/fixtures/open_sign.gd:62-63,85-87; scripts/autoload/game.gd:281-284",
+     "detail": "The sign is next to the door the player walks through first. In PREP, a single E opens the store with empty shelves. The clock starts, customers come in to nothing, and there's no way back to PREP. Fix: when `world.products_in_stock()` is empty, make it a hold and say \"Nothing on the shelves yet: [Hold E] open anyway\".",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:27+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F17",
+     "sev": "P3",
+     "title": "Dale's handover is easy to miss entirely",
+     "file": "scripts/npc/dale.gd:76-79,117-127",
+     "detail": "His lines are 2.5-second 3D bubbles with no voice. If the player heads straight for the PC (the obvious move), Dale follows at 1.25 m/s. When he reaches the seated player or gives up after 25 s, he talks behind them or from 20 m away, and the keys tween in a straight line through the shop wall. The pointer to the PC is lost. Fix: also post each Dale line as a toast, and skip the key-flight tween when there's no line of sight or the player is locked.",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:27+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F18",
+     "sev": "P3",
+     "title": "Ordering furniture on day 1 completes the tutorial's stock-order steps",
+     "file": "scripts/tutorial/tutorial.gd:31; scripts/autoload/game.gd:768",
+     "detail": "`order_furniture` emits `Game.order_placed`, which ticks \"order\", and its flat-pack landing ticks \"van\". A player who buys a bin or shelf first skips past the Cola/Chipz/Candy/Noodles step and still has 4 free boxes unused. Fix: only notify `order_placed` when the order has stock boxes (`o.boxes.any(func(b): return not b.is_flatpack())`).",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:27+10:00",
+     "commit": "",
+     "note": ""
+    },
+    {
+     "id": "F19",
+     "sev": "P3",
+     "title": "Market cards don't say what a product stands on",
+     "file": "scripts/ui/pc/app_market.gd:119-120",
+     "detail": "A card shows units per box, cost and sell price, but not the fixture kind. After a licence is bought without its fridge or freezer (K3 only fixed the licence card), the Market still sells milk or peas you can't put anywhere, and you only find out with the box in hand (\"Needs a fridge\"). Fix: add \"Fridge · you have none\" in the warning colour on the card when no placed fixture of that kind exists, reusing `AppLicences._fixture_note`'s check.",
+     "by": "CritFirstHour",
+     "status": "open",
+     "found": "2026-11-07T10:19:27+10:00",
+     "commit": "",
+     "note": ""
     }
    ]
   }
@@ -4000,6 +4228,106 @@
    "t": "2026-11-07T10:16:39+10:00",
    "kind": "shots",
    "msg": "Screenshots refreshed: 56 images After cycle 2 (till hint/smokes button moved, PC readable)"
+  },
+  {
+   "t": "2026-11-07T10:19:26+10:00",
+   "kind": "finding",
+   "msg": "C3/F1 [P1] Following the tutorial gives a nearly empty, nearly unprofitable day 1"
+  },
+  {
+   "t": "2026-11-07T10:19:26+10:00",
+   "kind": "finding",
+   "msg": "C3/F2 [P2] The tutorial's bay arrow points at the shop door, not the delivery bay"
+  },
+  {
+   "t": "2026-11-07T10:19:26+10:00",
+   "kind": "finding",
+   "msg": "C3/F3 [P2] The \"van\" step finishes unseen while the player is still at the PC, and its catch instruction can't be done"
+  },
+  {
+   "t": "2026-11-07T10:19:26+10:00",
+   "kind": "finding",
+   "msg": "C3/F4 [P2] Nothing at the PC tells you how to leave it"
+  },
+  {
+   "t": "2026-11-07T10:19:26+10:00",
+   "kind": "finding",
+   "msg": "C3/F5 [P2] The tutorial's shopping list disappears while you order"
+  },
+  {
+   "t": "2026-11-07T10:19:26+10:00",
+   "kind": "finding",
+   "msg": "C3/F6 [P2] Ordering fewer than 4 boxes throws away the rest of the free order"
+  },
+  {
+   "t": "2026-11-07T10:19:26+10:00",
+   "kind": "finding",
+   "msg": "C3/F7 [P2] The tutorial goes strictly in order and shows the wrong instructions at the till"
+  },
+  {
+   "t": "2026-11-07T10:19:27+10:00",
+   "kind": "finding",
+   "msg": "C3/F8 [P2] Products you never stocked are reported as \"out of stock\""
+  },
+  {
+   "t": "2026-11-07T10:19:27+10:00",
+   "kind": "finding",
+   "msg": "C3/F9 [P2] Cleanliness is never shown, but it quietly costs reputation"
+  },
+  {
+   "t": "2026-11-07T10:19:27+10:00",
+   "kind": "finding",
+   "msg": "C3/F10 [P2] Starter snacks fit only 2–6 to a shelf, so a box spans 4 slots and shelves look bare"
+  },
+  {
+   "t": "2026-11-07T10:19:27+10:00",
+   "kind": "finding",
+   "msg": "C3/F11 [P2] One click buys an expansion or licence, with no confirmation and no way back"
+  },
+  {
+   "t": "2026-11-07T10:19:27+10:00",
+   "kind": "finding",
+   "msg": "C3/F12 [P3] The clipboard's range warning can't be met at level 1"
+  },
+  {
+   "t": "2026-11-07T10:19:27+10:00",
+   "kind": "finding",
+   "msg": "C3/F13 [P3] The tutorial card rebuilds itself every frame while you sit at the PC"
+  },
+  {
+   "t": "2026-11-07T10:19:27+10:00",
+   "kind": "finding",
+   "msg": "C3/F14 [P3] The tutorial says \"the PC on the counter\", but it's a desk in the back corner"
+  },
+  {
+   "t": "2026-11-07T10:19:27+10:00",
+   "kind": "finding",
+   "msg": "C3/F15 [P3] The cash panel covers the tutorial's cash instructions"
+  },
+  {
+   "t": "2026-11-07T10:19:27+10:00",
+   "kind": "finding",
+   "msg": "C3/F16 [P3] One curious tap on the sign before any stock starts the day, and it can't be undone"
+  },
+  {
+   "t": "2026-11-07T10:19:27+10:00",
+   "kind": "finding",
+   "msg": "C3/F17 [P3] Dale's handover is easy to miss entirely"
+  },
+  {
+   "t": "2026-11-07T10:19:27+10:00",
+   "kind": "finding",
+   "msg": "C3/F18 [P3] Ordering furniture on day 1 completes the tutorial's stock-order steps"
+  },
+  {
+   "t": "2026-11-07T10:19:27+10:00",
+   "kind": "finding",
+   "msg": "C3/F19 [P3] Market cards don't say what a product stands on"
+  },
+  {
+   "t": "2026-11-07T10:19:27+10:00",
+   "kind": "agent",
+   "msg": "Agent CritFirstHour: done findings recorded"
   }
  ],
  "tests": [
@@ -4151,9 +4479,9 @@
    "t": "2026-11-07T10:08:24+10:00"
   },
   "CritFirstHour": {
-   "state": "running",
-   "task": "Reviewer: first hour of play",
-   "t": "2026-11-07T10:08:24+10:00"
+   "state": "done",
+   "task": "findings recorded",
+   "t": "2026-11-07T10:19:27+10:00"
   },
   "CritLate": {
    "state": "running",
@@ -4162,12 +4490,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:16:39+10:00",
-  "mem_free_pct": 66,
+  "t": "2026-11-07T10:19:27+10:00",
+  "mem_free_pct": 67,
   "load": [
-   3.13,
-   3.91,
-   3.9
+   1.85,
+   2.99,
+   3.52
   ],
   "godot_procs": 0
  },
@@ -4597,7 +4925,7 @@
   "dirty": [],
   "total_commits": 215
  },
- "updated": "2026-11-07T10:16:40+10:00",
+ "updated": "2026-11-07T10:19:27+10:00",
  "qa": [
   {
    "num": 1,
