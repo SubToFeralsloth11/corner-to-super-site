@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixFirstHour: visual check + full suite",
+  "activity": "FixLate on L1-L19; first-hour fixes landed (suite 1137/0)",
   "cycle": "3",
-  "since": "2026-11-07T10:55:06+10:00"
+  "since": "2026-11-07T10:58:41+10:00"
  },
  "rounds": [
   {
@@ -4906,6 +4906,21 @@
    "t": "2026-11-07T10:58:03+10:00",
    "kind": "test",
    "msg": "Tests: 1137 passed, 0 failed after F fixes (F1-F8, F10-F19, S1); check.sh clean"
+  },
+  {
+   "t": "2026-11-07T10:58:41+10:00",
+   "kind": "agent",
+   "msg": "Agent FixFirstHour: done F1-F8, F10-F19, S1 fixed; suite 1137/0; soak passes"
+  },
+  {
+   "t": "2026-11-07T10:58:41+10:00",
+   "kind": "agent",
+   "msg": "Agent FixLate: running Fixing late-game L findings (incl. shed doorway L2)"
+  },
+  {
+   "t": "2026-11-07T10:58:41+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixLate on L1-L19; first-hour fixes landed (suite 1137/0)"
   }
  ],
  "tests": [
@@ -5071,14 +5086,24 @@
    "state": "done",
    "task": "findings recorded",
    "t": "2026-11-07T10:21:10+10:00"
+  },
+  "FixFirstHour": {
+   "state": "done",
+   "task": "F1-F8, F10-F19, S1 fixed; suite 1137/0; soak passes",
+   "t": "2026-11-07T10:58:41+10:00"
+  },
+  "FixLate": {
+   "state": "running",
+   "task": "Fixing late-game L findings (incl. shed doorway L2)",
+   "t": "2026-11-07T10:58:41+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T10:58:03+10:00",
+  "t": "2026-11-07T10:58:41+10:00",
   "mem_free_pct": 59,
   "load": [
-   3.0,
-   3.05,
+   2.91,
+   3.03,
    2.9
   ],
   "godot_procs": 0
@@ -5509,7 +5534,7 @@
   "dirty": [],
   "total_commits": 238
  },
- "updated": "2026-11-07T10:58:04+10:00",
+ "updated": "2026-11-07T10:58:42+10:00",
  "qa": [
   {
    "num": 1,
