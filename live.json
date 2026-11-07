@@ -2400,10 +2400,11 @@
      "file": "scripts/ui/pc/app_furniture.gd:117-121; scripts/autoload/game.gd:755",
      "detail": "Kitting out a big store means dozens of clicks and dozens of $5 fees. `Game.order_furniture(id, n)` already supports a quantity with one fee, but the UI always sends 1. **Fix:** add a −/qty/+ control (Shift for 5, as in the Market) and pass `n`. Check the fixture's `max` against `owned_count + n`.",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:09+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "6854dec",
+     "note": "Furniture card -/qty/+ (Shift x5), one fee, clamped to max-owned; build_test:test_furniture_app_orders_a_quantity_for_one_fee passes",
+     "closed": "2026-11-07T12:07:16+10:00"
     },
     {
      "id": "L18",
@@ -5067,6 +5068,11 @@
    "t": "2026-11-07T12:07:13+10:00",
    "kind": "fix",
    "msg": "C3/L9 fixed fb66f55 Trip size capped by DeliveryBay.free_spots(); full bay holds the van with 'Bay full: the van waits' toast; delivery_test:test_a_full_bay_holds_the_van passes"
+  },
+  {
+   "t": "2026-11-07T12:07:16+10:00",
+   "kind": "fix",
+   "msg": "C3/L17 fixed 6854dec Furniture card -/qty/+ (Shift x5), one fee, clamped to max-owned; build_test:test_furniture_app_orders_a_quantity_for_one_fee passes"
   }
  ],
  "tests": [
@@ -5256,12 +5262,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:07:13+10:00",
+  "t": "2026-11-07T12:07:16+10:00",
   "mem_free_pct": 46,
   "load": [
-   4.05,
-   3.56,
-   3.16
+   3.89,
+   3.53,
+   3.15
   ],
   "godot_procs": 3
  },
@@ -5691,7 +5697,7 @@
   "dirty": [],
   "total_commits": 251
  },
- "updated": "2026-11-07T12:07:14+10:00",
+ "updated": "2026-11-07T12:07:17+10:00",
  "qa": [
   {
    "num": 1,
