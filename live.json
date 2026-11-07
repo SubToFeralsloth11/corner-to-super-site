@@ -2329,10 +2329,11 @@
      "file": "scripts/npc/restocker_job.gd:330-343",
      "detail": "When the racks have boxes but none match a slot below 50%, status says \"Looking for empty shelves\" while the player can see empty shelves. Those products simply have no racked boxes (they are still in the bay or on the floor). **Fix:** report \"Idle: no racked boxes for the low shelves (MILK, EGGS…)\" by listing the low slots' products that are missing from `_racked_boxes()`.",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:09+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "d5640f3",
+     "note": "Idle status lists low shelves' products with no racked boxes (up to 3). staff_jobs_test: status names CANDY (before: 'Looking for empty shelves').",
+     "closed": "2026-11-07T11:14:50+10:00"
     },
     {
      "id": "L13",
@@ -4949,6 +4950,11 @@
    "t": "2026-11-07T11:14:47+10:00",
    "kind": "fix",
    "msg": "C3/L11 fixed d5640f3 _box_on_rack checks _usable(_rack). staff_jobs_test: build.carried=rack during TO_RACK -> restocker gives up, box stays racked (failed before)."
+  },
+  {
+   "t": "2026-11-07T11:14:50+10:00",
+   "kind": "fix",
+   "msg": "C3/L12 fixed d5640f3 Idle status lists low shelves' products with no racked boxes (up to 3). staff_jobs_test: status names CANDY (before: 'Looking for empty shelves')."
   }
  ],
  "tests": [
@@ -5127,7 +5133,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:14:47+10:00",
+  "t": "2026-11-07T11:14:50+10:00",
   "mem_free_pct": 59,
   "load": [
    1.68,
@@ -5562,7 +5568,7 @@
   "dirty": [],
   "total_commits": 242
  },
- "updated": "2026-11-07T11:14:48+10:00",
+ "updated": "2026-11-07T11:14:51+10:00",
  "qa": [
   {
    "num": 1,
