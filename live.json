@@ -1,11 +1,11 @@
 {
  "status": {
-  "state": "fixing",
-  "round": "C2",
-  "area": "Second pass",
-  "activity": "FixRegress: Y3 stable till ids",
-  "cycle": "2",
-  "since": "2026-11-07T10:05:34+10:00"
+  "state": "reviewing",
+  "round": "C3",
+  "area": "First hour; late game",
+  "activity": "Two critics on cycle 3; 30-day soak verifying cycle 2",
+  "cycle": "3",
+  "since": "2026-11-07T10:08:24+10:00"
  },
  "rounds": [
   {
@@ -1918,6 +1918,13 @@
      "closed": "2026-11-07T09:51:19+10:00"
     }
    ]
+  },
+  {
+   "id": "C3",
+   "area": "Cycle 3: first hour and late game",
+   "started": "2026-11-07T10:08:24+10:00",
+   "finished": null,
+   "findings": []
   }
  ],
  "log": [
@@ -3935,6 +3942,36 @@
    "t": "2026-11-07T10:07:46+10:00",
    "kind": "test",
    "msg": "Tests: 1086 passed, 0 failed after FixRegress X1-X13,X15,X16,X18-X20,Y3,Y12 fixes; check.sh clean"
+  },
+  {
+   "t": "2026-11-07T10:08:24+10:00",
+   "kind": "agent",
+   "msg": "Agent FixRegress: done X1-X20, Y3, Y12 fixed; suite 1086/0"
+  },
+  {
+   "t": "2026-11-07T10:08:24+10:00",
+   "kind": "round",
+   "msg": "Round C3 started: Cycle 3: first hour and late game"
+  },
+  {
+   "t": "2026-11-07T10:08:24+10:00",
+   "kind": "agent",
+   "msg": "Agent CritFirstHour: running Reviewer: first hour of play"
+  },
+  {
+   "t": "2026-11-07T10:08:24+10:00",
+   "kind": "agent",
+   "msg": "Agent CritLate: running Reviewer: mid/late game"
+  },
+  {
+   "t": "2026-11-07T10:08:24+10:00",
+   "kind": "agent",
+   "msg": "Agent soak: running Soak #3 after cycle 2 (access strip now 0.9 m)"
+  },
+  {
+   "t": "2026-11-07T10:08:24+10:00",
+   "kind": "status",
+   "msg": "Status: reviewing - Two critics on cycle 3; 30-day soak verifying cycle 2"
   }
  ],
  "tests": [
@@ -4066,9 +4103,9 @@
    "t": "2026-11-07T09:27:56+10:00"
   },
   "soak": {
-   "state": "done",
-   "task": "Soak #2 passed all pacing rows, 0 errors, 761 s",
-   "t": "2026-11-07T08:55:23+10:00"
+   "state": "running",
+   "task": "Soak #3 after cycle 2 (access strip now 0.9 m)",
+   "t": "2026-11-07T10:08:24+10:00"
   },
   "CritRegress": {
    "state": "done",
@@ -4079,17 +4116,32 @@
    "state": "done",
    "task": "15 findings (2 P1)",
    "t": "2026-11-07T09:40:31+10:00"
+  },
+  "FixRegress": {
+   "state": "done",
+   "task": "X1-X20, Y3, Y12 fixed; suite 1086/0",
+   "t": "2026-11-07T10:08:24+10:00"
+  },
+  "CritFirstHour": {
+   "state": "running",
+   "task": "Reviewer: first hour of play",
+   "t": "2026-11-07T10:08:24+10:00"
+  },
+  "CritLate": {
+   "state": "running",
+   "task": "Reviewer: mid/late game",
+   "t": "2026-11-07T10:08:24+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T10:07:46+10:00",
-  "mem_free_pct": 46,
+  "t": "2026-11-07T10:08:24+10:00",
+  "mem_free_pct": 47,
   "load": [
-   3.19,
-   4.26,
-   3.91
+   2.32,
+   3.93,
+   3.81
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
@@ -4517,7 +4569,7 @@
   "dirty": [],
   "total_commits": 215
  },
- "updated": "2026-11-07T10:07:46+10:00",
+ "updated": "2026-11-07T10:08:25+10:00",
  "qa": [
   {
    "num": 1,
