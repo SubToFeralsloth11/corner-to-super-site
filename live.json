@@ -6146,6 +6146,21 @@
    "t": "2026-11-07T13:05:40+10:00",
    "kind": "test",
    "msg": "Tests: 3 passed, 2 failed after B fixes: soak FAILED - pacing day 3 $280 and day 7 $671 over band; 1 lambda-capture error day 11 (soak AI _rack_one); day 30 ok"
+  },
+  {
+   "t": "2026-11-07T13:06:59+10:00",
+   "kind": "agent",
+   "msg": "Agent FixBalance: done B1-B15 fixed; suite 1268/0; soak failed d3/d7 high + day-11 error"
+  },
+  {
+   "t": "2026-11-07T13:06:59+10:00",
+   "kind": "agent",
+   "msg": "Agent FixBalance2: running Tuning early pacing back into band; day-11 soak error"
+  },
+  {
+   "t": "2026-11-07T13:06:59+10:00",
+   "kind": "test",
+   "msg": "Tests: 1268 passed, 0 failed after B fixes (FixBalance)"
   }
  ],
  "tests": [
@@ -6262,6 +6277,12 @@
    "passed": 3,
    "failed": 2,
    "note": "after B fixes: soak FAILED - pacing day 3 $280 and day 7 $671 over band; 1 lambda-capture error day 11 (soak AI _rack_one); day 30 ok"
+  },
+  {
+   "t": "2026-11-07T13:06:59+10:00",
+   "passed": 1268,
+   "failed": 0,
+   "note": "after B fixes (FixBalance)"
   }
  ],
  "agents": {
@@ -6356,18 +6377,23 @@
    "t": "2026-11-07T12:19:12+10:00"
   },
   "FixBalance": {
+   "state": "done",
+   "task": "B1-B15 fixed; suite 1268/0; soak failed d3/d7 high + day-11 error",
+   "t": "2026-11-07T13:06:59+10:00"
+  },
+  "FixBalance2": {
    "state": "running",
-   "task": "Balance B1-B15 with soak verification",
-   "t": "2026-11-07T12:19:26+10:00"
+   "task": "Tuning early pacing back into band; day-11 soak error",
+   "t": "2026-11-07T13:06:59+10:00"
   }
  },
  "machine": {
-  "t": "2026-11-07T13:05:40+10:00",
-  "mem_free_pct": 44,
+  "t": "2026-11-07T13:06:59+10:00",
+  "mem_free_pct": 28,
   "load": [
-   4.17,
-   4.0,
-   3.34
+   3.01,
+   3.67,
+   3.27
   ],
   "godot_procs": 3
  },
@@ -6801,7 +6827,7 @@
   ],
   "total_commits": 286
  },
- "updated": "2026-11-07T13:05:41+10:00",
+ "updated": "2026-11-07T13:07:00+10:00",
  "qa": [
   {
    "num": 1,
