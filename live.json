@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixFirstHour: F7 tutorial order/stop",
+  "activity": "FixFirstHour: F18 furniture orders vs tutorial",
   "cycle": "3",
-  "since": "2026-11-07T10:36:40+10:00"
+  "since": "2026-11-07T10:37:59+10:00"
  },
  "rounds": [
   {
@@ -4786,6 +4786,11 @@
    "t": "2026-11-07T10:37:56+10:00",
    "kind": "fix",
    "msg": "C3/F7 fixed 92f6853 prices step skip_when store_opened; hint shows the serve step matching the seated till's PAYING method; day_ended completes the tutorial whatever is left. New tutorial_test case covers all three (fails before: stuck on prices / card text for cash / still active); tutorial 36 passed, menu passes"
+  },
+  {
+   "t": "2026-11-07T10:37:59+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixFirstHour: F18 furniture orders vs tutorial"
   }
  ],
  "tests": [
@@ -4948,12 +4953,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:37:56+10:00",
+  "t": "2026-11-07T10:37:59+10:00",
   "mem_free_pct": 67,
   "load": [
-   2.82,
-   2.94,
-   3.11
+   2.67,
+   2.91,
+   3.1
   ],
   "godot_procs": 0
  },
@@ -5383,7 +5388,7 @@
   "dirty": [],
   "total_commits": 228
  },
- "updated": "2026-11-07T10:37:57+10:00",
+ "updated": "2026-11-07T10:37:59+10:00",
  "qa": [
   {
    "num": 1,
