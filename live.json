@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixFirstHour: F16 open sign with empty shelves",
+  "activity": "FixFirstHour: F17 Dale handover",
   "cycle": "3",
-  "since": "2026-11-07T10:40:31+10:00"
+  "since": "2026-11-07T10:41:31+10:00"
  },
  "rounds": [
   {
@@ -4830,6 +4830,11 @@
    "t": "2026-11-07T10:41:29+10:00",
    "kind": "fix",
    "msg": "C3/F16 fixed 2918be9 PREP + world.products_in_stock() empty: sign prompt 'Nothing on the shelves yet: [Hold E] open anyway' and get_hold_time 0.6; day_test taps with empty shelves and stays PREP (fails before), then stocks and taps open; day_test 48, tutorial 42 pass"
+  },
+  {
+   "t": "2026-11-07T10:41:31+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixFirstHour: F17 Dale handover"
   }
  ],
  "tests": [
@@ -4992,7 +4997,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:41:29+10:00",
+  "t": "2026-11-07T10:41:31+10:00",
   "mem_free_pct": 59,
   "load": [
    1.49,
@@ -5427,7 +5432,7 @@
   "dirty": [],
   "total_commits": 232
  },
- "updated": "2026-11-07T10:41:29+10:00",
+ "updated": "2026-11-07T10:41:32+10:00",
  "qa": [
   {
    "num": 1,
