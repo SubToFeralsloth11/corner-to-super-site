@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C4",
   "area": "Visuals; balance",
-  "activity": "FixBalance on B1-B15 (stars matter, restockers carry more, produce, expansions); visual V1-V25 queued next",
+  "activity": "FixBalance: B15",
   "cycle": "4",
-  "since": "2026-11-07T12:19:26+10:00"
+  "since": "2026-11-07T12:19:34+10:00"
  },
  "rounds": [
   {
@@ -5828,6 +5828,11 @@
    "t": "2026-11-07T12:19:26+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixBalance on B1-B15 (stars matter, restockers carry more, produce, expansions); visual V1-V25 queued next"
+  },
+  {
+   "t": "2026-11-07T12:19:34+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixBalance: B15"
   }
  ],
  "tests": [
@@ -6038,12 +6043,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:19:26+10:00",
+  "t": "2026-11-07T12:19:34+10:00",
   "mem_free_pct": 65,
   "load": [
-   2.11,
-   2.51,
-   2.76
+   2.02,
+   2.48,
+   2.75
   ],
   "godot_procs": 0
  },
@@ -6473,7 +6478,7 @@
   "dirty": [],
   "total_commits": 251
  },
- "updated": "2026-11-07T12:19:27+10:00",
+ "updated": "2026-11-07T12:19:34+10:00",
  "qa": [
   {
    "num": 1,
