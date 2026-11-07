@@ -5122,6 +5122,11 @@
    "t": "2026-11-07T12:08:35+10:00",
    "kind": "status",
    "msg": "Status: reviewing - Visual critic reviewing 57 screenshots; balance critic reading soak data"
+  },
+  {
+   "t": "2026-11-07T12:10:37+10:00",
+   "kind": "shots",
+   "msg": "Screenshots refreshed: 56 images After cycle 3 (shed doorway, Market tabs, real-size snacks)"
   }
  ],
  "tests": [
@@ -5317,14 +5322,14 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:08:35+10:00",
-  "mem_free_pct": 48,
+  "t": "2026-11-07T12:10:37+10:00",
+  "mem_free_pct": 49,
   "load": [
-   3.76,
-   3.61,
-   3.22
+   3.04,
+   3.29,
+   3.13
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
@@ -5752,7 +5757,7 @@
   "dirty": [],
   "total_commits": 251
  },
- "updated": "2026-11-07T12:08:36+10:00",
+ "updated": "2026-11-07T12:10:38+10:00",
  "qa": [
   {
    "num": 1,
@@ -5812,8 +5817,65 @@
   }
  ],
  "shots": {
-  "t": "2026-11-07T12:08:35+10:00",
+  "t": "2026-11-07T12:10:37+10:00",
   "note": "After cycle 3 (shed doorway, Market tabs, real-size snacks)",
-  "files": []
+  "files": [
+   "01_exterior_from_road.jpg",
+   "02_entrance_looking_in.jpg",
+   "03_inside_from_door.jpg",
+   "04_checkout_feature_wall.jpg",
+   "05_aisle.jpg",
+   "06_looking_out_front.jpg",
+   "07_car_park.jpg",
+   "08_across_the_road.jpg",
+   "09_toward_sun.jpg",
+   "10_prompt_on_cooler.jpg",
+   "11_pos_screen_grazing.jpg",
+   "12_pc_market.jpg",
+   "13_van_sliding_in.jpg",
+   "14_van_mid_fire.jpg",
+   "15_full_bay.jpg",
+   "16_full_shelf.jpg",
+   "17_cooler_stocked.jpg",
+   "18_box_at_slot_green.jpg",
+   "19_box_at_cooler_red.jpg",
+   "20_price_popup.jpg",
+   "21_shoppers_in_aisle.jpg",
+   "22_speech_bubble.jpg",
+   "23_v5_checkout_change_panel.jpg",
+   "24_card_keypad.jpg",
+   "30_hud_sign_prompt_prep.jpg",
+   "31_clipboard.jpg",
+   "32_hud_open.jpg",
+   "33_day_summary.jpg",
+   "34_day_summary_paid.jpg",
+   "35_bank_app.jpg",
+   "36_pause_menu.jpg",
+   "37_game_over.jpg",
+   "40_furniture_app.jpg",
+   "41_expansions_app.jpg",
+   "42_knock_through.jpg",
+   "43_new_back_room.jpg",
+   "44_build_ghost_valid.jpg",
+   "45_build_ghost_invalid.jpg",
+   "46_flatpack_in_bay.jpg",
+   "47_stockroom_racks.jpg",
+   "48_shed_from_apron.jpg",
+   "49_chest_freezer_stocked.jpg",
+   "80_main_menu.jpg",
+   "81_main_menu_dolly_later.jpg",
+   "82_menu_controls.jpg",
+   "82_menu_credits.jpg",
+   "82_menu_new.jpg",
+   "82_menu_options.jpg",
+   "82_menu_sandbox.jpg",
+   "83_dale_walking_up.jpg",
+   "84_dale_hands_over_keys.jpg",
+   "85_tutorial_van_arrow_offscreen.jpg",
+   "86_tutorial_van_arrow_on_bay.jpg",
+   "87_clipboard_tutorial.jpg",
+   "88_pause_options.jpg",
+   "89_f3_overlay.jpg"
+  ]
  }
 }
