@@ -1944,10 +1944,11 @@
      "file": "data/tutorial.json:4; data/settings.json:77; data/customers.json \"arrival\"",
      "detail": "The tutorial (and its 4 free boxes) has the player stock 4 of the 9 starter products. Variety is 4/12 = 0.33, just above its 0.3 floor. Arrivals are (2.5+1)·(0.4+0.12·3)·0.33 ≈ 0.89 an hour × time curve, which works out to about 13 customers over the 12-minute day. The first one shows up about 1.6 real minutes after opening, plus about 25 s walking from the footpath. Revenue is about 13 × 1.85 items × $2.66 ≈ $64, and bills are rent $20 + lights $17 + cooler/till $8 = $45, so net is about +$20. That is below the $40–$120 day-1 pacing band, and the first minutes after opening have nothing happening. These numbers come from the formulas, not a playtest [INFERENCE]. Fix: make the free order 8 boxes and have the tutorial ask for 6–8 kinds (Chipz, Crunch, Cola, Fizz, Candy, Noodle, Soup, Bread), or raise `variety_min` to about 0.5 for day 1.",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:26+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "0d5e4aa",
+     "note": "Free first order 4->8 boxes; tutorial step 1 asks for 8 kinds (variety 0.67). Tutorial bot day 1 drew 28 arrivals (was ~13 by formula). soak 10 4 (/tmp/cts_soak_f1): day1 $149.34 (44 cust, ok in ±25%), other runs day1 $66/$50/$69; day3 $189 ($206/$186; one run $288 OFF), day7 $491 ok. ECONOMY.md/GDD updated",
+     "closed": "2026-11-07T10:34:41+10:00"
     },
     {
      "id": "F2",
@@ -4735,6 +4736,11 @@
    "t": "2026-11-07T10:28:55+10:00",
    "kind": "fix",
    "msg": "C3/L5 fixed 8bc7068 m7 tests pass"
+  },
+  {
+   "t": "2026-11-07T10:34:41+10:00",
+   "kind": "fix",
+   "msg": "C3/F1 fixed 0d5e4aa Free first order 4->8 boxes; tutorial step 1 asks for 8 kinds (variety 0.67). Tutorial bot day 1 drew 28 arrivals (was ~13 by formula). soak 10 4 (/tmp/cts_soak_f1): day1 $149.34 (44 cust, ok in ±25%), other runs day1 $66/$50/$69; day3 $189 ($206/$186; one run $288 OFF), day7 $491 ok. ECONOMY.md/GDD updated"
   }
  ],
  "tests": [
@@ -4897,17 +4903,38 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:28:55+10:00",
-  "mem_free_pct": 60,
+  "t": "2026-11-07T10:34:41+10:00",
+  "mem_free_pct": 66,
   "load": [
-   3.03,
-   3.03,
-   3.23
+   2.63,
+   3.09,
+   3.2
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "36b07c0",
+    "date": "2026-11-07T10:34:39+10:00",
+    "subject": "Show the tutorial's shopping list in the Market note while ordering (F5)",
+    "body": "",
+    "stat": "2 files changed, 12 insertions(+)"
+   },
+   {
+    "sha": "e04cd9d",
+    "date": "2026-11-07T10:34:37+10:00",
+    "subject": "Add a Stand up button to ShopOS and name Esc in the PC prompt (F4)",
+    "body": "",
+    "stat": "3 files changed, 36 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "0d5e4aa",
+    "date": "2026-11-07T10:34:28+10:00",
+    "subject": "Ask for eight kinds in the tutorial's free first order to lift day 1 into its pacing band (F1)",
+    "body": "",
+    "stat": "7 files changed, 44 insertions(+), 13 deletions(-)"
+   },
    {
     "sha": "8bc7068",
     "date": "2026-11-07T10:28:53+10:00",
@@ -5306,33 +5333,12 @@
     "subject": "Park the trolley beside a shopper at the shelf, and take baskets from the stand",
     "body": "Trolleys poked into the fixture being shopped; baskets appeared in hand at the door and empty\nones walked off the plot. Basket shoppers step to the stand and lift one; an unused basket goes\nback. Review round 2, N6 and N14.",
     "stat": "2 files changed, 37 insertions(+), 3 deletions(-)"
-   },
-   {
-    "sha": "24860bb",
-    "date": "2026-11-07T08:40:22+10:00",
-    "subject": "Only hold a customer back at an unserved till when the served till is free to take them",
-    "body": "The 30-day soak lost 62 customers on day 11: with a queue at the served till nobody switched, and\nthe unserved till never started on its front customer. Review round 2, E22 (N2 follow-up).",
-    "stat": "2 files changed, 28 insertions(+), 5 deletions(-)"
-   },
-   {
-    "sha": "56ef26f",
-    "date": "2026-11-07T08:24:36+10:00",
-    "subject": "Tell new players how to actually serve: sit with E, click to scan, click the cash",
-    "body": "The tutorial said 'scan every item' without saying how; also mentions catching boxes and\nclosing early. Review round 2, U5.",
-    "stat": "1 file changed, 4 insertions(+), 4 deletions(-)"
-   },
-   {
-    "sha": "f8ffad7",
-    "date": "2026-11-07T08:24:36+10:00",
-    "subject": "Widen the UI font's word spacing so HUD text doesn't run together",
-    "body": "Archivo's space is 0.2 em, about 3 px at HUD sizes: 'Profit today' read as 'Profittoday'. A\nFontVariation adds 2 px per space (checked in the screenshot tour). Review round 2, U4.",
-    "stat": "2 files changed, 10 insertions(+), 1 deletion(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 222
+  "total_commits": 225
  },
- "updated": "2026-11-07T10:28:56+10:00",
+ "updated": "2026-11-07T10:34:41+10:00",
  "qa": [
   {
    "num": 1,

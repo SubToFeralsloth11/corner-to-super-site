@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T10:28+10:00",
- "head": "8bc7068",
+ "generated": "2026-11-07T10:34+10:00",
+ "head": "36b07c0",
  "stats": {
-  "commits": 222,
+  "commits": 225,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T10:28:53+10:00",
+  "last_commit": "2026-11-07T10:34:39+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 29138,
+  "gd_lines": 29207,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1411,6 +1411,21 @@
    "sha": "8bc7068",
    "date": "2026-11-07T10:28:53+10:00",
    "subject": "Keep an aisle sign over its fixture unless another holds clearly more (25%) of the category"
+  },
+  {
+   "sha": "0d5e4aa",
+   "date": "2026-11-07T10:34:28+10:00",
+   "subject": "Ask for eight kinds in the tutorial's free first order to lift day 1 into its pacing band (F1)"
+  },
+  {
+   "sha": "e04cd9d",
+   "date": "2026-11-07T10:34:37+10:00",
+   "subject": "Add a Stand up button to ShopOS and name Esc in the PC prompt (F4)"
+  },
+  {
+   "sha": "36b07c0",
+   "date": "2026-11-07T10:34:39+10:00",
+   "subject": "Show the tutorial's shopping list in the Market note while ordering (F5)"
   }
  ],
  "commits_per_hour": [
@@ -1584,7 +1599,7 @@
   },
   {
    "hour": "2026-11-07T10:00:00+10:00",
-   "commits": 18
+   "commits": 21
   }
  ],
  "sections": [
