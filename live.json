@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixFirstHour: F17 Dale handover",
+  "activity": "FixFirstHour: F10 starter snack sizes",
   "cycle": "3",
-  "since": "2026-11-07T10:41:31+10:00"
+  "since": "2026-11-07T10:42:33+10:00"
  },
  "rounds": [
   {
@@ -4841,6 +4841,11 @@
    "t": "2026-11-07T10:42:30+10:00",
    "kind": "fix",
    "msg": "C3/F17 fixed 7a42b85 Dale._say also posts 'Dale: <line>' toast; hand_over_keys frees the ring instead of tweening when the player is locked or a world ray from hand to camera is blocked. tutorial_test: player at PC gets the goodbye toast naming the PC and no flying keys (fails before); tutorial 44, menu 81 pass"
+  },
+  {
+   "t": "2026-11-07T10:42:33+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixFirstHour: F10 starter snack sizes"
   }
  ],
  "tests": [
@@ -5003,7 +5008,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:42:30+10:00",
+  "t": "2026-11-07T10:42:33+10:00",
   "mem_free_pct": 59,
   "load": [
    1.86,
@@ -5438,7 +5443,7 @@
   "dirty": [],
   "total_commits": 233
  },
- "updated": "2026-11-07T10:42:31+10:00",
+ "updated": "2026-11-07T10:42:33+10:00",
  "qa": [
   {
    "num": 1,
