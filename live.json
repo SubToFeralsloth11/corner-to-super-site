@@ -2123,10 +2123,11 @@
      "file": "scripts/ui/change_panel.gd:39-43; scripts/tutorial/tutorial_hint.gd:35-36; scripts/ui/card_keypad.gd:26-29",
      "detail": "The change panel (layer 9, bottom centre, −330 to −20) covers the hint card (layer 5, bottom −36) completely during \"Serve a cash customer…\". At 1280 px the keypad also covers the right end of the card step's text. Fix: move the hint to the top centre (below the till hint) while the player is seated, or show the step line inside the panels.",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:27+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "9925562",
+     "note": "Seated at a till the card anchors top-centre at y 232 (under till hint + Smokes button), 520 px text with the step number inline; back to bottom on standing. tutorial_test checks card rect vs change panel, keypad and till hint (bottom card intersected the cash panel before); tutorial 42 passed",
+     "closed": "2026-11-07T10:40:28+10:00"
     },
     {
      "id": "F16",
@@ -4813,6 +4814,11 @@
    "t": "2026-11-07T10:38:59+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixFirstHour: F15 hint under cash panel"
+  },
+  {
+   "t": "2026-11-07T10:40:28+10:00",
+   "kind": "fix",
+   "msg": "C3/F15 fixed 9925562 Seated at a till the card anchors top-centre at y 232 (under till hint + Smokes button), 520 px text with the step number inline; back to bottom on standing. tutorial_test checks card rect vs change panel, keypad and till hint (bottom card intersected the cash panel before); tutorial 42 passed"
   }
  ],
  "tests": [
@@ -4975,17 +4981,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:38:59+10:00",
-  "mem_free_pct": 60,
+  "t": "2026-11-07T10:40:28+10:00",
+  "mem_free_pct": 59,
   "load": [
-   2.2,
-   2.72,
-   3.01
+   1.97,
+   2.52,
+   2.9
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "9925562",
+    "date": "2026-11-07T10:40:27+10:00",
+    "subject": "Move the tutorial card to the top centre while seated at a till, clear of the cash panel and keypad (F15)",
+    "body": "",
+    "stat": "2 files changed, 64 insertions(+), 8 deletions(-)"
+   },
    {
     "sha": "6764d3a",
     "date": "2026-11-07T10:38:54+10:00",
@@ -5398,19 +5411,12 @@
     "subject": "Lower the in-store cap's base so week 1 sits on the pacing table again",
     "body": "With leavers no longer counted, bigger baskets and real-size cans the 30-day soak ran rich\n(day 7 $647 against $250-450). Base 2 -> 0: soak now passes every row (day 1 $129, day 3\n$189, day 7 $542, day 15 $1,111, day 30 $4,315; level 16 by day 24). Review round 2, E4/E23.",
     "stat": "2 files changed, 5 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "cbbc78e",
-    "date": "2026-11-07T08:40:22+10:00",
-    "subject": "Record review round 2 in PROGRESS",
-    "body": "",
-    "stat": "1 file changed, 30 insertions(+)"
    }
   ],
   "dirty": [],
-  "total_commits": 230
+  "total_commits": 231
  },
- "updated": "2026-11-07T10:39:00+10:00",
+ "updated": "2026-11-07T10:40:29+10:00",
  "qa": [
   {
    "num": 1,
