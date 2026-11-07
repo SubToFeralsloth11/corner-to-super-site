@@ -1932,10 +1932,11 @@
      "file": "tests/soak_player.gd PLAN",
      "detail": "Soak #3 logs 'plan spot ... refused: Too close to the wall' for 14 spots",
      "by": "soak",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:14:12+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "17cff23",
+     "note": "E4 gondolas z -15 -> -14.75, E5 gondola/wall shelf z -11 -> -10.75 (wall shelf x -13.63, its snap), E5 coolers x 13.65 -> 13.55, E6 chest freezers z -19.5 -> -19.35. soak 30 4 (/tmp/cts_soak_s1): no 'refused' notes; all 6 E4 gondolas, E5 gondola+wall shelf, 3 coolers, 2 E6 freezers bought; pacing all ok (d1 $52, d3 $190, d7 $490, d15 $1,075, d30 $4,019)",
+     "closed": "2026-11-07T10:55:04+10:00"
     },
     {
      "id": "F1",
@@ -4890,6 +4891,11 @@
    "t": "2026-11-07T10:48:41+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixFirstHour: S1 soak plan spots off wall bands"
+  },
+  {
+   "t": "2026-11-07T10:55:04+10:00",
+   "kind": "fix",
+   "msg": "C3/S1 fixed 17cff23 E4 gondolas z -15 -> -14.75, E5 gondola/wall shelf z -11 -> -10.75 (wall shelf x -13.63, its snap), E5 coolers x 13.65 -> 13.55, E6 chest freezers z -19.5 -> -19.35. soak 30 4 (/tmp/cts_soak_s1): no 'refused' notes; all 6 E4 gondolas, E5 gondola+wall shelf, 3 coolers, 2 E6 freezers bought; pacing all ok (d1 $52, d3 $190, d7 $490, d15 $1,075, d30 $4,019)"
   }
  ],
  "tests": [
@@ -5052,17 +5058,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:48:41+10:00",
-  "mem_free_pct": 63,
+  "t": "2026-11-07T10:55:04+10:00",
+  "mem_free_pct": 59,
   "load": [
-   2.11,
-   2.13,
-   2.51
+   4.35,
+   3.52,
+   3.02
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "17cff23",
+    "date": "2026-11-07T10:55:01+10:00",
+    "subject": "Move the soak AI's E4-E6 plan spots off the wall bands (S1)",
+    "body": "",
+    "stat": "1 file changed, 9 insertions(+), 6 deletions(-)"
+   },
    {
     "sha": "8ffbe30",
     "date": "2026-11-07T10:48:36+10:00",
@@ -5475,19 +5488,12 @@
     "subject": "Wait for the navmesh rebake to start before waiting for it to finish in nav tests",
     "body": "The off-navmesh test failed once under load when the threaded rebake hadn't started yet.",
     "stat": "1 file changed, 8 insertions(+), 2 deletions(-)"
-   },
-   {
-    "sha": "bfe790a",
-    "date": "2026-11-07T09:03:09+10:00",
-    "subject": "Render the PC screen at full resolution without FXAA, hide the HUD there, and darken muted text",
-    "body": "The presets render 3D below native and FXAA blurs, which smeared ShopOS's small text; the HUD\ncovered its top bar; muted grey on white was faint. Checked in the screenshot tour (shot 12).",
-    "stat": "3 files changed, 17 insertions(+), 1 deletion(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 237
+  "total_commits": 238
  },
- "updated": "2026-11-07T10:48:41+10:00",
+ "updated": "2026-11-07T10:55:04+10:00",
  "qa": [
   {
    "num": 1,
