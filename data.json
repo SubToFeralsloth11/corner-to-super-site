@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T11:50+10:00",
- "head": "4d42de3",
+ "generated": "2026-11-07T12:07+10:00",
+ "head": "dd9c33d",
  "stats": {
-  "commits": 247,
+  "commits": 251,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T11:26:13+10:00",
+  "last_commit": "2026-11-07T12:07:04+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 30579,
+  "gd_lines": 30577,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1543,6 +1543,26 @@
    "sha": "4d42de3",
    "date": "2026-11-07T11:26:13+10:00",
    "subject": "Count stock on the way in Restock to full and give the Market tabs, a Needs stock filter and live counts (L1, L8)"
+  },
+  {
+   "sha": "fb66f55",
+   "date": "2026-11-07T12:07:04+10:00",
+   "subject": "Hold the van while the bay has no free spot instead of piling boxes on the stacks (L9)"
+  },
+  {
+   "sha": "6854dec",
+   "date": "2026-11-07T12:07:04+10:00",
+   "subject": "Order several flat-packs at once for one delivery fee in the Furniture app (L17)"
+  },
+  {
+   "sha": "88dc87b",
+   "date": "2026-11-07T12:07:04+10:00",
+   "subject": "Ask for a second press before buying a My Store upgrade such as head office (L18)"
+  },
+  {
+   "sha": "dd9c33d",
+   "date": "2026-11-07T12:07:04+10:00",
+   "subject": "Print the week's takings and the change on last week in the Sunday paper (L19)"
   }
  ],
  "commits_per_hour": [
@@ -1721,6 +1741,10 @@
   {
    "hour": "2026-11-07T11:00:00+10:00",
    "commits": 8
+  },
+  {
+   "hour": "2026-11-07T12:00:00+10:00",
+   "commits": 4
   }
  ],
  "sections": [

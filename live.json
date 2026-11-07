@@ -2296,10 +2296,11 @@
      "file": "scripts/delivery/delivery_bay.gd:66-71; scripts/delivery/delivery_service.gd:95-110",
      "detail": "The bay plus overflow holds 2×16×2 = 64 boxes. Further trips start as soon as the van leaves. Once full, `_find` aims every extra box at `all[_next_stack % 16] + LAYER_H*2` whatever is already there, so the third layer piles up and topples into the car park. A late-game restock (several thousand units a day, ~15.5 units a box) easily goes over 64 boxes [INFERENCE: volumes]. **Fix:** hold the next trip while `bay.peek()` returns a stacking point, with a toast (\"Bay full: the van waits\"). Or add a third grid, or stack onto the lowest pile.",
      "by": "CritLate",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:21:09+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "fb66f55",
+     "note": "Trip size capped by DeliveryBay.free_spots(); full bay holds the van with 'Bay full: the van waits' toast; delivery_test:test_a_full_bay_holds_the_van passes",
+     "closed": "2026-11-07T12:07:13+10:00"
     },
     {
      "id": "L10",
@@ -5061,6 +5062,11 @@
    "t": "2026-11-07T11:50:02+10:00",
    "kind": "finding",
    "msg": "Late game restocking: staff now move ~345 items/day via the shed doorway, but the AI player still restocks ~1,300/day itself; restockers remain the bottleneck (candidate for cycle 4)"
+  },
+  {
+   "t": "2026-11-07T12:07:13+10:00",
+   "kind": "fix",
+   "msg": "C3/L9 fixed fb66f55 Trip size capped by DeliveryBay.free_spots(); full bay holds the van with 'Bay full: the van waits' toast; delivery_test:test_a_full_bay_holds_the_van passes"
   }
  ],
  "tests": [
@@ -5250,17 +5256,45 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T11:50:02+10:00",
-  "mem_free_pct": 43,
+  "t": "2026-11-07T12:07:13+10:00",
+  "mem_free_pct": 46,
   "load": [
-   2.27,
-   2.77,
-   2.9
+   4.05,
+   3.56,
+   3.16
   ],
   "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "dd9c33d",
+    "date": "2026-11-07T12:07:04+10:00",
+    "subject": "Print the week's takings and the change on last week in the Sunday paper (L19)",
+    "body": "",
+    "stat": "5 files changed, 66 insertions(+), 5 deletions(-)"
+   },
+   {
+    "sha": "88dc87b",
+    "date": "2026-11-07T12:07:04+10:00",
+    "subject": "Ask for a second press before buying a My Store upgrade such as head office (L18)",
+    "body": "",
+    "stat": "3 files changed, 51 insertions(+), 4 deletions(-)"
+   },
+   {
+    "sha": "6854dec",
+    "date": "2026-11-07T12:07:04+10:00",
+    "subject": "Order several flat-packs at once for one delivery fee in the Furniture app (L17)",
+    "body": "",
+    "stat": "3 files changed, 83 insertions(+), 17 deletions(-)"
+   },
+   {
+    "sha": "fb66f55",
+    "date": "2026-11-07T12:07:04+10:00",
+    "subject": "Hold the van while the bay has no free spot instead of piling boxes on the stacks (L9)",
+    "body": "",
+    "stat": "4 files changed, 70 insertions(+), 5 deletions(-)"
+   },
    {
     "sha": "4d42de3",
     "date": "2026-11-07T11:26:13+10:00",
@@ -5652,54 +5686,12 @@
     "subject": "Save boxes still flying from the van as deliveries, not mid-air loose boxes (Y14)",
     "body": "",
     "stat": "1 file changed, 6 insertions(+)"
-   },
-   {
-    "sha": "84de3a0",
-    "date": "2026-11-07T09:49:38+10:00",
-    "subject": "Box spare stock from an old save a box-load at a time, side by side (X14)",
-    "body": "",
-    "stat": "1 file changed, 19 insertions(+), 18 deletions(-)"
-   },
-   {
-    "sha": "1724812",
-    "date": "2026-11-07T09:48:12+10:00",
-    "subject": "Point Continue at the newest save that reads, not the newest file (Y13)",
-    "body": "",
-    "stat": "1 file changed, 2 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "d991999",
-    "date": "2026-11-07T09:48:11+10:00",
-    "subject": "Confirm a pause-menu save on the menu itself (its toast was paused underneath) (Y11)",
-    "body": "",
-    "stat": "2 files changed, 8 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "697e847",
-    "date": "2026-11-07T09:46:10+10:00",
-    "subject": "Ask before pause-menu Load or Quit throws away a day that can't be saved yet",
-    "body": "Mid-day either button discarded everything since the morning on one click. Review round 2, Y5.",
-    "stat": "1 file changed, 20 insertions(+), 2 deletions(-)"
    }
   ],
-  "dirty": [
-   " M docs/DELIVERY_VAN.md",
-   " M docs/GDD.md",
-   " M scripts/autoload/game.gd",
-   " M scripts/core/weekly_review.gd",
-   " M scripts/delivery/delivery_bay.gd",
-   " M scripts/delivery/delivery_service.gd",
-   " M scripts/ui/newspaper_card.gd",
-   " M scripts/ui/pc/app_furniture.gd",
-   " M scripts/ui/pc/app_my_store.gd",
-   " M tests/cases/additions_test.gd",
-   " M tests/cases/build_test.gd",
-   " M tests/cases/delivery_test.gd",
-   " M tests/cases/progression_test.gd"
-  ],
-  "total_commits": 247
+  "dirty": [],
+  "total_commits": 251
  },
- "updated": "2026-11-07T11:50:03+10:00",
+ "updated": "2026-11-07T12:07:14+10:00",
  "qa": [
   {
    "num": 1,
