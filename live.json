@@ -3,9 +3,9 @@
   "state": "fixing",
   "round": "C3",
   "area": "First hour; late game",
-  "activity": "FixFirstHour: F14 PC location text",
+  "activity": "FixFirstHour: F15 hint under cash panel",
   "cycle": "3",
-  "since": "2026-11-07T10:38:40+10:00"
+  "since": "2026-11-07T10:38:59+10:00"
  },
  "rounds": [
   {
@@ -4808,6 +4808,11 @@
    "t": "2026-11-07T10:38:57+10:00",
    "kind": "fix",
    "msg": "C3/F14 fixed 6764d3a tutorial step 1 and Dale's goodbye name the desk in the back-left corner behind the till (pc_desk -4.2,-7.5 vs till -3.6,-2.6); text only, check.sh clean"
+  },
+  {
+   "t": "2026-11-07T10:38:59+10:00",
+   "kind": "status",
+   "msg": "Status: fixing - FixFirstHour: F15 hint under cash panel"
   }
  ],
  "tests": [
@@ -4970,12 +4975,12 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:38:57+10:00",
+  "t": "2026-11-07T10:38:59+10:00",
   "mem_free_pct": 60,
   "load": [
-   2.3,
-   2.75,
-   3.03
+   2.2,
+   2.72,
+   3.01
   ],
   "godot_procs": 0
  },
@@ -5405,7 +5410,7 @@
   "dirty": [],
   "total_commits": 230
  },
- "updated": "2026-11-07T10:38:57+10:00",
+ "updated": "2026-11-07T10:39:00+10:00",
  "qa": [
   {
    "num": 1,
