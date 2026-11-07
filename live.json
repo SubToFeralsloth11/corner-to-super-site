@@ -2870,10 +2870,11 @@
      "file": "outside.gd:90-99 (700 m `sparse_grass` plane tinted (0.78,0.82,0.62)), 186-189 (only 3 house backs behind and 4 at the sides) · 01, 13, 14, 15, 46: brown plain and chain-link to the horizon behind and beside the store, with the store a small box in a huge empty car park",
      "detail": "VISUALS.md says \"never a void\". This reads as a rural depot, not a suburban corner store. Fix: limit the green-tinted grass, around (0.55,0.72,0.42), to the verges and yards. Line the back and side fences with continuous house backs and gum-tree rows (repeat `_facade` and tree rows every 13 m to x ±80). Replace the far plane with a tree line or low hills so it doesn't run to the horizon.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "wip",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "ade3d4e",
+     "note": "greener ground; the empty field and sparse houses remain",
+     "closed": "2026-11-07T12:47:27+10:00"
     },
     {
      "id": "V20",
@@ -2894,10 +2895,11 @@
      "file": "expansion.gd:47-58 (every chunk is a plaster `Mk.deco` box at 3 fixed heights), 71-78 · 42_knock_through.png crop: white sheets hanging over the back of the store; no grey wainscot band, no brick on the outer face, no visible dust",
      "detail": "The expansion is a big moment, and it looks like a rendering glitch. Fix: make the bottom row (y < 1.2) wainscot grey and give the outward face of each chunk the `_brick` material (two-material boxes). Use random 0.4–0.9 m pieces that tumble with some sideways velocity, add a dust puff per piece column (not every 6th), and leave rubble decals that fade over 3 s.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "10c3211",
+     "note": "0.7 m pieces, wainscot grey lower row, scatter, dust per piece; build 172/0",
+     "closed": "2026-11-07T12:47:26+10:00"
     },
     {
      "id": "V22",
@@ -2919,11 +2921,11 @@
      "file": "building.gd:278-306 (green spans only `footprint/2 + 1` m either side of the till) · the storefront glazing header slot is teal · 04 and 06: the teal band over the windows meets the #2FA866 feature wall at the corner, and the green ends abruptly about 1/3 short of the wall's end",
      "detail": "Fix: run the feature wall corner to corner on its wall (or end it at a trim strip), and recolour the glazing header to STORE_GREEN with `StoreLook._paint` on its slot.",
      "by": "CritVisual",
-     "status": "wip",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "2d943a6",
-     "note": "wall now full length (04); teal glazing header still clashes",
-     "closed": "2026-11-07T12:41:26+10:00"
+     "commit": "4bde2d4",
+     "note": "header and feature wall one green (04, tour c4f)",
+     "closed": "2026-11-07T12:47:24+10:00"
     },
     {
      "id": "V24",
@@ -6074,6 +6076,26 @@
    "t": "2026-11-07T12:41:26+10:00",
    "kind": "fix",
    "msg": "C4/V23 wip 2d943a6 wall now full length (04); teal glazing header still clashes"
+  },
+  {
+   "t": "2026-11-07T12:47:24+10:00",
+   "kind": "fix",
+   "msg": "C4/V23 fixed 4bde2d4 header and feature wall one green (04, tour c4f)"
+  },
+  {
+   "t": "2026-11-07T12:47:26+10:00",
+   "kind": "fix",
+   "msg": "C4/V21 fixed 10c3211 0.7 m pieces, wainscot grey lower row, scatter, dust per piece; build 172/0"
+  },
+  {
+   "t": "2026-11-07T12:47:27+10:00",
+   "kind": "fix",
+   "msg": "C4/V19 wip ade3d4e greener ground; the empty field and sparse houses remain"
+  },
+  {
+   "t": "2026-11-07T12:47:29+10:00",
+   "kind": "shots",
+   "msg": "Screenshots refreshed: 56 images Cycle 4: green header, cooler glow, rubble"
   }
  ],
  "tests": [
@@ -6284,17 +6306,59 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:41:26+10:00",
-  "mem_free_pct": 53,
+  "t": "2026-11-07T12:47:29+10:00",
+  "mem_free_pct": 55,
   "load": [
-   1.98,
-   2.22,
-   2.38
+   5.04,
+   3.11,
+   2.66
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "ade3d4e",
+    "date": "2026-11-07T12:47:26+10:00",
+    "subject": "Tint the surrounding grass suburban green instead of dry brown (V19, ground)",
+    "body": "",
+    "stat": "1 file changed, 2 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "10c3211",
+    "date": "2026-11-07T12:47:24+10:00",
+    "subject": "Break knocked-through walls into rubble-sized pieces in the wall's own finish (V21)",
+    "body": "",
+    "stat": "1 file changed, 23 insertions(+), 10 deletions(-)"
+   },
+   {
+    "sha": "4bde2d4",
+    "date": "2026-11-07T12:47:22+10:00",
+    "subject": "Paint the storefront header store green over the glazing and doors (V23)",
+    "body": "",
+    "stat": "1 file changed, 16 insertions(+), 1 deletion(-)"
+   },
+   {
+    "sha": "1899a62",
+    "date": "2026-11-07T12:47:21+10:00",
+    "subject": "Give loyalty cards an extra basket item so they pay back (B11)",
+    "body": "",
+    "stat": "4 files changed, 25 insertions(+), 5 deletions(-)"
+   },
+   {
+    "sha": "76c58ba",
+    "date": "2026-11-07T12:44:27+10:00",
+    "subject": "Move the expansion loan to level 13 as $10,000 over 30 days (B10)",
+    "body": "",
+    "stat": "3 files changed, 10 insertions(+), 7 deletions(-)"
+   },
+   {
+    "sha": "66d092f",
+    "date": "2026-11-07T12:41:48+10:00",
+    "subject": "Add a fourth staff tier as a late-game running cost and reprice E6-E8 to $6k/$9k/$14k (B9)",
+    "body": "",
+    "stat": "8 files changed, 65 insertions(+), 27 deletions(-)"
+   },
    {
     "sha": "2d943a6",
     "date": "2026-11-07T12:41:25+10:00",
@@ -6672,64 +6736,17 @@
     "subject": "Show the tutorial's shopping list in the Market note while ordering (F5)",
     "body": "",
     "stat": "2 files changed, 12 insertions(+)"
-   },
-   {
-    "sha": "e04cd9d",
-    "date": "2026-11-07T10:34:37+10:00",
-    "subject": "Add a Stand up button to ShopOS and name Esc in the PC prompt (F4)",
-    "body": "",
-    "stat": "3 files changed, 36 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "0d5e4aa",
-    "date": "2026-11-07T10:34:28+10:00",
-    "subject": "Ask for eight kinds in the tutorial's free first order to lift day 1 into its pacing band (F1)",
-    "body": "",
-    "stat": "7 files changed, 44 insertions(+), 13 deletions(-)"
-   },
-   {
-    "sha": "8bc7068",
-    "date": "2026-11-07T10:28:53+10:00",
-    "subject": "Keep an aisle sign over its fixture unless another holds clearly more (25%) of the category",
-    "body": "Signs hopped between gondolas with every sale. Review round 2, L5.",
-    "stat": "1 file changed, 8 insertions(+)"
-   },
-   {
-    "sha": "4b99eca",
-    "date": "2026-11-07T10:28:31+10:00",
-    "subject": "Keep unused free boxes for the next order and mark free cart lines (F6)",
-    "body": "",
-    "stat": "4 files changed, 51 insertions(+), 23 deletions(-)"
-   },
-   {
-    "sha": "f0ad1e2",
-    "date": "2026-11-07T10:28:02+10:00",
-    "subject": "Don't rebuild hidden ShopOS apps on every sale; catch up when shown, and fill staff status at once",
-    "body": "Staff, Bank, Stats and My Store freed and rebuilt every control on each money/XP change even\nwhile hidden, a stutter source late game. Review round 2, L4 and L13.",
-    "stat": "3 files changed, 32 insertions(+)"
-   },
-   {
-    "sha": "6325dfc",
-    "date": "2026-11-07T10:27:55+10:00",
-    "subject": "Point the tutorial's van arrow at the delivery bay, not the shop door (F2)",
-    "body": "",
-    "stat": "3 files changed, 17 insertions(+), 2 deletions(-)"
    }
   ],
   "dirty": [
-   " M data/expansions.json",
    " M data/staff.json",
+   " M data/upgrades.json",
    " M docs/ECONOMY.md",
-   " M docs/GDD.md",
-   " M scripts/autoload/catalog.gd",
-   " M scripts/autoload/game.gd",
-   " M scripts/core/bills.gd",
-   " M scripts/world/outside.gd",
-   " M tests/cases/staff_test.gd"
+   " M tests/cases/game_test.gd"
   ],
-  "total_commits": 278
+  "total_commits": 284
  },
- "updated": "2026-11-07T12:41:27+10:00",
+ "updated": "2026-11-07T12:47:30+10:00",
  "qa": [
   {
    "num": 1,
@@ -6789,8 +6806,8 @@
   }
  ],
  "shots": {
-  "t": "2026-11-07T12:38:12+10:00",
-  "note": "Cycle 4: 1.2x UI at 720p, satin gondolas",
+  "t": "2026-11-07T12:47:29+10:00",
+  "note": "Cycle 4: green header, cooler glow, rubble",
   "files": [
    "01_exterior_from_road.jpg",
    "02_entrance_looking_in.jpg",

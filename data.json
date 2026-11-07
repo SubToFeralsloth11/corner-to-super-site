@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T12:41+10:00",
- "head": "2d943a6",
+ "generated": "2026-11-07T12:47+10:00",
+ "head": "ade3d4e",
  "stats": {
-  "commits": 278,
+  "commits": 284,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T12:41:25+10:00",
+  "last_commit": "2026-11-07T12:47:26+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 31591,
+  "gd_lines": 31658,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1698,6 +1698,36 @@
    "sha": "2d943a6",
    "date": "2026-11-07T12:41:25+10:00",
    "subject": "Run the green feature wall corner to corner instead of stopping mid-wall (V23)"
+  },
+  {
+   "sha": "66d092f",
+   "date": "2026-11-07T12:41:48+10:00",
+   "subject": "Add a fourth staff tier as a late-game running cost and reprice E6-E8 to $6k/$9k/$14k (B9)"
+  },
+  {
+   "sha": "76c58ba",
+   "date": "2026-11-07T12:44:27+10:00",
+   "subject": "Move the expansion loan to level 13 as $10,000 over 30 days (B10)"
+  },
+  {
+   "sha": "1899a62",
+   "date": "2026-11-07T12:47:21+10:00",
+   "subject": "Give loyalty cards an extra basket item so they pay back (B11)"
+  },
+  {
+   "sha": "4bde2d4",
+   "date": "2026-11-07T12:47:22+10:00",
+   "subject": "Paint the storefront header store green over the glazing and doors (V23)"
+  },
+  {
+   "sha": "10c3211",
+   "date": "2026-11-07T12:47:24+10:00",
+   "subject": "Break knocked-through walls into rubble-sized pieces in the wall's own finish (V21)"
+  },
+  {
+   "sha": "ade3d4e",
+   "date": "2026-11-07T12:47:26+10:00",
+   "subject": "Tint the surrounding grass suburban green instead of dry brown (V19, ground)"
   }
  ],
  "commits_per_hour": [
@@ -1879,7 +1909,7 @@
   },
   {
    "hour": "2026-11-07T12:00:00+10:00",
-   "commits": 31
+   "commits": 37
   }
  ],
  "sections": [
