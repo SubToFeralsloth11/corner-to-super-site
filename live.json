@@ -2158,10 +2158,11 @@
      "file": "scripts/tutorial/tutorial.gd:31; scripts/autoload/game.gd:768",
      "detail": "`order_furniture` emits `Game.order_placed`, which ticks \"order\", and its flat-pack landing ticks \"van\". A player who buys a bin or shelf first skips past the Cola/Chipz/Candy/Noodles step and still has 4 free boxes unused. Fix: only notify `order_placed` when the order has stock boxes (`o.boxes.any(func(b): return not b.is_flatpack())`).",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:27+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "7739933",
+     "note": "Tutorial only notifies order_placed when the order has a non-flat-pack box; flat-packs never finish the van step. tutorial_test emits a bin-only order and checks the step stays 'order' (fails before); tutorial passes",
+     "closed": "2026-11-07T10:38:37+10:00"
     },
     {
      "id": "F19",
@@ -4791,6 +4792,11 @@
    "t": "2026-11-07T10:37:59+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixFirstHour: F18 furniture orders vs tutorial"
+  },
+  {
+   "t": "2026-11-07T10:38:37+10:00",
+   "kind": "fix",
+   "msg": "C3/F18 fixed 7739933 Tutorial only notifies order_placed when the order has a non-flat-pack box; flat-packs never finish the van step. tutorial_test emits a bin-only order and checks the step stays 'order' (fails before); tutorial passes"
   }
  ],
  "tests": [
@@ -4953,17 +4959,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:37:59+10:00",
-  "mem_free_pct": 67,
+  "t": "2026-11-07T10:38:37+10:00",
+  "mem_free_pct": 60,
   "load": [
-   2.67,
-   2.91,
-   3.1
+   2.39,
+   2.79,
+   3.04
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "7739933",
+    "date": "2026-11-07T10:38:35+10:00",
+    "subject": "Don't count a furniture order as the tutorial's stock order (F18)",
+    "body": "",
+    "stat": "2 files changed, 10 insertions(+), 2 deletions(-)"
+   },
    {
     "sha": "92f6853",
     "date": "2026-11-07T10:37:54+10:00",
@@ -5376,19 +5389,12 @@
     "subject": "Add invert Y, head bob and fullscreen to Options",
     "body": "Review round 2, U6.",
     "stat": "4 files changed, 64 insertions(+), 4 deletions(-)"
-   },
-   {
-    "sha": "cddb516",
-    "date": "2026-11-07T08:40:22+10:00",
-    "subject": "Move the Sunday review's sentences into events.json as the class doc promised",
-    "body": "Review round 2, E20.",
-    "stat": "2 files changed, 20 insertions(+), 8 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 228
+  "total_commits": 229
  },
- "updated": "2026-11-07T10:37:59+10:00",
+ "updated": "2026-11-07T10:38:38+10:00",
  "qa": [
   {
    "num": 1,
