@@ -2087,10 +2087,11 @@
      "file": "scripts/ui/clipboard.gd:107-109",
      "detail": "It compares the shelves with `variety_divisor` (12) and shows \"Range: 9 of 12 kinds for full traffic\" in the warning colour. The Starter licence only has 9 products, so a fully stocked level-1 store is warned all day with no way to act on it. Fix: compare with the products you're licensed for, e.g. \"9 of 9 you can sell · a licence adds more\".",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:27+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "2ec20c1",
+     "note": "Clipboard.range_note(n, sellable): warns only when kinds you're licensed for are missing; 9 of 9 reads '9 of 9 you can sell · a licence adds more' in ink. progression_test covers 9/9, 5/9, 14/30; passes",
+     "closed": "2026-11-07T10:47:31+10:00"
     },
     {
      "id": "F13",
@@ -4868,6 +4869,11 @@
    "t": "2026-11-07T10:47:01+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixFirstHour: F12 clipboard range warning"
+  },
+  {
+   "t": "2026-11-07T10:47:31+10:00",
+   "kind": "fix",
+   "msg": "C3/F12 fixed 2ec20c1 Clipboard.range_note(n, sellable): warns only when kinds you're licensed for are missing; 9 of 9 reads '9 of 9 you can sell · a licence adds more' in ink. progression_test covers 9/9, 5/9, 14/30; passes"
   }
  ],
  "tests": [
@@ -5030,17 +5036,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:47:01+10:00",
-  "mem_free_pct": 66,
+  "t": "2026-11-07T10:47:31+10:00",
+  "mem_free_pct": 67,
   "load": [
-   1.94,
-   2.19,
-   2.58
+   1.91,
+   2.16,
+   2.55
   ],
-  "godot_procs": 0
+  "godot_procs": 3
  },
  "game": {
   "commits": [
+   {
+    "sha": "2ec20c1",
+    "date": "2026-11-07T10:47:29+10:00",
+    "subject": "Warn about range only against the kinds your licences let you sell (F12)",
+    "body": "",
+    "stat": "2 files changed, 31 insertions(+), 6 deletions(-)"
+   },
    {
     "sha": "a6cbc03",
     "date": "2026-11-07T10:46:57+10:00",
@@ -5453,19 +5466,12 @@
     "subject": "Check for a window's tween meta before reading it (null default still errors)",
     "body": "",
     "stat": "1 file changed, 3 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "0da31b5",
-    "date": "2026-11-07T08:55:14+10:00",
-    "subject": "Hide Continue on the main menu when there is no save to continue",
-    "body": "",
-    "stat": "1 file changed, 4 insertions(+), 1 deletion(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 235
+  "total_commits": 236
  },
- "updated": "2026-11-07T10:47:02+10:00",
+ "updated": "2026-11-07T10:47:31+10:00",
  "qa": [
   {
    "num": 1,
