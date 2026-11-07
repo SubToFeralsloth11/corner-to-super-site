@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T12:20+10:00",
- "head": "39abdf8",
+ "generated": "2026-11-07T12:21+10:00",
+ "head": "88581d2",
  "stats": {
-  "commits": 252,
+  "commits": 253,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T12:20:02+10:00",
+  "last_commit": "2026-11-07T12:21:13+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 30593,
+  "gd_lines": 30598,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1568,6 +1568,11 @@
    "sha": "39abdf8",
    "date": "2026-11-07T12:20:02+10:00",
    "subject": "Keep days.csv columns in place with two loans and split lost_oos from lost_not_carried (B15)"
+  },
+  {
+   "sha": "88581d2",
+   "date": "2026-11-07T12:21:13+10:00",
+   "subject": "Make disabled buttons, glass-card captions, the aim prompt and the till hint readable"
   }
  ],
  "commits_per_hour": [
@@ -1749,7 +1754,7 @@
   },
   {
    "hour": "2026-11-07T12:00:00+10:00",
-   "commits": 5
+   "commits": 6
   }
  ],
  "sections": [

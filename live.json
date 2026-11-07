@@ -2664,10 +2664,11 @@
      "file": "ui_kit.gd:64-79 (`disabled` background = `base.lerp(0.85 grey, 0.7)`, text = `white.lerp(grey, 0.5)`) · 35_bank_app.png (three blank loan buttons, sampled (164,183,174)) · 37_game_over.png (\"Load last save\" is an empty mint bar) · 40 (blank \"Needs level 3\" Order buttons)",
      "detail": "The text is about 0.75 grey on a 0.65 grey fill, roughly 1.2:1 contrast. The player sees a blank pill and can't tell what it would do. Fix: for filled buttons set `font_disabled_color = Color(0.25,0.27,0.3,0.75)` (dark text on the washed fill), or keep the accent fill at 45% alpha with white text.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "88581d2",
+     "note": "player/checkout tests pass; windowed look pending tour",
+     "closed": "2026-11-07T12:21:15+10:00"
     },
     {
      "id": "V5",
@@ -2676,10 +2677,11 @@
      "file": "change_panel.gd:48,58,68 · card_keypad.gd:30 · 23_v5_checkout_change_panel.png: \"CASH\" sampled ~(78,85,97) on (20,22,26), about 2.4:1 · 24 (\"CARD · type the total\" barely visible)",
      "detail": "MUTED is documented as \"secondary text on light cards\". Fix: add `UiKit.MUTED_ON_GLASS := Color(0.68,0.71,0.76)` and use it in both panels.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "88581d2",
+     "note": "player/checkout tests pass; windowed look pending tour",
+     "closed": "2026-11-07T12:21:15+10:00"
     },
     {
      "id": "V6",
@@ -2688,10 +2690,11 @@
      "file": "prompt.gd:33-41 (bare Label with no font override; project.godot has no `gui/theme/custom_font`) · 10 (white text on the white cooler, background (194,199,205)) · 17 (three lines across the red and green cans) · 49",
      "detail": "Prompts are the most-read text in the game and they get lost over stock and white fixtures. They are also in a different typeface from the rest of the UI. Fix: put the prompt label in a PanelContainer with `UiKit.glass_style(8)` (bg alpha about 0.6, margins 8/14) and give it `UiKit.SANS`. Also set `gui/theme/custom_font=\"res://assets/fonts/archivo_ui.tres\"` so CheckButtons and other theme-less controls use Archivo too.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "88581d2",
+     "note": "player/checkout tests pass; windowed look pending tour",
+     "closed": "2026-11-07T12:21:15+10:00"
     },
     {
      "id": "V7",
@@ -2700,10 +2703,11 @@
      "file": "checkout.gd:153-156 (16 px at 0.9 alpha, about 10.7 px at 720p) · 23/24: background behind the hint sampled (173,170,158)",
      "detail": "The one line that explains how to serve at the till can't be read. Fix: same pill as V6 (glass background, 18–20 px), or at least add `outline_size 6` with the prompt's outline colour.",
      "by": "CritVisual",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:19:11+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "88581d2",
+     "note": "player/checkout tests pass; windowed look pending tour",
+     "closed": "2026-11-07T12:21:15+10:00"
     },
     {
      "id": "V8",
@@ -5844,6 +5848,26 @@
    "t": "2026-11-07T12:20:09+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixBalance: B14"
+  },
+  {
+   "t": "2026-11-07T12:21:15+10:00",
+   "kind": "fix",
+   "msg": "C4/V4 fixed 88581d2 player/checkout tests pass; windowed look pending tour"
+  },
+  {
+   "t": "2026-11-07T12:21:15+10:00",
+   "kind": "fix",
+   "msg": "C4/V5 fixed 88581d2 player/checkout tests pass; windowed look pending tour"
+  },
+  {
+   "t": "2026-11-07T12:21:15+10:00",
+   "kind": "fix",
+   "msg": "C4/V6 fixed 88581d2 player/checkout tests pass; windowed look pending tour"
+  },
+  {
+   "t": "2026-11-07T12:21:15+10:00",
+   "kind": "fix",
+   "msg": "C4/V7 fixed 88581d2 player/checkout tests pass; windowed look pending tour"
   }
  ],
  "tests": [
@@ -6054,17 +6078,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:20:09+10:00",
+  "t": "2026-11-07T12:21:15+10:00",
   "mem_free_pct": 63,
   "load": [
-   1.74,
-   2.37,
-   2.7
+   1.99,
+   2.33,
+   2.66
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "88581d2",
+    "date": "2026-11-07T12:21:13+10:00",
+    "subject": "Make disabled buttons, glass-card captions, the aim prompt and the till hint readable",
+    "body": "- Disabled filled buttons kept white text on a pale fill and showed as blank pills (V4).\n- Captions on the dark cash/card panels used the light-card grey (V5).\n- The aim prompt is in the UI face on a glass pill that hugs the text (V6).\n- The seated-till hint is 20 px with an outline (V7).",
+    "stat": "5 files changed, 29 insertions(+), 12 deletions(-)"
+   },
    {
     "sha": "39abdf8",
     "date": "2026-11-07T12:20:02+10:00",
@@ -6477,22 +6508,12 @@
     "subject": "Leave exact cash waiting when sitting at the till, so taking it standing opens no card keypad (X1)",
     "body": "",
     "stat": "2 files changed, 27 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "9a71f1d",
-    "date": "2026-11-07T09:49:38+10:00",
-    "subject": "Keep a dropped box above the floor and out of your own capsule when crouching (Y7)",
-    "body": "",
-    "stat": "1 file changed, 6 insertions(+), 1 deletion(-)"
    }
   ],
-  "dirty": [
-   " M scripts/ui/prompt.gd",
-   " M scripts/ui/ui_kit.gd"
-  ],
-  "total_commits": 252
+  "dirty": [],
+  "total_commits": 253
  },
- "updated": "2026-11-07T12:20:10+10:00",
+ "updated": "2026-11-07T12:21:16+10:00",
  "qa": [
   {
    "num": 1,
