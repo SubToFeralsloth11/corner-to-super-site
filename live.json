@@ -2603,10 +2603,11 @@
      "file": "data/levels.json:5-7; data/fixtures.json (dairy_multideck price 50000)",
      "detail": "Day 2 is the worst day of the run ($49.92 against day 1's $75.42) and still no level 2 (472/500 XP). Dairy unlocks at L2 on day 3, but licence plus multideck cost $750 against $337 cash; the AI could only buy it on day 6 with a loan. The AI was idle 172-447 s a day on days 1-5. SS players expect a first purchase within the first two days. Fix: `total_xp[1]` 500 → 350 (L2 on day 2) and dairy_multideck $500 → $300 (licence + fridge $550, affordable on day 4 without a loan). Expected: a goal and a new product line during days 2-4.",
      "by": "CritBalance",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:18:41+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "7660bde",
+     "note": "xp_first_step 350 (L2 at 350), dairy_multideck $300",
+     "closed": "2026-11-07T12:50:46+10:00"
     },
     {
      "id": "B14",
@@ -6130,6 +6131,11 @@
    "t": "2026-11-07T12:49:49+10:00",
    "kind": "fix",
    "msg": "C4/B11 fixed 1899a62 loyalty effect list_bonus +1; test_loyalty_members_fill_bigger_baskets (sha corrected)"
+  },
+  {
+   "t": "2026-11-07T12:50:46+10:00",
+   "kind": "fix",
+   "msg": "C4/B13 fixed 7660bde xp_first_step 350 (L2 at 350), dairy_multideck $300"
   }
  ],
  "tests": [
@@ -6340,17 +6346,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:49:50+10:00",
-  "mem_free_pct": 31,
+  "t": "2026-11-07T12:50:46+10:00",
+  "mem_free_pct": 47,
   "load": [
-   3.93,
-   3.2,
+   3.3,
+   3.13,
    2.75
   ],
-  "godot_procs": 4
+  "godot_procs": 1
  },
  "game": {
   "commits": [
+   {
+    "sha": "7660bde",
+    "date": "2026-11-07T12:50:40+10:00",
+    "subject": "Reach level 2 at 350 XP and cut the dairy multideck to $300 so week one has a goal (B13)",
+    "body": "",
+    "stat": "4 files changed, 21 insertions(+), 18 deletions(-)"
+   },
    {
     "sha": "3a01935",
     "date": "2026-11-07T12:47:55+10:00",
@@ -6763,25 +6776,16 @@
     "subject": "Finish the tutorial's van step when the player reaches the boxes, not on the first landing (F3)",
     "body": "",
     "stat": "4 files changed, 62 insertions(+), 5 deletions(-)"
-   },
-   {
-    "sha": "dc6951a",
-    "date": "2026-11-07T10:35:31+10:00",
-    "subject": "Stop rebuilding the hidden tutorial card every frame at the PC (F13)",
-    "body": "",
-    "stat": "2 files changed, 8 insertions(+), 1 deletion(-)"
    }
   ],
   "dirty": [
-   " M data/fixtures.json",
-   " M data/levels.json",
-   " M scripts/autoload/catalog.gd",
    " M scripts/world/building.gd",
-   " M tests/cases/progression_test.gd"
+   "?? tests/_dbg_slogan.gd",
+   "?? tests/_dbg_slogan.gd.uid"
   ],
-  "total_commits": 285
+  "total_commits": 286
  },
- "updated": "2026-11-07T12:49:52+10:00",
+ "updated": "2026-11-07T12:50:47+10:00",
  "qa": [
   {
    "num": 1,
