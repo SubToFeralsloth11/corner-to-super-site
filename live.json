@@ -6511,6 +6511,11 @@
    "t": "2026-11-07T13:59:06+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixBalance2: confirmation soak"
+  },
+  {
+   "t": "2026-11-07T14:06:00+10:00",
+   "kind": "fix",
+   "msg": "Confirmation soak: days 1/7/15/30 in band, day 3 $263 just over tolerance; +30% markup soak: stars 3.51 vs 3.85 but profit $53.5k vs $43.9k over 30 days (markup still pays)"
   }
  ],
  "tests": [
@@ -6743,17 +6748,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T13:59:06+10:00",
-  "mem_free_pct": 49,
+  "t": "2026-11-07T14:06:00+10:00",
+  "mem_free_pct": 45,
   "load": [
-   3.53,
-   3.77,
-   4.22
+   5.22,
+   3.9,
+   4.07
   ],
-  "godot_procs": 3
+  "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "69eb1ee",
+    "date": "2026-11-07T14:05:58+10:00",
+    "subject": "Record the confirmation and +30% markup soak runs of the cycle-4 tuning",
+    "body": "",
+    "stat": "1 file changed, 4 insertions(+), 1 deletion(-)"
+   },
    {
     "sha": "b27c844",
     "date": "2026-11-07T13:51:05+10:00",
@@ -7166,13 +7178,6 @@
     "subject": "Draw the starter snacks and bread at real size so a box fits one or two slots (F10)",
     "body": "",
     "stat": "4 files changed, 36 insertions(+), 23 deletions(-)"
-   },
-   {
-    "sha": "7a42b85",
-    "date": "2026-11-07T10:42:28+10:00",
-    "subject": "Post Dale's lines as toasts and skip the key flight through walls or to a seated player (F17)",
-    "body": "",
-    "stat": "2 files changed, 51 insertions(+), 2 deletions(-)"
    }
   ],
   "dirty": [
@@ -7187,9 +7192,9 @@
    " M tests/cases/building_test.gd",
    " M tests/test_runner.gd"
   ],
-  "total_commits": 292
+  "total_commits": 293
  },
- "updated": "2026-11-07T13:59:08+10:00",
+ "updated": "2026-11-07T14:06:01+10:00",
  "qa": [
   {
    "num": 1,

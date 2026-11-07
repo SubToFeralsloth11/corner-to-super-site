@@ -1,10 +1,10 @@
 {
- "generated": "2026-11-07T13:59+10:00",
- "head": "b27c844",
+ "generated": "2026-11-07T14:06+10:00",
+ "head": "69eb1ee",
  "stats": {
-  "commits": 292,
+  "commits": 293,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T13:51:05+10:00",
+  "last_commit": "2026-11-07T14:05:58+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
@@ -1768,6 +1768,11 @@
    "sha": "b27c844",
    "date": "2026-11-07T13:51:05+10:00",
    "subject": "Give week one quiet hours (curve_min 3) and make each customer worth 7 XP so days 3 and 7 land on the pacing table"
+  },
+  {
+   "sha": "69eb1ee",
+   "date": "2026-11-07T14:05:58+10:00",
+   "subject": "Record the confirmation and +30% markup soak runs of the cycle-4 tuning"
   }
  ],
  "commits_per_hour": [
@@ -1954,6 +1959,10 @@
   {
    "hour": "2026-11-07T13:00:00+10:00",
    "commits": 6
+  },
+  {
+   "hour": "2026-11-07T14:00:00+10:00",
+   "commits": 1
   }
  ],
  "sections": [
