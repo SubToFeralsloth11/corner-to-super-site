@@ -2447,10 +2447,11 @@
      "file": "data/customers.json:5-9,53-55; scripts/npc/customer_spawner.gd:41-50",
      "detail": "Stars only change the arrival rate (`Game.reputation` is used only in `customer_spawner.gd:50`, the HUD, the paper and head office). Arrivals soon far exceed what the 20-shopper cap lets in. At L16, 3.59 stars: 18.5×0.83×1.5×14.5 ≈ 334 arrivals a day against 127 served on day 30. Even at 1 star it would be 18.5×0.52×1.5×14.5 ≈ 209, still over the cap. Day 7 at 1 star works out to ≈85 against 63 served [INFERENCE: formula]. hours.csv shows the store at 20-26 shoppers from 09:00 to 21:00 on every day from day 14. Effect: price markups, the cleaner, bargains, the promo stand and the \"found everything\" bonus cost nothing and earn nothing. The profit-best markups (+25% to +79%; refusal 11-22% per item, which I computed from products.json) beat +10% by 8-56% profit per unit, and their only cost is stars that do nothing. An SS player soon learns stars are cosmetic. Fix: tie stars to basket size, e.g. a new `list.star_items` = 2 with pivot 3.5, added to `size_bonus` at `customer_spawner.gd:86` and clamped to -2..+3. Optionally scale `refuse_chance` by lerp(1.3, 0.7, (stars-1)/4). Expected: 4.5 stars ≈ +2 items per basket (≈+18% revenue, ≈+$700/day at day 30), 2.5 stars ≈ -2. Gouging then pays for itself in lost stars.",
      "by": "CritBalance",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T12:18:41+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "95638e4",
+     "note": "list length x(1+0.15(stars-3.5)); test_stars_fill_baskets",
+     "closed": "2026-11-07T12:25:36+10:00"
     },
     {
      "id": "B2",
@@ -5910,6 +5911,11 @@
    "t": "2026-11-07T12:25:33+10:00",
    "kind": "fix",
    "msg": "C4/B14 fixed af0afe3 AI hires restockers while chores >50%, racks every box + fills free rack spots, buys upgrades by payback + staff tiers, --markup flag"
+  },
+  {
+   "t": "2026-11-07T12:25:36+10:00",
+   "kind": "fix",
+   "msg": "C4/B1 fixed 95638e4 list length x(1+0.15(stars-3.5)); test_stars_fill_baskets"
   }
  ],
  "tests": [
@@ -6120,7 +6126,7 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T12:25:33+10:00",
+  "t": "2026-11-07T12:25:36+10:00",
   "mem_free_pct": 54,
   "load": [
    1.99,
@@ -6560,7 +6566,7 @@
   ],
   "total_commits": 261
  },
- "updated": "2026-11-07T12:25:34+10:00",
+ "updated": "2026-11-07T12:25:36+10:00",
  "qa": [
   {
    "num": 1,
