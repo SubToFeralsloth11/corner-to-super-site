@@ -2061,10 +2061,11 @@
      "file": "data/products.json:47,89,174; scripts/core/stock_math.gd:28-30",
      "detail": "CHIPZ and CRUNCH are 0.30 × 0.36 × 0.12 m: two across in a 0.6 m slot needs 0.64 m, so they fit 1 across × 3 deep = 3 a slot. CANDY (a 120 g pack modelled 26 × 36 cm) fits 6, and BREAD (0.42 m long) fits 2. A box of 12, 20 or 8 takes 4 re-aims, and a 60 cm shelf with 3 bags looks empty. This is the same oversizing S3 fixed for cans, now on the products day 1 uses. Fix: real sizes with `model_scale` as for COLA (chips about 0.22 × 0.30 × 0.08, candy about 0.15 × 0.20 × 0.05, bread about 0.28 × 0.12 × 0.12), giving 8–16 a slot.",
      "by": "CritFirstHour",
-     "status": "open",
+     "status": "fixed",
      "found": "2026-11-07T10:19:27+10:00",
-     "commit": "",
-     "note": ""
+     "commit": "aebd2db",
+     "note": "CHIPZ/CRUNCH model_scale 0.58 (12/slot, was 3), CANDY 0.6 (15, was 6), BREAD 0.65 (6, was 2), sizes scaled to match. stock_test capacity checks (fail before); full suite 1127/1 -> m1 label count updated, passes; soak 10 4 /tmp/cts_soak_f10 day1 $70.62 day3 $191.31 day7 $515.71 all ok",
+     "closed": "2026-11-07T10:45:33+10:00"
     },
     {
      "id": "F11",
@@ -4846,6 +4847,11 @@
    "t": "2026-11-07T10:42:33+10:00",
    "kind": "status",
    "msg": "Status: fixing - FixFirstHour: F10 starter snack sizes"
+  },
+  {
+   "t": "2026-11-07T10:45:33+10:00",
+   "kind": "fix",
+   "msg": "C3/F10 fixed aebd2db CHIPZ/CRUNCH model_scale 0.58 (12/slot, was 3), CANDY 0.6 (15, was 6), BREAD 0.65 (6, was 2), sizes scaled to match. stock_test capacity checks (fail before); full suite 1127/1 -> m1 label count updated, passes; soak 10 4 /tmp/cts_soak_f10 day1 $70.62 day3 $191.31 day7 $515.71 all ok"
   }
  ],
  "tests": [
@@ -5008,17 +5014,24 @@
   }
  },
  "machine": {
-  "t": "2026-11-07T10:42:33+10:00",
-  "mem_free_pct": 59,
+  "t": "2026-11-07T10:45:33+10:00",
+  "mem_free_pct": 66,
   "load": [
-   1.86,
-   2.27,
-   2.74
+   2.72,
+   2.35,
+   2.67
   ],
   "godot_procs": 0
  },
  "game": {
   "commits": [
+   {
+    "sha": "aebd2db",
+    "date": "2026-11-07T10:45:31+10:00",
+    "subject": "Draw the starter snacks and bread at real size so a box fits one or two slots (F10)",
+    "body": "",
+    "stat": "4 files changed, 36 insertions(+), 23 deletions(-)"
+   },
    {
     "sha": "7a42b85",
     "date": "2026-11-07T10:42:28+10:00",
@@ -5431,19 +5444,12 @@
     "subject": "Have customers say product names the way people do (no pack weights)",
     "body": "",
     "stat": "1 file changed, 2 insertions(+), 1 deletion(-)"
-   },
-   {
-    "sha": "416a981",
-    "date": "2026-11-07T08:55:14+10:00",
-    "subject": "Sit closer to the PC so the Market's text is readable, and keep the price popup's figure clear of its edge",
-    "body": "At 0.5 m the 1280-px desktop filled about 60% of the view (13-px card text came out near 7 px).\n'(market)' beside the big price ran off the card; it is a small caption now.",
-    "stat": "2 files changed, 6 insertions(+), 2 deletions(-)"
    }
   ],
   "dirty": [],
-  "total_commits": 233
+  "total_commits": 234
  },
- "updated": "2026-11-07T10:42:33+10:00",
+ "updated": "2026-11-07T10:45:34+10:00",
  "qa": [
   {
    "num": 1,

@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-07T10:42+10:00",
- "head": "7a42b85",
+ "generated": "2026-11-07T10:45+10:00",
+ "head": "aebd2db",
  "stats": {
-  "commits": 233,
+  "commits": 234,
   "first_commit": "2026-11-05T16:22:30+10:00",
-  "last_commit": "2026-11-07T10:42:28+10:00",
+  "last_commit": "2026-11-07T10:45:31+10:00",
   "products": 48,
   "licences": 9,
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
   "gd_files": 148,
-  "gd_lines": 29478,
+  "gd_lines": 29484,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
@@ -1466,6 +1466,11 @@
    "sha": "7a42b85",
    "date": "2026-11-07T10:42:28+10:00",
    "subject": "Post Dale's lines as toasts and skip the key flight through walls or to a seated player (F17)"
+  },
+  {
+   "sha": "aebd2db",
+   "date": "2026-11-07T10:45:31+10:00",
+   "subject": "Draw the starter snacks and bread at real size so a box fits one or two slots (F10)"
   }
  ],
  "commits_per_hour": [
@@ -1639,7 +1644,7 @@
   },
   {
    "hour": "2026-11-07T10:00:00+10:00",
-   "commits": 29
+   "commits": 30
   }
  ],
  "sections": [
