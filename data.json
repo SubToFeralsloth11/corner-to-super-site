@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-07T12:50+10:00",
+ "generated": "2026-11-07T13:05+10:00",
  "head": "7660bde",
  "stats": {
   "commits": 286,
@@ -10,8 +10,8 @@
   "fixtures": 18,
   "levels": 16,
   "test_files": 27,
-  "gd_files": 149,
-  "gd_lines": 31719,
+  "gd_files": 148,
+  "gd_lines": 31726,
   "models": 130,
   "music_tracks": 6,
   "sounds": 84,
